@@ -1,0 +1,104 @@
+DLC:
+	Mask of the Shapeshifter
+
+Duplicate of Common/+1/+2:
+	Magical Pike
+	Kill Collar
+	Merregon Halberd
+	Githyanki Shortsword
+	Githyanki Crossbow
+	Tarnished Ring
+	Milk Bowl: Mostly equivalent to Cup of Water.
+	Chest of the Mundane: It is now far too heavy to be used as an improvised Bag of Holding.
+	Trepan, Syringe, Bonesaw, and Artificial Leech: Their weapon actions are not actually availiable to the player when the weapons are equipped.
+
+Story Item:
+	Brass Locket
+	Guild Ring
+	Szarr Family Ring
+	Mayrina's Locket
+	Bloody Amulet
+
+Other:
+	Shadow Blade: Temporarily granted by casting Shadow Blade spell.
+
+Inaccessible:
+	Ring of Restorative Gravity
+	Circlet of Fire
+	Gloves of Succour
+	Brewing Ladle
+	Light Crossbow of Speed
+	Spiderstep Staff
+	Mind Sundering Dagger
+	Goblinbane Dagger
+	Enforcer Club
+	Shar's Sting
+	Staff of Accretion
+	Arcane Absorption Dagger
+	Shadow Battleaxe
+	Tough Sunrises
+	Steadfast Maul
+	Doom Axe
+	Verminsign
+	Singing Sword
+	Sanguine Blade
+	Moonblade
+	Infernal Warhammer
+	Render of Scrumptious Flesh
+	Rebound Battleaxe
+	Combination Axe
+	Flail of Dread Skulls
+	innaccessible: A Sparking Promise
+	Absolute's Smite
+	Allandra's Whelm
+	Arduous Flame Blade
+	Blood-Bound Blade
+	Braindrain Cape
+	Briskwind Boots
+	Chain of Liberation
+	Cloak of Avarice
+	Dauntless Amulet
+	Deadly Channeller Gloves
+	Enforcer Helmet
+	Enforcer Shield
+	Executioner Sword
+	Featherlight Boots
+	Gargoyle Boots
+	Githyanki Breastplate
+	Gloves of Fire Resistance
+	Gloves of Flint and Steel
+	Hag's Ring
+	Hat Of Uproarious Laughter
+	Helm of Arcane Gate
+	Ilmater's Aid
+	Infernal Longsword
+	Ironwood Breastplate
+	Kruznabir's Asylum Amulet
+	Lofty Sorcerer's Amulet
+	Magical Hand Crossbow
+	Netherstone-Studded Gauntlet
+	Nightsinger's Half-Plate
+	Nightsong's Armour
+	Pale Widow Gloves
+	Planeslayer Flail
+	Ring of Beguiling
+	Ring of Crabsight
+	Ring of Fire
+	Robe of Spell Resistance
+	Robust Chain Shirt
+	Sandthief's Ring
+	Sarevok's Wretched Armour
+	Scarab of Protection
+	Shadowstep Boots
+	Shield (Hope)
+	Shield of Returning
+	Synaptic Needle Amulet
+	Tenacious Boots
+	The Clover
+	The Fork-Lightning Fingers
+	The Impaler
+	Tightening Orbit Helm
+	Torment Drinker Armour
+	Treacleflow Amulet
+	Vampiric Gloves
+	Wavemother's Boots
