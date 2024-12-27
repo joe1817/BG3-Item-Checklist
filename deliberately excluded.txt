@@ -1,0 +1,8 @@
+Bloody Amulet
+Mayrina's Locket
+Tarnished Ring
+Merregon Halberd
+Githyanki Shortsword
+Githyanki Crossbow
+Trepan, Syringe, Bonesaw, and Artificial Leech: Their weapon actions are not actually availiable to the player when the weapons are equipped.
+Chest of the Mundane: It is now far too heavy to be used as an improvised Bag of Holding.

@@ -14,7 +14,3 @@ Checklist for getting all unique gear in Baldur's Gate 3. Up-to-date as of Patch
 - inaccessible gear
 - gear with no beneficial effect (e.g., Kill Collar)
 - DLC gear (e.g., Mask of the Shapeshifter)
-
-## TODO
-- Add unique consumables (grenades, potions, and runepowder).
-- Add Trepan, Syringe, Bonesaw, and Artificial Leech? Their weapon actions are not actually availiable to the player when the weapons are equipped.
