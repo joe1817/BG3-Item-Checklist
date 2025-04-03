@@ -2,15 +2,21 @@ DLC:
 	Mask of the Shapeshifter
 
 Duplicate of Common/+1/+2:
+	Staff of the Moonmaiden
 	Magical Pike
-	Kill Collar
 	Merregon Halberd
 	Githyanki Shortsword
 	Githyanki Crossbow
 	Tarnished Ring
 	Milk Bowl: Mostly equivalent to Cup of Water.
-	Chest of the Mundane: It is now far too heavy to be used as an improvised Bag of Holding.
+	Chest of the Mundane: After a patch, it is now far too heavy to be used as an improvised Bag of Holding.
 	Trepan, Syringe, Bonesaw, and Artificial Leech: Their weapon actions are not actually availiable to the player when the weapons are equipped.
+	Roasted Dwarf Belly/Leg/Ribs: Inferior to Suspicious Meat, which can be in various locations throughout the world either as loot or sold by traders.
+	Volo's Jar of Moustache Wax: Grease bottle
+
+No Beneficial Effect:
+	Kill Collar
+	Phase Optimizer
 
 Story Item:
 	Brass Locket
@@ -18,6 +24,12 @@ Story Item:
 	Szarr Family Ring
 	Mayrina's Locket
 	Bloody Amulet
+	Hag's Bane
+
+Temporary
+	Shadow Blade
+	Concussion Grenade
+	Orthonic Handbomb
 
 Other:
 	Shadow Blade: Temporarily granted by casting Shadow Blade spell.
@@ -102,3 +114,40 @@ Inaccessible:
 	Treacleflow Amulet
 	Vampiric Gloves
 	Wavemother's Boots
+
+	Oil of Slipperiness
+	Arrow of Celestial Slaying
+	Arrow of Fey Slaying
+	Arrow of Giant Slaying
+	Arrow of Ooze Slaying
+	Arrow of Plant Slaying
+	Oil of Sharpness
+	Assassin's Blood
+	Wyvern Poison
+	Scroll of Arcane Eye
+	Scroll of Counterspell
+	Scroll of Dispel Magic
+	Scroll of Find Familiar
+	Scroll of Jump
+	Scroll of Longstrider
+	Scroll of Otiluke's Resilient Sphere
+	Scroll of Phantasmal Force
+	Scroll of Acid Splash
+	Scroll of Armour of Agathys
+	Scroll of Bane
+	Scroll of Barkskin
+	Scroll of Blade Ward
+	Scroll of Bless
+	Scroll of Cure Wounds
+	Scroll of Guiding Bolt
+	Scroll of Healing Word
+	Scroll of Heat Metal
+	Scroll of Inflict Wounds
+	Scroll of Lesser Restoration
+	Scroll of Moonbeam
+	Scroll of Prayer of Healing
+	Scroll of Protection from Poison
+	Scroll of Resistance
+	Scroll of Shield of Faith
+	Scroll of Silence
+	Scroll of Spike Growth

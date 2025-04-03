@@ -4,8 +4,7 @@ Checklist for getting all unique gear in Baldur's Gate 3. Up-to-date as of Patch
 **>> [View it here](https://joe1817.github.io/BG3-Item-Checklist/) <<**
 
 ## Included
-- any weapons/armor that are limited in number available
-  - TODO: add consumables as well
+- any weapons/armor/consumables that are limited in number available
 - mind flayer parasite specimens
 - permanent bonuses
 
