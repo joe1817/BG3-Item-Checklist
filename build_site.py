@@ -1,4 +1,6 @@
 import os
+from bs4 import BeautifulSoup
+import traceback
 from math import sqrt
 from PIL import Image
 
@@ -26,7 +28,7 @@ def create_sprite_sheet(img_dir, image_size, out_dir):
 	return sprite_map
 
 def update_links(in_file, img_map, out_dir):
-	with open(in_file, "r", encoding='utf-8') as f:
+	with open(in_file, "r", encoding="utf-8") as f:
 		html = f.read()
 	for path, coords in img_map.items():
 		if path not in html:
@@ -35,7 +37,8 @@ def update_links(in_file, img_map, out_dir):
 			f'<img src="{path}"',
 			f'<img class="sprite" id="{coords[0]}-{coords[1]}"'
 		)
-	with open(os.path.join(out_dir, "index.html"), "w", encoding='utf-8') as f:
+	html = str(BeautifulSoup(html, "lxml"))
+	with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as f:
 		f.write(html)
 
 def main():
@@ -46,4 +49,8 @@ def main():
 	input("Press ENTER to quit")
 
 if __name__ == "__main__":
-	main()
+	try:
+		main()
+	except:
+		traceback.print_exc()
+		input()
