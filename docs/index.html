@@ -1,4 +1,4 @@
-<!-- TODO hide section if all entries are individually hidden --><!-- TODO turn sections into collapsibles --><!-- TODO search & highlight text --><!-- TODO many instances of "Found in/on" should be changed to "Stolen from" --><!-- TODO options to show/hide top-tiering, show/hide exploits (Silver Sword, Deva Mace), specific categories --><!DOCTYPE html>
+<!-- TODO MVC --><!-- TODO hide complete --><!-- TODO hide section if all entries are individually hidden --><!-- TODO turn sections into collapsibles --><!-- TODO search & highlight text --><!-- TODO many instances of "Found in/on" should be changed to "Stolen from" --><!-- TODO options to show/hide top-tiering, show/hide exploits (Silver Sword, Deva Mace), specific categories --><!DOCTYPE html>
 <html>
 <head>
 <title>BG3 Item Checklist</title>
@@ -133,6 +133,11 @@ li > .progress {
 	padding-top: 1em;
 }
 
+.section-content {
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
+}
+
 .tip {
 	border: 1px solid #606A73;
 	border-radius: 2px;
@@ -213,10 +218,6 @@ a:hover {
 }
 
 .hidden-by-filter {
-	display: none;
-}
-
-.hidden-by-eye {
 	display: none;
 }
 
@@ -473,7 +474,6 @@ function filterItems() {
 	initializeProgressCounters();
 }
 
-// TODO entry checkbox data attribute should include section, act
 function linkCheckboxesToProgressCounters() {
 	const progressCounters = document.querySelectorAll(".progress");
 	document.querySelectorAll(".entry-checkbox").forEach(checkbox => {
@@ -546,10 +546,13 @@ function collapse(sectionID) {
 		activeElement.blur();
 	}
 	const section = document.getElementById(sectionID);
-	const collapseButton = section.querySelector(".eye");
-	const entries = section.querySelector(".section-content");
-	entries.classList.toggle("hidden-by-eye");
-	collapseButton.classList.toggle("faded");
+	const content = section.querySelector(".section-content");
+    if (content.style.maxHeight != "0px") {
+		content.style.maxHeight = "0px";
+	} else {
+		content.style.maxHeight = content.scrollHeight + "px";
+	}
+	section.querySelector(".eye").classList.toggle("faded");
 }
 
 window.onload = function() {
@@ -595,6 +598,11 @@ window.onload = function() {
 	// calculate buy prices from entry value
 	document.querySelectorAll(".value").forEach(value => {
 		value.innerText = get_final_price(value.innerText);
+	});
+
+	// enables collapsibles to start open
+	document.querySelectorAll(".section-content").forEach(content => {
+		content.style.maxHeight = content.scrollHeight + "px";
 	});
 
 	// img click -> checkbox

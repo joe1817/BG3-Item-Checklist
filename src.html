@@ -1,7 +1,6 @@
 <!-- TODO MVC -->
 <!-- TODO hide complete -->
 <!-- TODO hide section if all entries are individually hidden -->
-<!-- TODO turn sections into collapsibles -->
 <!-- TODO search & highlight text -->
 <!-- TODO many instances of "Found in/on" should be changed to "Stolen from" -->
 <!-- TODO options to show/hide top-tier, show/hide exploits (Silver Sword, Deva Mace), specific categories -->
@@ -143,11 +142,9 @@ li > .progress {
 	padding-top: 1em;
 }
 
-/*collapsible*/
 .section-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
 }
 
 .tip {
@@ -232,12 +229,6 @@ a:hover {
 .hidden-by-filter {
 	display: none;
 }
-
-/*
-.hidden-by-eye {
-	display: none;
-}
-*/
 
 .hidden {
 	display: none;
@@ -493,7 +484,6 @@ function filterItems() {
 	initializeProgressCounters();
 }
 
-// TODO entry checkbox data attribute should include section, act
 function linkCheckboxesToProgressCounters() {
 	const progressCounters = document.querySelectorAll(".progress");
 	document.querySelectorAll(".entry-checkbox").forEach(checkbox => {
@@ -566,14 +556,13 @@ function collapse(sectionID) {
 		activeElement.blur();
 	}
 	const section = document.getElementById(sectionID);
-	const collapseButton = section.querySelector(".eye");
-	const entries = section.querySelector(".section-content");
-    if (entries.style.maxHeight){
-      entries.style.maxHeight = null;
-    } else {
-      entries.style.maxHeight = entries.scrollHeight + "px";
-    }
-	collapseButton.classList.toggle("faded");
+	const content = section.querySelector(".section-content");
+    if (content.style.maxHeight != "0px") {
+		content.style.maxHeight = "0px";
+	} else {
+		content.style.maxHeight = content.scrollHeight + "px";
+	}
+	section.querySelector(".eye").classList.toggle("faded");
 }
 
 window.onload = function() {
@@ -619,6 +608,11 @@ window.onload = function() {
 	// calculate buy prices from entry value
 	document.querySelectorAll(".value").forEach(value => {
 		value.innerText = get_final_price(value.innerText);
+	});
+
+	// enables collapsibles to start open
+	document.querySelectorAll(".section-content").forEach(content => {
+		content.style.maxHeight = content.scrollHeight + "px";
 	});
 
 	// img click -> checkbox
