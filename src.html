@@ -149,7 +149,7 @@ li > .progress {
 
 .tip {
 	border: 1px solid #606A73;
-	border-radius: 2px;
+	border-radius: 5px;
 	padding: 8px;
 	text-align: center;
 	margin: 0 auto 0.5em;
@@ -376,7 +376,7 @@ function saveCheckboxState(section, entry, isChecked) {
 function clearCheckboxes(act) {
 	if (!confirm("Are you sure you want to clear all checkboxes for this act?"))
 		return;
-	const checkboxes = document.querySelectorAll("." + act + " input[type='checkbox']");
+	const checkboxes = document.querySelectorAll("#" + act + " input[type='checkbox']");
 	checkboxes.forEach(checkbox => {
 		if (checkbox.checked) {
 			checkbox.checked = false;
@@ -660,7 +660,7 @@ window.onload = function() {
 <div id="table">
 
 
-<div class="act" id="Act1"><div class="act-header center"><span class="act-title">Act 1</span><button onclick="clearCheckboxes('Act1')">Clear</button><span class="progress" data="Act1" /></div>
+<div class="act" id="Act1"><div class="act-header center"><span class="act-title">Act 1</span><span class="progress" data="Act1" /></div><div class="center"><button onclick="clearCheckboxes('Act1')">Clear</button></div>
 
 
 <div class="section" id="Nautiloid"><div class="section-header"><span class="eye noselect" onclick="collapse('Nautiloid')">👁️</span><span class="section-title">Nautiloid (Prologue)</span><span class="progress" data="Nautiloid" /></div><div class="section-content">
@@ -1139,7 +1139,7 @@ window.onload = function() {
 <div class="entry misc story" id="Quanith-Psionic-Detector"><span><input class="entry-checkbox" type="checkbox" data="misc"></span><span class="entry-img"><img src="imgs/Qua'nith Psionic Detector.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Qua'nith_Psionic_Detector">Qua'nith Psionic Detector</a></span><span class="entry-desc">Given by Kith'rak Voss.</span></div>
 
 
-</div></div></div><div class="act" id="Act2"><div class="act-header center"><span class="act-title">Act 2</span><button onclick="clearCheckboxes('Act2')">Clear</button><span class="progress" data="Act2" /></div>
+</div></div></div><div class="act" id="Act2"><div class="act-header center"><span class="act-title">Act 2</span><span class="progress" data="Act2" /></div><div class="center"><button onclick="clearCheckboxes('Act2')">Clear</button></div>
 
 
 <div class="section" id="Ruined-Battlefield"><div class="section-header"><span class="eye noselect" onclick="collapse('Ruined-Battlefield')">👁️</span><span class="section-title">Ruined Battlefield</span><span class="progress" data="Ruined-Battlefield" /></div><div class="section-content">
@@ -1432,7 +1432,7 @@ window.onload = function() {
 <div class="entry enhancement story" id="Mind-Flayer-Parasite-Specimen-21"><span><input class="entry-checkbox" type="checkbox" data="enhancement"></span><span class="entry-img"><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></span><span class="entry-desc">Two are obtained by transforming Minthara into a partial-illithid using the Astral-Touched Tadpole. You'll be refunded the two parasites she consumed before you met her.</span></div>
 
 
-</div></div></div><div class="act" id="Act3"><div class="act-header center"><span class="act-title">Act 3</span><button onclick="clearCheckboxes('Act3')">Clear</button><span class="progress" data="Act3" /></div>
+</div></div></div><div class="act" id="Act3"><div class="act-header center"><span class="act-title">Act 3</span><span class="progress" data="Act3" /></div><div class="center"><button onclick="clearCheckboxes('Act3')">Clear</button></div>
 
 
 <div class="section" id="Gur-Camp"><div class="section-header"><span class="eye noselect" onclick="collapse('Gur-Camp')">👁️</span><span class="section-title">Gur Camp</span><span class="progress" data="Gur-Camp" /></div><div class="section-content">

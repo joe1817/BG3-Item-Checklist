@@ -140,7 +140,7 @@ li > .progress {
 
 .tip {
 	border: 1px solid #606A73;
-	border-radius: 2px;
+	border-radius: 5px;
 	padding: 8px;
 	text-align: center;
 	margin: 0 auto 0.5em;
@@ -366,7 +366,7 @@ function saveCheckboxState(section, entry, isChecked) {
 function clearCheckboxes(act) {
 	if (!confirm("Are you sure you want to clear all checkboxes for this act?"))
 		return;
-	const checkboxes = document.querySelectorAll("." + act + " input[type='checkbox']");
+	const checkboxes = document.querySelectorAll("#" + act + " input[type='checkbox']");
 	checkboxes.forEach(checkbox => {
 		if (checkbox.checked) {
 			checkbox.checked = false;
@@ -643,7 +643,7 @@ window.onload = function() {
 <div id="search"></div>
 <div class="noselect" id="back-to-top">Back to Top</div>
 <div id="table">
-<div class="act" id="Act1"><div class="act-header center"><span class="act-title">Act 1</span><button onclick="clearCheckboxes('Act1')">Clear</button><span class="progress" data="Act1"></span></div>
+<div class="act" id="Act1"><div class="act-header center"><span class="act-title">Act 1</span><span class="progress" data="Act1"></span></div><div class="center"><button onclick="clearCheckboxes('Act1')">Clear</button></div>
 <div class="section" id="Nautiloid"><div class="section-header"><span class="eye noselect" onclick="collapse('Nautiloid')">👁️</span><span class="section-title">Nautiloid (Prologue)</span><span class="progress" data="Nautiloid"></span></div><div class="section-content">
 <div class="tip">It's recommended to help the friendly intellect devourer and keep it alive.</div>
 <div class="entry greatsword uncommon top-tier" id="Everburn-Blade"><span><input class="entry-checkbox" data="greatsword" type="checkbox"/></span><span class="entry-img"><img class="sprite" height="50" id="950-350" width="50"/></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Everburn_Blade">Everburn Blade</a></span><span class="entry-desc"><span class="coordinates">(X: -53 Y: -391)</span> Obtained by casting Command: Drop on Commander Zhalk at the helm of the Nautiloid, or looted from him.</span></div>
@@ -976,7 +976,7 @@ window.onload = function() {
 <div class="tip">This is a camp event during a Long Rest after encountering Vlaakith at Crèche Y'llek and before starting Act 3.</div>
 <div class="entry longsword very-rare top-tier" id="Voss-Silver-Sword"><span><input class="entry-checkbox" data="longsword" type="checkbox"/></span><span class="entry-img"><img class="sprite" height="50" id="100-1250" width="50"/></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Voss'_Silver_Sword">Voss' Silver Sword</a></span><span class="entry-desc">Looted from Kith'rak Voss, or bought from him in Act 3 (<span class="value">630 gp</span>).</span></div>
 <div class="entry misc story" id="Quanith-Psionic-Detector"><span><input class="entry-checkbox" data="misc" type="checkbox"/></span><span class="entry-img"><img class="sprite" height="50" id="0-800" width="50"/></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Qua'nith_Psionic_Detector">Qua'nith Psionic Detector</a></span><span class="entry-desc">Given by Kith'rak Voss.</span></div>
-</div></div></div><div class="act" id="Act2"><div class="act-header center"><span class="act-title">Act 2</span><button onclick="clearCheckboxes('Act2')">Clear</button><span class="progress" data="Act2"></span></div>
+</div></div></div><div class="act" id="Act2"><div class="act-header center"><span class="act-title">Act 2</span><span class="progress" data="Act2"></span></div><div class="center"><button onclick="clearCheckboxes('Act2')">Clear</button></div>
 <div class="section" id="Ruined-Battlefield"><div class="section-header"><span class="eye noselect" onclick="collapse('Ruined-Battlefield')">👁️</span><span class="section-title">Ruined Battlefield</span><span class="progress" data="Ruined-Battlefield"></span></div><div class="section-content">
 <div class="entry amulet uncommon" id="Frost-Prince"><span><input class="entry-checkbox" data="amulet" type="checkbox"/></span><span class="entry-img"><img class="sprite" height="50" id="950-400" width="50"/></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Frost_Prince">Frost Prince</a></span><span class="entry-desc"><span class="coordinates">(X: 80 Y: -96)</span> Found in a chest in the southeast, near an ambush of Shadow-Cursed Needle Blights and Shadow-Cursed Vine Blights.</span></div>
 <div class="entry gloves uncommon" id="Thermoarcanic-Gloves"><span><input class="entry-checkbox" data="gloves" type="checkbox"/></span><span class="entry-img"><img class="sprite" height="50" id="800-1150" width="50"/></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Thermoarcanic_Gloves">Thermoarcanic Gloves</a></span><span class="entry-desc"><span class="coordinates">(X: 4 Y: -28)</span> Looted from Kansif.</span></div>
@@ -1183,7 +1183,7 @@ window.onload = function() {
 <div class="entry quarterstaff rare" id="Staff-of-the-Emperor"><span><input class="entry-checkbox" data="quarterstaff" type="checkbox"/></span><span class="entry-img"><img class="sprite" height="50" id="100-1050" width="50"/></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Staff_of_the_Emperor">Staff of the Emperor</a></span><span class="entry-desc"><span class="coordinates">(X: -160 Y: -1165)</span> Obtained by disarming The Emperor.</span></div>
 <div class="entry boots rare top-tier" id="Boots-of-Uninhibited-Kushigo"><span><input class="entry-checkbox" data="boots" type="checkbox"/></span><span class="entry-img"><img class="sprite" height="50" id="400-150" width="50"/></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Boots_of_Uninhibited_Kushigo">Boots of Uninhibited Kushigo</a></span><span class="entry-desc"><span class="coordinates">(X: -163 Y: -1158)</span> Looted from Prelate Lir'i'c.</span></div>
 <div class="entry enhancement story" id="Mind-Flayer-Parasite-Specimen-21"><span><input class="entry-checkbox" data="enhancement" type="checkbox"/></span><span class="entry-img"><img class="sprite" height="50" id="200-700" width="50"/></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></span><span class="entry-desc">Two are obtained by transforming Minthara into a partial-illithid using the Astral-Touched Tadpole. You'll be refunded the two parasites she consumed before you met her.</span></div>
-</div></div></div><div class="act" id="Act3"><div class="act-header center"><span class="act-title">Act 3</span><button onclick="clearCheckboxes('Act3')">Clear</button><span class="progress" data="Act3"></span></div>
+</div></div></div><div class="act" id="Act3"><div class="act-header center"><span class="act-title">Act 3</span><span class="progress" data="Act3"></span></div><div class="center"><button onclick="clearCheckboxes('Act3')">Clear</button></div>
 <div class="section" id="Gur-Camp"><div class="section-header"><span class="eye noselect" onclick="collapse('Gur-Camp')">👁️</span><span class="section-title">Gur Camp</span><span class="progress" data="Gur-Camp"></span></div><div class="section-content">
 <div class="entry greataxe uncommon" id="The-Undead-Bane"><span><input class="entry-checkbox" data="greataxe" type="checkbox"/></span><span class="entry-img"><img class="sprite" height="50" id="600-1150" width="50"/></span><span class="entry-title"><a href="https://bg3.wiki/wiki/The_Undead_Bane">The Undead Bane</a></span><span class="entry-desc"><span class="coordinates">(X: 100 Y: -17)</span> Looted from Ulma in the Gur Camp.</span></div>
 <div class="entry grenade common" id="Surprise-Based Teddy Bear"><span><input class="entry-checkbox" data="grenade" type="checkbox"/></span><span class="entry-img"><img class="sprite" height="50" id="600-1050" width="50"/></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Surprise-Based_Teddy_Bear">Surprise-Based Teddy Bear</a></span><span class="entry-desc"><span class="coordinates">(X: 83 Y: -108)</span> Found in the locked and trapped crate in the Requisitioned Barn.</span></div>
