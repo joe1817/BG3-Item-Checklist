@@ -143,6 +143,13 @@ li > .progress {
 	padding-top: 1em;
 }
 
+/*collapsible*/
+.section-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
 .tip {
 	border: 1px solid #606A73;
 	border-radius: 2px;
@@ -226,9 +233,11 @@ a:hover {
 	display: none;
 }
 
+/*
 .hidden-by-eye {
 	display: none;
 }
+*/
 
 .hidden {
 	display: none;
@@ -559,7 +568,11 @@ function collapse(sectionID) {
 	const section = document.getElementById(sectionID);
 	const collapseButton = section.querySelector(".eye");
 	const entries = section.querySelector(".section-content");
-	entries.classList.toggle("hidden-by-eye");
+    if (entries.style.maxHeight){
+      entries.style.maxHeight = null;
+    } else {
+      entries.style.maxHeight = entries.scrollHeight + "px";
+    }
 	collapseButton.classList.toggle("faded");
 }
 
