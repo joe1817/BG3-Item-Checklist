@@ -1,4 +1,4 @@
-<!-- TODO hiding entries should change progress counters --><!-- TODO hide section if all entries are individually hidden --><!-- TODo turn sections into collapsibles --><!-- TODO search & highlight text --><!-- TODO many instances of "Found in/on" should be changed to "Stolen from" --><!-- TODO options to show/hide top-tiering, show/hide exploits (Silver Sword, Deva Mace), specific categories --><!DOCTYPE html>
+<!-- TODO hide section if all entries are individually hidden --><!-- TODO turn sections into collapsibles --><!-- TODO search & highlight text --><!-- TODO many instances of "Found in/on" should be changed to "Stolen from" --><!-- TODO options to show/hide top-tiering, show/hide exploits (Silver Sword, Deva Mace), specific categories --><!DOCTYPE html>
 <html>
 <head>
 <title>BG3 Item Checklist</title>
@@ -15,7 +15,7 @@ body {
 	text-align: left;
 	font-size: 0.875em;
     line-height: 1.6em;
-	
+
 	display: flex;
 	flex-direction: column;
 }
@@ -82,6 +82,7 @@ li > .progress {
 
 .progress.done {
 	border: 1px solid green;
+	opacity: 100%;
 }
 
 .act-title {
@@ -279,7 +280,7 @@ a:hover {
 <script>
 
 // only direct children
-const hierarchy = {
+const entryHierarchy = {
 	"_root_": ["accessory", "armour", "bonus", "consumable", "follower", "misc", "shield", "weapon"],
 	"accessory": ["amulet", "ring"],
 	"armour": ["boots", "cloak", "clothing", "gloves", "heavy-armour", "helmet", "light-armour", "medium-armour"],
@@ -294,14 +295,14 @@ const hierarchy = {
 // all children, grandchildren, etc.
 const expandedHierarchy = {};
 
-function expandHierarchy(expandedHierarchy, hierarchy, key) {
-	if (hierarchy[key] == undefined){
+function expandHierarchy(expandedHierarchy, entryHierarchy, key) {
+	if (entryHierarchy[key] == undefined){
 		expandedHierarchy[key] = [key];
 	}
 	else {
 		expandedHierarchy[key] = [];
-		hierarchy[key].forEach(item => {
-			expandHierarchy(expandedHierarchy, hierarchy, item);
+		entryHierarchy[key].forEach(item => {
+			expandHierarchy(expandedHierarchy, entryHierarchy, item);
 			expandedHierarchy[item].forEach(item2 => {
 				expandedHierarchy[key].push(item2);
 			});
@@ -309,7 +310,7 @@ function expandHierarchy(expandedHierarchy, hierarchy, key) {
 	}
 }
 
-expandHierarchy(expandedHierarchy, hierarchy, "_root_");
+expandHierarchy(expandedHierarchy, entryHierarchy, "_root_");
 
 function createElement(tag, parent, classname="") {
 	const element = document.createElement(tag);
@@ -395,7 +396,7 @@ function create_TOC() {
 // create filter menu
 function createFilters() {
 	filtersDiv = document.getElementById("filters");
-	hierarchy["_root_"].forEach(category => {
+	entryHierarchy["_root_"].forEach(category => {
 
 		const categoryDiv          = createElement("div", filtersDiv);
 
@@ -420,8 +421,8 @@ function createFilters() {
 			filterItems();
 		});
 
-		if (hierarchy[category]) {
-			hierarchy[category].forEach(subcategory => {
+		if (entryHierarchy[category]) {
+			entryHierarchy[category].forEach(subcategory => {
 				const subCategoryDiv      = createElement("div", subcategoriesDiv, "filter sub-filter");
 				const subCategoryCheckbox = createElement("input", subCategoryDiv);
 				const subCategoryTextSpan = createElement("span", subCategoryDiv);
@@ -469,8 +470,10 @@ function filterItems() {
 			entry.classList.add("hidden-by-filter");
 		}
 	});
+	initializeProgressCounters();
 }
 
+// TODO entry checkbox data attribute should include section, act
 function linkCheckboxesToProgressCounters() {
 	const progressCounters = document.querySelectorAll(".progress");
 	document.querySelectorAll(".entry-checkbox").forEach(checkbox => {
@@ -481,21 +484,6 @@ function linkCheckboxesToProgressCounters() {
 		progressCounters.forEach(progress => {
 			const progressData = progress.getAttribute("data");
 			if (categories.some(cat => expandedHierarchy[cat].includes(progressData)) || progressData == act || progressData == section) {
-				// set initial value
-				let progressText = progress.innerText
-				if (progressText) {
-					progressText = progressText.split("/");
-				} else {
-					progressText = [0, 0];
-					progress.classList.add("done");
-				}
-				if (checkbox.checked) {
-					progress.innerText = "" + (parseInt(progressText[0])+1) + "/" + (parseInt(progressText[1])+1);
-					progress.classList.add("started");
-				} else {
-					progress.innerText = progressText[0] + "/" + (parseInt(progressText[1])+1);
-					progress.classList.remove("done");
-				}
 				// update value when checkbox changed
 				checkbox.addEventListener("change", () => {
 					const progressText = progress.innerText.split("/");
@@ -512,11 +500,40 @@ function linkCheckboxesToProgressCounters() {
 						const total = progressText[1];
 						progress.classList.remove("done");
 						if (count == 0) {
-							progress.classList.add("started");
+							progress.classList.remove("started");
 						}
 						progress.innerText = "" + count + "/" + total;
 					}
 				});
+			}
+		});
+	});
+}
+
+function initializeProgressCounters() {
+	const progressCounters = document.querySelectorAll(".progress");
+	const entries = document.querySelectorAll(".entry");
+	progressCounters.forEach(progress => {
+		const progressData = progress.getAttribute("data");
+		progress.innerText = "0/0";
+		progress.classList.add("done");
+		entries.forEach(entry => {
+			if (!entry.classList.contains("hidden-by-filter") && !entry.classList.contains("hidden-by-search")) {
+				const checkbox = entry.querySelector(".entry-checkbox");
+				const checkboxData = checkbox.getAttribute("data");
+				const section = getClosestAncestorByClass(entry, "section").id;
+				const act = getClosestAncestorByClass(entry, "act").id;
+				const categories = checkboxData.split(" ");
+				const progressText = progress.innerText.split("/");
+				if (categories.some(cat => expandedHierarchy[cat].includes(progressData)) || progressData == act || progressData == section) {
+					if (checkbox.checked) {
+						progress.innerText = "" + (parseInt(progressText[0])+1) + "/" + (parseInt(progressText[1])+1);
+						progress.classList.add("started");
+					} else {
+						progress.innerText = progressText[0] + "/" + (parseInt(progressText[1])+1);
+						progress.classList.remove("done");
+					}
+				}
 			}
 		});
 	});
@@ -552,7 +569,8 @@ window.onload = function() {
 	});
 
 	// TODO load filter checkboxes
-	
+	filterItems();
+
 	linkCheckboxesToProgressCounters();
 
 	// load sprites
