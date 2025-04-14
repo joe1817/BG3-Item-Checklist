@@ -1,11 +1,22 @@
 import os
+import json
 from bs4 import BeautifulSoup
 import traceback
 from math import sqrt
 from PIL import Image
 
 def create_sprite_sheet(img_dir, image_size, out_dir):
-	paths = [img_dir + "/" + f for f in os.listdir(img_dir)]
+	paths = [img_dir + "/" + f for f in os.listdir(img_dir) if not f.endswith(".txt")]
+	try:
+		with open(os.path.join(img_dir, "sprite_images.txt"), "r", encoding="utf-8") as f:
+			last_images = f.read()
+	except FileNotFoundError:
+		last_images = ""
+	these_images = ";".join(paths)
+	if these_images == last_images:
+		print("No change to spritesheet")
+		with open(os.path.join(img_dir, "sprite_map.txt"), "r", encoding="utf-8") as f:
+			return json.loads(f.read())
 	count = round(sqrt(len(paths)))
 	sprite_width = image_size * count
 	sprite_height = image_size * ((len(paths) - 1) // count + 1)
@@ -25,6 +36,11 @@ def create_sprite_sheet(img_dir, image_size, out_dir):
 			y += image_size
 
 	sprite_sheet.save(os.path.join(out_dir, "sprites.png"))
+	with open(os.path.join(img_dir, "sprite_images.txt"), "w", encoding="utf-8") as f:
+		f.write(these_images)
+	with open(os.path.join(img_dir, "sprite_map.txt"), "w", encoding="utf-8") as f:
+		f.write(json.dumps(sprite_map))
+	print("Created spritesheet")
 	return sprite_map
 
 def update_links(in_file, img_map, out_dir):
@@ -40,17 +56,16 @@ def update_links(in_file, img_map, out_dir):
 	html = str(BeautifulSoup(html, "lxml"))
 	with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as f:
 		f.write(html)
+	print("Created index.html")
 
 def main():
 	os.chdir(os.path.dirname(os.path.abspath(__file__)))
 	img_map = create_sprite_sheet("imgs", 50, "docs")
 	update_links("src.html", img_map, "docs")
-	print("Successfully created spritesheet")
-	input("Press ENTER to quit")
 
 if __name__ == "__main__":
 	try:
 		main()
 	except:
 		traceback.print_exc()
-		input()
+		input("ERROR")
