@@ -94,6 +94,18 @@ li > .progress {
 	opacity: 100%;
 }
 
+.act-header {
+	padding: 0.75em 0;
+	margin: 0.5em 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.act-header > * {
+	margin-left: 0.5em;
+}
+
 .act-title {
 	font-size: 2em;
 }
@@ -104,14 +116,14 @@ li > .progress {
 }
 
 .section-header {
-	background: #14212D;
+	background-color: #14212D;
 	padding: 0.75em 0;
 	margin: 0.5em 0;
 	display: flex;
 	align-items: center;
 }
 
-.section-header > span {
+.section-header > *{
 	margin-left: 0.5em;
 }
 
@@ -652,7 +664,7 @@ window.onload = function() {
 <h2 class="center">Table of Contents</h2>
 
 <div id="TOC"></div>
-<fieldset id="filters"><legend>Filters</legend></fieldset>
+<fieldset id="filters" class="noselect"><legend>Filters</legend></fieldset>
 <div id="search"></div>
 <div id="back-to-top" class="noselect">Back to Top</div>
 

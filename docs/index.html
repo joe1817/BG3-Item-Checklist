@@ -55,6 +55,28 @@ li > .progress {
 	margin-left: 10px;
 }
 
+#filters {
+	display: flex;
+	margin: 1em auto;
+	border: none;
+}
+
+.filter {
+	border-radius: 5px;
+	border: 1px solid darkgrey;
+	background-color: #14212D;
+	padding: 0 4px;
+	cursor: default;
+}
+.category {
+	margin: 0 2px;
+}
+
+.subcategories {
+	overflow: hidden;
+	max-height: 0;
+}
+
 .eye {
 	background-color: #0060DF;
 	border: 0px solid #0060DF;
@@ -85,6 +107,18 @@ li > .progress {
 	opacity: 100%;
 }
 
+.act-header {
+	padding: 0.75em 0;
+	margin: 0.5em 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.act-header > * {
+	margin-left: 0.5em;
+}
+
 .act-title {
 	font-size: 2em;
 }
@@ -95,14 +129,14 @@ li > .progress {
 }
 
 .section-header {
-	background: #14212D;
+	background-color: #14212D;
 	padding: 0.75em 0;
 	margin: 0.5em 0;
 	display: flex;
 	align-items: center;
 }
 
-.section-header > span {
+.section-header > *{
 	margin-left: 0.5em;
 }
 
@@ -262,21 +296,6 @@ a:hover {
 	opacity: 1;
 }
 
-#filters {
-	display: flex;
-	margin: 1em auto;
-}
-
-.categoryDiv {
-	display: flex;
-	flex-direction: column;
-}
-
-.subcategoriesDiv {
-	display: flex;
-	flex-direction: column;
-}
-
 </style>
 <script>
 
@@ -399,12 +418,14 @@ function createFilters() {
 	filtersDiv = document.getElementById("filters");
 	entryHierarchy["_root_"].forEach(category => {
 
-		const categoryDiv          = createElement("div", filtersDiv);
+		const categoryDiv          = createElement("div", filtersDiv, "category");
 
 		const mainCategoryDiv      = createElement("div", categoryDiv, "filter main-filter");
-		const mainCategoryCheckbox = createElement("input", mainCategoryDiv);
+		const mainCategoryCheckbox = createElement("span", mainCategoryDiv);
 		const mainCategoryTextSpan = createElement("span", mainCategoryDiv);
 		//const mainCategoryProgress = createElement("span", mainCategoryDiv, "progress");
+		mainCategoryCheckbox.innerText = "👁️";
+		mainCategoryCheckbox.classList.add("eye");
 
 		mainCategoryCheckbox.setAttribute("type", "checkbox");
 		mainCategoryCheckbox.setAttribute("class", "filter-checkbox");
@@ -413,9 +434,10 @@ function createFilters() {
 
 		mainCategoryTextSpan.innerText = category;
 
-		const subcategoriesDiv     = createElement("div", categoryDiv, "subcategoriesDiv");
+		const subcategoriesDiv     = createElement("div", categoryDiv, "subcategories");
 
 		mainCategoryCheckbox.addEventListener("click", (event) => {
+			mainCategoryCheckbox.classList.toggle("faded");
 			Array.from(subcategoriesDiv.children).forEach(subcategory =>{
 				subcategory.children[0].checked = mainCategoryCheckbox.checked;
 			});
@@ -425,9 +447,11 @@ function createFilters() {
 		if (entryHierarchy[category]) {
 			entryHierarchy[category].forEach(subcategory => {
 				const subCategoryDiv      = createElement("div", subcategoriesDiv, "filter sub-filter");
-				const subCategoryCheckbox = createElement("input", subCategoryDiv);
+				const subCategoryCheckbox = createElement("span", subCategoryDiv);
 				const subCategoryTextSpan = createElement("span", subCategoryDiv);
 				//const subCategoryProgress = createElement("span", subCategoryDiv, "progress");
+				subCategoryCheckbox.innerText = "👁️";
+				subCategoryCheckbox.classList.add("eye");
 
 				subCategoryCheckbox.setAttribute("type", "checkbox");
 				subCategoryCheckbox.setAttribute("class", "filter-checkbox");
@@ -437,6 +461,7 @@ function createFilters() {
 				subCategoryTextSpan.innerText = subcategory;
 
 				subCategoryCheckbox.addEventListener("click", () => {
+					subCategoryCheckbox.classList.toggle("faded");
 					if (!subCategoryCheckbox.checked) {
 						mainCategoryCheckbox.checked = false;
 					} else if (Array.from(subcategoriesDiv.children).every(subcategory => subcategory.children[0].checked)) {
@@ -639,7 +664,7 @@ window.onload = function() {
 <p class="center"><a href="https://github.com/joe1817/BG3-Item-Checklist">GitHub</a></p>
 <h2 class="center">Table of Contents</h2>
 <div id="TOC"></div>
-<fieldset id="filters"><legend>Filters</legend></fieldset>
+<fieldset class="noselect" id="filters"><legend>Filters</legend></fieldset>
 <div id="search"></div>
 <div class="noselect" id="back-to-top">Back to Top</div>
 <div id="table">
