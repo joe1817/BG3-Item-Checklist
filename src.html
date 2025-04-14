@@ -1,3 +1,10 @@
+<!-- TODO progress for each section -->
+<!-- TODO search & highlight text -->
+<!-- TODO hide section if all entries are individually hidden -->
+<!-- TODO filters should have progress stats too -->
+<!-- TODO many instances of "Found in/on" should be changed to "Stolen from" -->
+<!-- TODO options to show/hide top-tier, show/hide exploits (Silver Sword, Deva Mace), specific categories -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +24,13 @@ body {
 	text-align: left;
 	font-size: 0.875em;
     line-height: 1.6em;
+	
+	display: flex;
+	flex-direction: column;
+}
+
+.center {
+	text-align: center;
 }
 
 h1 {
@@ -50,6 +64,10 @@ ul {
 	background-color: #ACABAB;
 }
 
+.act-title {
+	font-size: 2em;
+}
+
 .section {
 	display: flex;
 	flex-direction: column;
@@ -79,7 +97,7 @@ ul {
 .entry {
 	display: flex;
 	flex-direction: row;
-	padding: 5px;
+	padding: 3px 5px 0;
 	gap: 5px;
 	margin-left: 3em;
 }
@@ -88,9 +106,6 @@ ul {
 	width: 150px;
 	flex-grow: 0;
 	flex-shrink: 0;
-}
-
-.entry-desc {
 }
 
 .entry-checkbox, .entry-title, .entry-desc {
@@ -129,10 +144,6 @@ a:hover {
 	padding: 3px 5px;
 	box-shadow: 1px 1px 5px #00000030;
 	white-space: nowrap;
-}
-
-.center {
-	text-align: center;
 }
 
 .uncommon {
@@ -229,9 +240,66 @@ a:hover {
 	opacity: 1;
 }
 
+#filters {
+	display: flex;
+	margin: 1em auto;
+}
+
+.categoryDiv {
+	display: flex;
+	flex-direction: column;
+}
+
+.subcategoriesDiv {
+	display: flex;
+	flex-direction: column;
+}
+
 </style>
 
 <script>
+
+// only direct children
+const hierarchy = {
+	"_root_": ["accessory", "armour", "bonus", "consumable", "misc", "shield", "weapon"],
+	"accessory": ["amulet", "ring"],
+	"armour": ["boots", "cloak", "clothing", "gloves", "heavy-armour", "helmet", "light-armour", "medium-armour"],
+	"bonus": ["action", "condition", "enhancement"],
+	"action": ["non-spell", "spell"],
+	"consumable": ["arrow", "barrel", "camp-supplies", "crafting", "grenade", "potion", "scroll"],
+	"weapon": ["melee", "ranged"],
+	"melee": ["battleaxe", "club", "dagger", "flail", "glaive", "greataxe", "greatclub", "greatsword", "halberd", "handaxe", "light-hammer", "longsword", "mace", "maul", "morningstar", "pike", "quarterstaff", "rapier", "scimitar", "shortsword", "sickle", "spear", "trident", "war-pick", "warhammer"],
+	"ranged": ["hand-crossbow", "heavy-crossbow", "light-crossbow", "longbow", "shortbow"]
+};
+
+// all children, grandchildren, etc.
+const expandedHierarchy = {};
+
+function expandHierarchy(expandedHierarchy, hierarchy, key) {
+	if (hierarchy[key] == undefined){
+		expandedHierarchy[key] = [key];
+	}
+	else {
+		expandedHierarchy[key] = [];
+		hierarchy[key].forEach(item => {
+			expandHierarchy(expandedHierarchy, hierarchy, item);
+			expandedHierarchy[item].forEach(item2 => {
+				expandedHierarchy[key].push(item2);
+			});
+		});
+	}
+}
+
+expandHierarchy(expandedHierarchy, hierarchy, "_root_");
+
+function createElement(tag, parent, classname="") {
+	const element = document.createElement(tag);
+	parent.appendChild(element);
+	if (classname)
+		element.setAttribute("class", classname);
+	return element;
+}
+
 function get_difficulty_mod(difficulty) {
 	switch (difficulty) {
 		case "explorer": return 0.5;
@@ -295,38 +363,60 @@ function create_TOC() {
 	});
 }
 
-// only direct children
-const hierarchy = {
-	"_root_": ["accessory", "armour", "bonus", "consumable", "misc", "shield", "weapon"],
-	"accessory": ["amulet", "ring"],
-	"armour": ["boots", "cloak", "clothing", "gloves", "heavy-armour", "helmet", "light-armour", "medium-armour"],
-	"bonus": ["action", "condition", "enhancement"],
-	"action": ["non-spell", "spell"],
-	"consumable": ["arrow", "barrel", "camp-supplies", "crafting", "grenade", "potion", "scroll"],
-	"weapon": ["melee", "ranged"],
-	"melee": ["battleaxe", "club", "dagger", "flail", "glaive", "greataxe", "greatclub", "greatsword", "halberd", "handaxe", "light-hammer", "longsword", "mace", "maul", "morningstar", "pike", "quarterstaff", "rapier", "scimitar", "shortsword", "sickle", "spear", "trident", "war-pick", "warhammer"],
-	"ranged": ["hand-crossbow", "heavy-crossbow", "light-crossbow", "longbow", "shortbow"]
-};
+// create filter menu
+function createFilters() {
+	filtersDiv = document.getElementById("filters");
+	hierarchy["_root_"].forEach(category => {
 
-// all children, grandchildren, etc.
-const expandedHierarchy = {};
+		const categoryDiv          = createElement("div", filtersDiv);
 
-function expandHierarchy(expandedHierarchy, hierarchy, key) {
-	if (hierarchy[key] == undefined){
-		expandedHierarchy[key] = [key];
-	}
-	else {
-		expandedHierarchy[key] = [];
-		hierarchy[key].forEach(item => {
-			expandHierarchy(expandedHierarchy, hierarchy, item);
-			expandedHierarchy[item].forEach(item2 => {
-				expandedHierarchy[key].push(item2);
+		const mainCategoryDiv      = createElement("div", categoryDiv, "filter main-filter");
+		const mainCategoryCheckbox = createElement("input", mainCategoryDiv);
+		const mainCategoryTextSpan = createElement("span", mainCategoryDiv);
+		const mainCategoryProgress = createElement("span", mainCategoryDiv, "progress");
+
+		mainCategoryCheckbox.setAttribute("type", "checkbox");
+		mainCategoryCheckbox.setAttribute("class", "filter-checkbox");
+		mainCategoryCheckbox.setAttribute("data", category);
+		mainCategoryCheckbox.setAttribute("checked", "");
+
+		mainCategoryTextSpan.innerText = category;
+
+		const subcategoriesDiv     = createElement("div", categoryDiv, "subcategoriesDiv");
+
+		mainCategoryCheckbox.addEventListener("click", (event) => {
+			Array.from(subcategoriesDiv.children).forEach(subcategory =>{
+				subcategory.children[0].checked = mainCategoryCheckbox.checked;
 			});
+			filterItems();
 		});
-	}
-}
 
-expandHierarchy(expandedHierarchy, hierarchy, "_root_");
+		if (hierarchy[category]) {
+			hierarchy[category].forEach(subcategory => {
+				const subCategoryDiv      = createElement("div", subcategoriesDiv, "filter sub-filter");
+				const subCategoryCheckbox = createElement("input", subCategoryDiv);
+				const subCategoryTextSpan = createElement("span", subCategoryDiv);
+				const subCategoryProgress = createElement("span", subCategoryDiv, "progress");
+
+				subCategoryCheckbox.setAttribute("type", "checkbox");
+				subCategoryCheckbox.setAttribute("class", "filter-checkbox");
+				subCategoryCheckbox.setAttribute("data", subcategory);
+				subCategoryCheckbox.setAttribute("checked", "");
+
+				subCategoryTextSpan.innerText = subcategory;
+
+				subCategoryCheckbox.addEventListener("click", () => {
+					if (!subCategoryCheckbox.checked) {
+						mainCategoryCheckbox.checked = false;
+					} else if (Array.from(subcategoriesDiv.children).every(subcategory => subcategory.children[0].checked)) {
+						mainCategoryCheckbox.checked = true;
+					}
+					filterItems();
+				});
+			});
+		}
+	});
+}
 
 // filter items by selected categories
 function filterItems() {
@@ -344,38 +434,11 @@ function filterItems() {
 	const invisible = expandedHierarchy["_root_"].filter(item => !visible.includes(item));
 	document.querySelectorAll(".entry").forEach(entry => {
 		const visibility = visible.some(v => entry.classList.contains(v));
-		if (visibility && entry.classList.contains("hidden-by-filter")) {
+		if (visibility) {
 			entry.classList.remove("hidden-by-filter");
-		} else if (!visibility && !entry.classList.contains("hidden-by-filter")) {
+		} else if (!visibility) {
 			entry.classList.add("hidden-by-filter");
 		}
-	});
-
-}
-
-// create filter menu
-function createFilters() {
-	filtersDiv = document.getElementById("filters");
-	hierarchy["_root_"].forEach(category => {
-		const filter         = document.createElement("span");
-		const filterCheckbox = document.createElement("input");
-		const filterTextSpan = document.createElement("span");
-
-		filtersDiv.appendChild(filter);
-
-		filterCheckbox.setAttribute("type", "checkbox");
-		filterCheckbox.setAttribute("class", "filter-checkbox");
-		filterCheckbox.setAttribute("data", category);
-		filterCheckbox.setAttribute("checked", "");
-
-		filter.appendChild(filterCheckbox);
-		filter.appendChild(filterTextSpan);
-
-		filterTextSpan.innerText = category;
-
-		filterCheckbox.onclick = () => {
-			filterItems();
-		};
 	});
 }
 
@@ -387,11 +450,7 @@ function collapse(sectionID) {
 	}
 	const section = document.getElementById(sectionID);
 	const collapseButton = section.querySelector(".eye");
-	const tip = section.querySelector(".tip");
 	const entries = section.querySelector(".section-content");
-	if (tip) {
-		tip.classList.toggle("hidden-by-eye");
-	}
 	entries.classList.toggle("hidden-by-eye");
 	collapseButton.classList.toggle("faded");
 }
@@ -411,6 +470,8 @@ window.onload = function() {
 			});
 		});
 	});
+
+	// TODO load filter checkboxes
 
 	// load sprites
 	const fullImage = new Image();
@@ -445,21 +506,6 @@ window.onload = function() {
 		});
 	});
 
-	// hide/unhide sections
-	// TODO automatically hide completed sections
-	/*
-	document.querySelectorAll(".section").forEach(section => {
-		section.addEventListener("click", () => {
-			document.querySelectorAll("." + section.id + ".entry").forEach(entry => {
-				entry.classList.toggle("hidden");
-			});
-			const tip = section.querySelector(".tip")
-			if (tip != null)
-				tip.classList.toggle("hidden");
-		});
-	});
-	*/
-
 	// back to top
 	const backToTop = document.getElementById("back-to-top");
 
@@ -486,42 +532,34 @@ window.onload = function() {
 <h1 class="center">BG3 Item Checklist</h1>
 <p class="center"><a href="https://github.com/joe1817/BG3-Item-Checklist">GitHub</a></p>
 <h2 class="center">Table of Contents</h2>
+
 <div id="TOC"></div>
-
-
 <div id="filters"></div>
-
-
 <div id="search"></div>
-
-
 <div id="back-to-top" class="noselect">Back to Top</div>
 
 
-<!-- TODO many instances of "Found in/on" should be changed to "Stolen from" -->
-<!-- TODO options to show/hide top-tiering, show/hide exploits (Silver Sword, Deva Mace), specific categories -->
-<!-- TODO progress for each section -->
 <div id="table">
 
 
-<div class="act" id="Act1"><div class="act-header center"><span class="act-title">Act 1</span><button onclick="clearCheckboxes('Act1')">Clear</button></div>
+<div class="act" id="Act1"><div class="act-header center"><span class="act-title">Act 1</span><button onclick="clearCheckboxes('Act1')">Clear</button><span class="progress" data="Act1" /></div>
 
 
-<div class="section" id="Nautiloid"><div class="section-header"><span class="eye noselect" onclick="collapse('Nautiloid')">👁️</span><span class="section-title">Nautiloid (Prologue)</span><span class="progress" /></div><div class="section-content">
+<div class="section" id="Nautiloid"><div class="section-header"><span class="eye noselect" onclick="collapse('Nautiloid')">👁️</span><span class="section-title">Nautiloid (Prologue)</span><span class="progress" data="Nautiloid" /></div><div class="section-content">
 
 
 <div class="tip">It's recommended to help the friendly intellect devourer and keep it alive.</div>
 <div class="entry greatsword uncommon top-tier" id="Everburn-Blade"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Everburn Blade.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Everburn_Blade">Everburn Blade</a></span><span class="entry-desc"><span class="coordinates">(X: -53 Y: -391)</span> Obtained by casting Command: Drop on Commander Zhalk at the helm of the Nautiloid, or looted from him.</span></div>
 
 
-</div></div><div class="section" id="Dank-Crypt"><div class="section-header"><span class="eye noselect" onclick="collapse('Dank-Crypt')">👁️</span><span class="section-title">Dank Crypt</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Dank-Crypt"><div class="section-header"><span class="eye noselect" onclick="collapse('Dank-Crypt')">👁️</span><span class="section-title">Dank Crypt</span><span class="progress" data="Dank-Crypt" /></div><div class="section-content">
 
 
 <div class="entry spear uncommon" id="The-Watchers-Guide"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/The Watcher's Guide.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/The_Watcher's_Guide">The Watcher's Guide</a></span><span class="entry-desc"><span class="coordinates">(X: -293 Y: -323)</span> Found in a trapped sarcophagus next to the beach-side entrance. (Note: Recommended to feed Gale.)</span></div>
 <div class="entry amulet rare" id="The-Amulet-of-Lost-Voices"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/The Amulet of Lost Voices.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/The_Amulet_of_Lost_Voices">The Amulet of Lost Voices</a></span><span class="entry-desc"><span class="coordinates">(X: -290 Y: -235)</span> Found in a chest in the same room as Withers.</span></div>
 
 
-</div></div><div class="section" id="Druid-Grove"><div class="section-header"><span class="eye noselect" onclick="collapse('Druid-Grove')">👁️</span><span class="section-title">Druid Grove</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Druid-Grove"><div class="section-header"><span class="eye noselect" onclick="collapse('Druid-Grove')">👁️</span><span class="section-title">Druid Grove</span><span class="progress" data="Druid-Grove" /></div><div class="section-content">
 
 
 <div class="entry gloves uncommon top-tier" id="Hellriders-Pride"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Hellrider's Pride.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Hellrider's_Pride">Hellrider's Pride</a></span><span class="entry-desc"><span class="coordinates">(X: 166 Y: 533)</span> Bought from Zevlor (<span class="value">110 gp</span>), or rewarded for completing the quest "<a href="https://bg3.wiki/wiki/Kill_Kagha">Kill Kagha</a>" or "<a href="https://bg3.wiki/wiki/Investigate_Kagha">Investigate Kagha</a>".</span></div>
@@ -547,7 +585,7 @@ window.onload = function() {
 <div class="entry enhancement story" id="Mind-Flayer-Parasite-Specimen-2"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></span><span class="entry-desc">Rewarded by Minthara for raiding the Emerald Grove. (Note: Doing so will lock you out of multiple quests and rewards.)</span></div> <!-- TODO The actual reward is https://bg3.wiki/wiki/Gift_from_the_Absolute -->
 
 
-</div></div><div class="section" id="Arron"><div class="section-header"><span class="eye noselect" onclick="collapse('Arron')">👁️</span><span class="section-title">Arron</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Arron"><div class="section-header"><span class="eye noselect" onclick="collapse('Arron')">👁️</span><span class="section-title">Arron</span><span class="progress" data="Arron" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: 205 Y: 516)</span></div>
@@ -559,7 +597,7 @@ window.onload = function() {
 <div class="entry longbow uncommon" id="Spellthief"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Spellthief.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Spellthief">Spellthief</a></span><span class="entry-desc"><span class="value">100 gp (Note: Recommended to feed Gale.)</span></span></div>
 
 
-</div></div><div class="section" id="Dammon-1"><div class="section-header"><span class="eye noselect" onclick="collapse('Dammon-1')">👁️</span><span class="section-title">Dammon</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Dammon-1"><div class="section-header"><span class="eye noselect" onclick="collapse('Dammon-1')">👁️</span><span class="section-title">Dammon</span><span class="progress" data="Dammon-1" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: 177 Y: 562)</span></div>
@@ -568,14 +606,14 @@ window.onload = function() {
 <div class="entry grenade common crafting" id="Orthon-Explosive"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Orthon Explosive.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Orthon_Explosive">Orthon Explosive</a></span><span class="entry-desc">Obtained by giving Devilfoil Masks to Dammon.</span></div>
 
 
-</div></div><div class="section" id="Auntie-Ethel"><div class="section-header"><span class="eye noselect" onclick="collapse('Auntie-Ethel')">👁️</span><span class="section-title">Auntie Ethel</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Auntie-Ethel"><div class="section-header"><span class="eye noselect" onclick="collapse('Auntie-Ethel')">👁️</span><span class="section-title">Auntie Ethel</span><span class="progress" data="Auntie-Ethel" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: 192 Y: 546)</span> She will cease being a trader when encountered south of the Blighted Village.</div>
 <div class="entry quarterstaff uncommon" id="Corellons-Grace"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Corellon's Grace.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Corellon's_Grace">Corellon's Grace</a></span><span class="entry-desc">Bought here (<span class="value">100 gp</span>), or looted from Ethel in the Riverside Teahouse <span class="coordinates">(X: -58 Y: 263)</span>.</span></div>
 
 
-</div></div><div class="section" id="Outside-Druid-Grove"><div class="section-header"><span class="eye noselect" onclick="collapse('Outside-Druid-Grove')">👁️</span><span class="section-title">Outside Druid Grove</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Outside-Druid-Grove"><div class="section-header"><span class="eye noselect" onclick="collapse('Outside-Druid-Grove')">👁️</span><span class="section-title">Outside Druid Grove</span><span class="progress" data="Outside-Druid-Grove" /></div><div class="section-content">
 
 
 <div class="entry cloak rare top-tier" id="The-Deathstalker-Mantle"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/The Deathstalker Mantle.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/The_Deathstalker_Mantle">The Deathstalker Mantle</a></span><span class="entry-desc">Rewarded to The Dark Urge (Origin) by Sceleritas Fel for murdering either Alfira or Quil during a camp event. (Note: It's recommended to leave Alfira alive by non-lethally knocking her out before each Long Rest.)</span></div>
@@ -589,7 +627,7 @@ window.onload = function() {
 <div class="entry follower top-tier" id="Scratch"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Scratch.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Scratch">Scratch</a></span><span class="entry-desc"><span class="coordinates">(X: 69 Y: 476)</span> Recruited by leaving Scratch with your scent so he finds your camp.</span></div>
 
 
-</div></div><div class="section" id="Owlbear-Nest"><div class="section-header"><span class="eye noselect" onclick="collapse('Owlbear-Nest')">👁️</span><span class="section-title">Owlbear Nest</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Owlbear-Nest"><div class="section-header"><span class="eye noselect" onclick="collapse('Owlbear-Nest')">👁️</span><span class="section-title">Owlbear Nest</span><span class="progress" data="Owlbear-Nest" /></div><div class="section-content">
 
 
 <div class="entry medium-armour uncommon" id="The-Oak-Fathers-Embrace"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/The Oak Father's Embrace.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/The_Oak_Father's_Embrace">The Oak Father's Embrace</a></span><span class="entry-desc"><span class="coordinates">(X: -354 Y: -111)</span> Found on a headless skeleton.</span></div>
@@ -598,7 +636,7 @@ window.onload = function() {
 <div class="entry camp-supplies common top-tier" id="Owlbear-Egg"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Owlbear Egg.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Owlbear_Egg">Owlbear Egg</a></span><span class="entry-desc">Found in the nest behind the owlbear.</span></div> <!-- TODO coords -->
 
 
-</div></div><div class="section" id="Blighted-Village"><div class="section-header"><span class="eye noselect" onclick="collapse('Blighted-Village')">👁️</span><span class="section-title">Blighted Village</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Blighted-Village"><div class="section-header"><span class="eye noselect" onclick="collapse('Blighted-Village')">👁️</span><span class="section-title">Blighted Village</span><span class="progress" data="Blighted-Village" /></div><div class="section-content">
 
 
 <div class="entry helmet rare top-tier" id="Haste-Helm"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Haste Helm.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Haste_Helm">Haste Helm</a></span><span class="entry-desc"><span class="coordinates">(X: 32 Y: 403)</span> Found in a chest near the waypoint.</span></div>
@@ -617,7 +655,7 @@ window.onload = function() {
 <div class="entry enhancement top-tier" id="Forbidden-Knowledge"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Forbidden Knowledge.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Necromancy_of_Thay">Forbidden Knowledge</a></span><span class="entry-desc"><span class="coordinates">(X: -649 Y: -362)</span> Obtained by reading the Necromancy of Thay, found in a gated section behind the magic mirror in the Apothecary's Cellar. To read the book, you'll need the Dark Amethyst, located near the Phase Spider Matriarch in the Whispering Deapths <span class="coordinates">(X: -550 Y: -350)</span>.</span></div>
 
 
-</div></div><div class="section" id="Whispering-Depths"><div class="section-header"><span class="eye noselect" onclick="collapse('Whispering-Depths')">👁️</span><span class="section-title">Whispering Depths</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Whispering-Depths"><div class="section-header"><span class="eye noselect" onclick="collapse('Whispering-Depths')">👁️</span><span class="section-title">Whispering Depths</span><span class="progress" data="Whispering-Depths" /></div><div class="section-content">
 
 
 <div class="entry boots uncommon" id="Spiderstep-Boots"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Spiderstep Boots.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Spiderstep_Boots">Spiderstep Boots</a></span><span class="entry-desc"><span class="coordinates">(X: -514 Y: -411)</span> Found in a chest in the Arachnomancer's lab within the Whispering Depths.</span></div>
@@ -625,7 +663,7 @@ window.onload = function() {
 <div class="entry clothing uncommon" id="Poisoners-Robe"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Poisoner's Robe.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Poisoner's_Robe">Poisoner's Robe</a></span><span class="entry-desc"><span class="coordinates">(X: -569 Y: -359)</span> Looted from the Phase Spider Matriarch.</span></div>
 
 
-</div></div><div class="section" id="Sunlit-Wetlands"><div class="section-header"><span class="eye noselect" onclick="collapse('Sunlit-Wetlands')">👁️</span><span class="section-title">Sunlit Wetlands</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Sunlit-Wetlands"><div class="section-header"><span class="eye noselect" onclick="collapse('Sunlit-Wetlands')">👁️</span><span class="section-title">Sunlit Wetlands</span><span class="progress" data="Sunlit-Wetlands" /></div><div class="section-content">
 
 
 <div class="entry gloves rare" id="The-Sparkle-Hands"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/The Sparkle Hands.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/The_Sparkle_Hands">The Sparkle Hands</a></span><span class="entry-desc"><span class="coordinates">(X: 95 Y: 210)</span> Found in a chest at the base of large tree stump on the island containing a group of mud mephits.</span></div>
@@ -641,7 +679,7 @@ window.onload = function() {
 <div class="entry amulet uncommon" id="The-Ever-Seeing-Eye"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/The Ever-Seeing Eye.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/The_Ever-Seeing_Eye">The Ever-Seeing Eye</a></span><span class="entry-desc"><span class="coordinates">(X: -416 Y: 599)</span> Found in the treasure room of the Hag's Lair.</span></div>
 
 
-</div></div><div class="section" id="Goblin-Camp"><div class="section-header"><span class="eye noselect" onclick="collapse('Goblin-Camp')">👁️</span><span class="section-title">Goblin Camp</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Goblin-Camp"><div class="section-header"><span class="eye noselect" onclick="collapse('Goblin-Camp')">👁️</span><span class="section-title">Goblin Camp</span><span class="progress" data="Goblin-Camp" /></div><div class="section-content">
 
 
 <div class="entry light-armour uncommon" id="Blazer-of-Benevolence"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Blazer of Benevolence.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Blazer_of_Benevolence">Blazer of Benevolence</a></span><span class="entry-desc"><span class="coordinates">(X: 333 Y: -8)</span> Rewarded for rescuing Volo and speaking to him at camp.</span></div>
@@ -652,7 +690,7 @@ window.onload = function() {
 <div class="entry potion common" id="Potion-of-Vitality"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Potion of Vitality.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Potion_of_Vitality">Potion of Vitality</a></span><span class="entry-desc"><span class="coordinates">(X: -115 Y: 338)</span> Found in a chest next to three Goblins, near the exit to the Rosymorn Monastery Trail.</span></div>
 
 
-</div></div><div class="section" id="Grat-the-Trader"><div class="section-header"><span class="eye noselect" onclick="collapse('Grat-the-Trader')">👁️</span><span class="section-title">Grat the Trader</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Grat-the-Trader"><div class="section-header"><span class="eye noselect" onclick="collapse('Grat-the-Trader')">👁️</span><span class="section-title">Grat the Trader</span><span class="progress" data="Grat-the-Trader" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: -99 Y: 425)</span> He will cease being a trader if the booze is poisoned.</div>
@@ -663,7 +701,7 @@ window.onload = function() {
 <div class="entry boots rare" id="Swiresy-Shoes"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Swiresy Shoes.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Swiresy_Shoes">Swiresy Shoes</a></span><span class="entry-desc"><span class="value">35 gp</span></span></div>
 
 
-</div></div><div class="section" id="Shattered-Sanctum"><div class="section-header"><span class="eye noselect" onclick="collapse('Shattered-Sanctum')">👁️</span><span class="section-title">Shattered Sanctum</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Shattered-Sanctum"><div class="section-header"><span class="eye noselect" onclick="collapse('Shattered-Sanctum')">👁️</span><span class="section-title">Shattered Sanctum</span><span class="progress" data="Shattered-Sanctum" /></div><div class="section-content">
 
 
 <div class="entry enhancement" id="Brand-of-the-Absolute"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Brand of the Absolute.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Brand_of_the_Absolute">Brand of the Absolute</a></span><span class="entry-desc"><span class="coordinates">(X: 298 Y: -16)</span> Obtained by agreeing to be branded by Priestess Gut. Any or all characters can be branded.</span></div>
@@ -690,7 +728,7 @@ window.onload = function() {
 <div class="entry enhancement story" id="Mind-Flayer-Parasite-Specimen-6"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></span><span class="entry-desc"><span class="coordinates">(X: 332 Y: 43)</span> Looted from Minthara.</span></div>
 
 
-</div></div><div class="section" id="Roah-Moonglow"><div class="section-header"><span class="eye noselect" onclick="collapse('Roah-Moonglow')">👁️</span><span class="section-title">Roah Moonglow</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Roah-Moonglow"><div class="section-header"><span class="eye noselect" onclick="collapse('Roah-Moonglow')">👁️</span><span class="section-title">Roah Moonglow</span><span class="progress" data="Roah-Moonglow" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: 274 Y: -30)</span></div>
@@ -701,7 +739,7 @@ window.onload = function() {
 <div class="entry glaive rare" id="Monster-Slayer-Glaive"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Monster Slayer Glaive.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Monster_Slayer_Glaive">Monster Slayer Glaive</a></span><span class="entry-desc"><span class="value">380 gp</span></span></div>
 
 
-</div></div><div class="section" id="Worg-Pens"><div class="section-header"><span class="eye noselect" onclick="collapse('Worg-Pens')">👁️</span><span class="section-title">Worg Pens</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Worg-Pens"><div class="section-header"><span class="eye noselect" onclick="collapse('Worg-Pens')">👁️</span><span class="section-title">Worg Pens</span><span class="progress" data="Worg-Pens" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: 342 Y: 31)</span></div>
@@ -710,7 +748,7 @@ window.onload = function() {
 <div class="entry boots rare" id="Linebreaker-Boots"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Linebreaker Boots.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Linebreaker_Boots">Linebreaker Boots</a></span><span class="entry-desc"><span class="coordinates">(X: 379 Y: -39)</span> Looted from Beastmaster Zurk.</span></div>
 
 
-</div></div><div class="section" id="Waukeens-Rest"><div class="section-header"><span class="eye noselect" onclick="collapse('Waukeens-Rest')">👁️</span><span class="section-title">Waukeen's Rest</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Waukeens-Rest"><div class="section-header"><span class="eye noselect" onclick="collapse('Waukeens-Rest')">👁️</span><span class="section-title">Waukeen's Rest</span><span class="progress" data="Waukeens-Rest" /></div><div class="section-content">
 
 
 <div class="tip">You must complete this area upon your first visit, before resting or fast-travelling away. Otherwise, several quests and items become unavailable.</div>
@@ -721,7 +759,7 @@ window.onload = function() {
 <div class="entry trident rare choice" id="The-Sparky-Points"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/The Sparky Points.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/The_Sparky_Points">The Sparky Points</a></span><span class="entry-desc"><span class="coordinates">(X: -57 Y: 618)</span> Rewarded by Counsellor Florrick for rescuing her from the burning inn. You can only choose one.</span></div>
 
 
-</div></div><div class="section" id="Zhentarim-Hideout"><div class="section-header"><span class="eye noselect" onclick="collapse('Zhentarim-Hideout')">👁️</span><span class="section-title">Zhentarim Hideout</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Zhentarim-Hideout"><div class="section-header"><span class="eye noselect" onclick="collapse('Zhentarim-Hideout')">👁️</span><span class="section-title">Zhentarim Hideout</span><span class="progress" data="Zhentarim-Hideout" /></div><div class="section-content">
 
 
 <div class="entry heavy-crossbow rare" id="Harold"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Harold.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Harold">Harold</a></span><span class="entry-desc"><span class="coordinates">(X: 277 Y: -247)</span> Rewarded for bringing the <i>unopened</i> Caravan Strongbox to Zarys. (Note: It's recommended to pickpocket the Caravan Strongbox off her afterwards to obtain the Iron Flask.)</span></div>
@@ -729,7 +767,7 @@ window.onload = function() {
 <div class="entry gloves very-rare" id="Abyss-Beckoners"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Abyss Beckoners.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Abyss_Beckoners">Abyss Beckoners</a></span><span class="entry-desc"><span class="coordinates">(X: 306 Y: -170)</span> Found in a chest in the <i>right</i> cell at the far back of the basement.</span></div>
 
 
-</div></div><div class="section" id="Brem"><div class="section-header"><span class="eye noselect" onclick="collapse('Brem')">👁️</span><span class="section-title">Brem</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Brem"><div class="section-header"><span class="eye noselect" onclick="collapse('Brem')">👁️</span><span class="section-title">Brem</span><span class="progress" data="Brem" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: 295 Y: -251)</span> Brem's secret stock is unlocked after completing the quest "<a href="https://bg3.wiki/wiki/Find_the_Missing_Shipment">Find the Missing Shipment</a>".</div>
@@ -741,7 +779,7 @@ window.onload = function() {
 <div class="entry longbow rare top-tier" id="Titanstring-Bow"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Titanstring Bow.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Titanstring_Bow">Titanstring Bow</a></span><span class="entry-desc"><span class="value">310 gp / 400 gp</span> (Can also be bought from Lann Tarv on the Main Floor of Moonrise Towers in Act 2.)</span></div>
 
 
-</div></div><div class="section" id="Githyanki-Patrol"><div class="section-header"><span class="eye noselect" onclick="collapse('Githyanki-Patrol')">👁️</span><span class="section-title">Githyanki Patrol</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Githyanki-Patrol"><div class="section-header"><span class="eye noselect" onclick="collapse('Githyanki-Patrol')">👁️</span><span class="section-title">Githyanki Patrol</span><span class="progress" data="Githyanki-Patrol" /></div><div class="section-content">
 
 
 <div class="entry greatsword legendary top-tier exploit" id="Silver-Sword-of-the-Astral-Plane"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Silver Sword of the Astral Plane.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Silver_Sword_of_the_Astral_Plane">Silver Sword of the Astral Plane</a></span><span class="entry-desc"><span class="coordinates">(X: -70 Y: 828)</span> Obtained by casting Command: Drop or Disarming Attack on Kith'rak Voss before he flies away, or rewarded for showing him the Orphic Hammer in Act 3.</span></div>
@@ -749,7 +787,7 @@ window.onload = function() {
 <div class="entry longsword uncommon" id="Githyanki-Longsword-(Psionic)"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Githyanki Longsword (Psionic).png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Githyanki_Longsword_(Psionic)">Githyanki Longsword (Psionic)</a></span><span class="entry-desc"><span class="coordinates">(X: -137 Y: 558)</span> Looted from Gish For'reth.</span></div>
 
 
-</div></div><div class="section" id="Risen-Road"><div class="section-header"><span class="eye noselect" onclick="collapse('Risen-Road')">👁️</span><span class="section-title">Risen Road</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Risen-Road"><div class="section-header"><span class="eye noselect" onclick="collapse('Risen-Road')">👁️</span><span class="section-title">Risen Road</span><span class="progress" data="Risen-Road" /></div><div class="section-content">
 
 
 <div class="entry clothing very-rare" id="Infernal-Robe"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Infernal Robe.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Infernal_Robe">Infernal Robe</a></span><span class="entry-desc">Rewarded by Mizora at camp for killing Karlach at first meeting.</span></div>
@@ -763,7 +801,7 @@ window.onload = function() {
 <div class="entry ring uncommon top-tier" id="Smugglers-Ring"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Smuggler's Ring.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Smuggler's_Ring">Smuggler's Ring</a></span><span class="entry-desc"><span class="coordinates">(X: 57 Y: 514)</span> Found on a skeleton, hidden in a bush on the lower path following the river, east of the broken bridge.</span></div>
 
 
-</div></div><div class="section" id="Underdark"><div class="section-header"><span class="eye noselect" onclick="collapse('Underdark')">👁️</span><span class="section-title">Underdark</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Underdark"><div class="section-header"><span class="eye noselect" onclick="collapse('Underdark')">👁️</span><span class="section-title">Underdark</span><span class="progress" data="Underdark" /></div><div class="section-content">
 
 
 <div class="entry helmet uncommon" id="Helmet-of-Smiting"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Helmet of Smiting.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Helmet_of_Smiting">Helmet of Smiting</a></span><span class="entry-desc"><span class="coordinates">(X: 163 Y: -248)</span> Found in a chest in the Selûnite Outpost.</span></div>
@@ -784,7 +822,7 @@ window.onload = function() {
 <div class="entry amulet very-rare" id="The-Spectator-Eyes"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/The Spectator Eyes.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/The_Spectator_Eyes">The Spectator Eyes</a></span><span class="entry-desc"><span class="coordinates">(X: 112 Y: -249)</span> Looted from the spectator west of the Selûnite Outpost.</span></div>
 
 
-</div></div><div class="section" id="Myconoid-Colony"><div class="section-header"><span class="eye noselect" onclick="collapse('Myconoid-Colony')">👁️</span><span class="section-title">Myconoid Colony</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Myconoid-Colony"><div class="section-header"><span class="eye noselect" onclick="collapse('Myconoid-Colony')">👁️</span><span class="section-title">Myconoid Colony</span><span class="progress" data="Myconoid-Colony" /></div><div class="section-content">
 
 
 <div class="entry boots rare top-tier" id="Boots-of-Speed"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Boots of Speed.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Boots_of_Speed">Boots of Speed</a></span><span class="entry-desc"><span class="coordinates">(X: 82 Y: -97)</span> Rewarded by Thulla for curing her of the duergar poison.</span></div>
@@ -795,7 +833,7 @@ window.onload = function() {
 <div class="entry gloves uncommon" id="Winters-Clutches"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Winter's Clutches.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Winter's_Clutches">Winter's Clutches</a></span><span class="entry-desc">Rewarded by Glut for completing the quest "<a href="https://bg3.wiki/wiki/Avenge_Glut's_Circle">Avenge Glut's Circle</a>" by defeating Sovereign Spaw <span class="coordinates">(X: 58 Y: -110)</span>, bought from Lady Esther at Rosymorn Monastery Trail (<span class="value">90 gp / 170 gp</span>) <span class="coordinates">(X: -43 Y: -129)</span>, and found on a counter at Sorcerous Sundries guarded by a lava elemental <span class="coordinates">(X: -2 Y: -66)</span>.</span></div>
 
 
-</div></div><div class="section" id="Blurg"><div class="section-header"><span class="eye noselect" onclick="collapse('Blurg')">👁️</span><span class="section-title">Blurg</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Blurg"><div class="section-header"><span class="eye noselect" onclick="collapse('Blurg')">👁️</span><span class="section-title">Blurg</span><span class="progress" data="Blurg" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: 111 Y: -90)</span></div>
@@ -809,7 +847,7 @@ window.onload = function() {
 <div class="entry helmet uncommon" id="The-Lifebringer"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/The Lifebringer.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/The_Lifebringer">The Lifebringer</a></span><span class="entry-desc"><span class="value">90 gp</span></span></div>
 
 
-</div></div><div class="section" id="Omeluum"><div class="section-header"><span class="eye noselect" onclick="collapse('Omeluum')">👁️</span><span class="section-title">Omeluum</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Omeluum"><div class="section-header"><span class="eye noselect" onclick="collapse('Omeluum')">👁️</span><span class="section-title">Omeluum</span><span class="progress" data="Omeluum" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: 112 Y: -88)</span> Blurg will summon him.</div>
@@ -818,11 +856,11 @@ window.onload = function() {
 <div class="entry amulet uncommon top-tier" id="Pearl-of-Power-Amulet"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Pearl of Power Amulet.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Pearl_of_Power_Amulet">Pearl of Power Amulet</a></span><span class="entry-desc"><span class="value">45 gp / 155 gp</span></span></div>
 <div class="entry ring uncommon" id="Ring-of-Salving"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Ring of Salving.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Ring_of_Salving">Ring of Salving</a></span><span class="entry-desc"><span class="value">40 gp</span></span></div>
 <div class="entry helmet uncommon" id="The-Shadespell-Circlet"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/The Shadespell Circlet.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/The_Shadespell_Circlet">The Shadespell Circlet</a></span><span class="entry-desc"><span class="value">90 gp / 310 gp</span></span></div>
-<div class="entry action" id="Survival-Instinct"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Survival Instinct.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Survival_Instinct">Survival Instinct</a></span><span class="entry-desc">Obtained for completing the quest "<a href="https://bg3.wiki/wiki/Help_Omeluum_Investigate_the_Parasite">Help Omeluum Investigate the Parasite</a>".</span></div>
+<div class="entry non-spell" id="Survival-Instinct"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Survival Instinct.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Survival_Instinct">Survival Instinct</a></span><span class="entry-desc">Obtained for completing the quest "<a href="https://bg3.wiki/wiki/Help_Omeluum_Investigate_the_Parasite">Help Omeluum Investigate the Parasite</a>".</span></div>
 <div class="entry ring rare" id="Ring-of-Mind-Shielding"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Ring of Mind-Shielding.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Ring_of_Mind-Shielding">Ring of Mind-Shielding</a></span><span class="entry-desc">Obtained after completing the quest "<a href="https://bg3.wiki/wiki/Help_Omeluum_Investigate_the_Parasite">Help Omeluum Investigate the Parasite</a>". You can buy it either with gold (<span class="value">70 gp</span>), or by supplying information about the Nautiloid gathered from Eldritch Runes in the Prologue. (Note: Recommended to feed Gale.)</span></div>
 
 
-</div></div><div class="section" id="Derryth-Bonecloak"><div class="section-header"><span class="eye noselect" onclick="collapse('Derryth-Bonecloak')">👁️</span><span class="section-title">Derryth Bonecloak</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Derryth-Bonecloak"><div class="section-header"><span class="eye noselect" onclick="collapse('Derryth-Bonecloak')">👁️</span><span class="section-title">Derryth Bonecloak</span><span class="progress" data="Derryth-Bonecloak" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: 50 Y: -94)</span></div>
@@ -835,7 +873,7 @@ window.onload = function() {
 <div class="entry gloves rare top-tier" id="Gloves-of-Uninhibited-Kushigo"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Gloves of Uninhibited Kushigo.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Gloves_of_Uninhibited_Kushigo">Gloves of Uninhibited Kushigo</a></span><span class="entry-desc">Rewarded by Derryth Bonecloak after finding and saving Baelen Bonecloak during the quest "<a href="https://bg3.wiki/wiki/Find_the_Mushroom_Picker">Find the Mushroom Picker</a>".</span></div>
 
 
-</div></div><div class="section" id="The-Festering-Cove"><div class="section-header"><span class="eye noselect" onclick="collapse('The-Festering-Cove')">👁️</span><span class="section-title">The Festering Cove</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="The-Festering-Cove"><div class="section-header"><span class="eye noselect" onclick="collapse('The-Festering-Cove')">👁️</span><span class="section-title">The Festering Cove</span><span class="progress" data="The-Festering-Cove" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: 81 Y: -241)</span> The entrance to The Festering Cove can be found in the torchstalk field northeast of the Arcane Tower and southeast of the Decrepit Village. There is a Cragged Rock that can be reached by jumping over two mushrooms growing out of the cliff face. Climb down the Cragged Rock to reach The Festering Cove. (Note: Be careful of the exploding mushroom that can throw you to your death.)</div>
@@ -844,7 +882,7 @@ window.onload = function() {
 <div class="entry condition" id="BOOOALs-Blessing"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/BOOOAL's Blessing.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/BOOOAL's_Blessing_(Condition)">BOOOAL's Blessing</a></span><span class="entry-desc"><span class="coordinates">(X: -313 Y: 137)</span> Rewarded for sacrificing a companion to BOOOAL, or agreeing to be BOOOAL's Chosen after pickpocketing the Sickle of BOOOAL. Everyone in your active party will receive the blessing.</span></div>
 
 
-</div></div><div class="section" id="Arcane-Tower"><div class="section-header"><span class="eye noselect" onclick="collapse('Arcane-Tower')">👁️</span><span class="section-title">Arcane Tower</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Arcane-Tower"><div class="section-header"><span class="eye noselect" onclick="collapse('Arcane-Tower')">👁️</span><span class="section-title">Arcane Tower</span><span class="progress" data="Arcane-Tower" /></div><div class="section-content">
 
 
 <div class="entry light-hammer uncommon" id="Skybreaker"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Skybreaker.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Skybreaker">Skybreaker</a></span><span class="entry-desc"><span class="coordinates">(X: 27 Y: -298)</span> Found in a chest in front of the Arcane Tower.</span></div>
@@ -858,7 +896,7 @@ window.onload = function() {
 <div class="entry ring uncommon" id="The-Sparkswall"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/The Sparkswall.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/The_Sparkswall">The Sparkswall</a></span><span class="entry-desc"><span class="coordinates">(X: 163 Y: -432)</span> Found in a chest in the basement.</span></div>
 
 
-</div></div><div class="section" id="Zurkhwood-Skiffs"><div class="section-header"><span class="eye noselect" onclick="collapse('Zurkhwood-Skiffs')">👁️</span><span class="section-title">Zurkhwood Skiffs</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Zurkhwood-Skiffs"><div class="section-header"><span class="eye noselect" onclick="collapse('Zurkhwood-Skiffs')">👁️</span><span class="section-title">Zurkhwood Skiffs</span><span class="progress" data="Zurkhwood-Skiffs" /></div><div class="section-content">
 
 
 <div class="entry warhammer uncommon" id="Intransigent-Warhammer"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Intransigent Warhammer.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Intransigent_Warhammer">Intransigent Warhammer</a></span><span class="entry-desc"><span class="coordinates">(X: -447 Y: -525)</span> Found in a chest on a duergar skiff thats pulls up next to you during your first voyage to Grymforge. You'll need to start a fight to obtain it. (Note: This event only happens once.)</span></div>
@@ -867,7 +905,7 @@ window.onload = function() {
 <div class="entry light-hammer uncommon" id="Shining-Staver-of-Skulls"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Shining Staver-of-Skulls.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Shining_Staver-of-Skulls">Shining Staver-of-Skulls</a></span><span class="entry-desc">Looted from Corsair Greymon, or bought from him if he surivives the fight (<span class="value">65 gp</span>). He'll be found in the main chamber of Grymforge <span class="coordinates">(X: -632 Y: 326)</span>.</span></div>
 
 
-</div></div><div class="section" id="Grymforge"><div class="section-header"><span class="eye noselect" onclick="collapse('Grymforge')">👁️</span><span class="section-title">Grymforge</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Grymforge"><div class="section-header"><span class="eye noselect" onclick="collapse('Grymforge')">👁️</span><span class="section-title">Grymforge</span><span class="progress" data="Grymforge" /></div><div class="section-content">
 
 
 <div class="entry ring rare" id="Fetish-of-Callarduran-Smoothhands"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Fetish of Callarduran Smoothhands.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Fetish_of_Callarduran_Smoothhands">Fetish of Callarduran Smoothhands</a></span><span class="entry-desc"><span class="coordinates">(X: -610 Y: 408)</span> Stolen from one of the dead deep gnomes that a pair of duergar are throwing into the lake. If you talk to the duergar you can succeed a DC 10 Perception check, then a DC 20 Sleight of Hand or DC 10 Deception check to loot the corpse without a fight.</span></div>
@@ -897,7 +935,7 @@ window.onload = function() {
 <div class="entry rapier uncommon" id="Sword-of-Screams"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Sword of Screams.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Sword_of_Screams">Sword of Screams</a></span><span class="entry-desc"><span class="coordinates">(X: -854 Y: 780)</span> Looted from Nere.</span></div>
 
 
-</div></div><div class="section" id="The-Adamantine-Forge"><div class="section-header"><span class="eye noselect" onclick="collapse('The-Adamantine-Forge')">👁️</span><span class="section-title">The Adamantine Forge</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="The-Adamantine-Forge"><div class="section-header"><span class="eye noselect" onclick="collapse('The-Adamantine-Forge')">👁️</span><span class="section-title">The Adamantine Forge</span><span class="progress" data="The-Adamantine-Forge" /></div><div class="section-content">
 
 
 <div class="entry common crafting" id="Scimitar-Mould"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Scimitar Mould.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Scimitar_Mould">Scimitar Mould</a></span><span class="entry-desc"><span class="coordinates">(X: -604 Y: 322)</span> Found on a skeleton on a ruined stairwell with two levers, overlooking the rubble that has trapped Nere. Used to craft an <a href="https://bg3.wiki/wiki/Adamantine_Scimitar">Adamantine Scimitar</a>.</span></div>
@@ -915,7 +953,7 @@ window.onload = function() {
 <div class="entry medium-armour very-rare choice" id="Adamantine-Scale Mail"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Adamantine Scale Mail.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Adamantine_Scale_Mail">Adamantine Scale Mail</a></span><span class="entry-desc"><span class="coordinates">(X: -557 Y: 234)</span> Crafted from the <a href="https://bg3.wiki/wiki/Scale_Mail_Mould">Scale Mail Mould</a> and <a href="https://bg3.wiki/wiki/Mithral_Ore">Mithral Ore</a> after defeating Grym.</span></div>
 
 
-</div></div><div class="section" id="Lady-Esther"><div class="section-header"><span class="eye noselect" onclick="collapse('Lady-Esther')">👁️</span><span class="section-title">Lady Esther</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Lady-Esther"><div class="section-header"><span class="eye noselect" onclick="collapse('Lady-Esther')">👁️</span><span class="section-title">Lady Esther</span><span class="progress" data="Lady-Esther" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: -43 Y: -129)</span> She is in the Mountain Pass area, down the stairs and to the right from the Trielta Crags waypoint.</div>
@@ -929,7 +967,7 @@ window.onload = function() {
 <div class="entry gloves uncommon" id="Winters-Clutches"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Winter's Clutches.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Winter's_Clutches">Winter's Clutches</a></span><span class="entry-desc"><span class="value">90 gp / 170 gp</span></span></div>
 
 
-</div></div><div class="section" id="Rosymorn-Monastery"><div class="section-header"><span class="eye noselect" onclick="collapse('Rosymorn-Monastery')">👁️</span><span class="section-title">Rosymorn Monastery</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Rosymorn-Monastery"><div class="section-header"><span class="eye noselect" onclick="collapse('Rosymorn-Monastery')">👁️</span><span class="section-title">Rosymorn Monastery</span><span class="progress" data="Rosymorn-Monastery" /></div><div class="section-content">
 
 
 <div class="entry mace uncommon" id="Ceremonial-Mace"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Ceremonial Mace.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Ceremonial_Mace">Ceremonial Mace</a></span><span class="entry-desc"><span class="coordinates">(X: 45 Y: 37)</span> Looted from a random kobold in the Firewine storage room. Place the Ceremonial Mace onto the Southeast altar for Dawnmaster Stockhold.</span></div>
@@ -939,7 +977,7 @@ window.onload = function() {
 <div class="entry helmet uncommon" id="Holy-Lance-Helm"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Holy Lance Helm.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Holy_Lance_Helm">Holy Lance Helm</a></span><span class="entry-desc"><span class="coordinates">(X: 120 Y: 35)</span> Found in a chest on the roof.</span></div>
 
 
-</div></div><div class="section" id="Crèche-Yllek"><div class="section-header"><span class="eye noselect" onclick="collapse('Crèche-Yllek')">👁️</span><span class="section-title">Crèche Y'llek</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Crèche-Yllek"><div class="section-header"><span class="eye noselect" onclick="collapse('Crèche-Yllek')">👁️</span><span class="section-title">Crèche Y'llek</span><span class="progress" data="Crèche-Yllek" /></div><div class="section-content">
 
 
 <div class="entry boots uncommon" id="Varsh-Kokuus-Boots"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Varsh Ko'kuu's Boots.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Varsh_Ko'kuu's_Boots">Varsh Ko'kuu's Boots</a></span><span class="entry-desc"><span class="coordinates">(X: 1288 Y: -759)</span> Obtained from Varsh Ko'kuu in the Hatchery. The player must either kill him, or persuade him to hand over the egg by promising to take responsibility for it.</span></div>
@@ -960,7 +998,7 @@ window.onload = function() {
 <div class="entry mace legendary top-tier" id="The-Blood-of-Lathander"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/The Blood of Lathander.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/The_Blood_of_Lathander">The Blood of Lathander</a></span><span class="entry-desc">Found past the secret entrance in the western alcove, revealed by rotating the two statues. The one to the south requires an Athletics check (or a grease bottle) to move and should be turned west, while the other should be turned east. Proceed through the opening, evading traps along the way, until you reach the Blood of Lathander. If the Dawnmaster's Crest has been obtained, simply place it in the altar's item slot to safely acquire the Blood of Lathander. Otherwise, taking the mace will trigger a countdown to the Monastery's destruction. The party has only four turns to either escape the Monastery or dismantle the four Lathander Solar Machines that activate the trap.</span></div> <!-- TODO add DC -->
 
 
-</div></div><div class="section" id="Ajaknir-Jeera"><div class="section-header"><span class="eye noselect" onclick="collapse('Ajaknir-Jeera')">👁️</span><span class="section-title">A'jak'nir Jeera</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Ajaknir-Jeera"><div class="section-header"><span class="eye noselect" onclick="collapse('Ajaknir-Jeera')">👁️</span><span class="section-title">A'jak'nir Jeera</span><span class="progress" data="Ajaknir-Jeera" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: 1383 Y: -812)</span> She is found in the camp area.</div>
@@ -975,7 +1013,7 @@ window.onload = function() {
 <div class="entry amulet rare" id="Amulet-of-Branding"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Amulet of Branding.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Amulet_of_Branding">Amulet of Branding</a></span><span class="entry-desc">Looted from A'jak'nir Jeera.</span></div>
 
 
-</div></div><div class="section" id="At-Camp-1"><div class="section-header"><span class="eye noselect" onclick="collapse('At-Camp-1')">👁️</span><span class="section-title">At Camp</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="At-Camp-1"><div class="section-header"><span class="eye noselect" onclick="collapse('At-Camp-1')">👁️</span><span class="section-title">At Camp</span><span class="progress" data="At-Camp-1" /></div><div class="section-content">
 
 
 <div class="tip">This is a camp event during a Long Rest after encountering Vlaakith at Crèche Y'llek and before starting Act 3.</div>
@@ -983,10 +1021,10 @@ window.onload = function() {
 <div class="entry misc story" id="Quanith-Psionic-Detector"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Qua'nith Psionic Detector.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Qua'nith_Psionic_Detector">Qua'nith Psionic Detector</a></span><span class="entry-desc">Given by Kith'rak Voss.</span></div>
 
 
-</div></div></div><div class="act" id="Act2"><div class="act-header center"><span class="act-title">Act 2</span><button onclick="clearCheckboxes('Act2')">Clear</button></div>
+</div></div></div><div class="act" id="Act2"><div class="act-header center"><span class="act-title">Act 2</span><button onclick="clearCheckboxes('Act2')">Clear</button><span class="progress" data="Act2" /></div>
 
 
-<div class="section" id="Ruined-Battlefield"><div class="section-header"><span class="eye noselect" onclick="collapse('Ruined-Battlefield')">👁️</span><span class="section-title">Ruined Battlefield</span><span class="progress" /></div><div class="section-content">
+<div class="section" id="Ruined-Battlefield"><div class="section-header"><span class="eye noselect" onclick="collapse('Ruined-Battlefield')">👁️</span><span class="section-title">Ruined Battlefield</span><span class="progress" data="Ruined-Battlefield" /></div><div class="section-content">
 
 
 <div class="entry amulet uncommon" id="Frost-Prince"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Frost Prince.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Frost_Prince">Frost Prince</a></span><span class="entry-desc"><span class="coordinates">(X: 80 Y: -96)</span> Found in a chest in the southeast, near an ambush of Shadow-Cursed Needle Blights and Shadow-Cursed Vine Blights.</span></div>
@@ -1006,7 +1044,7 @@ window.onload = function() {
 <div class="entry shield uncommon" id="Gloomstrand-Shield"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Gloomstrand Shield.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Gloomstrand_Shield">Gloomstrand Shield</a></span><span class="entry-desc"><span class="coordinates">(X: -60 Y: -114)</span> Found in a chest south of the Tollhouse.</span></div>
 
 
-</div></div><div class="section" id="Last-Light-Inn"><div class="section-header"><span class="eye noselect" onclick="collapse('Last-Light-Inn')">👁️</span><span class="section-title">Last Light Inn</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Last-Light-Inn"><div class="section-header"><span class="eye noselect" onclick="collapse('Last-Light-Inn')">👁️</span><span class="section-title">Last Light Inn</span><span class="progress" data="Last-Light-Inn" /></div><div class="section-content">
 
 
 <div class="entry helmet uncommon top-tier" id="Hat-of-Fire-Acuity"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Hat of Fire Acuity.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Hat_of_Fire_Acuity">Hat of Fire Acuity</a></span><span class="entry-desc"><span class="coordinates">(X: -28 Y: 171)</span> Looted from the Strange Ox at the Last Light Inn or Rivington, but not at the Druid Grove.</span></div>
@@ -1025,7 +1063,7 @@ window.onload = function() {
 <div class="entry scimitar uncommon" id="Sylvan-Scimitar"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Sylvan Scimitar.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Sylvan_Scimitar">Sylvan Scimitar</a></span><span class="entry-desc"><span class="coordinates">(X: -64 Y: 139)</span> Looted from Jaheira, or obtained by recruiting her after defeating Ketheric.</span></div>
 
 
-</div></div><div class="section" id="Quartermaster-Talli"><div class="section-header"><span class="eye noselect" onclick="collapse('Quartermaster-Talli')">👁️</span><span class="section-title">Quartermaster Talli</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Quartermaster-Talli"><div class="section-header"><span class="eye noselect" onclick="collapse('Quartermaster-Talli')">👁️</span><span class="section-title">Quartermaster Talli</span><span class="progress" data="Quartermaster-Talli" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: -31 Y: 130)</span> She is found near the bridge.</div>
@@ -1044,7 +1082,7 @@ window.onload = function() {
 <div class="entry medium-armour rare top-tier" id="Yuan-ti-Scale-Mail"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Yuan-Ti Scale Mail.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Yuan-Ti_Scale_Mail">Yuan-Ti Scale Mail</a></span><span class="entry-desc"><span class="value">640 gp / 960 gp</span></span></div>
 
 
-</div></div><div class="section" id="Dammon-2"><div class="section-header"><span class="eye noselect" onclick="collapse('Dammon-2')">👁️</span><span class="section-title">Dammon</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Dammon-2"><div class="section-header"><span class="eye noselect" onclick="collapse('Dammon-2')">👁️</span><span class="section-title">Dammon</span><span class="progress" data="Dammon-2" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: -34 Y: 166)</span> He is found in the barn.</div>
@@ -1061,7 +1099,7 @@ window.onload = function() {
 <div class="entry helmet rare crafting" id="Flawed-Helldusk-Helmet"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Flawed Helldusk Helmet.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Flawed_Helldusk_Helmet">Flawed Helldusk Helmet</a></span><span class="entry-desc">Obtained by giving Dammon a piece of Infernal Iron.</span></div>
 
 
-</div></div><div class="section" id="Mattis"><div class="section-header"><span class="eye noselect" onclick="collapse('Mattis')">👁️</span><span class="section-title">Mattis</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Mattis"><div class="section-header"><span class="eye noselect" onclick="collapse('Mattis')">👁️</span><span class="section-title">Mattis</span><span class="progress" data="Mattis" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: -54 Y: 141)</span> He is found by the main entrance to Last Light Inn.</div>
@@ -1069,7 +1107,7 @@ window.onload = function() {
 <div class="entry boots rare" id="Evasive-Shoes"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Evasive Shoes.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Evasive_Shoes">Evasive Shoes</a></span><span class="entry-desc"><span class="value">95 gp / 1050 gp</span></span></div>
 
 
-</div></div><div class="section" id="Barcus-Wroot"><div class="section-header"><span class="eye noselect" onclick="collapse('Barcus-Wroot')">👁️</span><span class="section-title">Barcus Wroot</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Barcus-Wroot"><div class="section-header"><span class="eye noselect" onclick="collapse('Barcus-Wroot')">👁️</span><span class="section-title">Barcus Wroot</span><span class="progress" data="Barcus-Wroot" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: -56 Y: 133)</span> If Barcus was saved in Grymforge he can be found in his lab at Last Light Inn.</div>
@@ -1079,7 +1117,7 @@ window.onload = function() {
 <div class="entry grenade rare" id="Brilliant-Retort"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Brilliant Retort.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Brilliant_Retort">Brilliant Retort</a></span><span class="entry-desc">Rewarded for completing the quest "<a href="https://bg3.wiki/wiki/Rescue_Wulbren">Rescue Wulbren</a>".</span></div> <!-- TODO Found in the inventory of Hogi Nuners? -->
 
 
-</div></div><div class="section" id="Reithwin-Tollhouse"><div class="section-header"><span class="eye noselect" onclick="collapse('Reithwin-Tollhouse')">👁️</span><span class="section-title">Reithwin Tollhouse</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Reithwin-Tollhouse"><div class="section-header"><span class="eye noselect" onclick="collapse('Reithwin-Tollhouse')">👁️</span><span class="section-title">Reithwin Tollhouse</span><span class="progress" data="Reithwin-Tollhouse" /></div><div class="section-content">
 
 
 <div class="entry scroll very-rare" id="Flesh-to-Gold"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Flesh to Gold.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Flesh_to_Gold">Flesh to Gold</a></span><span class="entry-desc"><span class="coordinates">(X: -112 Y: -92)</span> Obtained as a scroll (Signed Trade Visa) from Gerringothe Thorm in exchange for the entirety of the player's gold, as long as the player has at least 5000 gp. The scroll cannot be learned by Wizards.</span></div>
@@ -1091,14 +1129,14 @@ window.onload = function() {
 <div class="entry amulet uncommon" id="Fireheart"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Fireheart.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Fireheart">Fireheart</a></span><span class="entry-desc"><span class="coordinates">(X: -127 Y: -78)</span> Found in a chest. The player must break a vine or jump from the outside through a window to enter in this hidden room.</span></div>
 
 
-</div></div><div class="section" id="Masons-Guild"><div class="section-header"><span class="eye noselect" onclick="collapse('Masons-Guild')">👁️</span><span class="section-title">Mason's Guild</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Masons-Guild"><div class="section-header"><span class="eye noselect" onclick="collapse('Masons-Guild')">👁️</span><span class="section-title">Mason's Guild</span><span class="progress" data="Masons-Guild" /></div><div class="section-content">
 
 
 <div class="entry common crafting" id="Infernal-Iron-5"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Infernal Iron.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Infernal_Iron">Infernal Iron</a></span><span class="entry-desc"><span class="coordinates">(X: -104 Y: 18)</span> Found outside, near the crane by the water.</span></div>
 <div class="entry helmet uncommon top-tier" id="Helmet-of-Arcane-Acuity"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Helmet of Arcane Acuity.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Helmet_of_Arcane_Acuity">Helmet of Arcane Acuity</a></span><span class="entry-desc"><span class="coordinates">(X: 107 Y: -758)</span> Found in a chest in a secret area of the Reithwin Mason's Guild Basement. The basement is accessed through a trapdoor in the Mason's Guild, and the secret area can be opened by lockpicking or using the Tower-Shaped Key on the Keyholed Herald <span class="coordinates">(X: 123 Y: -688)</span>.</span></div>
 
 
-</div></div><div class="section" id="Reithwin-Graveyard"><div class="section-header"><span class="eye noselect" onclick="collapse('Reithwin-Graveyard')">👁️</span><span class="section-title">Reithwin Graveyard</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Reithwin-Graveyard"><div class="section-header"><span class="eye noselect" onclick="collapse('Reithwin-Graveyard')">👁️</span><span class="section-title">Reithwin Graveyard</span><span class="progress" data="Reithwin-Graveyard" /></div><div class="section-content">
 
 
 <div class="entry ring rare" id="True-Loves-Caress"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/True Love's Caress.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/True_Love's_Caress">True Love's Caress</a></span><span class="entry-desc"><span class="coordinates">(X: -147 Y: 43)</span> Found on a skeleton leaning up against a large tree.</span></div>
@@ -1107,7 +1145,7 @@ window.onload = function() {
 <div class="entry spear uncommon top-tier" id="Lightning-Jabber"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Lightning Jabber.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Lightning_Jabber">Lightning Jabber</a></span><span class="entry-desc"><span class="coordinates">(X: -148 Y: 115)</span> Looted from the Cursed Kuo-Toa Chief in the ambush northeast of the Grand Mausoleum entrance.</span></div>
 
 
-</div></div><div class="section" id="House-of-Healing"><div class="section-header"><span class="eye noselect" onclick="collapse('House-of-Healing')">👁️</span><span class="section-title">House of Healing</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="House-of-Healing"><div class="section-header"><span class="eye noselect" onclick="collapse('House-of-Healing')">👁️</span><span class="section-title">House of Healing</span><span class="progress" data="House-of-Healing" /></div><div class="section-content">
 
 
 <div class="entry ring rare" id="True-Loves-Embrace"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/True Love's Embrace.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/True_Love's_Embrace">True Love's Embrace</a></span><span class="entry-desc"><span class="coordinates">(X: -212 Y: 0)</span> Found on a skeleton laying on a mattress.</span></div>
@@ -1118,7 +1156,7 @@ window.onload = function() {
 <div class="entry spell" id="Arabellas-Shadow-Entangle"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Arabella's Shadow Entangle.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Arabella's_Shadow_Entangle">Arabella's Shadow Entangle</a></span><span class="entry-desc">Rewarded for completing the quest "<a href="https://bg3.wiki/wiki/Find_Arabella's_Parents">Find Arabella's Parents</a>".</span></div>
 
 
-</div></div><div class="section" id="House-of-Healing-Morgue"><div class="section-header"><span class="eye noselect" onclick="collapse('House-of-Healing-Morgue')">👁️</span><span class="section-title">House of Healing Morgue</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="House-of-Healing-Morgue"><div class="section-header"><span class="eye noselect" onclick="collapse('House-of-Healing-Morgue')">👁️</span><span class="section-title">House of Healing Morgue</span><span class="progress" data="House-of-Healing-Morgue" /></div><div class="section-content">
 
 
 <div class="tip">There are two entrances to this location: one west of the House of Healing, and another east of the Grand Mausoleum waypoint through the Ominous Crevice <span class="coordinates">(X: -150 Y: 105)</span></div>.
@@ -1132,7 +1170,7 @@ window.onload = function() {
 <div class="entry heavy-armour uncommon" id="Protective-Plate"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Protective Plate.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Protective_Plate">Protective Plate</a></span><span class="entry-desc"><span class="coordinates">(X: 44 Y: -942)</span> Looted from the Hollow Armour at the bottom of the pit.</span></div>
 
 
-</div></div><div class="section" id="The-Waning-Moon"><div class="section-header"><span class="eye noselect" onclick="collapse('The-Waning-Moon')">👁️</span><span class="section-title">The Waning Moon</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="The-Waning-Moon"><div class="section-header"><span class="eye noselect" onclick="collapse('The-Waning-Moon')">👁️</span><span class="section-title">The Waning Moon</span><span class="progress" data="The-Waning-Moon" /></div><div class="section-content">
 
 
 <div class="entry greatclub rare" id="Rat-Bat"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Rat Bat.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Rat_Bat">Rat Bat</a></span><span class="entry-desc"><span class="coordinates">(X: -224 Y: -78)</span> Found leaning against a wall, near Thisobald Thorm.</span></div>
@@ -1141,7 +1179,7 @@ window.onload = function() {
 <div class="entry dagger uncommon" id="Ritual-Dagger-of-Shar"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Ritual Dagger of Shar.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Ritual_Dagger_of_Shar">Ritual Dagger of Shar</a></span><span class="entry-desc"><span class="coordinates">(X: 249 Y: -847)</span> Found on an altar in the hidden Sharran Sanctuary.</span></div>
 
 
-</div></div><div class="section" id="Moonrise-Towers"><div class="section-header"><span class="eye noselect" onclick="collapse('Moonrise-Towers')">👁️</span><span class="section-title">Moonrise Towers</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Moonrise-Towers"><div class="section-header"><span class="eye noselect" onclick="collapse('Moonrise-Towers')">👁️</span><span class="section-title">Moonrise Towers</span><span class="progress" data="Moonrise-Towers" /></div><div class="section-content">
 
 
 <div class="entry enhancement story" id="Mind-Flayer-Parasite-Specimen-13"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></span><span class="entry-desc"><span class="coordinates">(X: -153 Y: -130)</span> Two are looted from the guards in front of the stairs leading to the main entrance, Adept Merim and Zealot Malik.</span></div>
@@ -1165,7 +1203,7 @@ window.onload = function() {
 <div class="entry enhancement" id="Improved-Bardic-Inspiration"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Improved Bardic Inspiration.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Bardic_Inspiration">Improved Bardic Inspiration</a></span><span class="entry-desc"><span class="coordinates">(X: -150 Y: -213)</span> Obtained as a Bard by talking to Alfira in the throne room at the end of Act 2, if she is still alive. It's not necessary to perform the song she asks you to play.</span></div>
 
 
-</div></div><div class="section" id="Lann-Tarv"><div class="section-header"><span class="eye noselect" onclick="collapse('Lann-Tarv')">👁️</span><span class="section-title">Lann Tarv</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Lann-Tarv"><div class="section-header"><span class="eye noselect" onclick="collapse('Lann-Tarv')">👁️</span><span class="section-title">Lann Tarv</span><span class="progress" data="Lann-Tarv" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: -164 Y: -167)</span> He is found near the stairs inside Moonrise Towers. (Note: You must ask for extra help from Z'rell to unlock his full stock.)</div>
@@ -1181,7 +1219,7 @@ window.onload = function() {
 <div class="entry shortsword rare" id="Slicing-Shortsword"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Slicing Shortsword.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Slicing_Shortsword">Slicing Shortsword</a></span><span class="entry-desc"><span class="value">190 gp</span></span></div>
 
 
-</div></div><div class="section" id="Roah-Moonglow"><div class="section-header"><span class="eye noselect" onclick="collapse('Roah-Moonglow')">👁️</span><span class="section-title">Roah Moonglow</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Roah-Moonglow"><div class="section-header"><span class="eye noselect" onclick="collapse('Roah-Moonglow')">👁️</span><span class="section-title">Roah Moonglow</span><span class="progress" data="Roah-Moonglow" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: -174 Y: -176)</span> She is found in Moonrise Towers' entrance hall.</div>
@@ -1195,7 +1233,7 @@ window.onload = function() {
 <div class="entry medium-armour very-rare" id="Sharpened-Snare-Cuirass"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Sharpened Snare Cuirass.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Sharpened_Snare_Cuirass">Sharpened Snare Cuirass</a></span><span class="entry-desc"><span class="value">830 gp</span></span></div>
 
 
-</div></div><div class="section" id="Araj-Oblodra-1"><div class="section-header"><span class="eye noselect" onclick="collapse('Araj-Oblodra-1')">👁️</span><span class="section-title">Araj Oblodra</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Araj-Oblodra-1"><div class="section-header"><span class="eye noselect" onclick="collapse('Araj-Oblodra-1')">👁️</span><span class="section-title">Araj Oblodra</span><span class="progress" data="Araj-Oblodra-1" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: -128 Y: -193)</span> She is found in a side room to the left as you enter Moonrise Towers.</div>
@@ -1211,7 +1249,7 @@ window.onload = function() {
 <div class="entry enhancement common top-tier" id="Potion-of-Everlasting-Vigour"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Potion of Everlasting Vigour.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Potion_of_Everlasting_Vigour">Potion of Everlasting Vigour</a></span><span class="entry-desc">Rewarded for convincing Astarion to bite Araj Oblodra.</span></div>
 
 
-</div></div><div class="section" id="Gauntlet-of-Shar"><div class="section-header"><span class="eye noselect" onclick="collapse('Gauntlet-of-Shar')">👁️</span><span class="section-title">Gauntlet of Shar</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Gauntlet-of-Shar"><div class="section-header"><span class="eye noselect" onclick="collapse('Gauntlet-of-Shar')">👁️</span><span class="section-title">Gauntlet of Shar</span><span class="progress" data="Gauntlet-of-Shar" /></div><div class="section-content">
 
 
 <div class="entry cloak uncommon" id="Vivacious-Cloak"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Vivacious Cloak.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Vivacious_Cloak">Vivacious Cloak</a></span><span class="entry-desc"><span class="coordinates">(X: -257 Y: -886)</span> Found in a chest in the Grand Mausoleum before entering the Gauntlet of Shar proper.</span></div>
@@ -1232,7 +1270,7 @@ window.onload = function() {
 <div class="entry hand-crossbow very-rare top-tier" id="Hellfire-Hand-Crossbow"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Hellfire Hand Crossbow.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Hellfire_Hand_Crossbow">Hellfire Hand Crossbow</a></span><span class="entry-desc"><span class="coordinates">(X: -653 Y: -764)</span> Looted from Yurgir.</span></div>
 
 
-</div></div><div class="section" id="Shadowfell"><div class="section-header"><span class="eye noselect" onclick="collapse('Shadowfell')">👁️</span><span class="section-title">Shadowfell</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Shadowfell"><div class="section-header"><span class="eye noselect" onclick="collapse('Shadowfell')">👁️</span><span class="section-title">Shadowfell</span><span class="progress" data="Shadowfell" /></div><div class="section-content">
 
 
 <div class="entry glaive rare choice" id="Moonlight-Glaive"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Moonlight Glaive.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Moonlight_Glaive">Moonlight Glaive</a></span><span class="entry-desc">Rewarded for convincing Shadowheart to <i>free</i> the Nightsong.</span></div>
@@ -1244,7 +1282,7 @@ window.onload = function() {
 <div class="entry enhancement story" id="Mind-Flayer-Parasite-Specimen-18"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></span><span class="entry-desc">Rewarded by Ketheric for allowing Balthazar to transport the Nightsong to Moonrise Towers. (Note: Doing so will lose Shadowheart as a companion as well as lock you out of multiple quests and rewards.)</span></div> <!-- TODO The actual reward is https://bg3.wiki/wiki/Gift_from_the_Absolute -->
 
 
-</div></div><div class="section" id="Mind-Flayer-Colony"><div class="section-header"><span class="eye noselect" onclick="collapse('Mind-Flayer-Colony')">👁️</span><span class="section-title">Mind Flayer Colony</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Mind-Flayer-Colony"><div class="section-header"><span class="eye noselect" onclick="collapse('Mind-Flayer-Colony')">👁️</span><span class="section-title">Mind Flayer Colony</span><span class="progress" data="Mind-Flayer-Colony" /></div><div class="section-content">
 
 
 <div class="entry follower top-tier" id="Us"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Us.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Us">Us</a></span><span class="entry-desc"><span class="coordinates">(X: 663 Y: -74)</span> Recruited from a locked cage near Chop if it was freed during the Prologue.</span></div>
@@ -1261,14 +1299,14 @@ window.onload = function() {
 <div class="entry enhancement story" id="Mind-Flayer-Parasite-Specimen-20"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></span><span class="entry-desc"><span class="coordinates">(X: 861 Y: -23)</span> Looted from Isobel, who's standing next to Ketheric if she was abducted from Last Light Inn.</span></div>
 
 
-</div></div><div class="section" id="To-Baldurs-Gate"><div class="section-header"><span class="eye noselect" onclick="collapse('To-Baldurs-Gate')">👁️</span><span class="section-title">To Baldur's Gate</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="To-Baldurs-Gate"><div class="section-header"><span class="eye noselect" onclick="collapse('To-Baldurs-Gate')">👁️</span><span class="section-title">To Baldur's Gate</span><span class="progress" data="To-Baldurs-Gate" /></div><div class="section-content">
 
 
 <div class="entry gloves very-rare" id="Hracknir-Bracers"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Hr'a'cknir Bracers.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Hr'a'cknir_Bracers">Hr'a'cknir Bracers</a></span><span class="entry-desc"><span class="coordinates">(X: -249 Y: -33)</span> Looted from Ch'r'ai Tska'an in a Githyanki ambush near the To Baldur's Gate waypoint.</span></div>
 <div class="entry medium-armour rare" id="Psionic-Ward-Armour"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Psionic Ward Armour.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Psionic_Ward_Armour">Psionic Ward Armour</a></span><span class="entry-desc"><span class="coordinates">(X: -249 Y: -33)</span> Looted from Ch'r'ai Tska'an in a Githyanki ambush near the To Baldur's Gate waypoint.</span></div>
 
 
-</div></div><div class="section" id="Astral-Plane-1"><div class="section-header"><span class="eye noselect" onclick="collapse('Astral-Plane-1')">👁️</span><span class="section-title">Astral Plane</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Astral-Plane-1"><div class="section-header"><span class="eye noselect" onclick="collapse('Astral-Plane-1')">👁️</span><span class="section-title">Astral Plane</span><span class="progress" data="Astral-Plane-1" /></div><div class="section-content">
 
 
 <div class="entry quarterstaff rare" id="Staff-of-the-Emperor"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Staff of the Emperor.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Staff_of_the_Emperor">Staff of the Emperor</a></span><span class="entry-desc"><span class="coordinates">(X: -160 Y: -1165)</span> Obtained by disarming The Emperor.</span></div>
@@ -1276,10 +1314,10 @@ window.onload = function() {
 <div class="entry enhancement story" id="Mind-Flayer-Parasite-Specimen-21"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></span><span class="entry-desc">Two are obtained by transforming Minthara into a partial-illithid using the Astral-Touched Tadpole. You'll be refunded the two parasites she consumed before you met her.</span></div>
 
 
-</div></div></div><div class="act" id="Act3"><div class="act-header center"><span class="act-title">Act 3</span><button onclick="clearCheckboxes('Act3')">Clear</button></div>
+</div></div></div><div class="act" id="Act3"><div class="act-header center"><span class="act-title">Act 3</span><button onclick="clearCheckboxes('Act3')">Clear</button><span class="progress" data="Act3" /></div>
 
 
-<div class="section" id="Gur-Camp"><div class="section-header"><span class="eye noselect" onclick="collapse('Gur-Camp')">👁️</span><span class="section-title">Gur Camp</span><span class="progress" /></div><div class="section-content">
+<div class="section" id="Gur-Camp"><div class="section-header"><span class="eye noselect" onclick="collapse('Gur-Camp')">👁️</span><span class="section-title">Gur Camp</span><span class="progress" data="Gur-Camp" /></div><div class="section-content">
 
 
 <div class="entry greataxe uncommon" id="The-Undead-Bane"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/The Undead Bane.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/The_Undead_Bane">The Undead Bane</a></span><span class="entry-desc"><span class="coordinates">(X: 100 Y: -17)</span> Looted from Ulma in the Gur Camp.</span></div>
@@ -1288,7 +1326,7 @@ window.onload = function() {
 <div class="entry ring rare" id="Ring-of-Truthfulness"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Ring of Truthfulness.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Ring_of_Truthfulness">Ring of Truthfulness</a></span><span class="entry-desc">Looted from the mind flayer hiding in the Windmill Basement of the Abandoned Windmill.</span></div>
 
 
-</div></div><div class="section" id="Ferg-Drogher"><div class="section-header"><span class="eye noselect" onclick="collapse('Ferg-Drogher')">👁️</span><span class="section-title">Ferg Drogher</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Ferg-Drogher"><div class="section-header"><span class="eye noselect" onclick="collapse('Ferg-Drogher')">👁️</span><span class="section-title">Ferg Drogher</span><span class="progress" data="Ferg-Drogher" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: 45 Y: -98)</span> He is the Sharran lookout watching for Shadowheart's return. He is willing to trade, but if Shadowheart is in your party, he will flat-out refuse and then leave, never to return.</div>
@@ -1300,7 +1338,7 @@ window.onload = function() {
 <div class="entry greataxe very-rare" id="Sethan"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Sethan.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Sethan">Sethan</a></span><span class="entry-desc"><span class="value">960 gp</span></span></div>
 
 
-</div></div><div class="section" id="Mattis"><div class="section-header"><span class="eye noselect" onclick="collapse('Mattis')">👁️</span><span class="section-title">Mattis</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Mattis"><div class="section-header"><span class="eye noselect" onclick="collapse('Mattis')">👁️</span><span class="section-title">Mattis</span><span class="progress" data="Mattis" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: 59 Y: -127)</span> He is found near the Requisitioned Barn in Rivington.</div>
@@ -1308,7 +1346,7 @@ window.onload = function() {
 <div class="entry helmet rare" id="Scabby-Pugilist-Circlet"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Scabby Pugilist Circlet.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Scabby_Pugilist_Circlet">Scabby Pugilist Circlet</a></span><span class="entry-desc"><span class="value">120 gp / 500 gp</span></span></div>
 
 
-</div></div><div class="section" id="Circus-of-the-Last-Days"><div class="section-header"><span class="eye noselect" onclick="collapse('Circus-of-the-Last-Days')">👁️</span><span class="section-title">Circus of the Last Days</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Circus-of-the-Last-Days"><div class="section-header"><span class="eye noselect" onclick="collapse('Circus-of-the-Last-Days')">👁️</span><span class="section-title">Circus of the Last Days</span><span class="progress" data="Circus-of-the-Last-Days" /></div><div class="section-content">
 
 
 <div class="entry boots uncommon" id="Boots-of-Very-Fast-Blinking"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Boots of Very Fast Blinking.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Boots_of_Very_Fast_Blinking">Boots of Very Fast Blinking</a></span><span class="entry-desc"><span class="coordinates">(X: -67 Y: -73)</span> Won as a consolation prize from Akabi's Wheel of Fortune.</span></div>
@@ -1326,7 +1364,7 @@ window.onload = function() {
 <div class="entry condition" id="Sweet-Stone-Features"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Sweet Stone Features.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Sweet_Stone_Features_(Condition)">Sweet Stone Features</a></span><span class="entry-desc"><span class="coordinates">(X: -89 Y: -73)</span> Obtained by paying Boney 5000 gp to construct a statue of yourself.</span></div>
 
 
-</div></div><div class="section" id="Jungle"><div class="section-header"><span class="eye noselect" onclick="collapse('Jungle')">👁️</span><span class="section-title">Jungle</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Jungle"><div class="section-header"><span class="eye noselect" onclick="collapse('Jungle')">👁️</span><span class="section-title">Jungle</span><span class="progress" data="Jungle" /></div><div class="section-content">
 
 
 <div class="tip">The player is teleported here if they win the jackpot in Akabi's spin the wheel game by pickpocketing his Djinni Ring before playing his game. (Note: You can visit this area only once.)</div>
@@ -1334,7 +1372,7 @@ window.onload = function() {
 <div class="entry trident legendary top-tier" id="Nyrulna"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Nyrulna.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Nyrulna">Nyrulna</a></span><span class="entry-desc"><span class="coordinates">(X: -1511 Y: -1522)</span> Found in a chest next to the exit portal.</span></div>
 
 
-</div></div><div class="section" id="Open-Hand-Temple"><div class="section-header"><span class="eye noselect" onclick="collapse('Open-Hand-Temple')">👁️</span><span class="section-title">Open Hand Temple</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Open-Hand-Temple"><div class="section-header"><span class="eye noselect" onclick="collapse('Open-Hand-Temple')">👁️</span><span class="section-title">Open Hand Temple</span><span class="progress" data="Open-Hand-Temple" /></div><div class="section-content">
 
 
 <div class="entry gloves rare" id="Seraphic-Pugilist-Gloves"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Seraphic Pugilist Gloves.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Seraphic_Pugilist_Gloves">Seraphic Pugilist Gloves</a></span><span class="entry-desc"><span class="coordinates">(X: -90 Y: -7)</span> Found in the southernmost locked chest at the foot of the beds at the west end of the temple.</span></div>
@@ -1344,7 +1382,7 @@ window.onload = function() {
 <div class="entry ring rare" id="Ring-of-Blink"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Ring of Blink.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Ring_of_Blink">Ring of Blink</a></span><span class="entry-desc"><span class="coordinates">(X: -45 Y: -5)</span> Obtained by stealing from or persuading the tressym, Tara, on the roof. (Note: It's recommended to do this during the quest "<a href="https://bg3.wiki/wiki/Find_the_Missing_Letters">Find the Missing Letters</a>" with Gale in your party.)</span></div>
 
 
-</div></div><div class="section" id="Exxvikyap"><div class="section-header"><span class="eye noselect" onclick="collapse('Exxvikyap')">👁️</span><span class="section-title">Exxvikyap</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Exxvikyap"><div class="section-header"><span class="eye noselect" onclick="collapse('Exxvikyap')">👁️</span><span class="section-title">Exxvikyap</span><span class="progress" data="Exxvikyap" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: 8 Y: -32)</span> She is found in the blacksmith shop.</div>
@@ -1356,7 +1394,7 @@ window.onload = function() {
 <div class="entry glaive very-rare top-tier" id="The-Dancing-Breeze"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/The Dancing Breeze.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/The_Dancing_Breeze">The Dancing Breeze</a></span><span class="entry-desc"><span class="value">960 gp</span></span></div>
 
 
-</div></div><div class="section" id="Angleirons-Cellar"><div class="section-header"><span class="eye noselect" onclick="collapse('Angleirons-Cellar')">👁️</span><span class="section-title">Angleiron's Cellar</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Angleirons-Cellar"><div class="section-header"><span class="eye noselect" onclick="collapse('Angleirons-Cellar')">👁️</span><span class="section-title">Angleiron's Cellar</span><span class="progress" data="Angleirons-Cellar" /></div><div class="section-content">
 
 
 <div class="tip">Entered via a cave entrance.</div>
@@ -1364,7 +1402,7 @@ window.onload = function() {
 <div class="entry barrel very-rare top-tier" id="Runepowder-Bomb"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Runepowder Bomb.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Runepowder_Bomb">Runepowder Bomb</a></span><span class="entry-desc">Given by Wulbren when initiating the quest "<a href="https://bg3.wiki/wiki/Avenge_the_Ironhands">Avenge the Ironhands</a>", or stolen from his desk <span class="coordinates">(X: -259 Y: -1079)</span>.</span></div>
 
 
-</div></div><div class="section" id="Bumpnagel"><div class="section-header"><span class="eye noselect" onclick="collapse('Bumpnagel')">👁️</span><span class="section-title">Bumpnagel</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Bumpnagel"><div class="section-header"><span class="eye noselect" onclick="collapse('Bumpnagel')">👁️</span><span class="section-title">Bumpnagel</span><span class="progress" data="Bumpnagel" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: 30 Y: 29)</span> He is found in Angleiron's Cellar.</div>
@@ -1373,7 +1411,7 @@ window.onload = function() {
 <div class="entry gloves rare" id="Thunderpalm-Strikers"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Thunderpalm Strikers.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Thunderpalm_Strikers">Thunderpalm Strikers</a></span><span class="entry-desc"><span class="value">450 gp</span></span></div>
 
 
-</div></div><div class="section" id="Rivington-Docks"><div class="section-header"><span class="eye noselect" onclick="collapse('Rivington-Docks')">👁️</span><span class="section-title">Rivington Docks</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Rivington-Docks"><div class="section-header"><span class="eye noselect" onclick="collapse('Rivington-Docks')">👁️</span><span class="section-title">Rivington Docks</span><span class="progress" data="Rivington-Docks" /></div><div class="section-content">
 
 
 <div class="entry maul rare" id="Corpsegrinder"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Corpsegrinder.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Corpsegrinder">Corpsegrinder</a></span><span class="entry-desc"><span class="coordinates">(X: -222 Y: 93)</span> Looted from Cairos.</span></div>
@@ -1383,7 +1421,7 @@ window.onload = function() {
 <div class="entry boots very-rare" id="Bonespike-Boots"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Bonespike Boots.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Bonespike_Boots">Bonespike Boots</a></span><span class="entry-desc"><span class="coordinates">(X: -1340 Y: -857)</span> Found in a chest in a secluded passageway <span class="coordinates">(X: -233 Y: 84)</span> at the far end of the western trail leading away from the South Span Checkpoint.</span></div>
 
 
-</div></div><div class="section" id="Wyrms-Crossing"><div class="section-header"><span class="eye noselect" onclick="collapse('Wyrms-Crossing')">👁️</span><span class="section-title">Wyrm's Crossing</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Wyrms-Crossing"><div class="section-header"><span class="eye noselect" onclick="collapse('Wyrms-Crossing')">👁️</span><span class="section-title">Wyrm's Crossing</span><span class="progress" data="Wyrms-Crossing" /></div><div class="section-content">
 
 
 <div class="entry amulet rare" id="Amulet-of-the-Drunkard"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Amulet of the Drunkard.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Amulet_of_the_Drunkard">Amulet of the Drunkard</a></span><span class="entry-desc"><span class="coordinates">(X: 21 Y: 85)</span> Bought from Hoots Hooligan in Sharess' Caress (<span class="value">190 gp</span>).</span></div>
@@ -1393,7 +1431,7 @@ window.onload = function() {
 <div class="entry ring uncommon" id="Seemingly-Gleaming-Ring"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Seemingly Gleaming Ring.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Seemingly_Gleaming_Ring">Seemingly Gleaming Ring</a></span><span class="entry-desc"><span class="coordinates">(X: 20 Y: 130)</span> Rewarded for exhausting all Naaber's dialogue options after pickpocketing his Absolute Confidence Amulet.</span></div>
 
 
-</div></div><div class="section" id="Entharl-Danthelon"><div class="section-header"><span class="eye noselect" onclick="collapse('Entharl-Danthelon')">👁️</span><span class="section-title">Entharl Danthelon</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Entharl-Danthelon"><div class="section-header"><span class="eye noselect" onclick="collapse('Entharl-Danthelon')">👁️</span><span class="section-title">Entharl Danthelon</span><span class="progress" data="Entharl-Danthelon" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: -6 Y: 133)</span> He can be found in Danthelon's Dancing Axe in Wyrm's Crossing.</div>
@@ -1407,7 +1445,7 @@ window.onload = function() {
 <div class="entry gloves rare" id="Snow-Dusted-Monastery-Gloves"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Snow-Dusted Monastery Gloves.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Snow-Dusted_Monastery_Gloves">Snow-Dusted Monastery Gloves</a></span><span class="entry-desc"><span class="value">450 gp</span></span></div>
 
 
-</div></div><div class="section" id="Basilisk-Gate-Barracks"><div class="section-header"><span class="eye noselect" onclick="collapse('Basilisk-Gate-Barracks')">👁️</span><span class="section-title">Basilisk Gate Barracks</span><span class="progress" /></div><div class="section-content"> <!-- TODO coords for all 3 -->
+</div></div><div class="section" id="Basilisk-Gate-Barracks"><div class="section-header"><span class="eye noselect" onclick="collapse('Basilisk-Gate-Barracks')">👁️</span><span class="section-title">Basilisk Gate Barracks</span><span class="progress" data="Basilisk-Gate-Barracks" /></div><div class="section-content"> <!-- TODO coords for all 3 -->
 
 
 <div class="entry clothing uncommon" id="Cloth-Armour"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Cloth Armour.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Cloth_Armour">Cloth Armour</a></span><span class="entry-desc"><span class="coordinates">(X: -1266 Y: 744)</span> Found on a table in the southeastern room of Heapside Prison.</span></div>
@@ -1415,7 +1453,7 @@ window.onload = function() {
 <div class="entry rapier legendary top-tier" id="Duellists-Prerogative"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Duellist's Prerogative.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Duellist's_Prerogative">Duellist's Prerogative</a></span><span class="entry-desc">Rewarded for completing the quest "<a href="https://bg3.wiki/wiki/Save_Vanra">Save Vanra</a>". (Note: It's recommended to complete the quest "<a href="https://bg3.wiki/wiki/Help_the_Hag_Survivors">Help the Hag Survivors</a>" first.)</span></div>
 
 
-</div></div><div class="section" id="Stormshore-Tabernacle"><div class="section-header"><span class="eye noselect" onclick="collapse('Stormshore-Tabernacle')">👁️</span><span class="section-title">Stormshore Tabernacle</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Stormshore-Tabernacle"><div class="section-header"><span class="eye noselect" onclick="collapse('Stormshore-Tabernacle')">👁️</span><span class="section-title">Stormshore Tabernacle</span><span class="progress" data="Stormshore-Tabernacle" /></div><div class="section-content">
 
 
 <div class="entry condition" id="Anointed-in-Splendour"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Anointed in Splendour.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Anointed_in_Splendour_(Condition)">Anointed in Splendour</a></span><span class="entry-desc"><span class="coordinates">(X: 109 Y: -24)</span> Obtained by making an offering to one of the deities. You need to donate between 400 gp and 4500 gp, depending on your level.</span></div>
@@ -1425,7 +1463,7 @@ window.onload = function() {
 <div class="entry mace common top-tier exploit" id="Deva-Mace"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Deva Mace.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Deva_Mace">Deva Mace</a></span><span class="entry-desc"><span class="coordinates">(X: 796 Y: 1159)</span> Looted from Devas. As of Patch 7, this weapon is obtainable using a controller on PC or console with the following steps: kill a Deva summoned by Castigated by Divinity and Pick Up its body. Open any character's inventory, press A/X on their melee main-hand equipment slot, and unequip their current weapon in the weapon list that appears. Still in the weapon list, press A/X on the Deva Mace to equip it to the currently selected character.</span></div>
 
 
-</div></div><div class="section" id="Vicar-Humbletoes"><div class="section-header"><span class="eye noselect" onclick="collapse('Vicar-Humbletoes')">👁️</span><span class="section-title">Vicar Humbletoes</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Vicar-Humbletoes"><div class="section-header"><span class="eye noselect" onclick="collapse('Vicar-Humbletoes')">👁️</span><span class="section-title">Vicar Humbletoes</span><span class="progress" data="Vicar-Humbletoes" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: 109 Y: -16)</span> He is the guardian of the Stormshore Tabernacle.</div>
@@ -1434,7 +1472,7 @@ window.onload = function() {
 <div class="entry morningstar very-rare top-tier" id="The-Sacred-Star"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/The Sacred Star.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/The_Sacred_Star">The Sacred Star</a></span><span class="entry-desc"><span class="value">770 gp</span></span></div>
 
 
-</div></div><div class="section" id="Elfsong-Tavern"><div class="section-header"><span class="eye noselect" onclick="collapse('Elfsong-Tavern')">👁️</span><span class="section-title">Elfsong Tavern</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Elfsong-Tavern"><div class="section-header"><span class="eye noselect" onclick="collapse('Elfsong-Tavern')">👁️</span><span class="section-title">Elfsong Tavern</span><span class="progress" data="Elfsong-Tavern" /></div><div class="section-content">
 
 
 <div class="entry ring rare" id="Keepsake-Ring"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Keepsake Ring.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Keepsake_Ring">Keepsake Ring</a></span><span class="entry-desc"><span class="coordinates">(X: -859 Y: 531)</span> Found in the basement, in the middle of the room with the rats.</span></div>
@@ -1444,13 +1482,13 @@ window.onload = function() {
 <div class="entry longsword rare" id="Sword-of-the-Emperor"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Sword of the Emperor.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Sword_of_the_Emperor">Sword of the Emperor</a></span><span class="entry-desc"><span class="coordinates">(X: -728 Y: 588)</span> Found in the Hidden Room in the basement.</span></div>
 
 
-</div></div><div class="section" id="Baldurs-Gate-Graveyard"><div class="section-header"><span class="eye noselect" onclick="collapse('Baldurs-Gate-Graveyard')">👁️</span><span class="section-title">Baldur's Gate Graveyard</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Baldurs-Gate-Graveyard"><div class="section-header"><span class="eye noselect" onclick="collapse('Baldurs-Gate-Graveyard')">👁️</span><span class="section-title">Baldur's Gate Graveyard</span><span class="progress" data="Baldurs-Gate-Graveyard" /></div><div class="section-content">
 
 
 <div class="entry scimitar uncommon" id="Kurwins-Cauteriser"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Kurwin's Cauteriser.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Kurwin's_Cauteriser">Kurwin's Cauteriser</a></span><span class="entry-desc"><span class="coordinates">(X: 7 Y: 24)</span> Looted from Bugthimble.</span></div>
 
 
-</div></div><div class="section" id="Forge-of-the-Nine"><div class="section-header"><span class="eye noselect" onclick="collapse('Forge-of-the-Nine')">👁️</span><span class="section-title">Forge of the Nine</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Forge-of-the-Nine"><div class="section-header"><span class="eye noselect" onclick="collapse('Forge-of-the-Nine')">👁️</span><span class="section-title">Forge of the Nine</span><span class="progress" data="Forge-of-the-Nine" /></div><div class="section-content">
 
 
 <div class="entry gloves rare" id="Unwanted-Masterwork-Gauntlets"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Unwanted Masterwork Gauntlets.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Unwanted_Masterwork_Gauntlets">Unwanted Masterwork Gauntlets</a></span><span class="entry-desc"><span class="coordinates">(X: 393 Y: 763)</span> Found in a chest in the basement.</span></div>
@@ -1458,7 +1496,7 @@ window.onload = function() {
 <div class="entry medium-armour rare" id="Unwanted-Masterwork-Scalemail"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Unwanted Masterwork Scalemail.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Unwanted_Masterwork_Scalemail">Unwanted Masterwork Scalemail</a></span><span class="entry-desc"><span class="coordinates">(X: 393 Y: 763)</span> Found in a chest in the basement.</span></div>
 
 
-</div></div><div class="section" id="Dammon-3"><div class="section-header"><span class="eye noselect" onclick="collapse('Dammon-3')">👁️</span><span class="section-title">Dammon</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Dammon-3"><div class="section-header"><span class="eye noselect" onclick="collapse('Dammon-3')">👁️</span><span class="section-title">Dammon</span><span class="progress" data="Dammon-3" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: -2 Y: -7)</span> He is the blacksmith at the Forge of the Nine.</div>
@@ -1467,13 +1505,13 @@ window.onload = function() {
 <div class="entry gloves very-rare top-tier" id="Legacy-of-the-Masters"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Legacy of the Masters.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Legacy_of_the_Masters">Legacy of the Masters</a></span><span class="entry-desc"><span class="value">570 gp / 2100 gp</span></span></div>
 
 
-</div></div><div class="section" id="The-Devils-Fee"><div class="section-header"><span class="eye noselect" onclick="collapse('The-Devils-Fee')">👁️</span><span class="section-title">The Devil's Fee</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="The-Devils-Fee"><div class="section-header"><span class="eye noselect" onclick="collapse('The-Devils-Fee')">👁️</span><span class="section-title">The Devil's Fee</span><span class="progress" data="The-Devils-Fee" /></div><div class="section-content">
 
 
 <div class="entry helmet very-rare top-tier" id="Mask-of-Soul-Perception"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Mask of Soul Perception.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Mask_of_Soul_Perception">Mask of Soul Perception</a></span><span class="entry-desc"><span class="coordinates">(X: -33 Y: 20)</span> Found in a chest upstairs in Helsik's Room, next to her bed.</span></div>
 
 
-</div></div><div class="section" id="Helsik"><div class="section-header"><span class="eye noselect" onclick="collapse('Helsik')">👁️</span><span class="section-title">Helsik</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Helsik"><div class="section-header"><span class="eye noselect" onclick="collapse('Helsik')">👁️</span><span class="section-title">Helsik</span><span class="progress" data="Helsik" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: -39 Y: -13)</span> She is found in the Devil's Fee.</div>
@@ -1486,7 +1524,7 @@ window.onload = function() {
 <div class="entry gloves rare" id="Spellseeking-Gloves"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Spellseeking Gloves.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Spellseeking_Gloves">Spellseeking Gloves</a></span><span class="entry-desc"><span class="value">160 gp / 710 gp</span></span></div>
 
 
-</div></div><div class="section" id="Tara"><div class="section-header"><span class="eye noselect" onclick="collapse('Tara')">👁️</span><span class="section-title">Tara</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Tara"><div class="section-header"><span class="eye noselect" onclick="collapse('Tara')">👁️</span><span class="section-title">Tara</span><span class="progress" data="Tara" /></div><div class="section-content">
 
 
 <div class="tip">Tara will appear on various rooftops in the Lower City if Gale spoke to her during the quest "<a href="https://bg3.wiki/wiki/Find_the_Missing_Letters">Find the Missing Letters</a>".</div>
@@ -1495,14 +1533,14 @@ window.onload = function() {
 <div class="entry amulet very-rare" id="Tressym-Collar"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Tressym Collar.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Tressym_Collar">Tressym Collar</a></span><span class="entry-desc">Looted from Tara.</span></div>
 
 
-</div></div><div class="section" id="Highberrys-Home"><div class="section-header"><span class="eye noselect" onclick="collapse('Highberrys-Home')">👁️</span><span class="section-title">Highberry's Home</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Highberrys-Home"><div class="section-header"><span class="eye noselect" onclick="collapse('Highberrys-Home')">👁️</span><span class="section-title">Highberry's Home</span><span class="progress" data="Highberrys-Home" /></div><div class="section-content">
 
 
 <div class="entry boots rare" id="Spaceshunt-Boots"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Spaceshunt Boots.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Spaceshunt_Boots">Spaceshunt Boots</a></span><span class="entry-desc"><span class="coordinates">(X: 18 Y: -36)</span> Looted from Dolor, who can be found at the Highberry's Wine Festival after completing the quest "<a href="https://bg3.wiki/wiki/Solve_the_Open_Hand_Temple_Murders">Solve the Open Hand Temple Murders</a>".</span></div>
 <div class="entry dagger rare top-tier" id="Dolor-Amarus"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Dolor Amarus.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Dolor_Amarus">Dolor Amarus</a></span><span class="entry-desc"><span class="coordinates">(X: 18 Y: -36)</span> Looted from Dolor, or bought from Echo of Abazigal in the Murder Tribunal after the player character becomes an Unholy Assassin (<span class="value">190 gp</span>).</span></div>
 
 
-</div></div><div class="section" id="Stormshore-Armoury"><div class="section-header"><span class="eye noselect" onclick="collapse('Stormshore-Armoury')">👁️</span><span class="section-title">Stormshore Armoury</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Stormshore-Armoury"><div class="section-header"><span class="eye noselect" onclick="collapse('Stormshore-Armoury')">👁️</span><span class="section-title">Stormshore Armoury</span><span class="progress" data="Stormshore-Armoury" /></div><div class="section-content">
 
 
 <div class="entry medium-armour very-rare top-tier" id="Armour-of-Agility"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Armour of Agility.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Armour_of_Agility">Armour of Agility</a></span><span class="entry-desc"><span class="coordinates">(X: -41 Y: -71)</span> Bought from Gloomy Fentonson (<span class="value">2900 gp</span>).</span></div>
@@ -1510,7 +1548,7 @@ window.onload = function() {
 <div class="entry longbow very-rare top-tier" id="The-Dead-Shot"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/The Dead Shot.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/The_Dead_Shot">The Dead Shot</a></span><span class="entry-desc"><span class="coordinates">(X: -36 Y: -83)</span>Bought from Fytz the Firecracker (<span class="value">770 gp / 1800 gp</span>).</span></div>
 
 
-</div></div><div class="section" id="Sorcerous-Sundries"><div class="section-header"><span class="eye noselect" onclick="collapse('Sorcerous-Sundries')">👁️</span><span class="section-title">Sorcerous Sundries</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Sorcerous-Sundries"><div class="section-header"><span class="eye noselect" onclick="collapse('Sorcerous-Sundries')">👁️</span><span class="section-title">Sorcerous Sundries</span><span class="progress" data="Sorcerous-Sundries" /></div><div class="section-content">
 
 
 <div class="entry enhancement story" id="Mind-Flayer-Parasite-Specimen-25"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></span><span class="entry-desc"><span class="coordinates">(X: -9 Y: -92)</span> Found on a table on the ground floor.</span></div>
@@ -1528,7 +1566,7 @@ window.onload = function() {
 <div class="entry clothing rare" id="Shelter-of-Athkatla"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Shelter of Athkatla.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Shelter_of_Athkatla">Shelter of Athkatla</a></span><span class="entry-desc"><span class="coordinates">(X: 4960 Y: 705)</span> Looted from Lorroakan in Ramazith's Tower.</span></div>
 
 
-</div></div><div class="section" id="Rolan-Lorroakans-Projection"><div class="section-header"><span class="eye noselect" onclick="collapse('Rolan-Lorroakans-Projection')">👁️</span><span class="section-title">Rolan / Lorroakan's Projection</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Rolan-Lorroakans-Projection"><div class="section-header"><span class="eye noselect" onclick="collapse('Rolan-Lorroakans-Projection')">👁️</span><span class="section-title">Rolan / Lorroakan's Projection</span><span class="progress" data="Rolan-Lorroakans-Projection" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: -14 Y: -72)</span> He is found at Sorcerous Sundries' front desk.</div>
@@ -1540,7 +1578,7 @@ window.onload = function() {
 <div class="entry clothing very-rare" id="Vest-of-Soul-Rejuvenation"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Vest of Soul Rejuvenation.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Vest_of_Soul_Rejuvenation">Vest of Soul Rejuvenation</a></span><span class="entry-desc"><span class="value">4160 gp</span></span></div>
 
 
-</div></div><div class="section" id="Felogyrs-Fireworks"><div class="section-header"><span class="eye noselect" onclick="collapse('Felogyrs-Fireworks')">👁️</span><span class="section-title">Felogyr's Fireworks</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Felogyrs-Fireworks"><div class="section-header"><span class="eye noselect" onclick="collapse('Felogyrs-Fireworks')">👁️</span><span class="section-title">Felogyr's Fireworks</span><span class="progress" data="Felogyrs-Fireworks" /></div><div class="section-content">
 
 
 <div class="entry enhancement story" id="Mind-Flayer-Parasite-Specimen-26"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></span><span class="entry-desc"><span class="coordinates">(X: 13 Y: -127)</span> Looted from Avery Sonshal in Felogyr's Fireworks.</span></div>
@@ -1548,7 +1586,7 @@ window.onload = function() {
 <div class="entry enhancement story" id="Mind-Flayer-Parasite-Specimen-27"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></span><span class="entry-desc"><span class="coordinates">(X: -32 Y: -114)</span> Two are looted from Sally and Dravo Flymm in Flymm's Cobblers, just west of Felogyr's Fireworks.</span></div>
 
 
-</div></div><div class="section" id="Philgraves-Mansion"><div class="section-header"><span class="eye noselect" onclick="collapse('Philgraves-Mansion')">👁️</span><span class="section-title">Philgrave's Mansion</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Philgraves-Mansion"><div class="section-header"><span class="eye noselect" onclick="collapse('Philgraves-Mansion')">👁️</span><span class="section-title">Philgrave's Mansion</span><span class="progress" data="Philgraves-Mansion" /></div><div class="section-content">
 
 
 <div class="entry ring very-rare top-tier" id="Crypt-Lord-Ring"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Crypt Lord Ring.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Crypt_Lord_Ring">Crypt Lord Ring</a></span><span class="entry-desc">Rewarded for completing the quest "<a href="https://bg3.wiki/wiki/Find_Mystic_Carrion's_Servant">Find Mystic Carrion's Servant</a>" and keeping Thrumbo alive.</span></div>
@@ -1556,7 +1594,7 @@ window.onload = function() {
 <div class="entry quarterstaff very-rare top-tier" id="Staff-of-Cherished-Necromancy"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Staff of Cherished Necromancy.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Staff_of_Cherished_Necromancy">Staff of Cherished Necromancy</a></span><span class="entry-desc">Looted from Mystic Carrion.</span></div>
 
 
-</div></div><div class="section" id="Mystic-Carrion"><div class="section-header"><span class="eye noselect" onclick="collapse('Mystic-Carrion')">👁️</span><span class="section-title">Mystic Carrion</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Mystic-Carrion"><div class="section-header"><span class="eye noselect" onclick="collapse('Mystic-Carrion')">👁️</span><span class="section-title">Mystic Carrion</span><span class="progress" data="Mystic-Carrion" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: 14 Y: -160)</span> He is found in Philgrave's Mansion.</div>
@@ -1565,21 +1603,21 @@ window.onload = function() {
 <div class="entry clothing very-rare" id="Veil-of-the-Morning"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Veil of the Morning.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Veil_of_the_Morning">Veil of the Morning</a></span><span class="entry-desc"><span class="value">1600 gp</span></span></div>
 
 
-</div></div><div class="section" id="Guildhall"><div class="section-header"><span class="eye noselect" onclick="collapse('Guildhall')">👁️</span><span class="section-title">Guildhall</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Guildhall"><div class="section-header"><span class="eye noselect" onclick="collapse('Guildhall')">👁️</span><span class="section-title">Guildhall</span><span class="progress" data="Guildhall" /></div><div class="section-content">
 
 
 <div class="entry clothing rare" id="Drunken-Cloth"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Drunken Cloth.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Drunken_Cloth">Drunken Cloth</a></span><span class="entry-desc"><span class="coordinates">(X: -19 Y: 765)</span> Bought from Bar Tender Severn (<span class="value">800 gp</span>).</span></div>
 <div class="entry cloak very-rare" id="Shade-Slayer-Cloak"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Shade-Slayer Cloak.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Shade-Slayer_Cloak">Shade-Slayer Cloak</a></span><span class="entry-desc"><span class="coordinates">(X: -17 Y: 755)</span> Bought from Sticky Dondo (<span class="value">360 gp / 570 gp</span>).</span></div>
 
 
-</div></div><div class="section" id="Old-Garlows-Place"><div class="section-header"><span class="eye noselect" onclick="collapse('Old-Garlows-Place')">👁️</span><span class="section-title">Old Garlow's Place</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Old-Garlows-Place"><div class="section-header"><span class="eye noselect" onclick="collapse('Old-Garlows-Place')">👁️</span><span class="section-title">Old Garlow's Place</span><span class="progress" data="Old-Garlows-Place" /></div><div class="section-content">
 
 
 <div class="entry quarterstaff rare" id="Staff-of-Interruption"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Staff of Interruption.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Staff_of_Interruption">Staff of Interruption</a></span><span class="entry-desc"><span class="coordinates">(X: -55 Y: -147)</span> Rewarded by Mayrina for completing the quest "<a href="https://bg3.wiki/wiki/Help_the_Hag_Survivors">Help the Hag Survivors</a>". She is found in the decrepit house southwest of Felogyr's Fireworks.</span></div>
 <div class="entry amulet very-rare" id="Fey-Semblance-Amulet"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Fey Semblance Amulet.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Fey_Semblance_Amulet">Fey Semblance Amulet</a></span><span class="entry-desc"><span class="coordinates">(X: -55 Y: -147)</span> Rewarded by Mayrina for completing the quest "<a href="https://bg3.wiki/wiki/Avenge_the_Hag_Survivors">Avenge the Hag Survivors</a>".</span></div>
 
 
-</div></div><div class="section" id="The-Counting-House"><div class="section-header"><span class="eye noselect" onclick="collapse('The-Counting-House')">👁️</span><span class="section-title">The Counting House</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="The-Counting-House"><div class="section-header"><span class="eye noselect" onclick="collapse('The-Counting-House')">👁️</span><span class="section-title">The Counting House</span><span class="progress" data="The-Counting-House" /></div><div class="section-content">
 
 
 <div class="entry cloak very-rare" id="Nymph-Cloak"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Nymph Cloak.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Nymph_Cloak">Nymph Cloak</a></span><span class="entry-desc">Found in High Security Vault n°1 in the Lower City of Baldur's Gate <span class="coordinates">(X: -711 Y: 864)</span>, or bought from Ferg Drogher in Rivington (<span class="value">360 gp</span>) <span class="coordinates">(X: 45 Y: -98)</span>.</span></div>
@@ -1593,20 +1631,20 @@ window.onload = function() {
 <div class="entry light-armour very-rare" id="Elegant-Studded-Leather"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Elegant Studded Leather.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Elegant_Studded_Leather">Elegant Studded Leather</a></span><span class="entry-desc"><span class="coordinates">(X: -686 Y: 874)</span> Found in High Security Vault n°9 (the big vault at the back of the room). A key for this vault can be obtained by completing the quest "<a href="https://bg3.wiki/wiki/Return_Rakath's_Gold">Return Rakath's Gold</a>". The gold can be looted off Roah Moonglow.</span></div>
 
 
-</div></div><div class="section" id="Crimson-Draughts"><div class="section-header"><span class="eye noselect" onclick="collapse('Crimson-Draughts')">👁️</span><span class="section-title">Crimson Draughts</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Crimson-Draughts"><div class="section-header"><span class="eye noselect" onclick="collapse('Crimson-Draughts')">👁️</span><span class="section-title">Crimson Draughts</span><span class="progress" data="Crimson-Draughts" /></div><div class="section-content">
 
 
 <div class="entry enhancement" id="Unstable-Blood"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Unstable Blood.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Unstable_Blood">Unstable Blood</a></span><span class="entry-desc"><span class="coordinates">(X: -91 Y: -90)</span> Rewarded for giving your blood to Araj Oblodra in Moonrise Towers in Act 2, then helping her again at her house, east of The Blushing Mermaid in Act 3. (Note: Some may not find this to be a beneficial effect.)</span></div> <!-- TODO is condition? -->
 <div class="entry enhancement story" id="Mind-Flayer-Parasite-Specimen-29"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></span><span class="entry-desc"><span class="coordinates">(X: -91 Y: -90)</span> Found on a table in the basement.</span></div>
 
 
-</div></div><div class="section" id="Rainforests-Home"><div class="section-header"><span class="eye noselect" onclick="collapse('Rainforests-Home')">👁️</span><span class="section-title">Rainforest's Home </span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Rainforests-Home"><div class="section-header"><span class="eye noselect" onclick="collapse('Rainforests-Home')">👁️</span><span class="section-title">Rainforest's Home </span><span class="progress" data="Rainforests-Home" /></div><div class="section-content">
 
 
 <div class="entry potion common" id="Bottled-Breath"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Bottled Breath.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Bottled_Breath">Bottled Breath</a></span><span class="entry-desc"><span class="coordinates">(X: 1417 Y: 1059)</span> Found on an altar in the basement.</span></div>
 
 
-</div></div><div class="section" id="The-Blushing-Mermaid"><div class="section-header"><span class="eye noselect" onclick="collapse('The-Blushing-Mermaid')">👁️</span><span class="section-title">The Blushing Mermaid</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="The-Blushing-Mermaid"><div class="section-header"><span class="eye noselect" onclick="collapse('The-Blushing-Mermaid')">👁️</span><span class="section-title">The Blushing Mermaid</span><span class="progress" data="The-Blushing-Mermaid" /></div><div class="section-content">
 
 
 <div class="entry grenade common" id="Scrap-and-Shrapnel-Grenade"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Scrap and Shrapnel Grenade.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Scrap_and_Shrapnel_Grenade">Scrap and Shrapnel Grenade</a></span><span class="entry-desc">Three are looted from Blunder Bob, Two-Toes Rischer, Bert Adams on the second floor.</span></div> <!-- TODO coords -->
@@ -1615,20 +1653,20 @@ window.onload = function() {
 <div class="entry ring very-rare" id="Ring-of-Feywild-Sparks"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Ring of Feywild Sparks.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Ring_of_Feywild_Sparks">Ring of Feywild Sparks</a></span><span class="entry-desc"><span class="coordinates">(X: -2329 Y: -95)</span> Looted from Ethel in the basement.</span></div>
 
 
-</div></div><div class="section" id="Golbraiths-House"><div class="section-header"><span class="eye noselect" onclick="collapse('Golbraiths-House')">👁️</span><span class="section-title">Golbraith's House</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Golbraiths-House"><div class="section-header"><span class="eye noselect" onclick="collapse('Golbraiths-House')">👁️</span><span class="section-title">Golbraith's House</span><span class="progress" data="Golbraiths-House" /></div><div class="section-content">
 
 
 <div class="entry shield very-rare" id="Abdels-Trusted-Shield"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Abdel's Trusted Shield.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Abdel's_Trusted_Shield">Abdel's Trusted Shield</a></span><span class="entry-desc"><span class="coordinates">(X: -148 Y: -60)</span> Rewarded by Golbraith in the upper level of his home in the Lower City, after convincing him of your courage against mind flayers.</span></div>
 <div class="entry longsword uncommon" id="Katana"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Katana.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Katana">Katana</a></span><span class="entry-desc"><span class="coordinates">(X: -152 Y: -55)</span> Found on a table in Golbraith's Cellar, which can be accessed through a hatch in Golbraith's House.</span></div>
 
 
-</div></div><div class="section" id="Bloomridge-Park"><div class="section-header"><span class="eye noselect" onclick="collapse('Bloomridge-Park')">👁️</span><span class="section-title">Bloomridge Park</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Bloomridge-Park"><div class="section-header"><span class="eye noselect" onclick="collapse('Bloomridge-Park')">👁️</span><span class="section-title">Bloomridge Park</span><span class="progress" data="Bloomridge-Park" /></div><div class="section-content">
 
 
 <div class="entry enhancement story" id="Mind-Flayer-Parasite-Specimen-31"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></span><span class="entry-desc"><span class="coordinates">(X: -126 Y: -47)</span> Looted from Manip Edenosa.</span></div>
 
 
-</div></div><div class="section" id="Szarr-Palace"><div class="section-header"><span class="eye noselect" onclick="collapse('Szarr-Palace')">👁️</span><span class="section-title">Szarr Palace</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Szarr-Palace"><div class="section-header"><span class="eye noselect" onclick="collapse('Szarr-Palace')">👁️</span><span class="section-title">Szarr Palace</span><span class="progress" data="Szarr-Palace" /></div><div class="section-content">
 
 
 <div class="entry helmet very-rare top-tier" id="Helmet-of-Grit"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Helmet of Grit.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Helmet_of_Grit">Helmet of Grit</a></span><span class="entry-desc"><span class="coordinates">(X: -1298 Y: 965)</span> Found in a chest in the room with the cursed corpse of Victoria.</span></div>
@@ -1639,20 +1677,20 @@ window.onload = function() {
 <div class="entry enhancement" id="Vampire-Ascendant"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Vampire Ascendant.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Vampire_Ascendant">Vampire Ascendant</a></span><span class="entry-desc"><span class="coordinates">(X: -1925 Y: 944)</span> Obtained for Astarion after defeating Cazador and continuing the ritual.</span></div> <!-- TODO is condition, Vampire Spawn is also a possible bonus -->
 
 
-</div></div><div class="section" id="Facemakers-Boutique"><div class="section-header"><span class="eye noselect" onclick="collapse('Facemakers-Boutique')">👁️</span><span class="section-title">Facemaker's Boutique</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Facemakers-Boutique"><div class="section-header"><span class="eye noselect" onclick="collapse('Facemakers-Boutique')">👁️</span><span class="section-title">Facemaker's Boutique</span><span class="progress" data="Facemakers-Boutique" /></div><div class="section-content">
 
 
 <div class="entry arrow common" id="Arrow-of-Piercing"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Arrow of Piercing.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Arrow_of_Piercing">Arrow of Piercing</a></span><span class="entry-desc"><span class="coordinates">(X: -164 Y: -45)</span> Looted from a Doppelganger named Woyy.</span></div>
 
 
-</div></div><div class="section" id="Society-of-Brilliance-Lodge"><div class="section-header"><span class="eye noselect" onclick="collapse('Society-of-Brilliance-Lodge')">👁️</span><span class="section-title">Society of Brilliance Lodge</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Society-of-Brilliance-Lodge"><div class="section-header"><span class="eye noselect" onclick="collapse('Society-of-Brilliance-Lodge')">👁️</span><span class="section-title">Society of Brilliance Lodge</span><span class="progress" data="Society-of-Brilliance-Lodge" /></div><div class="section-content">
 
 
 <div class="entry enhancement story" id="Mind-Flayer-Parasite-Specimen-32"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></span><span class="entry-desc"><span class="coordinates">(X: -208 Y: -86)</span> Found on a desk on the 2nd floor.</span></div>
 <div class="entry amulet very-rare" id="Unflinching-Protector-Amulet"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Unflinching Protector Amulet.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Unflinching_Protector_Amulet">Unflinching Protector Amulet</a></span><span class="entry-desc"><span class="coordinates">(X: -1283 Y: 252)</span> Looted from Ptaris in the basement.</span></div>
 
 
-</div></div><div class="section" id="Elerrathins-Home"><div class="section-header"><span class="eye noselect" onclick="collapse('Elerrathins-Home')">👁️</span><span class="section-title">Elerrathin's Home</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Elerrathins-Home"><div class="section-header"><span class="eye noselect" onclick="collapse('Elerrathins-Home')">👁️</span><span class="section-title">Elerrathin's Home</span><span class="progress" data="Elerrathins-Home" /></div><div class="section-content">
 
 
 <div class="entry scimitar very-rare" id="Belm"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Belm.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Belm">Belm</a></span><span class="entry-desc"><span class="coordinates">(X: -1572 Y: 976)</span> Found in a chest in the basement, which is accessible through a DC 18 locked bookcase. It can be unlocked with a Harper Pin found on the roof.</span></div>
@@ -1661,14 +1699,14 @@ window.onload = function() {
 <div class="entry enhancement story" id="Mind-Flayer-Parasite-Specimen-33"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></span><span class="entry-desc"><span class="coordinates">(X: -197 Y: 12)</span> Two are looted from the guards near the entrance to the Upper City near the Baldur's Gate waypoint, Fist "Deadeye" Mibbs and Fist Healer Darbonna.</span></div>
 
 
-</div></div><div class="section" id="Jannaths-Estate"><div class="section-header"><span class="eye noselect" onclick="collapse('Jannaths-Estate')">👁️</span><span class="section-title">Jannath's Estate</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Jannaths-Estate"><div class="section-header"><span class="eye noselect" onclick="collapse('Jannaths-Estate')">👁️</span><span class="section-title">Jannath's Estate</span><span class="progress" data="Jannaths-Estate" /></div><div class="section-content">
 
 
 <div class="entry ring rare" id="Till-Death-Do-Us-Part"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Till Death Do Us Part.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Till_Death_Do_Us_Part">Till Death Do Us Part</a></span><span class="entry-desc"><span class="coordinates">(X: -250 Y: -44)</span> Pickpocketed off Lady Jannath.</span></div>
 <div class="entry ring rare" id="After-Death-Do-Us-Part"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/After Death Do Us Part.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/After_Death_Do_Us_Part">After Death Do Us Part</a></span><span class="entry-desc"><span class="coordinates">(X: -250 Y: -44)</span> Looted from Oskar Fevras if his affair is exposed to Lady Jannath, or if he is killed by Kerri during the quest "<a href="https://bg3.wiki/wiki/Free_the_Artist">Free the Artist</a>". Can also be looted from Lady Jannath if Oskar wasn't saved in Act 1.</span></div>
 
 
-</div></div><div class="section" id="House-of-Grief"><div class="section-header"><span class="eye noselect" onclick="collapse('House-of-Grief')">👁️</span><span class="section-title">House of Grief</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="House-of-Grief"><div class="section-header"><span class="eye noselect" onclick="collapse('House-of-Grief')">👁️</span><span class="section-title">House of Grief</span><span class="progress" data="House-of-Grief" /></div><div class="section-content">
 
 
 <div class="entry mace very-rare" id="Handmaidens-Mace"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Handmaiden's Mace.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Handmaiden's_Mace">Handmaiden's Mace</a></span><span class="entry-desc"><span class="coordinates">(X: -400 Y: -1651)</span> Looted from Viconia DeVir in the Cloister of Sombre Embrace beneath the House of Grief.</span></div>
@@ -1677,7 +1715,7 @@ window.onload = function() {
 <div class="entry enhancement top-tier" id="Mirror-of-Loss"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Mirror of Loss.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Mirror_of_Loss">Mirror of Loss</a></span><span class="entry-desc"><span class="coordinates">(X: -645 Y: -735)</span> Obtained by offering a prayer to the Mirror of Loss (DC 25 Religion check), then sacrificing one of the following: Constitution, Wisdom, Charisma, or your knowledge of the Necromancy of Thay. You'll receive the option to choose a +2 bonus to any ability (up to 24).</span></div> <!-- TODO better desc -->
 
 
-</div></div><div class="section" id="Grey-Harbour-Docks"><div class="section-header"><span class="eye noselect" onclick="collapse('Grey-Harbour-Docks')">👁️</span><span class="section-title">Grey Harbour Docks</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Grey-Harbour-Docks"><div class="section-header"><span class="eye noselect" onclick="collapse('Grey-Harbour-Docks')">👁️</span><span class="section-title">Grey Harbour Docks</span><span class="progress" data="Grey-Harbour-Docks" /></div><div class="section-content">
 
 
 <div class="entry enhancement story" id="Mind-Flayer-Parasite-Specimen-34"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Mind Flayer Parasite Specimen.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen">Mind Flayer Parasite Specimen</a></span><span class="entry-desc"><span class="coordinates">(X: -225 Y: -151)</span> Looted from Churg Elvek, leader of the mob.</span></div>
@@ -1690,7 +1728,7 @@ window.onload = function() {
 <div class="entry sickle rare" id="Wavemothers-Sickle"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Wavemother's Sickle.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Wavemother's_Sickle">Wavemother's Sickle</a></span><span class="entry-desc"><span class="coordinates">(X: -229 Y: -261)</span> Looted from Allandra Grey.</span></div>
 
 
-</div></div><div class="section" id="Steel-Watch-Foundry"><div class="section-header"><span class="eye noselect" onclick="collapse('Steel-Watch-Foundry')">👁️</span><span class="section-title">Steel Watch Foundry</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Steel-Watch-Foundry"><div class="section-header"><span class="eye noselect" onclick="collapse('Steel-Watch-Foundry')">👁️</span><span class="section-title">Steel Watch Foundry</span><span class="progress" data="Steel-Watch-Foundry" /></div><div class="section-content">
 
 
 <div class="entry helmet rare" id="Steelwatcher-Helmet"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Steelwatcher Helmet.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Steelwatcher_Helmet">Steelwatcher Helmet</a></span><span class="entry-desc"><span class="coordinates">(X: -275 Y: -134)</span> Found on a table on the ground floor.</span></div>
@@ -1700,7 +1738,7 @@ window.onload = function() {
 <div class="entry longbow legendary top-tier" id="Gontr-Mael"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Gontr Mael.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Gontr_Mael">Gontr Mael</a></span><span class="entry-desc"><span class="coordinates">(X: -1952 Y: 206)</span> Looted from the Steel Watcher Titan in Steel Watch Foundry.</span></div>
 
 
-</div></div><div class="section" id="Iron-Throne"><div class="section-header"><span class="eye noselect" onclick="collapse('Iron-Throne')">👁️</span><span class="section-title">Iron Throne</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Iron-Throne"><div class="section-header"><span class="eye noselect" onclick="collapse('Iron-Throne')">👁️</span><span class="section-title">Iron Throne</span><span class="progress" data="Iron-Throne" /></div><div class="section-content">
 
 
 <div class="tip">Duke Ravengard will not be present here (and will become a permanent enemy) if you don't attend Gortash's coronation first.</div>
@@ -1710,7 +1748,7 @@ window.onload = function() {
 <div class="entry heavy-armour very-rare" id="Emblazoned-Plate-of-the-Marshal"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Emblazoned Plate of the Marshal.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Emblazoned_Plate_of_the_Marshal">Emblazoned Plate of the Marshal</a></span><span class="entry-desc">Looted from Duke Ulder Ravengard.</span></div>
 
 
-</div></div><div class="section" id="Wyrms-Rock-Fortress"><div class="section-header"><span class="eye noselect" onclick="collapse('Wyrms-Rock-Fortress')">👁️</span><span class="section-title">Wyrm's Rock Fortress</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Wyrms-Rock-Fortress"><div class="section-header"><span class="eye noselect" onclick="collapse('Wyrms-Rock-Fortress')">👁️</span><span class="section-title">Wyrm's Rock Fortress</span><span class="progress" data="Wyrms-Rock-Fortress" /></div><div class="section-content">
 
 
 <div class="entry spear rare" id="Infernal-Spear"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Infernal Spear.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Infernal_spear">Infernal Spear</a></span><span class="entry-desc">Looted from Iron Consul Mian <span class="coordinates">(X: -13 Y: 202)</span> and Nuff <span class="coordinates">(X: -10 Y: 212)</span>.</span></div>
@@ -1726,14 +1764,14 @@ window.onload = function() {
 <div class="entry potion common" id="Elixir-of-Health"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Elixir of Health.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Elixir_of_Health">Elixir of Health</a></span><span class="entry-desc"><span class="coordinates">(X: -32 Y: 198)</span> Found in a chest on the top floor.</span></div>
 
 
-</div></div><div class="section" id="The-Dragons-Sanctum"><div class="section-header"><span class="eye noselect" onclick="collapse('The-Dragons-Sanctum')">👁️</span><span class="section-title">The Dragon's Sanctum</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="The-Dragons-Sanctum"><div class="section-header"><span class="eye noselect" onclick="collapse('The-Dragons-Sanctum')">👁️</span><span class="section-title">The Dragon's Sanctum</span><span class="progress" data="The-Dragons-Sanctum" /></div><div class="section-content">
 
 
 <div class="entry greatsword legendary top-tier" id="Baldurans-Giantslayer"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Balduran's Giantslayer.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Balduran's_Giantslayer">Balduran's Giantslayer</a></span><span class="entry-desc"><span class="coordinates">(X: 633 Y: -989)</span> Looted from Ansur.</span></div>
 <div class="entry helmet legendary top-tier" id="Helm-of-Balduran"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Helm of Balduran.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Helm_of_Balduran">Helm of Balduran</a></span><span class="entry-desc"><span class="coordinates">(X: 636 Y: -964)</span> Found on an altar next to Ansur.</span></div>
 
 
-</div></div><div class="section" id="Murder-Tribunal"><div class="section-header"><span class="eye noselect" onclick="collapse('Murder-Tribunal')">👁️</span><span class="section-title">Murder Tribunal</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Murder-Tribunal"><div class="section-header"><span class="eye noselect" onclick="collapse('Murder-Tribunal')">👁️</span><span class="section-title">Murder Tribunal</span><span class="progress" data="Murder-Tribunal" /></div><div class="section-content">
 
 
 <div class="entry gloves rare" id="Blackguards-Gauntlets"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Blackguard's Gauntlets.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Blackguard's_Gauntlets">Blackguard's Gauntlets</a></span><span class="entry-desc"><span class="coordinates">(X: -1292 Y: 501)</span> Looted from the undead guardian, That Which Watches.</span></div>
@@ -1746,7 +1784,7 @@ window.onload = function() {
 <div class="entry helmet very-rare top-tier" id="Sarevoks-Horned-Helmet"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Sarevok's Horned Helmet.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Sarevok's_Horned_Helmet">Sarevok's Horned Helmet</a></span><span class="entry-desc"><span class="coordinates">(X: -1248 Y: 503)</span> Looted from Sarevok.</span></div>
 
 
-</div></div><div class="section" id="Echo-of-Abazigal"><div class="section-header"><span class="eye noselect" onclick="collapse('Echo-of-Abazigal')">👁️</span><span class="section-title">Echo of Abazigal</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Echo-of-Abazigal"><div class="section-header"><span class="eye noselect" onclick="collapse('Echo-of-Abazigal')">👁️</span><span class="section-title">Echo of Abazigal</span><span class="progress" data="Echo-of-Abazigal" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: -1263 Y: 511)</span> He will appear in the main chamber after completing the quest "<a href="https://bg3.wiki/wiki/Impress_the_Murder_Tribunal">Impress the Murder Tribunal</a>" and becoming an Unholy Assassin of Bhaal.</div>
@@ -1760,7 +1798,7 @@ window.onload = function() {
 <div class="entry shortbow rare top-tier" id="Vicious-Shortbow"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Vicious Shortbow.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Vicious_Shortbow">Vicious Shortbow</a></span><span class="entry-desc"><span class="value">190 gp</span></span></div>
 
 
-</div></div><div class="section" id="Lower-City-Sewers"><div class="section-header"><span class="eye noselect" onclick="collapse('Lower-City-Sewers')">👁️</span><span class="section-title">Lower City Sewers</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Lower-City-Sewers"><div class="section-header"><span class="eye noselect" onclick="collapse('Lower-City-Sewers')">👁️</span><span class="section-title">Lower City Sewers</span><span class="progress" data="Lower-City-Sewers" /></div><div class="section-content">
 
 
 <div class="entry dagger uncommon" id="Murderous-Cut"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Murderous Cut.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Murderous_Cut">Murderous Cut</a></span><span class="entry-desc">Looted from several Bhaal cultists throughout Act 3.</span></div>
@@ -1769,7 +1807,7 @@ window.onload = function() {
 <div class="entry pike rare" id="Breaching-Pikestaff"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Breaching Pikestaff.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Breaching_Pikestaff">Breaching Pikestaff</a></span><span class="entry-desc"><span class="coordinates">(X: -1393 Y: 56)</span> Found in a coffin in the center of the Ancient Lair west of the Undercity Ruins waypoint.</span></div>
 
 
-</div></div><div class="section" id="Voiceless-Penitent-Bareki"><div class="section-header"><span class="eye noselect" onclick="collapse('Voiceless-Penitent-Bareki')">👁️</span><span class="section-title">Voiceless Penitent Bareki</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Voiceless-Penitent-Bareki"><div class="section-header"><span class="eye noselect" onclick="collapse('Voiceless-Penitent-Bareki')">👁️</span><span class="section-title">Voiceless Penitent Bareki</span><span class="progress" data="Voiceless-Penitent-Bareki" /></div><div class="section-content">
 
 
 <div class="tip"><span class="coordinates">(X: -157 Y: 939)</span> He is found next to the Undercity Ruins waypoint.</div>
@@ -1777,7 +1815,7 @@ window.onload = function() {
 <div class="entry helmet very-rare" id="Bonespike-Helmet"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Bonespike Helmet.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Bonespike_Helmet">Bonespike Helmet</a></span><span class="entry-desc"><span class="value">450 gp</span></span></div>
 
 
-</div></div><div class="section" id="Bhaal-Temple"><div class="section-header"><span class="eye noselect" onclick="collapse('Bhaal-Temple')">👁️</span><span class="section-title">Bhaal Temple</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Bhaal-Temple"><div class="section-header"><span class="eye noselect" onclick="collapse('Bhaal-Temple')">👁️</span><span class="section-title">Bhaal Temple</span><span class="progress" data="Bhaal-Temple" /></div><div class="section-content">
 
 
 <div class="entry gloves very-rare" id="Bonespike-Gloves"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Bonespike Gloves.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Bonespike_Gloves">Bonespike Gloves</a></span><span class="entry-desc"><span class="coordinates">(X: -136 Y: 980)</span> Looted from Strangler Luke in the Undercity Ruins during the quest "<a href="https://bg3.wiki/wiki/Get_Orin's_Netherstone">Get Orin's Netherstone</a>" as part of the trial to enter the Temple of Bhaal. The enemy will despawn once the trial is complete so the item will need to be obtained before then.</span></div>
@@ -1786,7 +1824,7 @@ window.onload = function() {
 <div class="entry clothing rare" id="Mutilated-Carapace"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Mutilated Carapace.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Mutilated_Carapace">Mutilated Carapace</a></span><span class="entry-desc"><span class="coordinates">(X: 61 Y: 1004)</span> Looted from Orin during the quest "<a href="https://bg3.wiki/wiki/Get_Orin's_Netherstone">Get Orin's Netherstone</a>".</span></div>
 
 
-</div></div><div class="section" id="House-of-Hope"><div class="section-header"><span class="eye noselect" onclick="collapse('House-of-Hope')">👁️</span><span class="section-title">House of Hope</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="House-of-Hope"><div class="section-header"><span class="eye noselect" onclick="collapse('House-of-Hope')">👁️</span><span class="section-title">House of Hope</span><span class="progress" data="House-of-Hope" /></div><div class="section-content">
 
 
 <div class="entry helmet very-rare" id="Helldusk-Helmet"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Helldusk Helmet.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Helldusk_Helmet">Helldusk Helmet</a></span><span class="entry-desc"><span class="coordinates">(X: -6482 Y: 2939)</span> Found in a vault in front of the entrance to the Boudoir. The player will need to pass a DC 10 Wisdom check to activate the Inert Infernal Gem and then a DC 20 Arcana check to use the Infernal Control Gem to open the door. The helmet is found in the treasure pile.</span></div>
@@ -1801,7 +1839,7 @@ window.onload = function() {
 <div class="entry mace legendary" id="Devotees-Mace"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Devotee's Mace.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Devotee's_Mace">Devotee's Mace</a></span><span class="entry-desc">Obtained from the "Arm Thy Servant" option of Divine Intervention, a one-time level 10 Cleric spell. The mace can be looted from Hope after she casts this as a temporary companion.</span></div>
 
 
-</div></div><div class="section" id="Astral-Plane-2"><div class="section-header"><span class="eye noselect" onclick="collapse('Astral-Plane-2')">👁️</span><span class="section-title">Astral Plane</span><span class="progress" /></div><div class="section-content">
+</div></div><div class="section" id="Astral-Plane-2"><div class="section-header"><span class="eye noselect" onclick="collapse('Astral-Plane-2')">👁️</span><span class="section-title">Astral Plane</span><span class="progress" data="Astral-Plane-2" /></div><div class="section-content">
 
 
 <div class="entry ring very-rare" id="Orphic-Ring"><span class="entry-checkbox"><input type="checkbox"></span><span class="entry-img"><img src="imgs/Orphic Ring.png" width=50 height=50></span><span class="entry-title"><a href="https://bg3.wiki/wiki/Orphic_Ring">Orphic Ring</a></span><span class="entry-desc"><span class="coordinates">(X: 53 Y: 3238)</span> Looted from Prince Orpheus.</span></div>
