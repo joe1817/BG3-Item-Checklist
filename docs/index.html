@@ -1,4 +1,4 @@
-<!-- TODO MVC --><!-- TODO strikethough/fade checked entries --><!-- TODO hide complete --><!-- TODO split file --><!-- TODO half-eye for partial filters --><!-- TODO hide section if all entries are individually hidden --><!-- TODO wrap TOC and filters on small screens --><!-- TODO search & highlight text --><!-- TODO many instances of "Found in/on" should be changed to "Stolen from" --><!-- TODO options to show/hide top-tier, show/hide exploits (Silver Sword, Deva Mace), specific categories --><!DOCTYPE html>
+<!-- TODO MVC --><!-- TODO hide complete --><!-- TODO save & load filter state --><!-- TODO split file --><!-- TODO half-eye for partial filters --><!-- TODO hide section if all entries are individually hidden --><!-- TODO wrap TOC and filters on small screens --><!-- TODO search & highlight text --><!-- TODO many instances of "Found in/on" should be changed to "Stolen from" --><!-- TODO options to show/hide top-tier, show/hide exploits (Silver Sword, Deva Mace), specific categories --><!DOCTYPE html>
 <html>
 <head>
 <title>BG3 Item Checklist</title>
@@ -187,6 +187,11 @@ li > .progress {
 	padding: 3px 5px 0;
 	gap: 5px;
 	margin-left: 3em;
+}
+
+.entry.complete {
+	opacity: 0.5;
+	text-decoration: line-through;
 }
 
 .entry .title {
@@ -536,9 +541,10 @@ function filterItems() {
 	initializeProgressCounters();
 }
 
-function linkCheckboxesToProgressCounters() {
+function addCheckboxChangeHandlers() {
 	const progressCounters = document.querySelectorAll(".progress");
-	document.querySelectorAll(".entry input").forEach(checkbox => {
+	document.querySelectorAll(".entry").forEach(entry => {
+		const checkbox = entry.querySelector("input");
 		const checkboxData = checkbox.getAttribute("data");
 		const section = getClosestAncestorByClass(checkbox, "section").id;
 		const act = getClosestAncestorByClass(checkbox, "act").id;
@@ -548,6 +554,7 @@ function linkCheckboxesToProgressCounters() {
 			if (categories.some(cat => expandedHierarchy[cat].includes(progressData)) || progressData == act || progressData == section) {
 				// update value when checkbox changed
 				checkbox.addEventListener("change", () => {
+					entry.classList.toggle("complete");
 					const progressText = progress.innerText.split("/");
 					if (checkbox.checked) {
 						const count = parseInt(progressText[0])+1;
@@ -641,7 +648,7 @@ window.onload = function() {
 	// TODO load filter checkboxes
 	filterItems();
 
-	linkCheckboxesToProgressCounters();
+	addCheckboxChangeHandlers();
 
 	// load sprites
 	const fullImage = new Image();
