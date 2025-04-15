@@ -98,6 +98,11 @@ fieldset {
 	white-space: nowrap;
 }
 
+.filter.enabled .eye {
+	background-color: #0060DF;
+	opacity: 1;
+}
+
 .filter > *:not(:nth-child(1)) {
 	margin-left: 2px;
 }
@@ -122,11 +127,6 @@ fieldset {
 	padding: 0 1px;
 	background-color: #ACABAB;
 	opacity: 0.3;
-}
-
-.eye.checked {
-	background-color: #0060DF;
-	opacity: 1;
 }
 
 .progress {
@@ -460,27 +460,24 @@ function createFilters() {
 
 		const categoryDiv          = createElement("div", filtersDiv, "category");
 
-		const mainCategoryDiv      = createElement("div", categoryDiv, "filter category-filter main-filter");
+		const mainCategoryDiv      = createElement("div", categoryDiv, "filter category-filter main-filter enabled");
 		const mainCategoryCheckbox = createElement("span", mainCategoryDiv);
 		const mainCategoryTextSpan = createElement("span", mainCategoryDiv);
 		//const mainCategoryProgress = createElement("span", mainCategoryDiv, "progress");
+		mainCategoryDiv.setAttribute("data", category);
 		mainCategoryCheckbox.innerText = "👁️";
 		mainCategoryCheckbox.classList.add("eye");
-
-		mainCategoryCheckbox.setAttribute("data", category);
-		mainCategoryCheckbox.classList.add("checked");
-
 		mainCategoryTextSpan.innerText = category;
 
 		const subcategoriesDiv = createElement("div", categoryDiv, "subcategories");
 
 		mainCategoryCheckbox.addEventListener("click", () => {
-			mainCategoryCheckbox.classList.toggle("checked");
+			mainCategoryDiv.classList.toggle("enabled");
 			Array.from(subcategoriesDiv.children).forEach(subcategory => {
-				if (mainCategoryCheckbox.classList.contains("checked")) {
-					subcategory.children[0].classList.add("checked");
+				if (mainCategoryDiv.classList.contains("enabled")) {
+					subcategory.classList.add("enabled");
 				} else {
-					subcategory.children[0].classList.remove("checked");
+					subcategory.classList.remove("enabled");
 				}
 			});
 			filterItems();
@@ -488,24 +485,21 @@ function createFilters() {
 
 		if (categoryHierachy[category]) {
 			categoryHierachy[category].forEach(subcategory => {
-				const subCategoryDiv      = createElement("div", subcategoriesDiv, "filter category-filter sub-filter");
+				const subCategoryDiv      = createElement("div", subcategoriesDiv, "filter category-filter sub-filter enabled");
 				const subCategoryCheckbox = createElement("span", subCategoryDiv);
 				const subCategoryTextSpan = createElement("span", subCategoryDiv);
 				//const subCategoryProgress = createElement("span", subCategoryDiv, "progress");
+				subCategoryDiv.setAttribute("data", subcategory);
 				subCategoryCheckbox.innerText = "👁️";
 				subCategoryCheckbox.classList.add("eye");
-
-				subCategoryCheckbox.setAttribute("data", subcategory);
-				subCategoryCheckbox.classList.add("checked");
-
 				subCategoryTextSpan.innerText = subcategory;
 
 				subCategoryCheckbox.addEventListener("click", () => {
-					subCategoryCheckbox.classList.toggle("checked");
-					if (!subCategoryCheckbox.classList.contains("checked")) {
-						mainCategoryCheckbox.classList.remove("checked");
-					} else if (Array.from(subcategoriesDiv.children).every(subcategory => subcategory.children[0].classList.contains("checked"))) {
-						mainCategoryCheckbox.classList.add("checked");
+					subCategoryDiv.classList.toggle("enabled");
+					if (!subCategoryDiv.classList.contains("enabled")) {
+						subCategoryDiv.classList.remove("enabled");
+					} else if (Array.from(subcategoriesDiv.children).every(subcategory => subcategory.classList.contains("enabled"))) {
+						subCategoryDiv.classList.add("enabled");
 					}
 					filterItems();
 				});
@@ -532,9 +526,8 @@ function createFilters() {
 function filterItems() {
 	const visible = [];
 	document.querySelectorAll(".category-filter").forEach(filter => {
-		const checkbox = filter.children[0];
-		if (checkbox.classList.contains("checked")) {
-			const category = checkbox.getAttribute("data");
+		if (filter.classList.contains("enabled")) {
+			const category = filter.getAttribute("data");
 			expandedHierarchy[category].forEach(item => {
 				if (!visible.includes(item)) {
 					visible.push(item);
