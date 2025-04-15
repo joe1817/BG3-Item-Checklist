@@ -1,4 +1,4 @@
-<!-- TODO MVC -->
+<!-- TODO MVC, progress split into count & total -->
 <!-- TODO hide complete -->
 <!-- TODO save & load filter state -->
 <!-- TODO split file -->
@@ -569,23 +569,25 @@ function addCheckboxChangeHandlers() {
 				// update value when checkbox changed
 				checkbox.addEventListener("change", () => {
 					entry.classList.toggle("complete");
-					const progressText = progress.innerText.split("/");
-					if (checkbox.checked) {
-						const count = parseInt(progressText[0])+1;
-						const total = progressText[1];
-						progress.classList.add("started");
-						if (count == total) {
-							progress.classList.add("done");
+					if (!entry.classList.contains("hidden-by-filter") && !entry.classList.contains("hidden-by-search")) {
+						const progressText = progress.innerText.split("/");
+						if (checkbox.checked) {
+							const count = parseInt(progressText[0])+1;
+							const total = progressText[1];
+							progress.classList.add("started");
+							if (count == total) {
+								progress.classList.add("done");
+							}
+							progress.innerText = "" + count + "/" + total;
+						} else {
+							const count = parseInt(progressText[0])-1;
+							const total = progressText[1];
+							progress.classList.remove("done");
+							if (count == 0) {
+								progress.classList.remove("started");
+							}
+							progress.innerText = "" + count + "/" + total;
 						}
-						progress.innerText = "" + count + "/" + total;
-					} else {
-						const count = parseInt(progressText[0])-1;
-						const total = progressText[1];
-						progress.classList.remove("done");
-						if (count == 0) {
-							progress.classList.remove("started");
-						}
-						progress.innerText = "" + count + "/" + total;
 					}
 				});
 			}

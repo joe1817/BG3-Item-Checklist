@@ -1,4 +1,4 @@
-<!-- TODO MVC --><!-- TODO hide complete --><!-- TODO save & load filter state --><!-- TODO split file --><!-- TODO half-eye for partial filters --><!-- TODO hide section if all entries are individually hidden --><!-- TODO wrap TOC and filters on small screens --><!-- TODO search & highlight text --><!-- TODO many instances of "Found in/on" should be changed to "Stolen from" --><!-- TODO options to show/hide top-tier, show/hide exploits (Silver Sword, Deva Mace), specific categories --><!DOCTYPE html>
+<!-- TODO MVC, progress split into count & total --><!-- TODO hide complete --><!-- TODO save & load filter state --><!-- TODO split file --><!-- TODO half-eye for partial filters --><!-- TODO hide section if all entries are individually hidden --><!-- TODO wrap TOC and filters on small screens --><!-- TODO search & highlight text --><!-- TODO many instances of "Found in/on" should be changed to "Stolen from" --><!-- TODO options to show/hide top-tier, show/hide exploits (Silver Sword, Deva Mace), specific categories --><!DOCTYPE html>
 <html>
 <head>
 <title>BG3 Item Checklist</title>
@@ -555,23 +555,25 @@ function addCheckboxChangeHandlers() {
 				// update value when checkbox changed
 				checkbox.addEventListener("change", () => {
 					entry.classList.toggle("complete");
-					const progressText = progress.innerText.split("/");
-					if (checkbox.checked) {
-						const count = parseInt(progressText[0])+1;
-						const total = progressText[1];
-						progress.classList.add("started");
-						if (count == total) {
-							progress.classList.add("done");
+					if (!entry.classList.contains("hidden-by-filter") && !entry.classList.contains("hidden-by-search")) {
+						const progressText = progress.innerText.split("/");
+						if (checkbox.checked) {
+							const count = parseInt(progressText[0])+1;
+							const total = progressText[1];
+							progress.classList.add("started");
+							if (count == total) {
+								progress.classList.add("done");
+							}
+							progress.innerText = "" + count + "/" + total;
+						} else {
+							const count = parseInt(progressText[0])-1;
+							const total = progressText[1];
+							progress.classList.remove("done");
+							if (count == 0) {
+								progress.classList.remove("started");
+							}
+							progress.innerText = "" + count + "/" + total;
 						}
-						progress.innerText = "" + count + "/" + total;
-					} else {
-						const count = parseInt(progressText[0])-1;
-						const total = progressText[1];
-						progress.classList.remove("done");
-						if (count == 0) {
-							progress.classList.remove("started");
-						}
-						progress.innerText = "" + count + "/" + total;
 					}
 				});
 			}
@@ -639,7 +641,6 @@ window.onload = function() {
 			checkbox = entry.querySelector("input[type='checkbox']");
 			checkbox.checked = complete;
 			checkbox.addEventListener("change", (event) => {
-				console.log("here");
 				saveCheckboxState(section.id, entry.id, event.target.checked);
 			});
 		});
