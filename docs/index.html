@@ -1,4 +1,4 @@
-<!-- TODO MVC, progress split into count & total --><!-- TODO hide complete --><!-- TODO save & load filter state --><!-- TODO split file --><!-- TODO half-eye for partial filters --><!-- TODO hide section if all entries are individually hidden --><!-- TODO wrap TOC and filters on small screens --><!-- TODO search & highlight text --><!-- TODO many instances of "Found in/on" should be changed to "Stolen from" --><!-- TODO options to show/hide top-tier, show/hide exploits (Silver Sword, Deva Mace), specific categories --><!DOCTYPE html>
+<!-- TODO MVC, progress split into count & total --><!-- TODO hide complete --><!-- TODO save & load filter state --><!-- TODO split file --><!-- TODO half-eye for partial filters --><!-- TODO hide section if all entries are individually hidden --><!-- TODO wrap TOC and filters on small screens --><!-- TODO search & highlight text --><!-- TODO many instances of "Found in/on" should be changed to "Stolen from" --><!-- TODO options to show/hide top-tier, show/hide exploits (Silver Sword, Deva Mace), honor mode prices --><!DOCTYPE html>
 <html>
 <head>
 <title>BG3 Item Checklist</title>
@@ -69,7 +69,7 @@ li > .progress {
 	margin-left: 10px;
 }
 
-#filters {
+fieldset {
 	display: flex;
 	margin: 1em auto;
 	border: none;
@@ -312,7 +312,7 @@ a:hover {
 <script>
 
 // only direct children
-const entryHierarchy = {
+const categoryHierachy = {
 	"_root_": ["accessory", "armour", "bonus", "consumable", "follower", "misc", "shield", "weapon"],
 	"accessory": ["amulet", "ring"],
 	"armour": ["boots", "cloak", "clothing", "gloves", "heavy-armour", "helmet", "light-armour", "medium-armour"],
@@ -327,14 +327,14 @@ const entryHierarchy = {
 // all children, grandchildren, etc.
 const expandedHierarchy = {};
 
-function expandHierarchy(expandedHierarchy, entryHierarchy, key) {
-	if (entryHierarchy[key] == undefined){
+function expandHierarchy(expandedHierarchy, categoryHierachy, key) {
+	if (categoryHierachy[key] == undefined){
 		expandedHierarchy[key] = [key];
 	}
 	else {
 		expandedHierarchy[key] = [];
-		entryHierarchy[key].forEach(item => {
-			expandHierarchy(expandedHierarchy, entryHierarchy, item);
+		categoryHierachy[key].forEach(item => {
+			expandHierarchy(expandedHierarchy, categoryHierachy, item);
 			expandedHierarchy[item].forEach(item2 => {
 				expandedHierarchy[key].push(item2);
 			});
@@ -342,7 +342,7 @@ function expandHierarchy(expandedHierarchy, entryHierarchy, key) {
 	}
 }
 
-expandHierarchy(expandedHierarchy, entryHierarchy, "_root_");
+expandHierarchy(expandedHierarchy, categoryHierachy, "_root_");
 
 function createElement(tag, parent, classname="") {
 	const element = document.createElement(tag);
@@ -423,10 +423,9 @@ function clearCheckboxes(act) {
 function create_TOC() {
 	const TOC = document.getElementById("TOC");
 	const ol = createElement("ol", TOC);
-	let ul = null;
 	document.querySelectorAll(".act").forEach(act => {
 		const ol_li = createElement("li", ol);
-		ul = createElement("ul", ol_li);
+		const ul = createElement("ul", ol_li);
 		act.querySelectorAll(".section").forEach(section => {
 			const ul_li = createElement("li", ul);
 			const a = createElement("a", ul_li);
@@ -441,19 +440,18 @@ function create_TOC() {
 
 // create filter menu
 function createFilters() {
-	filtersDiv = document.getElementById("filters");
-	entryHierarchy["_root_"].forEach(category => {
+	const filtersDiv = document.getElementById("filters");
+	categoryHierachy["_root_"].forEach(category => {
 
 		const categoryDiv          = createElement("div", filtersDiv, "category");
 
-		const mainCategoryDiv      = createElement("div", categoryDiv, "filter main-filter");
+		const mainCategoryDiv      = createElement("div", categoryDiv, "filter category-filter main-filter");
 		const mainCategoryCheckbox = createElement("span", mainCategoryDiv);
 		const mainCategoryTextSpan = createElement("span", mainCategoryDiv);
 		//const mainCategoryProgress = createElement("span", mainCategoryDiv, "progress");
 		mainCategoryCheckbox.innerText = "👁️";
 		mainCategoryCheckbox.classList.add("eye");
 
-		mainCategoryCheckbox.classList.add("filter-checkbox");
 		mainCategoryCheckbox.setAttribute("data", category);
 		mainCategoryCheckbox.classList.add("checked");
 
@@ -473,16 +471,15 @@ function createFilters() {
 			filterItems();
 		});
 
-		if (entryHierarchy[category]) {
-			entryHierarchy[category].forEach(subcategory => {
-				const subCategoryDiv      = createElement("div", subcategoriesDiv, "filter sub-filter");
+		if (categoryHierachy[category]) {
+			categoryHierachy[category].forEach(subcategory => {
+				const subCategoryDiv      = createElement("div", subcategoriesDiv, "filter category-filter sub-filter");
 				const subCategoryCheckbox = createElement("span", subCategoryDiv);
 				const subCategoryTextSpan = createElement("span", subCategoryDiv);
 				//const subCategoryProgress = createElement("span", subCategoryDiv, "progress");
 				subCategoryCheckbox.innerText = "👁️";
 				subCategoryCheckbox.classList.add("eye");
 
-				subCategoryCheckbox.classList.add("filter-checkbox");
 				subCategoryCheckbox.setAttribute("data", subcategory);
 				subCategoryCheckbox.classList.add("checked");
 
@@ -519,7 +516,8 @@ function createFilters() {
 // filter items by selected categories
 function filterItems() {
 	const visible = [];
-	document.querySelectorAll(".filter-checkbox").forEach(checkbox => {
+	document.querySelectorAll(".category-filter").forEach(filter => {
+		const checkbox = filter.children[0];
 		if (checkbox.classList.contains("checked")) {
 			const category = checkbox.getAttribute("data");
 			expandedHierarchy[category].forEach(item => {
