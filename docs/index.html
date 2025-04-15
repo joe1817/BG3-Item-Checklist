@@ -529,13 +529,32 @@ function filterItems() {
 			});
 		}
 	});
-	const invisible = expandedHierarchy["_root_"].filter(item => !visible.includes(item));
-	document.querySelectorAll(".entry").forEach(entry => {
-		const visibility = visible.some(v => entry.classList.contains(v));
-		if (visibility) {
-			entry.classList.remove("hidden-by-filter");
-		} else if (!visibility) {
-			entry.classList.add("hidden-by-filter");
+	//const invisible = expandedHierarchy["_root_"].filter(item => !visible.includes(item));
+	
+	document.querySelectorAll(".act").forEach(act => {
+		let anySectionVisible = false;
+		act.querySelectorAll(".section").forEach(section => {
+			let anyEntryVisible = false;
+			section.querySelectorAll(".entry").forEach(entry => {
+				const visibility = visible.some(v => entry.classList.contains(v));
+				if (visibility) {
+					entry.classList.remove("hidden-by-filter");
+					anyEntryVisible = true;
+				} else if (!visibility) {
+					entry.classList.add("hidden-by-filter");
+				}
+			});
+			if (anyEntryVisible) {
+				section.classList.remove("hidden-by-filter");
+				anySectionVisible = true;
+			} else {
+				section.classList.add("hidden-by-filter");
+			}
+		});
+		if (anySectionVisible) {
+			act.classList.remove("hidden-by-filter");
+		} else {
+			act.classList.add("hidden-by-filter");
 		}
 	});
 	initializeProgressCounters();
