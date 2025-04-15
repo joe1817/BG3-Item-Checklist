@@ -1,4 +1,4 @@
-<!-- TODO MVC --><!-- TODO hide complete --><!-- TODO hide section if all entries are individually hidden --><!-- TODO wrap TOC and filters on small screens --><!-- TODO search & highlight text --><!-- TODO many instances of "Found in/on" should be changed to "Stolen from" --><!-- TODO options to show/hide top-tiering, show/hide exploits (Silver Sword, Deva Mace), specific categories --><!DOCTYPE html>
+<!-- TODO fix storage --><!-- TODO MVC --><!-- TODO hide complete --><!-- TODO hide section if all entries are individually hidden --><!-- TODO wrap TOC and filters on small screens --><!-- TODO search & highlight text --><!-- TODO many instances of "Found in/on" should be changed to "Stolen from" --><!-- TODO options to show/hide top-tier, show/hide exploits (Silver Sword, Deva Mace), specific categories --><!DOCTYPE html>
 <html>
 <head>
 <title>BG3 Item Checklist</title>
@@ -498,7 +498,7 @@ function createFilters() {
 				});
 			});
 		}
-		
+
 		categoryDiv.setAttribute("tabindex", "0");
 		categoryDiv.addEventListener("focus", () => {
 			subcategoriesDiv.style.maxHeight = subcategoriesDiv.scrollHeight + "px";
@@ -628,10 +628,15 @@ window.onload = function() {
 	// load local storage
 	document.querySelectorAll(".section").forEach(section => {
 		const checkboxStates = JSON.parse(localStorage.getItem(section.id) || "{}");
-		document.querySelectorAll("." + section.id + ".entry").forEach(entry => {
+		document.querySelectorAll("#" + section.id + " .entry").forEach(entry => {
+			const complete = checkboxStates[entry.id] || false;
+			if (complete) {
+				entry.classList.add("complete");
+			}
 			checkbox = entry.querySelector("input[type='checkbox']");
-			checkbox.checked = checkboxStates[entry.id] || false;
+			checkbox.checked = complete;
 			checkbox.addEventListener("change", (event) => {
+				console.log("here");
 				saveCheckboxState(section.id, entry.id, event.target.checked);
 			});
 		});
