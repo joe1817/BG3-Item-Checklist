@@ -1,5 +1,5 @@
 # BG3-Item-Checklist
-Checklist for getting all unique gear in Baldur's Gate 3. Up-to-date as of Patch 7.
+Checklist for getting all unique gear in Baldur's Gate 3. Up-to-date as of Patch 8.
 
 **>> [View it here](https://joe1817.github.io/BG3-Item-Checklist/) <<**
 
