@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="./favicon.png"/>
 <link rel="stylesheet" href="./style.css"></style>
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="https://unpkg.com/vue@3.5.13/dist/vue.global.js"></script>
 <script src="./data.js"></script>
 <script>
 
@@ -35,97 +35,37 @@ function get_final_price(value, persuasion_mod = 4, attitude = 0, difficulty = "
 
 document.addEventListener("DOMContentLoaded", () => {
 
-	const app = Vue.createApp({
+	const Entry = {
+		props: ["filters", "checked", "title", "id", "categories", "rarity", "suggested", "choice", "crafting", "exploit", "img", "link", "desc"],
 		template: `
-<h1 class="center">BG3 Item Checklist</h1>
-<p class="center"><a href="https://github.com/joe1817/BG3-Item-Checklist">GitHub</a></p>
-<h2 class="center">Table of Contents</h2>
-
-<div id="back-to-top" class="text-button noselect">Back to Top</div>
-
-<div id="TOC">
-	<ol v-for="act in acts">
-		<li>
-			<ul>
-				<li v-for="section in act.entries" :class="{started: sectionProgress(section) > 0, completed: sectionProgress(section) == sectionTotal(section)}">
-					<span class="header">
-						<a :href="'#'+section.id">{{ section.title }}</a>
-						<span class="progress">{{ sectionProgress(section) }}/{{ sectionTotal(section) }}</span>
-					</span>
-				</li>
-			</ul>
-		</li>
-	</ol>
-</div>
-
-<fieldset id="filters" class="noselect"><legend>Filters</legend>
-	<div v-for="filter in filters" class="category" tabindex="0" @focus="calcSubcatHeight($event)" @mouseover="calcSubcatHeight($event)" @blur="nullSubcatHeight($event)" @mouseout="nullSubcatHeight($event)">
-		<div class="filter category-filter main-filter" :class="{enabled: filter.enabled}">
-			<span class="eye" @click="toggleFilter(filter)">👁️</span>
-			<span>{{ filter.title }}</span>
-		</div>
-		<div class="subcategories">
-			<div v-for="subfilter in filter.subfilters" class="filter category-filter sub-filter" :class="{enabled: subfilter.enabled}">
-				<span class="eye" @click="toggleSubFilter(subfilter, filter)">👁️</span>
-				<span>{{ subfilter.title }}</span>
-			</div>
-
-		</div>
-	</div>
-</fieldset>
-
-<div id="search"></div>
-
-<div class="entry-container" id="table">
-
-	<div v-for="act in acts" class="act entry-container" :id="act.id" :class="{started: actProgress(act) > 0, completed: actProgress(act) == actTotal(act), expanded: act.expanded}" :style="{mayHeight: act.collaped ? '0px' : null}">
-		<div class="header"><span class="eye noselect" @click="act.expanded = !act.expanded; expandContent($event, act.expanded); saveCollapsed()">👁️</span><span class="title">{{ act.title }}</span><span class="progress">{{ actProgress(act) }}/{{ actTotal(act) }}</span><span class="text-button noselect" @click="clearCheckboxes();">Clear</span></div>
-
-		<div class="content">
-
-			<div v-for="section in act.entries" class="section entry-container" :id="section.id" :class="{started: sectionProgress(section) > 0, completed: sectionProgress(section) == sectionTotal(section), expanded: section.expanded}"  :style="{mayHeight: section.collaped ? '0px' : null}">
-
-				<div class="header"><span class="eye noselect" @click="section.expanded = !section.expanded; expandContent($event, section.expanded); saveCollapsed()">👁️</span><span class="title">{{ section.title }}</span><span class="progress">{{ sectionProgress(section) }}/{{ sectionTotal(section) }}</span></div>
-
-				<div class="content">
-
-					<div v-if="section.tip" class="tip" v-html="section.tip"></div>
-
-					<div v-for="entry in section.entries" :class="['entry', entry.categories, entry.rarity, {'top-tier': entry.suggested, 'completed': entry.completed}]" :id="entry.id" v-show="showEntry(entry)">
-						<span class="checkbox"><input type="checkbox" v-model="entry.completed" @change="saveCheckboxes()"></span>
-						<span class="img"><img :src="entry.img" width=50 height=50></span>
-						<span class="title"><a :href="entry.link">{{ entry.title }}</a></span>
-						<span class="desc" v-html="entry.desc"></span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div :class="['entry', categories, rarity, {'top-tier': suggested, 'completed': completed}]" :id="id" v-show="visible">
+	<span class="checkbox"><input type="checkbox" v-model="completed"></span>
+	<span class="img" @click="completed = !completed"><img :src="img" width=50 height=50></span>
+	<span class="title"><a :href="link">{{ title }}</a></span>
+	<span class="desc" v-html="desc"></span>
 </div>
 `,
+		mounted() {
+			if (this.progress)
+				this.$emit("update:progress", 1, this.categories);
+			if (this.total)
+				this.$emit("update:total", 1, this.categories);
+		},
 		data() {
 			return {
-				acts    : entryData,
-				filters : filters
-			};
+				completed: this.checked.includes(this.id)
+			}
 		},
-		mounted() {
-			console.log("mounted");
-			this.loadChecked();
-			this.loadCollapsed();
-			this.loadDisabled();
-		},
-		methods: {
-			showEntry(entry) {
-				console.log("in showEntry")
+		computed: {
+			visible() {
 				for (const filter of this.filters) {
-					for (const cat of entry.categories) {
+					for (const cat of this.categories) {
 						if (filter.categories.includes(cat) && filter.enabled) {
 							return true;
 						}
 					}
 					for (const subfilter of filter.subfilters) {
-						for (const cat of entry.categories) {
+						for (const cat of this.categories) {
 							if (subfilter.categories.includes(cat) && filter.enabled) {
 								return true;
 							}
@@ -134,6 +74,356 @@ document.addEventListener("DOMContentLoaded", () => {
 				}
 				return false;
 			},
+			progress() {
+				return (this.visible && this.completed) ? 1 : 0;
+			},
+			total() {
+				return (this.visible) ? 1 : 0;
+			}
+		},
+		watch: {
+			progress(newVal, oldVal) {
+				this.$emit("update:progress", newVal-oldVal, this.categories);
+			},
+			total(newVal, oldVal) {
+				this.$emit("update:total", newVal-oldVal, this.categories);
+			},
+			completed(newVal, oldVal) {
+				this.$emit('update:completed', this.id);
+				this.$emit('save');
+			}
+		}
+	}
+
+	const EntryContainer = {
+		props: ["filters", "checked", "collapsed", "title", "id", "tip", "entries"],
+		inject: ["countProgress", "countTotal"],
+		template: `
+<div class="container" :id="id" :class="{started: progress > 0, completed: progress == total, expanded: expanded}" v-show="total || preMount">
+
+	<div class="header">
+		<span class="eye noselect" @click="expanded = !expanded; $emit('save');">👁️</span>
+		<span class="title">{{ title }}</span>
+		<span class="progress">{{ progress }}/{{ total }}</span>
+		<span class="text-button noselect" @click="clearCheckboxes">Clear</span>
+	</div>
+
+	<div ref="content" class="content">
+
+		<div v-if="tip" class="tip" v-html="tip"></div>
+
+		<EntryContainer
+			ref="containers"
+			v-if="entries[0].entries !== undefined"
+			v-for="entry in entries"
+			:filters="filters"
+			:checked="checked"
+			:collapsed="collapsed"
+			:title="entry.title"
+			:id="entry.id"
+			:entries="entry.entries"
+			@update:completed="id=>$emit('update:completed', id)"
+			@update:expanded="id=>$emit('update:expanded', id)"
+			@update:progress="updateProgress"
+			@update:total="updateTotal"
+			@save="id=>$emit('save')"
+			>
+		</EntryContainer>
+
+		<Entry
+			ref="realEntries"
+			v-else
+			v-for="entry in entries"
+			:filters="filters"
+			:checked="checked"
+			:title="entry.title"
+			:id="entry.id"
+			:categories="entry.categories"
+			:rarity="entry.rarity"
+			:suggested="entry.suggested"
+			:choice="entry.choice"
+			:crafting="entry.crafting"
+			:exploit="entry.exploit"
+			:img="entry.img"
+			:link="entry.link"
+			:desc="entry.desc"
+			@update:completed="id=>$emit('update:completed', id)"
+			@update:progress="updateProgress"
+			@update:total="updateTotal"
+			@save="id=>$emit('save')"
+			>
+		</Entry>
+	</div>
+</div>
+`,
+		mounted() {
+			const contentDiv = this.$refs.content;
+			//contentDiv.style.maxHeight = contentDiv.scrollHeight + "px";
+			this.expandContent(this.expanded);
+			this.preMount = false;
+		},
+		data() {
+			return {
+				progress: 0,
+				total : 0,
+				expanded: !this.collapsed.includes(this.id),
+				preMount: true // needed to get correct scrollHeight during initial render
+			}
+		},
+		methods: {
+			updateProgress(amount, categories) {
+				this.progress += amount;
+				this.countProgress[this.id] = this.progress;
+				this.$emit("update:progress", amount, categories);
+			},
+			updateTotal(amount, categories) {
+				this.total += amount;
+				this.countTotal[this.id] = this.total;
+				this.$emit("update:total", amount, categories);
+			},
+			expandContent(expand) {
+				const contentDiv = this.$refs.content;
+				if (expand) {
+					contentDiv.style.maxHeight = contentDiv.scrollHeight + "px";
+				} else {
+					contentDiv.style.maxHeight = "0px";
+				}
+			},
+			clearCheckboxes() {
+				console.log("in clearCheckboxes")
+				const _clearCheckboxes = (entries) => {
+					for (const entry of entries) {
+						if (entry.entries !== undefined) {
+							_clearCheckboxes(entry.entries)
+						} else if (this.checked.includes(entry.id)) {
+							console.log("emit: " + entry.id)
+							this.$emit('update:completed', entry.id);
+						}
+					}
+				}
+				_clearCheckboxes(this.entries)
+				this.$emit('save');
+			}
+		},
+		watch: {
+			expanded(newValue) {
+				this.expandContent(newValue);
+				this.$emit('update:expanded', this.id);
+				this.$emit('save');
+			}
+		}
+	}
+
+	const filterOption = {
+		props: ["filter"],
+		inject: ["countProgress", "countTotal"],
+		template: `
+<div class="category" tabindex="0" @focus="expandSubcategories(true)" @mouseover="expandSubcategories(true)" @blur="expandSubcategories(false)" @mouseout="expandSubcategories(false)">
+	<div class="filter category-filter main-filter" :class="{enabled: filter.enabled}">
+		<span class="eye" @click="toggleFilter(filter)">👁️</span>
+		<span>{{ filter.id }}</span>
+	</div>
+	<div ref="subcategories" class="subcategories">
+		<div v-for="subfilter in filter.subfilters" class="filter category-filter sub-filter" :class="{enabled: subfilter.enabled}">
+			<span class="eye" @click="toggleSubFilter(subfilter, filter)">👁️</span>
+			<span>{{ subfilter.id }}</span>
+		</div>
+
+	</div>
+</div>
+`,
+		methods: {
+			toggleFilter(filter) {
+				filter.enabled = !filter.enabled;
+				for (const subfilter of filter.subfilters) {
+					//if (subfilter.enabled != filter.enabled)
+					subfilter.enabled = filter.enabled;
+				}
+				this.$emit("update:disabled", filter.id);
+				this.$emit('save');
+			},
+			toggleSubFilter(subfilter, filter) {
+				subfilter.enabled = !subfilter.enabled;
+				const count = filter.subfilters.filter(sf => sf.enabled).length;
+				if (count == filter.subfilters.length) {
+					filter.enabled = true;
+				} else {
+					filter.enabled = false;
+				}
+				// TODO half-eye
+				this.$emit("update:disabled", subfilter.id);
+				this.$emit('save');
+			},
+			expandSubcategories(expand) {
+				const subcategoriesDiv = this.$refs.subcategories;
+				if (expand) {
+					subcategoriesDiv.style.maxHeight = subcategoriesDiv.scrollHeight + "px";
+				} else {
+					subcategoriesDiv.style.maxHeight = "0px";
+				}
+			}
+		}
+	}
+
+	const app = Vue.createApp({
+		template: `
+<h1 class="center">BG3 Item Checklist</h1>
+<p class="center"><a href="https://github.com/joe1817/BG3-Item-Checklist">GitHub</a></p>
+<h2 class="center">Table of Contents</h2>
+
+<div id="back-to-top" class="text-button noselect" @click="scrollToTop">Back to Top</div>
+
+<div id="TOC">
+	<ol v-for="act in acts">
+		<li>
+			<ul>
+				<li v-for="section in act.entries" :class="{started: countProgress[section.id] > 0, completed: countProgress[section.id] == countTotal[section.id]}">
+					<span class="header">
+						<a :href="'#'+section.id">{{ section.title }}</a>
+						<span class="progress">{{ countProgress[section.id] }}/{{ countTotal[section.id] }}</span>
+					</span>
+				</li>
+			</ul>
+		</li>
+	</ol>
+</div>
+
+<fieldset id="filters" class="noselect">
+	<legend>Filters</legend>
+	<filterOption v-for="filter in filters" :filter="filter" @update:disabled="toggleDisabled" @save="save"></filterOption>
+</fieldset>
+
+<div id="search"></div>
+
+<EntryContainer
+	class="container"
+	:filters="filters"
+	:checked="checked"
+	:collapsed="collapsed"
+	:title="'All Items'"
+	:id="'table'"
+	:isExpanded="true"
+	:tip="''"
+	:entries="acts"
+	@update:completed="toggleCompleted"
+	@update:expanded="toggleCollapsed"
+	@save="save"
+	>
+</EntryContainer>
+`,
+		data() {
+			const checked   = (localStorage.getItem("checked") || "").split(",");
+			const collapsed = (localStorage.getItem("collapsed") || "").split(",");
+			const disabled  = (localStorage.getItem("disabled") || "").split(",");
+
+			const countProgress = {}
+			const countTotal = {}
+			for (const act of entryData) {
+				for (const section of act.entries) {
+					countProgress[section.id] = 0
+					countTotal[section.id] = 0
+				}
+			}
+
+			return {
+				acts    : entryData,
+				filters : filters,
+				checked : checked,
+				collapsed : collapsed,
+				disabled : disabled,
+				countProgress: countProgress,
+				countTotal: countTotal
+			};
+		},
+		provide() {
+
+			return {
+				countProgress: this.countProgress,
+				countTotal: this.countTotal
+			}
+
+		},
+		mounted() {
+			console.log("mounted");
+			//this.loadChecked();
+			//this.loadCollapsed();
+			//this.loadDisabled();
+
+			const backToTop = document.getElementById("back-to-top");
+			window.addEventListener("scroll", () => {
+				if (window.scrollY > 1200) {
+					backToTop.classList.add("show");
+				} else {
+					backToTop.classList.remove("show");
+				}
+			});
+
+			// calculate buy prices from entry value
+			document.querySelectorAll(".value").forEach(value => {
+				value.innerText = get_final_price(value.innerText);
+			});
+
+			// load sprites
+			const fullImage = new Image();
+			fullImage.src = "./sprites.png";
+			fullImage.onload = () => {
+				document.querySelectorAll(".sprite").forEach(img => {
+					const canvas = document.createElement("canvas");
+					const ctx = canvas.getContext("2d");
+					const [x, y] = img.id.split("-");
+					const cropX = parseInt(x);
+					const cropY = parseInt(y);
+					const cropWidth = 50;
+					const cropHeight = 50;
+					canvas.width = cropWidth;
+					canvas.height = cropHeight;
+					ctx.drawImage(fullImage, cropX, cropY, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
+					img.src = canvas.toDataURL();
+				});
+			};
+		},
+		methods: {
+			toggleCompleted(id) {
+				const index = this.checked.indexOf(id);
+				if (index > -1) {
+					this.checked.splice(index, 1);
+				} else {
+					this.checked.push(id);
+				}
+			},
+			toggleCollapsed(id) {
+				const index = this.collapsed.indexOf(id);
+				if (index > -1) {
+					this.collapsed.splice(index, 1);
+				} else {
+					this.collapsed.push(id);
+				}
+			},
+			toggleDisabled(id) {
+				const index = this.disabled.indexOf(id);
+				if (index > -1) {
+					this.disabled.splice(index, 1);
+				} else {
+					this.disabled.push(id);
+				}
+			},
+			save() {
+				console.log("save")
+				let data = this.checked.join(",");
+				localStorage.setItem("checked", data);
+				data = this.collapsed.join(",");
+				localStorage.setItem("collapsed", data);
+				data = this.disabled.join(",");
+				localStorage.setItem("disabled", data);
+			},
+
+
+
+
+
+
+
+
 			loadChecked() {
 				let checked = localStorage.getItem("checked") || "";
 				checked = checked.split(",");
@@ -225,150 +515,31 @@ document.addEventListener("DOMContentLoaded", () => {
 				data = data.join(",");
 				localStorage.setItem("disabled", data);
 			},
-			clearCheckboxes() {
-				for (const act of this.acts) {
-					for (const section of act.entries) {
-						for (const entry of section.entries) {
-							entry.completed = false;
-						}
-					}
-				}
-				this.saveCheckboxes();
+			scrollToTop() {
+				window.scrollTo({top: 0, behavior: 'smooth'});
+			}
+		},
+		watch: {
+			checked() {
+				console.log("saving checked");
+				save();
 			},
-			toggleFilter(filter) {
-				filter.enabled = !filter.enabled;
-				for (const subfilter of filter.subfilters) {
-					//if (subfilter.enabled != filter.enabled)
-					subfilter.enabled = filter.enabled;
-				}
-				this.saveDisabled();
+			collapsed() {
+				console.log("saving collapsed");
+				save();
 			},
-			toggleSubFilter(subfilter, filter) {
-				subfilter.enabled = !subfilter.enabled;
-				const count = filter.subfilters.filter(sf => sf.enabled).length;
-				if (count == filter.subfilters.length) {
-					filter.enabled = true;
-				} else if (count == 0) {
-					filter.enabled = false;
-				}
-				// TODO half-eye
-				this.saveDisabled();
-			},
-			expandContent(event, expand) {
-				// TODO use refs
-				const contentDiv = event.currentTarget.parentNode.nextSibling;
-				if (expand) {
-					contentDiv.style.maxHeight = contentDiv.scrollHeight + "px";
-				} else {
-					contentDiv.style.maxHeight = "0px";
-				}
-			},
-			calcSubcatHeight(event) {
-				// TODO use refs
-				const subcategoriesDiv = event.currentTarget.children[1];
-				subcategoriesDiv.style.maxHeight = subcategoriesDiv.scrollHeight + "px";
-			},
-			nullSubcatHeight(event) {
-				// TODO use refs
-				const subcategoriesDiv = event.currentTarget.children[1];
-				subcategoriesDiv.style.maxHeight = "0px";
-			},
-			actProgress(act) {
-				let sum = 0;
-				for (const section of act.entries) {
-					sum += this.sectionProgress(section);
-				}
-				return sum;
-			},
-			actTotal(act) {
-				let sum = 0;
-				for (const section of act.entries) {
-					sum += this.sectionTotal(section);
-				}
-				return sum;
-			},
-			sectionProgress(section) {
-				let sum = 0;
-				for (const entry of section.entries) {
-					if (entry.completed && this.showEntry(entry)) {
-						sum++;
-					}
-				}
-				return sum;
-			},
-			sectionTotal(section) {
-				let sum = 0;
-				for (const entry of section.entries) {
-					if (this.showEntry(entry)) {
-						sum++;
-					}
-				}
-				return sum;
+			disabled() {
+				console.log("saving disabled");
+				save();
 			}
 		}
 	});
+
+	app.component("filterOption", filterOption);
+	app.component("Entry", Entry);
+	app.component("EntryContainer", EntryContainer);
+
 	app.mount("#app");
-
-	// back to top
-	const backToTop = document.getElementById("back-to-top");
-
-	window.addEventListener("scroll", () => {
-		if (window.scrollY > 1200) {
-			backToTop.classList.add("show");
-		} else {
-			backToTop.classList.remove("show");
-		}
-	});
-
-	backToTop.addEventListener("click", () => {
-		window.scrollTo({
-			top: 0,
-			behavior: "smooth"
-		});
-	});
-
-	// load sprites
-	const fullImage = new Image();
-	fullImage.src = "./sprites.png";
-	fullImage.onload = () => {
-		document.querySelectorAll(".sprite").forEach(img => {
-			const canvas = document.createElement("canvas");
-			const ctx = canvas.getContext("2d");
-			const [x, y] = img.id.split("-");
-			const cropX = parseInt(x);
-			const cropY = parseInt(y);
-			const cropWidth = 50;
-			const cropHeight = 50;
-			canvas.width = cropWidth;
-			canvas.height = cropHeight;
-			ctx.drawImage(fullImage, cropX, cropY, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
-			img.src = canvas.toDataURL();
-		});
-	};
-
-
-
-
-
-
-	// calculate buy prices from entry value
-	document.querySelectorAll(".value").forEach(value => {
-		value.innerText = get_final_price(value.innerText);
-	});
-
-	// enables collapsibles to start open
-	document.querySelectorAll(".section .content").forEach(content => {
-		content.style.maxHeight = content.scrollHeight + "px";
-	});
-
-	// img click -> checkbox
-	document.querySelectorAll(".entry").forEach(entry => {
-		entry.querySelector("img").addEventListener("click", () => {
-			let checkbox = entry.querySelector("input");
-			checkbox.checked = !checkbox.checked;
-			checkbox.dispatchEvent(new Event("change"));
-		});
-	});
 });
 </script>
 

@@ -38,14 +38,14 @@ const filters = [];
 		if (categoryHierachy[cat]) {
 			categoryHierachy[cat].forEach(subcat => {
 				subfilters.push({
-					"title"      : subcat,
+					"id"         : subcat,
 					"enabled"    : true,
 					"categories" : expandedHierarchy[subcat]
 				});
 			});
 		}
 		filters.push({
-			"title"      : cat,
+			"id"         : cat,
 			"enabled"    : true,
 			"categories" : expandedHierarchy[cat],
 			"subfilters" : subfilters
@@ -63,22 +63,15 @@ for (const cat in expandedHierarchy["_root_"]) {
 const entryData = [{
 title    : "Act 1",
 id       : "Act-1",
-expanded : true,
-progress : 0,
-total    : 0,
 entries  : [
 	{
 	title    : "Nautiloid",
 	id       : "Nautiloid",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "It's recommended to help the friendly intellect devourer and keep it alive.",
 	entries  : [
 		{
 			title    : "Everburn Blade",
 			id       : "Everburn-Blade",
-			completed: false,
 			categories : ["greatsword"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -93,15 +86,11 @@ entries  : [
 	{
 	title    : "Dank Crypt",
 	id       : "Dank-Crypt",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "The Watcher's Guide",
 			id       : "The-Watchers-Guide",
-			completed: false,
 			categories : ["spear"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -115,7 +104,6 @@ entries  : [
 		{
 			title    : "The Amulet of Lost Voices",
 			id       : "The-Amulet-of-Lost-Voices",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "rare",
 			suggested: false,
@@ -130,15 +118,11 @@ entries  : [
 	{
 	title    : "Druid Grove",
 	id       : "Druid-Grove",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Hellrider's Pride",
 			id       : "Hellriders-Pride",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -152,7 +136,6 @@ entries  : [
 		{
 			title    : "Shapeshifter's Boon Ring",
 			id       : "Shapeshifters-Boon-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -166,7 +149,6 @@ entries  : [
 		{
 			title    : "Assassin's Touch",
 			id       : "Assassins-Touch",
-			completed: false,
 			categories : ["dagger"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -180,7 +162,6 @@ entries  : [
 		{
 			title    : "Nature's Snare",
 			id       : "Natures-Snare",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -194,7 +175,6 @@ entries  : [
 		{
 			title    : "Key of the Ancients",
 			id       : "Key-of-the-Ancients",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "story",
 			suggested: false,
@@ -208,7 +188,6 @@ entries  : [
 		{
 			title    : "The Whispering Promise",
 			id       : "The-Whispering-Promise",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -222,7 +201,6 @@ entries  : [
 		{
 			title    : "Instrument Proficiency",
 			id       : "Instrument-Proficiency",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : null,
 			suggested: false,
@@ -236,7 +214,6 @@ entries  : [
 		{
 			title    : "Cap of Curing",
 			id       : "Cap-of-Curing",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -250,7 +227,6 @@ entries  : [
 		{
 			title    : "Amulet of Silvanus",
 			id       : "Amulet-of-Silvanus",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -264,7 +240,6 @@ entries  : [
 		{
 			title    : "Elixir of Silvanus",
 			id       : "Elixir-of-Silvanus",
-			completed: false,
 			categories : ["potion"],
 			rarity   : "common",
 			suggested: false,
@@ -278,7 +253,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-1",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -292,7 +266,6 @@ entries  : [
 		{
 			title    : "Komira's Locket",
 			id       : "Komiras-Locket",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -306,7 +279,6 @@ entries  : [
 		{
 			title    : "Ring of Colour Spray",
 			id       : "Ring-of-Colour-Spray",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -320,7 +292,6 @@ entries  : [
 		{
 			title    : "Pale Oak",
 			id       : "Pale-Oak",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "rare",
 			suggested: false,
@@ -334,7 +305,6 @@ entries  : [
 		{
 			title    : "Broodmother's Revenge",
 			id       : "Broodmothers-Revenge",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -348,7 +318,6 @@ entries  : [
 		{
 			title    : "Sorrow",
 			id       : "Sorrow",
-			completed: false,
 			categories : ["glaive"],
 			rarity   : "rare",
 			suggested: false,
@@ -362,7 +331,6 @@ entries  : [
 		{
 			title    : "Robe of Summer",
 			id       : "Robe-of-Summer",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -376,7 +344,6 @@ entries  : [
 		{
 			title    : "Idol of Silvanus",
 			id       : "Idol-of-Silvanus",
-			completed: false,
 			categories : ["misc"],
 			rarity   : "common",
 			suggested: false,
@@ -390,7 +357,6 @@ entries  : [
 		{
 			title    : "Ring of Protection",
 			id       : "Ring-of-Protection",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "rare",
 			suggested: true,
@@ -404,7 +370,6 @@ entries  : [
 		{
 			title    : "Wapira's Crown",
 			id       : "Wapiras-Crown",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -418,7 +383,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-2",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -433,15 +397,11 @@ entries  : [
 	{
 	title    : "Arron",
 	id       : "Arron",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: 205 Y: 516)</span>",
 	entries  : [
 		{
 			title    : "Dragon's Grasp",
 			id       : "Dragons-Grasp",
-			completed: false,
 			categories : ["handaxe"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -455,7 +415,6 @@ entries  : [
 		{
 			title    : "Gloves of Missile Snaring",
 			id       : "Gloves-of-Missile-Snaring",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -469,7 +428,6 @@ entries  : [
 		{
 			title    : "Hedge Wanderer Armour",
 			id       : "Hedge-Wanderer-Armour",
-			completed: false,
 			categories : ["medium-armour"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -483,7 +441,6 @@ entries  : [
 		{
 			title    : "Rain Dancer",
 			id       : "Rain-Dancer",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -497,7 +454,6 @@ entries  : [
 		{
 			title    : "Ring of Flinging",
 			id       : "Ring-of-Flinging",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -511,7 +467,6 @@ entries  : [
 		{
 			title    : "Spellthief",
 			id       : "Spellthief",
-			completed: false,
 			categories : ["longbow"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -526,15 +481,11 @@ entries  : [
 	{
 	title    : "Dammon",
 	id       : "Dammon-1",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: 177 Y: 562)</span>",
 	entries  : [
 		{
 			title    : "Hunting Shortbow",
 			id       : "Hunting-Shortbow",
-			completed: false,
 			categories : ["shortbow"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -548,7 +499,6 @@ entries  : [
 		{
 			title    : "Safeguard Shield",
 			id       : "Safeguard-Shield",
-			completed: false,
 			categories : ["shield"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -562,7 +512,6 @@ entries  : [
 		{
 			title    : "Orthon Explosive",
 			id       : "Orthon-Explosive",
-			completed: false,
 			categories : ["grenade"],
 			rarity   : "common",
 			suggested: false,
@@ -577,15 +526,11 @@ entries  : [
 	{
 	title    : "Auntie Ethel",
 	id       : "Auntie-Ethel",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: 192 Y: 546)</span> She will cease being a trader when encountered south of the Blighted Village.",
 	entries  : [
 		{
 			title    : "Corellon's Grace",
 			id       : "Corellons-Grace",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -600,15 +545,11 @@ entries  : [
 	{
 	title    : "Outside Druid Grove",
 	id       : "Outside-Druid-Grove",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "The Deathstalker Mantle",
 			id       : "The-Deathstalker-Mantle",
-			completed: false,
 			categories : ["cloak"],
 			rarity   : "rare",
 			suggested: true,
@@ -622,7 +563,6 @@ entries  : [
 		{
 			title    : "Ring of Evasion",
 			id       : "Ring-of-Evasion",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -636,7 +576,6 @@ entries  : [
 		{
 			title    : "Scroll of True Resurrection",
 			id       : "Scroll-of-True-Resurrection",
-			completed: false,
 			categories : ["scroll"],
 			rarity   : "rare",
 			suggested: false,
@@ -650,7 +589,6 @@ entries  : [
 		{
 			title    : "Gloves of Power",
 			id       : "Gloves-of-Power",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -664,7 +602,6 @@ entries  : [
 		{
 			title    : "Silver Pendant",
 			id       : "Silver-Pendant",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -678,7 +615,6 @@ entries  : [
 		{
 			title    : "Spider Egg Sac",
 			id       : "Spider-Egg-Sac",
-			completed: false,
 			categories : ["grenade"],
 			rarity   : "common",
 			suggested: false,
@@ -692,7 +628,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-3",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -706,7 +641,6 @@ entries  : [
 		{
 			title    : "Fleetfingers",
 			id       : "Fleetfingers",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -720,7 +654,6 @@ entries  : [
 		{
 			title    : "Scratch",
 			id       : "Scratch",
-			completed: false,
 			categories : ["follower"],
 			rarity   : null,
 			suggested: true,
@@ -735,15 +668,11 @@ entries  : [
 	{
 	title    : "Owlbear Nest",
 	id       : "Owlbear-Nest",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "The Oak Father's Embrace",
 			id       : "The-Oak-Fathers-Embrace",
-			completed: false,
 			categories : ["medium-armour"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -757,7 +686,6 @@ entries  : [
 		{
 			title    : "Moondrop Pendant",
 			id       : "Moondrop-Pendant",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -771,7 +699,6 @@ entries  : [
 		{
 			title    : "Vision of the Absolute",
 			id       : "Vision-of-the-Absolute",
-			completed: false,
 			categories : ["spear"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -785,7 +712,6 @@ entries  : [
 		{
 			title    : "Owlbear Egg",
 			id       : "Owlbear-Egg",
-			completed: false,
 			categories : ["camp-supplies"],
 			rarity   : "common",
 			suggested: true,
@@ -800,15 +726,11 @@ entries  : [
 	{
 	title    : "Blighted Village",
 	id       : "Blighted-Village",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Haste Helm",
 			id       : "Haste-Helm",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "rare",
 			suggested: true,
@@ -822,7 +744,6 @@ entries  : [
 		{
 			title    : "Warped Headband of Intellect",
 			id       : "Warped-Headband-of-Intellect",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -836,7 +757,6 @@ entries  : [
 		{
 			title    : "Very Heavy Greataxe",
 			id       : "Very-Heavy-Greataxe",
-			completed: false,
 			categories : ["greataxe"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -850,7 +770,6 @@ entries  : [
 		{
 			title    : "The Speedy Lightfeet",
 			id       : "The-Speedy-Lightfeet",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "rare",
 			suggested: false,
@@ -864,7 +783,6 @@ entries  : [
 		{
 			title    : "Smokepowder Satchel",
 			id       : "Smokepowder-Satchel",
-			completed: false,
 			categories : ["grenade"],
 			rarity   : "common",
 			suggested: false,
@@ -878,7 +796,6 @@ entries  : [
 		{
 			title    : "Infernal Iron",
 			id       : "Infernal-Iron-1",
-			completed: false,
 			categories : ["crafting"],
 			rarity   : null,
 			suggested: false,
@@ -892,7 +809,6 @@ entries  : [
 		{
 			title    : "Steelforged Sword",
 			id       : "Steelforged-Sword",
-			completed: false,
 			categories : ["shortsword"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -906,7 +822,6 @@ entries  : [
 		{
 			title    : "Sussur Dagger",
 			id       : "Sussur-Dagger",
-			completed: false,
 			categories : ["dagger"],
 			rarity   : "rare",
 			suggested: true,
@@ -920,7 +835,6 @@ entries  : [
 		{
 			title    : "Sussur Sickle",
 			id       : "Sussur-Sickle",
-			completed: false,
 			categories : ["sickle"],
 			rarity   : "rare",
 			suggested: false,
@@ -934,7 +848,6 @@ entries  : [
 		{
 			title    : "Sussur Greatsword",
 			id       : "Sussur-Greatsword",
-			completed: false,
 			categories : ["greatsword"],
 			rarity   : "rare",
 			suggested: false,
@@ -948,7 +861,6 @@ entries  : [
 		{
 			title    : "Shovel",
 			id       : "Shovel",
-			completed: false,
 			categories : ["follower"],
 			rarity   : null,
 			suggested: true,
@@ -962,7 +874,6 @@ entries  : [
 		{
 			title    : "Suspicious Poison",
 			id       : "Suspicious-Poison",
-			completed: false,
 			categories : ["potion", "grenade"],
 			rarity   : "common",
 			suggested: false,
@@ -976,7 +887,6 @@ entries  : [
 		{
 			title    : "Bracers of Defence",
 			id       : "Bracers-of-Defence",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: true,
@@ -990,7 +900,6 @@ entries  : [
 		{
 			title    : "Forbidden Knowledge",
 			id       : "Forbidden-Knowledge",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : null,
 			suggested: true,
@@ -1005,15 +914,11 @@ entries  : [
 	{
 	title    : "Whispering Depths",
 	id       : "Whispering-Depths",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Spiderstep Boots",
 			id       : "Spiderstep-Boots",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1027,7 +932,6 @@ entries  : [
 		{
 			title    : "Spurred Band",
 			id       : "Spurred-Band",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1041,7 +945,6 @@ entries  : [
 		{
 			title    : "Poisoner's Robe",
 			id       : "Poisoners-Robe",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1056,15 +959,11 @@ entries  : [
 	{
 	title    : "Sunlit Wetlands",
 	id       : "Sunlit-Wetlands",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "The Sparkle Hands",
 			id       : "The-Sparkle-Hands",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -1078,7 +977,6 @@ entries  : [
 		{
 			title    : "Wood Woad Shield",
 			id       : "Wood-Woad-Shield",
-			completed: false,
 			categories : ["shield"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1092,7 +990,6 @@ entries  : [
 		{
 			title    : "Gandrel's Aspiration",
 			id       : "Gandrels-Aspiration",
-			completed: false,
 			categories : ["heavy-crossbow"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1106,7 +1003,6 @@ entries  : [
 		{
 			title    : "Paid the Price",
 			id       : "Paid-the-Price",
-			completed: false,
 			categories : ["condition"],
 			rarity   : null,
 			suggested: false,
@@ -1120,7 +1016,6 @@ entries  : [
 		{
 			title    : "Auntie Ethel's Hair",
 			id       : "Auntie-Ethels-Hair",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "common",
 			suggested: false,
@@ -1134,7 +1029,6 @@ entries  : [
 		{
 			title    : "Tarnished Charm",
 			id       : "Tarnished-Charm",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1148,7 +1042,6 @@ entries  : [
 		{
 			title    : "Flammable Slime Bomb",
 			id       : "Flammable-Slime-Bomb",
-			completed: false,
 			categories : ["grenade"],
 			rarity   : "common",
 			suggested: false,
@@ -1162,7 +1055,6 @@ entries  : [
 		{
 			title    : "Poisonous Slime Bomb",
 			id       : "Poisonous-Slime-Bomb",
-			completed: false,
 			categories : ["grenade"],
 			rarity   : "common",
 			suggested: false,
@@ -1176,7 +1068,6 @@ entries  : [
 		{
 			title    : "Hag's Potions",
 			id       : "Hags-Potions",
-			completed: false,
 			categories : ["potion", "grenade"],
 			rarity   : "common",
 			suggested: false,
@@ -1190,7 +1081,6 @@ entries  : [
 		{
 			title    : "Staff of Crones",
 			id       : "Staff-of-Crones",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1204,7 +1094,6 @@ entries  : [
 		{
 			title    : "The Ever-Seeing Eye",
 			id       : "The-Ever-Seeing-Eye",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1219,15 +1108,11 @@ entries  : [
 	{
 	title    : "Goblin Camp",
 	id       : "Goblin-Camp",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Blazer of Benevolence",
 			id       : "Blazer-of-Benevolence",
-			completed: false,
 			categories : ["light-armour"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1241,7 +1126,6 @@ entries  : [
 		{
 			title    : "Volo's Ersatz Eye",
 			id       : "Volos-Ersatz-Eye",
-			completed: false,
 			categories : ["condition"],
 			rarity   : "common",
 			suggested: false,
@@ -1255,7 +1139,6 @@ entries  : [
 		{
 			title    : "Owlbear Cub",
 			id       : "Owlbear-Cub",
-			completed: false,
 			categories : ["follower"],
 			rarity   : null,
 			suggested: false,
@@ -1269,7 +1152,6 @@ entries  : [
 		{
 			title    : "Crusher's Ring",
 			id       : "Crushers-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1283,7 +1165,6 @@ entries  : [
 		{
 			title    : "Glowing Shield",
 			id       : "Glowing-Shield",
-			completed: false,
 			categories : ["shield"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1297,7 +1178,6 @@ entries  : [
 		{
 			title    : "Potion of Vitality",
 			id       : "Potion-of-Vitality",
-			completed: false,
 			categories : ["potion"],
 			rarity   : "common",
 			suggested: false,
@@ -1312,15 +1192,11 @@ entries  : [
 	{
 	title    : "Grat the Trader",
 	id       : "Grat-the-Trader",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: -99 Y: 425)</span> He will cease being a trader if the booze is poisoned.",
 	entries  : [
 		{
 			title    : "Boots of Aid and Comfort",
 			id       : "Boots-of-Aid-and-Comfort",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1334,7 +1210,6 @@ entries  : [
 		{
 			title    : "Doom Hammer",
 			id       : "Doom-Hammer",
-			completed: false,
 			categories : ["maul"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1348,7 +1223,6 @@ entries  : [
 		{
 			title    : "Gloves of Archery",
 			id       : "Gloves-of-Archery",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1362,7 +1236,6 @@ entries  : [
 		{
 			title    : "Returning Pike",
 			id       : "Returning-Pike",
-			completed: false,
 			categories : ["pike"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -1376,7 +1249,6 @@ entries  : [
 		{
 			title    : "Swiresy Shoes",
 			id       : "Swiresy-Shoes",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "rare",
 			suggested: false,
@@ -1391,15 +1263,11 @@ entries  : [
 	{
 	title    : "Shattered Sanctum",
 	id       : "Shattered-Sanctum",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Brand of the Absolute",
 			id       : "Brand-of-the-Absolute",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : null,
 			suggested: false,
@@ -1413,7 +1281,6 @@ entries  : [
 		{
 			title    : "Jagged Spear",
 			id       : "Jagged-Spear",
-			completed: false,
 			categories : ["spear"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1427,7 +1294,6 @@ entries  : [
 		{
 			title    : "Loviatar's Love",
 			id       : "Loviatars-Love",
-			completed: false,
 			categories : ["condition"],
 			rarity   : null,
 			suggested: false,
@@ -1441,7 +1307,6 @@ entries  : [
 		{
 			title    : "Ritual Axe",
 			id       : "Ritual-Axe",
-			completed: false,
 			categories : ["handaxe"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1455,7 +1320,6 @@ entries  : [
 		{
 			title    : "Ritual Dagger",
 			id       : "Ritual-Dagger",
-			completed: false,
 			categories : ["dagger"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1469,7 +1333,6 @@ entries  : [
 		{
 			title    : "Loviatar's Scourge",
 			id       : "Loviatars-Scourge",
-			completed: false,
 			categories : ["mace"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1483,7 +1346,6 @@ entries  : [
 		{
 			title    : "Ring of Poison Resistance",
 			id       : "Ring-of-Poison-Resistance",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "rare",
 			suggested: false,
@@ -1497,7 +1359,6 @@ entries  : [
 		{
 			title    : "The Watersparkers",
 			id       : "The-Watersparkers",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "rare",
 			suggested: false,
@@ -1511,7 +1372,6 @@ entries  : [
 		{
 			title    : "Amulet of Selûne's Chosen",
 			id       : "Amulet-of-Selunes-Chosen",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1525,7 +1385,6 @@ entries  : [
 		{
 			title    : "Gloves of the Growling Underdog",
 			id       : "Gloves-of-the-Growling-Underdog",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1539,7 +1398,6 @@ entries  : [
 		{
 			title    : "Infernal Iron",
 			id       : "Infernal-Iron-2",
-			completed: false,
 			categories : ["crafting"],
 			rarity   : null,
 			suggested: false,
@@ -1553,7 +1411,6 @@ entries  : [
 		{
 			title    : "Springstep Boots",
 			id       : "Springstep-Boots",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "rare",
 			suggested: false,
@@ -1567,7 +1424,6 @@ entries  : [
 		{
 			title    : "Amulet of Misty Step",
 			id       : "Amulet-of-Misty-Step",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -1581,7 +1437,6 @@ entries  : [
 		{
 			title    : "Absolute's Talisman",
 			id       : "Absolutes-Talisman",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1595,7 +1450,6 @@ entries  : [
 		{
 			title    : "Absolute's Warboard",
 			id       : "Absolutes-Warboard",
-			completed: false,
 			categories : ["shield"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1609,7 +1463,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-4",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -1623,7 +1476,6 @@ entries  : [
 		{
 			title    : "Faithbreaker",
 			id       : "Faithbreaker",
-			completed: false,
 			categories : ["warhammer"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1637,7 +1489,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-5",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -1651,7 +1502,6 @@ entries  : [
 		{
 			title    : "Boots of Striding",
 			id       : "Boots-of-Striding",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1665,7 +1515,6 @@ entries  : [
 		{
 			title    : "Spidersilk Armour",
 			id       : "Spidersilk-Armour",
-			completed: false,
 			categories : ["light-armour"],
 			rarity   : "rare",
 			suggested: false,
@@ -1679,7 +1528,6 @@ entries  : [
 		{
 			title    : "Xyanyde",
 			id       : "Xyanyde",
-			completed: false,
 			categories : ["mace"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1693,7 +1541,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-6",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -1708,15 +1555,11 @@ entries  : [
 	{
 	title    : "Roah Moonglow",
 	id       : "Roah-Moonglow",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: 274 Y: -30)</span>",
 	entries  : [
 		{
 			title    : "Blooded Greataxe",
 			id       : "Blooded-Greataxe",
-			completed: false,
 			categories : ["greataxe"],
 			rarity   : "rare",
 			suggested: false,
@@ -1730,7 +1573,6 @@ entries  : [
 		{
 			title    : "Bow of Awareness",
 			id       : "Bow-of-Awareness",
-			completed: false,
 			categories : ["shortbow"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -1744,7 +1586,6 @@ entries  : [
 		{
 			title    : "Gold Wyrmling Staff",
 			id       : "Gold-Wyrmling-Staff",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "rare",
 			suggested: false,
@@ -1758,7 +1599,6 @@ entries  : [
 		{
 			title    : "Hunter's Dagger",
 			id       : "Hunters-Dagger",
-			completed: false,
 			categories : ["dagger"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1772,7 +1612,6 @@ entries  : [
 		{
 			title    : "Monster Slayer Glaive",
 			id       : "Monster-Slayer-Glaive",
-			completed: false,
 			categories : ["glaive"],
 			rarity   : "rare",
 			suggested: false,
@@ -1787,15 +1626,11 @@ entries  : [
 	{
 	title    : "Worg Pens",
 	id       : "Worg-Pens",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: 342 Y: 31)</span>",
 	entries  : [
 		{
 			title    : "Worgfang",
 			id       : "Worgfang",
-			completed: false,
 			categories : ["dagger"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1809,7 +1644,6 @@ entries  : [
 		{
 			title    : "Beastmaster's Chain",
 			id       : "Beastmasters-Chain",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -1823,7 +1657,6 @@ entries  : [
 		{
 			title    : "Linebreaker Boots",
 			id       : "Linebreaker-Boots",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "rare",
 			suggested: false,
@@ -1838,15 +1671,11 @@ entries  : [
 	{
 	title    : "Waukeen's Rest",
 	id       : "Waukeens-Rest",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "You must complete this area upon your first visit, before resting or fast-travelling away. Otherwise, several quests and items become unavailable.",
 	entries  : [
 		{
 			title    : "Svartlebee's Woundseeker",
 			id       : "Svartlebees-Woundseeker",
-			completed: false,
 			categories : ["greatsword"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -1860,7 +1689,6 @@ entries  : [
 		{
 			title    : "Hamarhraft",
 			id       : "Hamarhraft",
-			completed: false,
 			categories : ["maul"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -1874,7 +1702,6 @@ entries  : [
 		{
 			title    : "The Spellsparkler",
 			id       : "The-Spellsparkler",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "rare",
 			suggested: true,
@@ -1888,7 +1715,6 @@ entries  : [
 		{
 			title    : "The Joltshooter",
 			id       : "The-Joltshooter",
-			completed: false,
 			categories : ["longbow"],
 			rarity   : "rare",
 			suggested: false,
@@ -1902,7 +1728,6 @@ entries  : [
 		{
 			title    : "The Sparky Points",
 			id       : "The-Sparky-Points",
-			completed: false,
 			categories : ["trident"],
 			rarity   : "rare",
 			suggested: false,
@@ -1917,15 +1742,11 @@ entries  : [
 	{
 	title    : "Zhentarim Hideout",
 	id       : "Zhentarim-Hideout",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Harold",
 			id       : "Harold",
-			completed: false,
 			categories : ["heavy-crossbow"],
 			rarity   : "rare",
 			suggested: false,
@@ -1939,7 +1760,6 @@ entries  : [
 		{
 			title    : "Infernal Iron",
 			id       : "Infernal-Iron-3",
-			completed: false,
 			categories : ["crafting"],
 			rarity   : null,
 			suggested: false,
@@ -1953,7 +1773,6 @@ entries  : [
 		{
 			title    : "Abyss Beckoners",
 			id       : "Abyss-Beckoners",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -1968,15 +1787,11 @@ entries  : [
 	{
 	title    : "Brem",
 	id       : "Brem",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: 295 Y: -251)</span> Brem's secret stock is unlocked after completing the quest \"<a href='https://bg3.wiki/wiki/Find_the_Missing_Shipment'>Find the Missing Shipment</a>\".",
 	entries  : [
 		{
 			title    : "Giantbreaker",
 			id       : "Giantbreaker",
-			completed: false,
 			categories : ["heavy-crossbow"],
 			rarity   : "rare",
 			suggested: false,
@@ -1990,7 +1805,6 @@ entries  : [
 		{
 			title    : "Gloves of Hail of Thorns",
 			id       : "Gloves-of-Hail-of-Thorns",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2004,7 +1818,6 @@ entries  : [
 		{
 			title    : "Gloves of Thievery",
 			id       : "Gloves-of-Thievery",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2018,7 +1831,6 @@ entries  : [
 		{
 			title    : "Rupturing Blade",
 			id       : "Rupturing-Blade",
-			completed: false,
 			categories : ["rapier"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2032,7 +1844,6 @@ entries  : [
 		{
 			title    : "The Jolty Vest",
 			id       : "The-Jolty-Vest",
-			completed: false,
 			categories : ["medium-armour"],
 			rarity   : "rare",
 			suggested: false,
@@ -2046,7 +1857,6 @@ entries  : [
 		{
 			title    : "Titanstring Bow",
 			id       : "Titanstring-Bow",
-			completed: false,
 			categories : ["longbow"],
 			rarity   : "rare",
 			suggested: true,
@@ -2061,15 +1871,11 @@ entries  : [
 	{
 	title    : "Githyanki Patrol",
 	id       : "Githyanki-Patrol",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Silver Sword of the Astral Plane",
 			id       : "Silver-Sword-of-the-Astral-Plane",
-			completed: false,
 			categories : ["greatsword"],
 			rarity   : "legendary",
 			suggested: true,
@@ -2083,7 +1889,6 @@ entries  : [
 		{
 			title    : "Githyanki Greatsword (Psionic)",
 			id       : "Githyanki-Greatsword-(Psionic)",
-			completed: false,
 			categories : ["greatsword"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -2097,7 +1902,6 @@ entries  : [
 		{
 			title    : "Githyanki Longsword (Psionic)",
 			id       : "Githyanki-Longsword-(Psionic)",
-			completed: false,
 			categories : ["longsword"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2112,15 +1916,11 @@ entries  : [
 	{
 	title    : "Risen Road",
 	id       : "Risen-Road",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Infernal Robe",
 			id       : "Infernal-Robe",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -2134,7 +1934,6 @@ entries  : [
 		{
 			title    : "Sword of Justice",
 			id       : "Sword-of-Justice",
-			completed: false,
 			categories : ["greatsword"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2148,7 +1947,6 @@ entries  : [
 		{
 			title    : "Gloves of Heroism",
 			id       : "Gloves-of-Heroism",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2162,7 +1960,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-7",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -2176,7 +1973,6 @@ entries  : [
 		{
 			title    : "Shattered Flail",
 			id       : "Shattered-Flail",
-			completed: false,
 			categories : ["mace"],
 			rarity   : "rare",
 			suggested: false,
@@ -2190,7 +1986,6 @@ entries  : [
 		{
 			title    : "Speedy Reply",
 			id       : "Speedy-Reply",
-			completed: false,
 			categories : ["scimitar"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2204,7 +1999,6 @@ entries  : [
 		{
 			title    : "Iron Flask",
 			id       : "Iron-Flask",
-			completed: false,
 			categories : ["grenade"],
 			rarity   : "story",
 			suggested: true,
@@ -2218,7 +2012,6 @@ entries  : [
 		{
 			title    : "Reason's Grasp",
 			id       : "Reasons-Grasp",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2232,7 +2025,6 @@ entries  : [
 		{
 			title    : "Smuggler's Ring",
 			id       : "Smugglers-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -2247,15 +2039,11 @@ entries  : [
 	{
 	title    : "Underdark",
 	id       : "Underdark",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Helmet of Smiting",
 			id       : "Helmet-of-Smiting",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2269,7 +2057,6 @@ entries  : [
 		{
 			title    : "Luminous Armour",
 			id       : "Luminous-Armour",
-			completed: false,
 			categories : ["medium-armour"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -2283,7 +2070,6 @@ entries  : [
 		{
 			title    : "Phalar Aluve",
 			id       : "Phalar-Aluve",
-			completed: false,
 			categories : ["longsword"],
 			rarity   : "rare",
 			suggested: true,
@@ -2297,7 +2083,6 @@ entries  : [
 		{
 			title    : "Amulet of the Unworthy",
 			id       : "Amulet-of-the-Unworthy",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2311,7 +2096,6 @@ entries  : [
 		{
 			title    : "Explorer's Ring",
 			id       : "Explorers-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2325,7 +2109,6 @@ entries  : [
 		{
 			title    : "Mourning Frost",
 			id       : "Mourning-Frost",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -2339,7 +2122,6 @@ entries  : [
 		{
 			title    : "Sussur Tree Bark",
 			id       : "Sussur-Tree-Bark",
-			completed: false,
 			categories : ["crafting"],
 			rarity   : "story",
 			suggested: false,
@@ -2353,7 +2135,6 @@ entries  : [
 		{
 			title    : "Dog Collar",
 			id       : "Dog-Collar",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "common",
 			suggested: false,
@@ -2367,7 +2148,6 @@ entries  : [
 		{
 			title    : "Shortsword of First Blood",
 			id       : "Shortsword-of-First-Blood",
-			completed: false,
 			categories : ["shortsword"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2381,7 +2161,6 @@ entries  : [
 		{
 			title    : "Duergar Antidote",
 			id       : "Duergar-Antidote",
-			completed: false,
 			categories : ["potion"],
 			rarity   : "common",
 			suggested: false,
@@ -2395,7 +2174,6 @@ entries  : [
 		{
 			title    : "Exterminator's Axe",
 			id       : "Exterminators-Axe",
-			completed: false,
 			categories : ["greataxe"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2409,7 +2187,6 @@ entries  : [
 		{
 			title    : "Drow Studded Leather Armour",
 			id       : "Drow-Studded-Leather-Armour",
-			completed: false,
 			categories : ["light-armour"],
 			rarity   : "rare",
 			suggested: false,
@@ -2423,7 +2200,6 @@ entries  : [
 		{
 			title    : "Helmet of Autonomy",
 			id       : "Helmet-of-Autonomy",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2437,7 +2213,6 @@ entries  : [
 		{
 			title    : "Bloodguzzler Garb",
 			id       : "Bloodguzzler-Garb",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2451,7 +2226,6 @@ entries  : [
 		{
 			title    : "The Blast Pendant",
 			id       : "The-Blast-Pendant",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2465,7 +2239,6 @@ entries  : [
 		{
 			title    : "The Spectator Eyes",
 			id       : "The-Spectator-Eyes",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -2480,15 +2253,11 @@ entries  : [
 	{
 	title    : "Myconoid Colony",
 	id       : "Myconoid-Colony",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Boots of Speed",
 			id       : "Boots-of-Speed",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "rare",
 			suggested: true,
@@ -2502,7 +2271,6 @@ entries  : [
 		{
 			title    : "Shadow of Menzoberranzan",
 			id       : "Shadow-of-Menzoberranzan",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "rare",
 			suggested: false,
@@ -2516,7 +2284,6 @@ entries  : [
 		{
 			title    : "Haste Spore Flask",
 			id       : "Haste-Spore-Flask",
-			completed: false,
 			categories : ["grenade"],
 			rarity   : "common",
 			suggested: false,
@@ -2530,7 +2297,6 @@ entries  : [
 		{
 			title    : "Envoy's Amulet",
 			id       : "Envoys-Amulet",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "rare",
 			suggested: false,
@@ -2544,7 +2310,6 @@ entries  : [
 		{
 			title    : "Champion's Chain",
 			id       : "Champions-Chain",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "rare",
 			suggested: false,
@@ -2558,7 +2323,6 @@ entries  : [
 		{
 			title    : "Winter's Clutches",
 			id       : "Winters-Clutches",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2573,15 +2337,11 @@ entries  : [
 	{
 	title    : "Blurg",
 	id       : "Blurg",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: 111 Y: -90)</span>",
 	entries  : [
 		{
 			title    : "Boots of Genial Striding",
 			id       : "Boots-of-Genial-Striding",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "rare",
 			suggested: false,
@@ -2595,7 +2355,6 @@ entries  : [
 		{
 			title    : "Cinder Shoes",
 			id       : "Cinder-Shoes",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2609,7 +2368,6 @@ entries  : [
 		{
 			title    : "Circlet of Blasting",
 			id       : "Circlet-of-Blasting",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "rare",
 			suggested: false,
@@ -2623,7 +2381,6 @@ entries  : [
 		{
 			title    : "Melf's First Staff",
 			id       : "Melfs-First-Staff",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -2637,7 +2394,6 @@ entries  : [
 		{
 			title    : "Psychic Spark",
 			id       : "Psychic-Spark",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2651,7 +2407,6 @@ entries  : [
 		{
 			title    : "Sunwalker's Gift",
 			id       : "Sunwalkers-Gift",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2665,7 +2420,6 @@ entries  : [
 		{
 			title    : "The Baneful",
 			id       : "The-Baneful",
-			completed: false,
 			categories : ["shortsword"],
 			rarity   : "rare",
 			suggested: false,
@@ -2679,7 +2433,6 @@ entries  : [
 		{
 			title    : "The Lifebringer",
 			id       : "The-Lifebringer",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2694,15 +2447,11 @@ entries  : [
 	{
 	title    : "Omeluum",
 	id       : "Omeluum",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: 112 Y: -88)</span> Blurg will summon him.",
 	entries  : [
 		{
 			title    : "Boots of Stormy Clamour",
 			id       : "Boots-of-Stormy-Clamour",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -2716,7 +2465,6 @@ entries  : [
 		{
 			title    : "Creation's Echo",
 			id       : "Creations-Echo",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "rare",
 			suggested: false,
@@ -2730,7 +2478,6 @@ entries  : [
 		{
 			title    : "Pearl of Power Amulet",
 			id       : "Pearl-of-Power-Amulet",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -2744,7 +2491,6 @@ entries  : [
 		{
 			title    : "Ring of Salving",
 			id       : "Ring-of-Salving",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2758,7 +2504,6 @@ entries  : [
 		{
 			title    : "The Shadespell Circlet",
 			id       : "The-Shadespell-Circlet",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2772,7 +2517,6 @@ entries  : [
 		{
 			title    : "Survival Instinct",
 			id       : "Survival-Instinct",
-			completed: false,
 			categories : ["non-spell"],
 			rarity   : null,
 			suggested: false,
@@ -2786,7 +2530,6 @@ entries  : [
 		{
 			title    : "Ring of Mind-Shielding",
 			id       : "Ring-of-Mind-Shielding",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "rare",
 			suggested: false,
@@ -2801,15 +2544,11 @@ entries  : [
 	{
 	title    : "Derryth Bonecloak",
 	id       : "Derryth-Bonecloak",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: 50 Y: -94)</span>",
 	entries  : [
 		{
 			title    : "Amulet of Restoration",
 			id       : "Amulet-of-Restoration",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "rare",
 			suggested: false,
@@ -2823,7 +2562,6 @@ entries  : [
 		{
 			title    : "Caustic Band",
 			id       : "Caustic-Band",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2837,7 +2575,6 @@ entries  : [
 		{
 			title    : "Corrosive Flail",
 			id       : "Corrosive-Flail",
-			completed: false,
 			categories : ["flail"],
 			rarity   : "rare",
 			suggested: false,
@@ -2851,7 +2588,6 @@ entries  : [
 		{
 			title    : "Gloves of Hail of Thorns",
 			id       : "Gloves-of-Hail-of-Thorns",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2865,7 +2601,6 @@ entries  : [
 		{
 			title    : "Herbalist's Gloves",
 			id       : "Herbalists-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2879,7 +2614,6 @@ entries  : [
 		{
 			title    : "Ring of Jumping",
 			id       : "Ring-of-Jumping",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2893,7 +2627,6 @@ entries  : [
 		{
 			title    : "Gloves of Uninhibited Kushigo",
 			id       : "Gloves-of-Uninhibited-Kushigo",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: true,
@@ -2908,15 +2641,11 @@ entries  : [
 	{
 	title    : "The Festering Cove",
 	id       : "The-Festering-Cove",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: 81 Y: -241)</span> The entrance to The Festering Cove can be found in the torchstalk field northeast of the Arcane Tower and southeast of the Decrepit Village. There is a Cragged Rock that can be reached by jumping over two mushrooms growing out of the cliff face. Climb down the Cragged Rock to reach The Festering Cove. (Note: Be careful of the exploding mushroom that can throw you to your death.)",
 	entries  : [
 		{
 			title    : "Slippery Chain Shirt",
 			id       : "Slippery-Chain-Shirt",
-			completed: false,
 			categories : ["medium-armour"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2930,7 +2659,6 @@ entries  : [
 		{
 			title    : "Sickle of BOOOAL",
 			id       : "Sickle-of-BOOOAL",
-			completed: false,
 			categories : ["sickle"],
 			rarity   : "rare",
 			suggested: false,
@@ -2944,7 +2672,6 @@ entries  : [
 		{
 			title    : "BOOOAL's Blessing",
 			id       : "BOOOALs-Blessing",
-			completed: false,
 			categories : ["condition"],
 			rarity   : null,
 			suggested: false,
@@ -2959,15 +2686,11 @@ entries  : [
 	{
 	title    : "Arcane Tower",
 	id       : "Arcane-Tower",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Skybreaker",
 			id       : "Skybreaker",
-			completed: false,
 			categories : ["light-hammer"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -2981,7 +2704,6 @@ entries  : [
 		{
 			title    : "Uncovered Mysteries",
 			id       : "Uncovered-Mysteries",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "rare",
 			suggested: false,
@@ -2995,7 +2717,6 @@ entries  : [
 		{
 			title    : "Mystra's Grace",
 			id       : "Mystras-Grace",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3009,7 +2730,6 @@ entries  : [
 		{
 			title    : "Mage's Friend",
 			id       : "Mages-Friend",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3023,7 +2743,6 @@ entries  : [
 		{
 			title    : "Guiding Light",
 			id       : "Guiding-Light",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "story",
 			suggested: false,
@@ -3037,7 +2756,6 @@ entries  : [
 		{
 			title    : "Light of Creation",
 			id       : "Light-of-Creation",
-			completed: false,
 			categories : ["halberd"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3051,7 +2769,6 @@ entries  : [
 		{
 			title    : "Club of Hill Giant Strength",
 			id       : "Club-of-Hill-Giant-Strength",
-			completed: false,
 			categories : ["club"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -3065,7 +2782,6 @@ entries  : [
 		{
 			title    : "Staff of Arcane Blessing",
 			id       : "Staff-of-Arcane-Blessing",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -3079,7 +2795,6 @@ entries  : [
 		{
 			title    : "The Sparkswall",
 			id       : "The-Sparkswall",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3094,15 +2809,11 @@ entries  : [
 	{
 	title    : "Zurkhwood Skiffs",
 	id       : "Zurkhwood-Skiffs",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Intransigent Warhammer",
 			id       : "Intransigent-Warhammer",
-			completed: false,
 			categories : ["warhammer"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3116,7 +2827,6 @@ entries  : [
 		{
 			title    : "Bow of the Banshee",
 			id       : "Bow-of-the-Banshee",
-			completed: false,
 			categories : ["shortbow"],
 			rarity   : "rare",
 			suggested: false,
@@ -3130,7 +2840,6 @@ entries  : [
 		{
 			title    : "Jorgoral's Greatsword",
 			id       : "Jorgorals-Greatsword",
-			completed: false,
 			categories : ["greatsword"],
 			rarity   : "rare",
 			suggested: false,
@@ -3144,7 +2853,6 @@ entries  : [
 		{
 			title    : "Shining Staver-of-Skulls",
 			id       : "Shining-Staver-of-Skulls",
-			completed: false,
 			categories : ["light-hammer"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3159,15 +2867,11 @@ entries  : [
 	{
 	title    : "Grymforge",
 	id       : "Grymforge",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Fetish of Callarduran Smoothhands",
 			id       : "Fetish-of-Callarduran-Smoothhands",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "rare",
 			suggested: false,
@@ -3181,7 +2885,6 @@ entries  : [
 		{
 			title    : "Infernal Alloy",
 			id       : "Infernal-Alloy",
-			completed: false,
 			categories : ["crafting"],
 			rarity   : null,
 			suggested: false,
@@ -3195,7 +2898,6 @@ entries  : [
 		{
 			title    : "Wondrous Gloves",
 			id       : "Wondrous-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -3209,7 +2911,6 @@ entries  : [
 		{
 			title    : "Armour of Uninhibited Kushigo",
 			id       : "Armour-of-Uninhibited-Kushigo",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3223,7 +2924,6 @@ entries  : [
 		{
 			title    : "Bracing Band",
 			id       : "Bracing-Band",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3237,7 +2937,6 @@ entries  : [
 		{
 			title    : "Devilfoil Mask",
 			id       : "Devilfoil-Mask",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "common",
 			suggested: false,
@@ -3251,7 +2950,6 @@ entries  : [
 		{
 			title    : "Firestoker",
 			id       : "Firestoker",
-			completed: false,
 			categories : ["hand-crossbow"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3265,7 +2963,6 @@ entries  : [
 		{
 			title    : "Smokepowder Satchel",
 			id       : "Smokepowder-Satchel",
-			completed: false,
 			categories : ["grenade"],
 			rarity   : "common",
 			suggested: false,
@@ -3279,7 +2976,6 @@ entries  : [
 		{
 			title    : "Runepowder Barrel",
 			id       : "Runepowder-Barrel-1",
-			completed: false,
 			categories : ["barrel"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -3293,7 +2989,6 @@ entries  : [
 		{
 			title    : "Runepowder Vial",
 			id       : "Runepowder-Vial",
-			completed: false,
 			categories : ["grenade"],
 			rarity   : "rare",
 			suggested: false,
@@ -3307,7 +3002,6 @@ entries  : [
 		{
 			title    : "Dark Justiciar Mail",
 			id       : "Dark-Justiciar-Mail",
-			completed: false,
 			categories : ["medium-armour"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3321,7 +3015,6 @@ entries  : [
 		{
 			title    : "Sharran Crossbow",
 			id       : "Sharran-Crossbow",
-			completed: false,
 			categories : ["light-crossbow"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3335,7 +3028,6 @@ entries  : [
 		{
 			title    : "The Real Sparky Sparkswall",
 			id       : "The-Real-Sparky-Sparkswall",
-			completed: false,
 			categories : ["shield"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3349,7 +3041,6 @@ entries  : [
 		{
 			title    : "The Protecty Sparkswall",
 			id       : "The-Protecty-Sparkswall",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "rare",
 			suggested: true,
@@ -3363,7 +3054,6 @@ entries  : [
 		{
 			title    : "Dark Justiciar Mask",
 			id       : "Dark-Justiciar-Mask",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3377,7 +3067,6 @@ entries  : [
 		{
 			title    : "Dark Justiciar Helm",
 			id       : "Dark-Justiciar-Helm",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3391,7 +3080,6 @@ entries  : [
 		{
 			title    : "Sentient Amulet (Rare)",
 			id       : "Sentient-Amulet-(Rare)",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "rare",
 			suggested: false,
@@ -3405,7 +3093,6 @@ entries  : [
 		{
 			title    : "Grymskull Helm",
 			id       : "Grymskull-Helm",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -3419,7 +3106,6 @@ entries  : [
 		{
 			title    : "Deep Delver",
 			id       : "Deep-Delver",
-			completed: false,
 			categories : ["war-pick"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3433,7 +3119,6 @@ entries  : [
 		{
 			title    : "Cap of Wrath",
 			id       : "Cap-of-Wrath",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "rare",
 			suggested: false,
@@ -3447,7 +3132,6 @@ entries  : [
 		{
 			title    : "Ring of Absolute Force",
 			id       : "Ring-of-Absolute-Force",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3461,7 +3145,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-8",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -3475,7 +3158,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-9",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -3489,7 +3171,6 @@ entries  : [
 		{
 			title    : "Disintegrating Night Walkers",
 			id       : "Disintegrating-Night-Walkers",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "story",
 			suggested: true,
@@ -3503,7 +3184,6 @@ entries  : [
 		{
 			title    : "Sword of Screams",
 			id       : "Sword-of-Screams",
-			completed: false,
 			categories : ["rapier"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3518,15 +3198,11 @@ entries  : [
 	{
 	title    : "The Adamantine Forge",
 	id       : "The-Adamantine-Forge",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Scimitar Mould",
 			id       : "Scimitar-Mould",
-			completed: false,
 			categories : ["crafting"],
 			rarity   : null,
 			suggested: false,
@@ -3540,7 +3216,6 @@ entries  : [
 		{
 			title    : "Shield Mould",
 			id       : "Shield-Mould",
-			completed: false,
 			categories : ["crafting"],
 			rarity   : null,
 			suggested: false,
@@ -3554,7 +3229,6 @@ entries  : [
 		{
 			title    : "Longsword Mould",
 			id       : "Longsword-Mould",
-			completed: false,
 			categories : ["crafting"],
 			rarity   : null,
 			suggested: false,
@@ -3568,7 +3242,6 @@ entries  : [
 		{
 			title    : "Splint Mould",
 			id       : "Splint-Mould",
-			completed: false,
 			categories : ["crafting"],
 			rarity   : null,
 			suggested: false,
@@ -3582,7 +3255,6 @@ entries  : [
 		{
 			title    : "Mace Mould",
 			id       : "Mace-Mould",
-			completed: false,
 			categories : ["crafting"],
 			rarity   : null,
 			suggested: false,
@@ -3596,7 +3268,6 @@ entries  : [
 		{
 			title    : "Scale Mail Mould",
 			id       : "Scale-Mail-Mould",
-			completed: false,
 			categories : ["crafting"],
 			rarity   : null,
 			suggested: false,
@@ -3610,7 +3281,6 @@ entries  : [
 		{
 			title    : "Mithral Ore",
 			id       : "Mithral-Ore",
-			completed: false,
 			categories : ["crafting"],
 			rarity   : null,
 			suggested: false,
@@ -3624,7 +3294,6 @@ entries  : [
 		{
 			title    : "Adamantine Scimitar",
 			id       : "Adamantine-Scimitar",
-			completed: false,
 			categories : ["scimitar"],
 			rarity   : "rare",
 			suggested: false,
@@ -3638,7 +3307,6 @@ entries  : [
 		{
 			title    : "Adamantine Shield",
 			id       : "Adamantine-Shield",
-			completed: false,
 			categories : ["shield"],
 			rarity   : "rare",
 			suggested: false,
@@ -3652,7 +3320,6 @@ entries  : [
 		{
 			title    : "Adamantine Longsword",
 			id       : "Adamantine-Longsword",
-			completed: false,
 			categories : ["longsword"],
 			rarity   : "rare",
 			suggested: false,
@@ -3666,7 +3333,6 @@ entries  : [
 		{
 			title    : "Adamantine Splint Armor",
 			id       : "Adamantine-Splint-Armor",
-			completed: false,
 			categories : ["heavy-armour"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -3680,7 +3346,6 @@ entries  : [
 		{
 			title    : "Adamantine Mace",
 			id       : "Adamantine-Mace",
-			completed: false,
 			categories : ["mace"],
 			rarity   : "rare",
 			suggested: false,
@@ -3694,7 +3359,6 @@ entries  : [
 		{
 			title    : "Adamantine Scale Mail",
 			id       : "Adamantine-Scale-Mail",
-			completed: false,
 			categories : ["medium-armour"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -3709,15 +3373,11 @@ entries  : [
 	{
 	title    : "Lady Esther",
 	id       : "Lady-Esther",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: -43 Y: -129)</span> She is in the Mountain Pass area, down the stairs and to the right from the Trielta Crags waypoint.",
 	entries  : [
 		{
 			title    : "Boots of Elemental Momentum",
 			id       : "Boots-of-Elemental-Momentum",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3731,7 +3391,6 @@ entries  : [
 		{
 			title    : "Cacophony",
 			id       : "Cacophony",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "rare",
 			suggested: false,
@@ -3745,7 +3404,6 @@ entries  : [
 		{
 			title    : "Gloves of Baneful Striking",
 			id       : "Gloves-of-Baneful-Striking",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3759,7 +3417,6 @@ entries  : [
 		{
 			title    : "Gloves of Cinder and Sizzle",
 			id       : "Gloves-of-Cinder-and-Sizzle",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -3773,7 +3430,6 @@ entries  : [
 		{
 			title    : "Hoppy",
 			id       : "Hoppy",
-			completed: false,
 			categories : ["war-pick"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3787,7 +3443,6 @@ entries  : [
 		{
 			title    : "Periapt of Wound Closure",
 			id       : "Periapt-of-Wound-Closure",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "rare",
 			suggested: false,
@@ -3801,7 +3456,6 @@ entries  : [
 		{
 			title    : "The Graceful Cloth",
 			id       : "The-Graceful-Cloth",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "rare",
 			suggested: true,
@@ -3815,7 +3469,6 @@ entries  : [
 		{
 			title    : "Winter's Clutches",
 			id       : "Winters-Clutches",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3830,15 +3483,11 @@ entries  : [
 	{
 	title    : "Rosymorn Monastery",
 	id       : "Rosymorn-Monastery",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Ceremonial Mace",
 			id       : "Ceremonial-Mace",
-			completed: false,
 			categories : ["mace"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3852,7 +3501,6 @@ entries  : [
 		{
 			title    : "Ceremonial Longsword",
 			id       : "Ceremonial-Longsword",
-			completed: false,
 			categories : ["longsword"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3866,7 +3514,6 @@ entries  : [
 		{
 			title    : "Ceremonial Battleaxe",
 			id       : "Ceremonial-Battleaxe",
-			completed: false,
 			categories : ["battleaxe"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3880,7 +3527,6 @@ entries  : [
 		{
 			title    : "Ceremonial Warhammer",
 			id       : "Ceremonial-Warhammer",
-			completed: false,
 			categories : ["warhammer"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3894,7 +3540,6 @@ entries  : [
 		{
 			title    : "Holy Lance Helm",
 			id       : "Holy-Lance-Helm",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3909,15 +3554,11 @@ entries  : [
 	{
 	title    : "Crèche Y'llek",
 	id       : "Crèche-Yllek",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Varsh Ko'kuu's Boots",
 			id       : "Varsh-Kokuus-Boots",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3931,7 +3572,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-10",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -3945,7 +3585,6 @@ entries  : [
 		{
 			title    : "Awakened",
 			id       : "Awakened",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : null,
 			suggested: true,
@@ -3959,7 +3598,6 @@ entries  : [
 		{
 			title    : "Aberration Hunters' Amulet",
 			id       : "Aberration-Hunters-Amulet",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3973,7 +3611,6 @@ entries  : [
 		{
 			title    : "Ring of Elemental Infusion",
 			id       : "Ring-of-Elemental-Infusion",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -3987,7 +3624,6 @@ entries  : [
 		{
 			title    : "Ring of Arcane Synergy",
 			id       : "Ring-of-Arcane-Synergy",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "rare",
 			suggested: false,
@@ -4001,7 +3637,6 @@ entries  : [
 		{
 			title    : "Crossbow of Arcane Force",
 			id       : "Crossbow-of-Arcane-Force",
-			completed: false,
 			categories : ["heavy-crossbow"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -4015,7 +3650,6 @@ entries  : [
 		{
 			title    : "Soulbreaker Greatsword",
 			id       : "Soulbreaker-Greatsword",
-			completed: false,
 			categories : ["greatsword"],
 			rarity   : "rare",
 			suggested: true,
@@ -4029,7 +3663,6 @@ entries  : [
 		{
 			title    : "Circlet of Psionic Revenge",
 			id       : "Circlet-of-Psionic-Revenge",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "rare",
 			suggested: false,
@@ -4043,7 +3676,6 @@ entries  : [
 		{
 			title    : "Diadem of Arcane Synergy",
 			id       : "Diadem-of-Arcane-Synergy",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "rare",
 			suggested: false,
@@ -4057,7 +3689,6 @@ entries  : [
 		{
 			title    : "Necklace of Elemental Augmentation",
 			id       : "Necklace-of-Elemental-Augmentation",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -4071,7 +3702,6 @@ entries  : [
 		{
 			title    : "The Skinburster",
 			id       : "The-Skinburster",
-			completed: false,
 			categories : ["halberd"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -4085,7 +3715,6 @@ entries  : [
 		{
 			title    : "Strange Conduit Ring",
 			id       : "Strange-Conduit-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -4099,7 +3728,6 @@ entries  : [
 		{
 			title    : "Gloves of Belligerent Skies",
 			id       : "Gloves-of-Belligerent-Skies",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -4113,7 +3741,6 @@ entries  : [
 		{
 			title    : "Hoarfrost Boots",
 			id       : "Hoarfrost-Boots",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -4127,7 +3754,6 @@ entries  : [
 		{
 			title    : "The Blood of Lathander",
 			id       : "The-Blood-of-Lathander",
-			completed: false,
 			categories : ["mace"],
 			rarity   : "legendary",
 			suggested: true,
@@ -4142,15 +3768,11 @@ entries  : [
 	{
 	title    : "A'jak'nir Jeera",
 	id       : "Ajaknir-Jeera",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: 1383 Y: -812)</span> She is found in the camp area.",
 	entries  : [
 		{
 			title    : "Daredevil Gloves",
 			id       : "Daredevil-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -4164,7 +3786,6 @@ entries  : [
 		{
 			title    : "Defender Flail",
 			id       : "Defender-Flail",
-			completed: false,
 			categories : ["flail"],
 			rarity   : "rare",
 			suggested: true,
@@ -4178,7 +3799,6 @@ entries  : [
 		{
 			title    : "Gloves of Dexterity",
 			id       : "Gloves-of-Dexterity",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -4192,7 +3812,6 @@ entries  : [
 		{
 			title    : "Knife of the Undermountain King",
 			id       : "Knife-of-the-Undermountain-King",
-			completed: false,
 			categories : ["shortsword"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -4206,7 +3825,6 @@ entries  : [
 		{
 			title    : "Larethian's Wrath",
 			id       : "Larethians-Wrath",
-			completed: false,
 			categories : ["longsword"],
 			rarity   : "rare",
 			suggested: false,
@@ -4220,7 +3838,6 @@ entries  : [
 		{
 			title    : "Unseen Menace",
 			id       : "Unseen-Menace",
-			completed: false,
 			categories : ["pike"],
 			rarity   : "rare",
 			suggested: true,
@@ -4234,7 +3851,6 @@ entries  : [
 		{
 			title    : "Vital Conduit Boots",
 			id       : "Vital-Conduit-Boots",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "rare",
 			suggested: false,
@@ -4248,7 +3864,6 @@ entries  : [
 		{
 			title    : "Witchbreaker",
 			id       : "Witchbreaker",
-			completed: false,
 			categories : ["battleaxe"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -4262,7 +3877,6 @@ entries  : [
 		{
 			title    : "Amulet of Branding",
 			id       : "Amulet-of-Branding",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "rare",
 			suggested: false,
@@ -4277,15 +3891,11 @@ entries  : [
 	{
 	title    : "At Camp",
 	id       : "At-Camp",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "This is a camp event during a Long Rest after encountering Vlaakith at Crèche Y'llek and before starting Act 3.",
 	entries  : [
 		{
 			title    : "Voss' Silver Sword",
 			id       : "Voss-Silver-Sword",
-			completed: false,
 			categories : ["longsword"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -4299,7 +3909,6 @@ entries  : [
 		{
 			title    : "Qua'nith Psionic Detector",
 			id       : "Quanith-Psionic-Detector",
-			completed: false,
 			categories : ["misc"],
 			rarity   : "story",
 			suggested: false,
@@ -4315,22 +3924,15 @@ entries  : [
 {
 title    : "Act 2",
 id       : "Act-2",
-expanded : true,
-progress : 0,
-total    : 0,
 entries  : [
 	{
 	title    : "Ruined Battlefield",
 	id       : "Ruined-Battlefield",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Frost Prince",
 			id       : "Frost-Prince",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -4344,7 +3946,6 @@ entries  : [
 		{
 			title    : "Thermoarcanic Gloves",
 			id       : "Thermoarcanic-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -4358,7 +3959,6 @@ entries  : [
 		{
 			title    : "Cruel Sting",
 			id       : "Cruel-Sting",
-			completed: false,
 			categories : ["longsword"],
 			rarity   : "rare",
 			suggested: false,
@@ -4372,7 +3972,6 @@ entries  : [
 		{
 			title    : "Moonlantern",
 			id       : "Moonlantern",
-			completed: false,
 			categories : ["club"],
 			rarity   : "story",
 			suggested: false,
@@ -4386,7 +3985,6 @@ entries  : [
 		{
 			title    : "Hammergrim Mist Amulet",
 			id       : "Hammergrim-Mist-Amulet",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -4400,7 +3998,6 @@ entries  : [
 		{
 			title    : "Luminous Gloves",
 			id       : "Luminous-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -4414,7 +4011,6 @@ entries  : [
 		{
 			title    : "Ring of Twilight",
 			id       : "Ring-of-Twilight",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "rare",
 			suggested: false,
@@ -4428,7 +4024,6 @@ entries  : [
 		{
 			title    : "Shadow-Cloaked Ring",
 			id       : "Shadow-Cloaked-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -4442,7 +4037,6 @@ entries  : [
 		{
 			title    : "Ring of Shadows",
 			id       : "Ring-of-Shadows",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -4456,7 +4050,6 @@ entries  : [
 		{
 			title    : "Ring of Mental Inhibition",
 			id       : "Ring-of-Mental-Inhibition",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -4470,7 +4063,6 @@ entries  : [
 		{
 			title    : "Ironwood Club",
 			id       : "Ironwood-Club",
-			completed: false,
 			categories : ["club"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -4484,7 +4076,6 @@ entries  : [
 		{
 			title    : "Ring of Self Immolation",
 			id       : "Ring-of-Self-Immolation",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -4498,7 +4089,6 @@ entries  : [
 		{
 			title    : "Family Ring",
 			id       : "Family-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -4512,7 +4102,6 @@ entries  : [
 		{
 			title    : "Raven Gloves",
 			id       : "Raven-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -4526,7 +4115,6 @@ entries  : [
 		{
 			title    : "Gloomstrand Shield",
 			id       : "Gloomstrand-Shield",
-			completed: false,
 			categories : ["shield"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -4541,15 +4129,11 @@ entries  : [
 	{
 	title    : "Last Light Inn",
 	id       : "Last-Light-Inn",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Hat of Fire Acuity",
 			id       : "Hat-of-Fire-Acuity",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -4563,7 +4147,6 @@ entries  : [
 		{
 			title    : "Snowburst Ring",
 			id       : "Snowburst-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -4577,7 +4160,6 @@ entries  : [
 		{
 			title    : "Coruscation Ring",
 			id       : "Coruscation-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -4591,7 +4173,6 @@ entries  : [
 		{
 			title    : "Covert Cowl",
 			id       : "Covert-Cowl",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -4605,7 +4186,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-11",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -4619,7 +4199,6 @@ entries  : [
 		{
 			title    : "Shifting Corpus Ring",
 			id       : "Shifting-Corpus-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "rare",
 			suggested: false,
@@ -4633,7 +4212,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-12",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -4647,7 +4225,6 @@ entries  : [
 		{
 			title    : "Jhannyl's Gloves",
 			id       : "Jhannyls-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -4661,7 +4238,6 @@ entries  : [
 		{
 			title    : "Moon Devotion Robe",
 			id       : "Moon-Devotion-Robe",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -4675,7 +4251,6 @@ entries  : [
 		{
 			title    : "Potent Robe",
 			id       : "Potent-Robe",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -4689,7 +4264,6 @@ entries  : [
 		{
 			title    : "Penumbral Armour",
 			id       : "Penumbral-Armour",
-			completed: false,
 			categories : ["light-armour"],
 			rarity   : "rare",
 			suggested: false,
@@ -4703,7 +4277,6 @@ entries  : [
 		{
 			title    : "Rippling Force Mail",
 			id       : "Rippling-Force-Mail",
-			completed: false,
 			categories : ["heavy-armour"],
 			rarity   : "rare",
 			suggested: false,
@@ -4717,7 +4290,6 @@ entries  : [
 		{
 			title    : "Shield of Scorching Reprisal",
 			id       : "Shield-of-Scorching-Reprisal",
-			completed: false,
 			categories : ["shield"],
 			rarity   : "rare",
 			suggested: false,
@@ -4731,7 +4303,6 @@ entries  : [
 		{
 			title    : "Sylvan Scimitar",
 			id       : "Sylvan-Scimitar",
-			completed: false,
 			categories : ["scimitar"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -4746,15 +4317,11 @@ entries  : [
 	{
 	title    : "Quartermaster Talli",
 	id       : "Quartermaster-Talli",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: -31 Y: 130)</span> She is found near the bridge.",
 	entries  : [
 		{
 			title    : "Amulet of the Harpers",
 			id       : "Amulet-of-the-Harpers",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "rare",
 			suggested: false,
@@ -4768,7 +4335,6 @@ entries  : [
 		{
 			title    : "Barkskin Armour",
 			id       : "Barkskin-Armour",
-			completed: false,
 			categories : ["medium-armour"],
 			rarity   : "rare",
 			suggested: false,
@@ -4782,7 +4348,6 @@ entries  : [
 		{
 			title    : "Cindersnap Gloves",
 			id       : "Cindersnap-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -4796,7 +4361,6 @@ entries  : [
 		{
 			title    : "Cloak of Protection",
 			id       : "Cloak-of-Protection",
-			completed: false,
 			categories : ["cloak"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -4810,7 +4374,6 @@ entries  : [
 		{
 			title    : "Defender Greataxe",
 			id       : "Defender-Greataxe",
-			completed: false,
 			categories : ["greataxe"],
 			rarity   : "rare",
 			suggested: false,
@@ -4824,7 +4387,6 @@ entries  : [
 		{
 			title    : "Gloves of the Balanced Hands",
 			id       : "Gloves-of-the-Balanced-Hands",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -4838,7 +4400,6 @@ entries  : [
 		{
 			title    : "Hat of Uninhibited Kushigo",
 			id       : "Hat-of-Uninhibited-Kushigo",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "rare",
 			suggested: false,
@@ -4852,7 +4413,6 @@ entries  : [
 		{
 			title    : "Incandescent Staff",
 			id       : "Incandescent-Staff",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -4866,7 +4426,6 @@ entries  : [
 		{
 			title    : "Obsidian Laced Robe",
 			id       : "Obsidian-Laced-Robe",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "rare",
 			suggested: false,
@@ -4880,7 +4439,6 @@ entries  : [
 		{
 			title    : "Shadeclinger Armour",
 			id       : "Shadeclinger-Armour",
-			completed: false,
 			categories : ["light-armour"],
 			rarity   : "rare",
 			suggested: false,
@@ -4894,7 +4452,6 @@ entries  : [
 		{
 			title    : "Shield of Devotion",
 			id       : "Shield-of-Devotion",
-			completed: false,
 			categories : ["shield"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -4908,7 +4465,6 @@ entries  : [
 		{
 			title    : "The Mighty Cloth",
 			id       : "The-Mighty-Cloth",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "rare",
 			suggested: false,
@@ -4922,7 +4478,6 @@ entries  : [
 		{
 			title    : "Yuan-Ti Scale Mail",
 			id       : "Yuan-Ti-Scale-Mail",
-			completed: false,
 			categories : ["medium-armour"],
 			rarity   : "rare",
 			suggested: true,
@@ -4937,15 +4492,11 @@ entries  : [
 	{
 	title    : "Dammon",
 	id       : "Dammon-2",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: -34 Y: 166)</span> He is found in the barn.",
 	entries  : [
 		{
 			title    : "Charge-Bound Warhammer",
 			id       : "Charge-Bound-Warhammer",
-			completed: false,
 			categories : ["warhammer"],
 			rarity   : "rare",
 			suggested: true,
@@ -4959,7 +4510,6 @@ entries  : [
 		{
 			title    : "Darkfire Shortbow",
 			id       : "Darkfire-Shortbow",
-			completed: false,
 			categories : ["shortbow"],
 			rarity   : "rare",
 			suggested: true,
@@ -4973,7 +4523,6 @@ entries  : [
 		{
 			title    : "Harmonium Halberd",
 			id       : "Harmonium-Halberd",
-			completed: false,
 			categories : ["halberd"],
 			rarity   : "rare",
 			suggested: false,
@@ -4987,7 +4536,6 @@ entries  : [
 		{
 			title    : "Sword of Clutching Umbra",
 			id       : "Sword-of-Clutching-Umbra",
-			completed: false,
 			categories : ["shortsword"],
 			rarity   : "rare",
 			suggested: false,
@@ -5001,7 +4549,6 @@ entries  : [
 		{
 			title    : "Sword of Life Stealing",
 			id       : "Sword-of-Life-Stealing",
-			completed: false,
 			categories : ["shortsword"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -5015,7 +4562,6 @@ entries  : [
 		{
 			title    : "Swordmaster Gloves",
 			id       : "Swordmaster-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -5029,7 +4575,6 @@ entries  : [
 		{
 			title    : "Thermodynamo Axe",
 			id       : "Thermodynamo-Axe",
-			completed: false,
 			categories : ["battleaxe"],
 			rarity   : "rare",
 			suggested: false,
@@ -5043,7 +4588,6 @@ entries  : [
 		{
 			title    : "Thorn Blade",
 			id       : "Thorn-Blade",
-			completed: false,
 			categories : ["scimitar"],
 			rarity   : "rare",
 			suggested: false,
@@ -5057,7 +4601,6 @@ entries  : [
 		{
 			title    : "Flawed Helldusk Armour",
 			id       : "Flawed-Helldusk-Armour",
-			completed: false,
 			categories : ["heavy-armour"],
 			rarity   : "rare",
 			suggested: false,
@@ -5071,7 +4614,6 @@ entries  : [
 		{
 			title    : "Flawed Helldusk Gloves",
 			id       : "Flawed-Helldusk-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: true,
@@ -5085,7 +4627,6 @@ entries  : [
 		{
 			title    : "Flawed Helldusk Helmet",
 			id       : "Flawed-Helldusk-Helmet",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "rare",
 			suggested: false,
@@ -5100,15 +4641,11 @@ entries  : [
 	{
 	title    : "Mattis",
 	id       : "Mattis-1",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: -54 Y: 141)</span> He is found by the main entrance to Last Light Inn.",
 	entries  : [
 		{
 			title    : "Cloak of Cunning Brume",
 			id       : "Cloak-of-Cunning-Brume",
-			completed: false,
 			categories : ["cloak"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5122,7 +4659,6 @@ entries  : [
 		{
 			title    : "Evasive Shoes",
 			id       : "Evasive-Shoes",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "rare",
 			suggested: false,
@@ -5137,15 +4673,11 @@ entries  : [
 	{
 	title    : "Barcus Wroot",
 	id       : "Barcus-Wroot",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: -56 Y: 133)</span> If Barcus was saved in Grymforge he can be found in his lab at Last Light Inn.",
 	entries  : [
 		{
 			title    : "Acrobat Shoes",
 			id       : "Acrobat-Shoes",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "rare",
 			suggested: false,
@@ -5159,7 +4691,6 @@ entries  : [
 		{
 			title    : "Gloves of the Automaton",
 			id       : "Gloves-of-the-Automaton",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: true,
@@ -5173,7 +4704,6 @@ entries  : [
 		{
 			title    : "Ring of Geniality",
 			id       : "Ring-of-Geniality",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5187,7 +4717,6 @@ entries  : [
 		{
 			title    : "Brilliant Retort",
 			id       : "Brilliant-Retort",
-			completed: false,
 			categories : ["grenade"],
 			rarity   : "rare",
 			suggested: false,
@@ -5202,15 +4731,11 @@ entries  : [
 	{
 	title    : "Reithwin Tollhouse",
 	id       : "Reithwin-Tollhouse",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Flesh to Gold",
 			id       : "Flesh-to-Gold",
-			completed: false,
 			categories : ["scroll"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -5224,7 +4749,6 @@ entries  : [
 		{
 			title    : "Twist of Fortune",
 			id       : "Twist-of-Fortune",
-			completed: false,
 			categories : ["morningstar"],
 			rarity   : "rare",
 			suggested: false,
@@ -5238,7 +4762,6 @@ entries  : [
 		{
 			title    : "Consumed Shadow Weave",
 			id       : "Consumed-Shadow-Weave",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : null,
 			suggested: false,
@@ -5252,7 +4775,6 @@ entries  : [
 		{
 			title    : "Mystra's Blessing",
 			id       : "Mystras-Blessing",
-			completed: false,
 			categories : ["condition"],
 			rarity   : null,
 			suggested: false,
@@ -5266,7 +4788,6 @@ entries  : [
 		{
 			title    : "Ironvine Shield",
 			id       : "Ironvine-Shield",
-			completed: false,
 			categories : ["shield"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5280,7 +4801,6 @@ entries  : [
 		{
 			title    : "Gloves of Battlemage's Power",
 			id       : "Gloves-of-Battlemages-Power",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -5294,7 +4814,6 @@ entries  : [
 		{
 			title    : "Fireheart",
 			id       : "Fireheart",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5309,15 +4828,11 @@ entries  : [
 	{
 	title    : "Mason's Guild",
 	id       : "Masons-Guild",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Infernal Iron",
 			id       : "Infernal-Iron-4",
-			completed: false,
 			categories : ["crafting"],
 			rarity   : null,
 			suggested: false,
@@ -5331,7 +4846,6 @@ entries  : [
 		{
 			title    : "Helmet of Arcane Acuity",
 			id       : "Helmet-of-Arcane-Acuity",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -5346,15 +4860,11 @@ entries  : [
 	{
 	title    : "Reithwin Graveyard",
 	id       : "Reithwin-Graveyard",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "True Love's Caress",
 			id       : "True-Loves-Caress",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "rare",
 			suggested: false,
@@ -5368,7 +4878,6 @@ entries  : [
 		{
 			title    : "Boots of Apparent Death",
 			id       : "Boots-of-Apparent-Death",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "rare",
 			suggested: false,
@@ -5382,7 +4891,6 @@ entries  : [
 		{
 			title    : "Icebite Robe",
 			id       : "Icebite-Robe",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "rare",
 			suggested: false,
@@ -5396,7 +4904,6 @@ entries  : [
 		{
 			title    : "Lightning Jabber",
 			id       : "Lightning-Jabber",
-			completed: false,
 			categories : ["spear"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -5411,15 +4918,11 @@ entries  : [
 	{
 	title    : "House of Healing",
 	id       : "House-of-Healing",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "True Love's Embrace",
 			id       : "True-Loves-Embrace",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "rare",
 			suggested: false,
@@ -5433,7 +4936,6 @@ entries  : [
 		{
 			title    : "Poisoner's Gloves",
 			id       : "Poisoners-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -5447,7 +4949,6 @@ entries  : [
 		{
 			title    : "Shar's Temptation",
 			id       : "Shars-Temptation",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5461,7 +4962,6 @@ entries  : [
 		{
 			title    : "Surgeon's Subjugation Amulet",
 			id       : "Surgeons-Subjugation-Amulet",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "rare",
 			suggested: false,
@@ -5475,7 +4975,6 @@ entries  : [
 		{
 			title    : "Shadow Blade Ring",
 			id       : "Shadow-Blade-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5489,7 +4988,6 @@ entries  : [
 		{
 			title    : "Arabella's Shadow Entangle",
 			id       : "Arabellas-Shadow-Entangle",
-			completed: false,
 			categories : ["spell"],
 			rarity   : null,
 			suggested: false,
@@ -5504,15 +5002,11 @@ entries  : [
 	{
 	title    : "House of Healing Morgue",
 	id       : "House-of-Healing-Morgue",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "There are two entrances to this location: one west of the House of Healing, and another east of the Grand Mausoleum waypoint through the Ominous Crevice <span class='coordinates'>(X: -150 Y: 105)</span>",
 	entries  : [
 		{
 			title    : "Assassin's Shortsword",
 			id       : "Assassins-Shortsword",
-			completed: false,
 			categories : ["shortsword"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5526,7 +5020,6 @@ entries  : [
 		{
 			title    : "Watcher's Shield",
 			id       : "Watchers-Shield",
-			completed: false,
 			categories : ["shield"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5540,7 +5033,6 @@ entries  : [
 		{
 			title    : "Firzu's Ring of Trading",
 			id       : "Firzus-Ring-of-Trading",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5554,7 +5046,6 @@ entries  : [
 		{
 			title    : "Strange Tendril Amulet",
 			id       : "Strange-Tendril-Amulet",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "rare",
 			suggested: false,
@@ -5568,7 +5059,6 @@ entries  : [
 		{
 			title    : "Bided Time",
 			id       : "Bided-Time",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5582,7 +5072,6 @@ entries  : [
 		{
 			title    : "Eversight Ring",
 			id       : "Eversight-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -5596,7 +5085,6 @@ entries  : [
 		{
 			title    : "Fleshmelter Cloak",
 			id       : "Fleshmelter-Cloak",
-			completed: false,
 			categories : ["cloak"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5610,7 +5098,6 @@ entries  : [
 		{
 			title    : "Protective Plate",
 			id       : "Protective-Plate",
-			completed: false,
 			categories : ["heavy-armour"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5625,15 +5112,11 @@ entries  : [
 	{
 	title    : "The Waning Moon",
 	id       : "The-Waning-Moon",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Rat Bat",
 			id       : "Rat-Bat",
-			completed: false,
 			categories : ["greatclub"],
 			rarity   : "rare",
 			suggested: false,
@@ -5647,7 +5130,6 @@ entries  : [
 		{
 			title    : "Ichorous Gloves",
 			id       : "Ichorous-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5661,7 +5143,6 @@ entries  : [
 		{
 			title    : "Punch-Drunk Bastard",
 			id       : "Punch-Drunk-Bastard",
-			completed: false,
 			categories : ["greatclub"],
 			rarity   : "rare",
 			suggested: true,
@@ -5675,7 +5156,6 @@ entries  : [
 		{
 			title    : "Ritual Dagger of Shar",
 			id       : "Ritual-Dagger-of-Shar",
-			completed: false,
 			categories : ["dagger"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5690,15 +5170,11 @@ entries  : [
 	{
 	title    : "Moonrise Towers",
 	id       : "Moonrise-Towers",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-13",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -5712,7 +5188,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-14",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -5726,7 +5201,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-15",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -5740,7 +5214,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-16",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -5754,7 +5227,6 @@ entries  : [
 		{
 			title    : "Barbed Arrow",
 			id       : "Barbed-Arrow",
-			completed: false,
 			categories : ["arrow"],
 			rarity   : "common",
 			suggested: false,
@@ -5768,7 +5240,6 @@ entries  : [
 		{
 			title    : "Argument Solver",
 			id       : "Argument-Solver",
-			completed: false,
 			categories : ["greatclub"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5782,7 +5253,6 @@ entries  : [
 		{
 			title    : "Absolute's Protector",
 			id       : "Absolutes-Protector",
-			completed: false,
 			categories : ["shield"],
 			rarity   : "rare",
 			suggested: false,
@@ -5796,7 +5266,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-17",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -5810,7 +5279,6 @@ entries  : [
 		{
 			title    : "Spellcrux Amulet",
 			id       : "Spellcrux-Amulet",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -5824,7 +5292,6 @@ entries  : [
 		{
 			title    : "Browbeaten Circlet",
 			id       : "Browbeaten-Circlet",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5838,7 +5305,6 @@ entries  : [
 		{
 			title    : "Wulbren's Hammer",
 			id       : "Wulbrens-Hammer",
-			completed: false,
 			categories : ["light-hammer"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5852,7 +5318,6 @@ entries  : [
 		{
 			title    : "Myrkulite Scourge",
 			id       : "Myrkulite-Scourge",
-			completed: false,
 			categories : ["flail"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5866,7 +5331,6 @@ entries  : [
 		{
 			title    : "Derivation Cloak",
 			id       : "Derivation-Cloak",
-			completed: false,
 			categories : ["cloak"],
 			rarity   : "rare",
 			suggested: false,
@@ -5880,7 +5344,6 @@ entries  : [
 		{
 			title    : "Coldbrim Hat",
 			id       : "Coldbrim-Hat",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5894,7 +5357,6 @@ entries  : [
 		{
 			title    : "Shadow Lantern",
 			id       : "Shadow-Lantern",
-			completed: false,
 			categories : ["club"],
 			rarity   : "rare",
 			suggested: false,
@@ -5908,7 +5370,6 @@ entries  : [
 		{
 			title    : "Cloak of Elemental Absorption",
 			id       : "Cloak-of-Elemental-Absorption",
-			completed: false,
 			categories : ["cloak"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5922,7 +5383,6 @@ entries  : [
 		{
 			title    : "Spineshudder Amulet",
 			id       : "Spineshudder-Amulet",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -5936,7 +5396,6 @@ entries  : [
 		{
 			title    : "Ring of Exalted Marrow",
 			id       : "Ring-of-Exalted-Marrow",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "rare",
 			suggested: false,
@@ -5950,7 +5409,6 @@ entries  : [
 		{
 			title    : "Improved Bardic Inspiration",
 			id       : "Improved-Bardic-Inspiration",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : null,
 			suggested: false,
@@ -5965,15 +5423,11 @@ entries  : [
 	{
 	title    : "Lann Tarv",
 	id       : "Lann-Tarv",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: -164 Y: -167)</span> He is found near the stairs inside Moonrise Towers. (Note: You must ask for extra help from Z'rell to unlock his full stock.)",
 	entries  : [
 		{
 			title    : "Bigboy's Chew Toy",
 			id       : "Bigboys-Chew-Toy",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "rare",
 			suggested: false,
@@ -5987,7 +5441,6 @@ entries  : [
 		{
 			title    : "Dwarven Splintmail",
 			id       : "Dwarven-Splintmail",
-			completed: false,
 			categories : ["heavy-armour"],
 			rarity   : "rare",
 			suggested: false,
@@ -6001,7 +5454,6 @@ entries  : [
 		{
 			title    : "Enraging Heart Garb",
 			id       : "Enraging-Heart-Garb",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "rare",
 			suggested: false,
@@ -6015,7 +5467,6 @@ entries  : [
 		{
 			title    : "Fistbreaker Helm",
 			id       : "Fistbreaker-Helm",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "rare",
 			suggested: true,
@@ -6029,7 +5480,6 @@ entries  : [
 		{
 			title    : "Gauntlets of Surging Accuracy",
 			id       : "Gauntlets-of-Surging-Accuracy",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -6043,7 +5493,6 @@ entries  : [
 		{
 			title    : "Gloves of The Duellist",
 			id       : "Gloves-of-The-Duellist",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -6057,7 +5506,6 @@ entries  : [
 		{
 			title    : "Halberd of Vigilance",
 			id       : "Halberd-of-Vigilance",
-			completed: false,
 			categories : ["halberd"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -6071,7 +5519,6 @@ entries  : [
 		{
 			title    : "Render of Mind and Body",
 			id       : "Render-of-Mind-and-Body",
-			completed: false,
 			categories : ["shortsword"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -6085,7 +5532,6 @@ entries  : [
 		{
 			title    : "Sentinel Shield",
 			id       : "Sentinel-Shield",
-			completed: false,
 			categories : ["shield"],
 			rarity   : "rare",
 			suggested: true,
@@ -6099,7 +5545,6 @@ entries  : [
 		{
 			title    : "Slicing Shortsword",
 			id       : "Slicing-Shortsword",
-			completed: false,
 			categories : ["shortsword"],
 			rarity   : "rare",
 			suggested: false,
@@ -6114,15 +5559,11 @@ entries  : [
 	{
 	title    : "Roah Moonglow",
 	id       : "Roah-Moonglow",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: -174 Y: -176)</span> She is found in Moonrise Towers' entrance hall.",
 	entries  : [
 		{
 			title    : "Armour of Devotion",
 			id       : "Armour-of-Devotion",
-			completed: false,
 			categories : ["heavy-armour"],
 			rarity   : "rare",
 			suggested: false,
@@ -6136,7 +5577,6 @@ entries  : [
 		{
 			title    : "Gloves of Crushing",
 			id       : "Gloves-of-Crushing",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -6150,7 +5590,6 @@ entries  : [
 		{
 			title    : "Drakethroat Glaive",
 			id       : "Drakethroat-Glaive",
-			completed: false,
 			categories : ["glaive"],
 			rarity   : "rare",
 			suggested: true,
@@ -6164,7 +5603,6 @@ entries  : [
 		{
 			title    : "Marksmanship Hat",
 			id       : "Marksmanship-Hat",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -6178,7 +5616,6 @@ entries  : [
 		{
 			title    : "Ne'er Misser",
 			id       : "Neer-Misser",
-			completed: false,
 			categories : ["hand-crossbow"],
 			rarity   : "rare",
 			suggested: true,
@@ -6192,7 +5629,6 @@ entries  : [
 		{
 			title    : "Poisoner's Ring",
 			id       : "Poisoners-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -6206,7 +5642,6 @@ entries  : [
 		{
 			title    : "Ring of Spiteful Thunder",
 			id       : "Ring-of-Spiteful-Thunder",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -6220,7 +5655,6 @@ entries  : [
 		{
 			title    : "Sharpened Snare Cuirass",
 			id       : "Sharpened-Snare-Cuirass",
-			completed: false,
 			categories : ["medium-armour"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -6235,15 +5669,11 @@ entries  : [
 	{
 	title    : "Araj Oblodra",
 	id       : "Araj-Oblodra",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: -128 Y: -193)</span> She is found in a side room to the left as you enter Moonrise Towers.",
 	entries  : [
 		{
 			title    : "Boots of Arcane Bolstering",
 			id       : "Boots-of-Arcane-Bolstering",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "rare",
 			suggested: false,
@@ -6257,7 +5687,6 @@ entries  : [
 		{
 			title    : "Circlet of Hunting",
 			id       : "Circlet-of-Hunting",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -6271,7 +5700,6 @@ entries  : [
 		{
 			title    : "Hat of Storm Scion's Power",
 			id       : "Hat-of-Storm-Scions-Power",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -6285,7 +5713,6 @@ entries  : [
 		{
 			title    : "Ring of Free Action",
 			id       : "Ring-of-Free-Action",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "rare",
 			suggested: false,
@@ -6299,7 +5726,6 @@ entries  : [
 		{
 			title    : "Risky Ring",
 			id       : "Risky-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "rare",
 			suggested: true,
@@ -6313,7 +5739,6 @@ entries  : [
 		{
 			title    : "Robe of Exquisite Focus",
 			id       : "Robe-of-Exquisite-Focus",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "rare",
 			suggested: false,
@@ -6327,7 +5752,6 @@ entries  : [
 		{
 			title    : "The Graceful Cloth",
 			id       : "The-Graceful-Cloth",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "rare",
 			suggested: false,
@@ -6341,7 +5765,6 @@ entries  : [
 		{
 			title    : "Thunderskin Cloak",
 			id       : "Thunderskin-Cloak",
-			completed: false,
 			categories : ["cloak"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -6355,7 +5778,6 @@ entries  : [
 		{
 			title    : "Blood-Draw Elixir",
 			id       : "Blood-Draw-Elixir",
-			completed: false,
 			categories : ["potion"],
 			rarity   : "rare",
 			suggested: false,
@@ -6369,7 +5791,6 @@ entries  : [
 		{
 			title    : "Potion of Everlasting Vigour",
 			id       : "Potion-of-Everlasting-Vigour",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "common",
 			suggested: true,
@@ -6384,15 +5805,11 @@ entries  : [
 	{
 	title    : "Gauntlet of Shar",
 	id       : "Gauntlet-of-Shar",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Vivacious Cloak",
 			id       : "Vivacious-Cloak",
-			completed: false,
 			categories : ["cloak"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -6406,7 +5823,6 @@ entries  : [
 		{
 			title    : "Least Expected",
 			id       : "Least-Expected",
-			completed: false,
 			categories : ["shortbow"],
 			rarity   : "rare",
 			suggested: false,
@@ -6420,7 +5836,6 @@ entries  : [
 		{
 			title    : "Callous Glow Ring",
 			id       : "Callous-Glow-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -6434,7 +5849,6 @@ entries  : [
 		{
 			title    : "Infernal Metal",
 			id       : "Infernal-Metal-1",
-			completed: false,
 			categories : ["crafting"],
 			rarity   : null,
 			suggested: false,
@@ -6448,7 +5862,6 @@ entries  : [
 		{
 			title    : "Circle of Bones",
 			id       : "Circle-of-Bones",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "rare",
 			suggested: false,
@@ -6462,7 +5875,6 @@ entries  : [
 		{
 			title    : "Killer's Sweetheart",
 			id       : "Killers-Sweetheart",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -6476,7 +5888,6 @@ entries  : [
 		{
 			title    : "Spear of Night",
 			id       : "Spear-of-Night",
-			completed: false,
 			categories : ["spear"],
 			rarity   : "rare",
 			suggested: false,
@@ -6490,7 +5901,6 @@ entries  : [
 		{
 			title    : "Dark Justiciar Half-Plate (Rare)",
 			id       : "Dark-Justiciar-Half-Plate-(Rare)",
-			completed: false,
 			categories : ["medium-armour"],
 			rarity   : "rare",
 			suggested: false,
@@ -6504,7 +5914,6 @@ entries  : [
 		{
 			title    : "Dark Justiciar Helmet",
 			id       : "Dark-Justiciar-Helmet",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -6518,7 +5927,6 @@ entries  : [
 		{
 			title    : "Dark Justiciar Gauntlets (Uncommon)",
 			id       : "Dark-Justiciar-Gauntlets-(Uncommon)",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -6532,7 +5940,6 @@ entries  : [
 		{
 			title    : "Merregon Potion",
 			id       : "Merregon-Potion",
-			completed: false,
 			categories : ["grenade"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -6546,7 +5953,6 @@ entries  : [
 		{
 			title    : "Boots of Brilliance",
 			id       : "Boots-of-Brilliance",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "rare",
 			suggested: false,
@@ -6560,7 +5966,6 @@ entries  : [
 		{
 			title    : "Justiciar's Greatshield",
 			id       : "Justiciars-Greatshield",
-			completed: false,
 			categories : ["shield"],
 			rarity   : "rare",
 			suggested: true,
@@ -6574,7 +5979,6 @@ entries  : [
 		{
 			title    : "Justiciar's Scimitar",
 			id       : "Justiciars-Scimitar",
-			completed: false,
 			categories : ["scimitar"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -6588,7 +5992,6 @@ entries  : [
 		{
 			title    : "Infernal Metal",
 			id       : "Infernal-Metal-2",
-			completed: false,
 			categories : ["crafting"],
 			rarity   : null,
 			suggested: false,
@@ -6602,7 +6005,6 @@ entries  : [
 		{
 			title    : "Hellfire Hand Crossbow",
 			id       : "Hellfire-Hand-Crossbow",
-			completed: false,
 			categories : ["hand-crossbow"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -6617,15 +6019,11 @@ entries  : [
 	{
 	title    : "Shadowfell",
 	id       : "Shadowfell",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Moonlight Glaive",
 			id       : "Moonlight-Glaive",
-			completed: false,
 			categories : ["glaive"],
 			rarity   : "rare",
 			suggested: false,
@@ -6639,7 +6037,6 @@ entries  : [
 		{
 			title    : "Selûne's Spear of Night",
 			id       : "Selunes-Spear-of-Night",
-			completed: false,
 			categories : ["spear"],
 			rarity   : "legendary",
 			suggested: true,
@@ -6653,7 +6050,6 @@ entries  : [
 		{
 			title    : "Dark Justiciar Boots",
 			id       : "Dark-Justiciar-Boots",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "rare",
 			suggested: false,
@@ -6667,7 +6063,6 @@ entries  : [
 		{
 			title    : "Dark Justiciar Gauntlets (Rare)",
 			id       : "Dark-Justiciar-Gauntlets-(Rare)",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -6681,7 +6076,6 @@ entries  : [
 		{
 			title    : "Dark Justiciar Half-Plate (Very Rare)",
 			id       : "Dark-Justiciar-Half-Plate-(Very-Rare)",
-			completed: false,
 			categories : ["medium-armour"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -6695,7 +6089,6 @@ entries  : [
 		{
 			title    : "Shar's Spear of Evening",
 			id       : "Shars-Spear-of-Evening",
-			completed: false,
 			categories : ["spear"],
 			rarity   : "legendary",
 			suggested: true,
@@ -6709,7 +6102,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-18",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -6724,15 +6116,11 @@ entries  : [
 	{
 	title    : "Mind Flayer Colony",
 	id       : "Mind-Flayer-Colony",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Us",
 			id       : "Us",
-			completed: false,
 			categories : ["follower"],
 			rarity   : null,
 			suggested: true,
@@ -6746,7 +6134,6 @@ entries  : [
 		{
 			title    : "Infernal Rapier",
 			id       : "Infernal-Rapier",
-			completed: false,
 			categories : ["rapier"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -6760,7 +6147,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-19",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -6774,7 +6160,6 @@ entries  : [
 		{
 			title    : "Blade of Oppressed Souls",
 			id       : "Blade-of-Oppressed-Souls",
-			completed: false,
 			categories : ["longsword"],
 			rarity   : "rare",
 			suggested: false,
@@ -6788,7 +6173,6 @@ entries  : [
 		{
 			title    : "Braindrain Gloves",
 			id       : "Braindrain-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -6802,7 +6186,6 @@ entries  : [
 		{
 			title    : "Circlet of Mental Anguish",
 			id       : "Circlet-of-Mental-Anguish",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "rare",
 			suggested: false,
@@ -6816,7 +6199,6 @@ entries  : [
 		{
 			title    : "Resonance Stone",
 			id       : "Resonance-Stone",
-			completed: false,
 			categories : ["misc"],
 			rarity   : "common",
 			suggested: false,
@@ -6830,7 +6212,6 @@ entries  : [
 		{
 			title    : "Githzerai Mind Barrier",
 			id       : "Githzerai-Mind-Barrier",
-			completed: false,
 			categories : ["condition"],
 			rarity   : null,
 			suggested: false,
@@ -6844,7 +6225,6 @@ entries  : [
 		{
 			title    : "Ketheric's Shield",
 			id       : "Ketherics-Shield",
-			completed: false,
 			categories : ["shield"],
 			rarity   : "rare",
 			suggested: true,
@@ -6858,7 +6238,6 @@ entries  : [
 		{
 			title    : "Ketheric's Warhammer",
 			id       : "Ketherics-Warhammer",
-			completed: false,
 			categories : ["warhammer"],
 			rarity   : "rare",
 			suggested: false,
@@ -6872,7 +6251,6 @@ entries  : [
 		{
 			title    : "Reaper's Embrace",
 			id       : "Reapers-Embrace",
-			completed: false,
 			categories : ["heavy-armour"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -6886,7 +6264,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-20",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -6901,15 +6278,11 @@ entries  : [
 	{
 	title    : "To Baldur's Gate",
 	id       : "To-Baldurs-Gate",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Hr'a'cknir Bracers",
 			id       : "Hracknir-Bracers",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -6923,7 +6296,6 @@ entries  : [
 		{
 			title    : "Psionic Ward Armour",
 			id       : "Psionic-Ward-Armour",
-			completed: false,
 			categories : ["medium-armour"],
 			rarity   : "rare",
 			suggested: false,
@@ -6938,15 +6310,11 @@ entries  : [
 	{
 	title    : "Astral Plane",
 	id       : "Astral-Plane",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Staff of the Emperor",
 			id       : "Staff-of-the-Emperor",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "rare",
 			suggested: false,
@@ -6960,7 +6328,6 @@ entries  : [
 		{
 			title    : "Boots of Uninhibited Kushigo",
 			id       : "Boots-of-Uninhibited-Kushigo",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "rare",
 			suggested: true,
@@ -6974,7 +6341,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-21",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -6990,22 +6356,15 @@ entries  : [
 {
 title    : "Act 3",
 id       : "Act-3",
-expanded : true,
-progress : 0,
-total    : 0,
 entries  : [
 	{
 	title    : "Gur Camp",
 	id       : "Gur-Camp",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "The Undead Bane",
 			id       : "The-Undead-Bane",
-			completed: false,
 			categories : ["greataxe"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -7019,7 +6378,6 @@ entries  : [
 		{
 			title    : "Surprise-Based Teddy Bear",
 			id       : "Surprise-Based-Teddy-Bear",
-			completed: false,
 			categories : ["grenade"],
 			rarity   : "common",
 			suggested: false,
@@ -7033,7 +6391,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Brain",
 			id       : "Mind-Flayer-Parasite-Specimen-22",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -7047,7 +6404,6 @@ entries  : [
 		{
 			title    : "Ring of Truthfulness",
 			id       : "Ring-of-Truthfulness",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "rare",
 			suggested: false,
@@ -7062,15 +6418,11 @@ entries  : [
 	{
 	title    : "Ferg Drogher",
 	id       : "Ferg-Drogher",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: 45 Y: -98)</span> He is the Sharran lookout watching for Shadowheart's return. He is willing to trade, but if Shadowheart is in your party, he will flat-out refuse and then leave, never to return.",
 	entries  : [
 		{
 			title    : "Cold Snap",
 			id       : "Cold-Snap",
-			completed: false,
 			categories : ["dagger"],
 			rarity   : "rare",
 			suggested: false,
@@ -7084,7 +6436,6 @@ entries  : [
 		{
 			title    : "Dwarven Thrower",
 			id       : "Dwarven-Thrower",
-			completed: false,
 			categories : ["warhammer"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -7098,7 +6449,6 @@ entries  : [
 		{
 			title    : "Hellrider Longbow",
 			id       : "Hellrider-Longbow",
-			completed: false,
 			categories : ["longbow"],
 			rarity   : "uncommon",
 			suggested: true,
@@ -7112,7 +6462,6 @@ entries  : [
 		{
 			title    : "Nymph Cloak",
 			id       : "Nymph-Cloak",
-			completed: false,
 			categories : ["cloak"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -7126,7 +6475,6 @@ entries  : [
 		{
 			title    : "Robe of Supreme Defences",
 			id       : "Robe-of-Supreme-Defences",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -7140,7 +6488,6 @@ entries  : [
 		{
 			title    : "Sethan",
 			id       : "Sethan",
-			completed: false,
 			categories : ["greataxe"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -7155,15 +6502,11 @@ entries  : [
 	{
 	title    : "Mattis",
 	id       : "Mattis-2",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: 59 Y: -127)</span> He is found near the Requisitioned Barn in Rivington.",
 	entries  : [
 		{
 			title    : "Corvid Token",
 			id       : "Corvid-Token",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -7177,7 +6520,6 @@ entries  : [
 		{
 			title    : "Scabby Pugilist Circlet",
 			id       : "Scabby-Pugilist-Circlet",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "rare",
 			suggested: false,
@@ -7192,15 +6534,11 @@ entries  : [
 	{
 	title    : "Circus of the Last Days",
 	id       : "Circus-of-the-Last-Days",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Boots of Very Fast Blinking",
 			id       : "Boots-of-Very-Fast-Blinking",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -7214,7 +6552,6 @@ entries  : [
 		{
 			title    : "Comeback Handaxe",
 			id       : "Comeback-Handaxe",
-			completed: false,
 			categories : ["handaxe"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -7228,7 +6565,6 @@ entries  : [
 		{
 			title    : "Eternal Carafe of Wine (Or Sometimes Acid)",
 			id       : "Eternal-Carafe-of-Wine-(Or-Sometimes-Acid)",
-			completed: false,
 			categories : ["potion"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -7242,7 +6578,6 @@ entries  : [
 		{
 			title    : "Reverse Rain Cloak",
 			id       : "Reverse-Rain-Cloak",
-			completed: false,
 			categories : ["cloak"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -7256,7 +6591,6 @@ entries  : [
 		{
 			title    : "Staff of a Mumbling Wizard",
 			id       : "Staff-of-a-Mumbling-Wizard",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -7270,7 +6604,6 @@ entries  : [
 		{
 			title    : "Unlucky Thief's Gloves",
 			id       : "Unlucky-Thiefs-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -7284,7 +6617,6 @@ entries  : [
 		{
 			title    : "Djinni Ring",
 			id       : "Djinni-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -7298,7 +6630,6 @@ entries  : [
 		{
 			title    : "Clown Hammer",
 			id       : "Clown-Hammer",
-			completed: false,
 			categories : ["warhammer"],
 			rarity   : "rare",
 			suggested: false,
@@ -7312,7 +6643,6 @@ entries  : [
 		{
 			title    : "Spellmight Gloves",
 			id       : "Spellmight-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -7326,7 +6656,6 @@ entries  : [
 		{
 			title    : "Hollow's Staff",
 			id       : "Hollows-Staff",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "rare",
 			suggested: false,
@@ -7340,7 +6669,6 @@ entries  : [
 		{
 			title    : "The Pointy Hat",
 			id       : "The-Pointy-Hat",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "rare",
 			suggested: false,
@@ -7354,7 +6682,6 @@ entries  : [
 		{
 			title    : "Dark Displacement Gloves",
 			id       : "Dark-Displacement-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -7368,7 +6695,6 @@ entries  : [
 		{
 			title    : "Sweet Stone Features",
 			id       : "Sweet-Stone-Features",
-			completed: false,
 			categories : ["condition"],
 			rarity   : null,
 			suggested: false,
@@ -7383,15 +6709,11 @@ entries  : [
 	{
 	title    : "Jungle",
 	id       : "Jungle",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "The player is teleported here if they win the jackpot in Akabi's spin the wheel game by pickpocketing his Djinni Ring before playing his game. (Note: You can visit this area only once.)",
 	entries  : [
 		{
 			title    : "Band of the Mystic Scoundrel",
 			id       : "Band-of-the-Mystic-Scoundrel",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "rare",
 			suggested: true,
@@ -7405,7 +6727,6 @@ entries  : [
 		{
 			title    : "Nyrulna",
 			id       : "Nyrulna",
-			completed: false,
 			categories : ["trident"],
 			rarity   : "legendary",
 			suggested: true,
@@ -7420,15 +6741,11 @@ entries  : [
 	{
 	title    : "Open Hand Temple",
 	id       : "Open-Hand-Temple",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Seraphic Pugilist Gloves",
 			id       : "Seraphic-Pugilist-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -7442,7 +6759,6 @@ entries  : [
 		{
 			title    : "Tasha's Hideous Laughter",
 			id       : "Tashas-Hideous-Laughter",
-			completed: false,
 			categories : ["spell"],
 			rarity   : null,
 			suggested: false,
@@ -7456,7 +6772,6 @@ entries  : [
 		{
 			title    : "Sentient Amulet (Very Rare)",
 			id       : "Sentient-Amulet-(Very-Rare)",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -7470,7 +6785,6 @@ entries  : [
 		{
 			title    : "Stillmaker",
 			id       : "Stillmaker",
-			completed: false,
 			categories : ["dagger"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -7484,7 +6798,6 @@ entries  : [
 		{
 			title    : "Ring of Blink",
 			id       : "Ring-of-Blink",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "rare",
 			suggested: false,
@@ -7499,15 +6812,11 @@ entries  : [
 	{
 	title    : "Exxvikyap",
 	id       : "Exxvikyap",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: 8 Y: -32)</span> She is found in the blacksmith shop.",
 	entries  : [
 		{
 			title    : "Ambusher",
 			id       : "Ambusher",
-			completed: false,
 			categories : ["shortsword"],
 			rarity   : "rare",
 			suggested: true,
@@ -7521,7 +6830,6 @@ entries  : [
 		{
 			title    : "Bonespike Garb",
 			id       : "Bonespike-Garb",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -7535,7 +6843,6 @@ entries  : [
 		{
 			title    : "Elven Chain",
 			id       : "Elven-Chain",
-			completed: false,
 			categories : ["medium-armour"],
 			rarity   : "rare",
 			suggested: false,
@@ -7549,7 +6856,6 @@ entries  : [
 		{
 			title    : "Stalker Gloves",
 			id       : "Stalker-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -7563,7 +6869,6 @@ entries  : [
 		{
 			title    : "Swires' Sledboard",
 			id       : "Swires-Sledboard",
-			completed: false,
 			categories : ["shield"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -7577,7 +6882,6 @@ entries  : [
 		{
 			title    : "The Dancing Breeze",
 			id       : "The-Dancing-Breeze",
-			completed: false,
 			categories : ["glaive"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -7592,15 +6896,11 @@ entries  : [
 	{
 	title    : "Angleiron's Cellar",
 	id       : "Angleirons-Cellar",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "Entered via a cave entrance.",
 	entries  : [
 		{
 			title    : "Runepowder Barrel",
 			id       : "Runepowder-Barrel-2",
-			completed: false,
 			categories : ["barrel"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -7614,7 +6914,6 @@ entries  : [
 		{
 			title    : "Runepowder Bomb",
 			id       : "Runepowder-Bomb",
-			completed: false,
 			categories : ["barrel"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -7629,15 +6928,11 @@ entries  : [
 	{
 	title    : "Bumpnagel",
 	id       : "Bumpnagel",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: 30 Y: 29)</span> He is found in Angleiron's Cellar.",
 	entries  : [
 		{
 			title    : "Martial Exertion Gloves",
 			id       : "Martial-Exertion-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -7651,7 +6946,6 @@ entries  : [
 		{
 			title    : "Nimblefinger Gloves",
 			id       : "Nimblefinger-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -7665,7 +6959,6 @@ entries  : [
 		{
 			title    : "Thunderpalm Strikers",
 			id       : "Thunderpalm-Strikers",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -7680,15 +6973,11 @@ entries  : [
 	{
 	title    : "Rivington Docks",
 	id       : "Rivington-Docks",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Corpsegrinder",
 			id       : "Corpsegrinder",
-			completed: false,
 			categories : ["maul"],
 			rarity   : "rare",
 			suggested: false,
@@ -7702,7 +6991,6 @@ entries  : [
 		{
 			title    : "Gleamdance Dagger",
 			id       : "Gleamdance-Dagger",
-			completed: false,
 			categories : ["dagger"],
 			rarity   : "rare",
 			suggested: false,
@@ -7716,7 +7004,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-23",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -7730,7 +7017,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-24",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -7744,7 +7030,6 @@ entries  : [
 		{
 			title    : "Bonespike Boots",
 			id       : "Bonespike-Boots",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -7759,15 +7044,11 @@ entries  : [
 	{
 	title    : "Wyrm's Crossing",
 	id       : "Wyrms-Crossing",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Amulet of the Drunkard",
 			id       : "Amulet-of-the-Drunkard",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "rare",
 			suggested: false,
@@ -7781,7 +7062,6 @@ entries  : [
 		{
 			title    : "Scarlet Leather Armour",
 			id       : "Scarlet-Leather-Armour",
-			completed: false,
 			categories : ["light-armour"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -7795,7 +7075,6 @@ entries  : [
 		{
 			title    : "Orphic Hammer",
 			id       : "Orphic-Hammer",
-			completed: false,
 			categories : ["warhammer"],
 			rarity   : "story",
 			suggested: false,
@@ -7809,7 +7088,6 @@ entries  : [
 		{
 			title    : "Absolute Confidence Amulet",
 			id       : "Absolute-Confidence-Amulet",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -7823,7 +7101,6 @@ entries  : [
 		{
 			title    : "Seemingly Gleaming Ring",
 			id       : "Seemingly-Gleaming-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -7838,15 +7115,11 @@ entries  : [
 	{
 	title    : "Entharl Danthelon",
 	id       : "Entharl-Danthelon",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: -6 Y: 133)</span> He can be found in Danthelon's Dancing Axe in Wyrm's Crossing.",
 	entries  : [
 		{
 			title    : "Blightbringer",
 			id       : "Blightbringer",
-			completed: false,
 			categories : ["shortbow"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -7860,7 +7133,6 @@ entries  : [
 		{
 			title    : "Cloak of Displacement",
 			id       : "Cloak-of-Displacement",
-			completed: false,
 			categories : ["cloak"],
 			rarity   : "rare",
 			suggested: true,
@@ -7874,7 +7146,6 @@ entries  : [
 		{
 			title    : "Garb of the Land and Sky",
 			id       : "Garb-of-the-Land-and-Sky",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "rare",
 			suggested: false,
@@ -7888,7 +7159,6 @@ entries  : [
 		{
 			title    : "Gauntlets of the Warmaster",
 			id       : "Gauntlets-of-the-Warmaster",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -7902,7 +7172,6 @@ entries  : [
 		{
 			title    : "Harmonic Dueller",
 			id       : "Harmonic-Dueller",
-			completed: false,
 			categories : ["rapier"],
 			rarity   : "rare",
 			suggested: false,
@@ -7916,7 +7185,6 @@ entries  : [
 		{
 			title    : "Heavy Supply Pack",
 			id       : "Heavy-Supply-Pack",
-			completed: false,
 			categories : ["camp-supplies"],
 			rarity   : "common",
 			suggested: false,
@@ -7930,7 +7198,6 @@ entries  : [
 		{
 			title    : "Horns of the Berserker",
 			id       : "Horns-of-the-Berserker",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -7944,7 +7211,6 @@ entries  : [
 		{
 			title    : "Snow-Dusted Monastery Gloves",
 			id       : "Snow-Dusted-Monastery-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -7959,15 +7225,11 @@ entries  : [
 	{
 	title    : "Basilisk Gate Barracks",
 	id       : "Basilisk-Gate-Barracks",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [ // TODO coords for all 3
 		{
 			title    : "Cloth Armour",
 			id       : "Cloth-Armour",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -7981,7 +7243,6 @@ entries  : [
 		{
 			title    : "Amulet of Windrider",
 			id       : "Amulet-of-Windrider",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -7995,7 +7256,6 @@ entries  : [
 		{
 			title    : "Duellist's Prerogative",
 			id       : "Duellists-Prerogative",
-			completed: false,
 			categories : ["rapier"],
 			rarity   : "legendary",
 			suggested: true,
@@ -8010,15 +7270,11 @@ entries  : [
 	{
 	title    : "Stormshore Tabernacle",
 	id       : "Stormshore-Tabernacle",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Anointed in Splendour",
 			id       : "Anointed-in-Splendour",
-			completed: false,
 			categories : ["condition"],
 			rarity   : null,
 			suggested: false,
@@ -8032,7 +7288,6 @@ entries  : [
 		{
 			title    : "Amulet of the Devout",
 			id       : "Amulet-of-the-Devout",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -8046,7 +7301,6 @@ entries  : [
 		{
 			title    : "Shield of Shielding",
 			id       : "Shield-of-Shielding",
-			completed: false,
 			categories : ["shield"],
 			rarity   : "rare",
 			suggested: false,
@@ -8060,7 +7314,6 @@ entries  : [
 		{
 			title    : "Hammer of the Just",
 			id       : "Hammer-of-the-Just",
-			completed: false,
 			categories : ["warhammer"],
 			rarity   : "rare",
 			suggested: false,
@@ -8074,7 +7327,6 @@ entries  : [
 		{
 			title    : "Deva Mace",
 			id       : "Deva-Mace",
-			completed: false,
 			categories : ["mace"],
 			rarity   : "common",
 			suggested: true,
@@ -8089,15 +7341,11 @@ entries  : [
 	{
 	title    : "Vicar Humbletoes",
 	id       : "Vicar-Humbletoes",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: 109 Y: -16)</span> He is the guardian of the Stormshore Tabernacle.",
 	entries  : [
 		{
 			title    : "Mantle of the Holy Warrior",
 			id       : "Mantle-of-the-Holy-Warrior",
-			completed: false,
 			categories : ["cloak"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -8111,7 +7359,6 @@ entries  : [
 		{
 			title    : "The Reviving Hands",
 			id       : "The-Reviving-Hands",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -8125,7 +7372,6 @@ entries  : [
 		{
 			title    : "The Sacred Star",
 			id       : "The-Sacred-Star",
-			completed: false,
 			categories : ["morningstar"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -8140,15 +7386,11 @@ entries  : [
 	{
 	title    : "Elfsong Tavern",
 	id       : "Elfsong-Tavern",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Keepsake Ring",
 			id       : "Keepsake-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "rare",
 			suggested: false,
@@ -8162,7 +7404,6 @@ entries  : [
 		{
 			title    : "Boots of Psionic Movement",
 			id       : "Boots-of-Psionic-Movement",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -8176,7 +7417,6 @@ entries  : [
 		{
 			title    : "Cerebral Citadel Armour",
 			id       : "Cerebral-Citadel-Armour",
-			completed: false,
 			categories : ["heavy-armour"],
 			rarity   : "rare",
 			suggested: false,
@@ -8190,7 +7430,6 @@ entries  : [
 		{
 			title    : "Cerebral Citadel Gloves",
 			id       : "Cerebral-Citadel-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -8204,7 +7443,6 @@ entries  : [
 		{
 			title    : "Sword of the Emperor",
 			id       : "Sword-of-the-Emperor",
-			completed: false,
 			categories : ["longsword"],
 			rarity   : "rare",
 			suggested: false,
@@ -8219,15 +7457,11 @@ entries  : [
 	{
 	title    : "Baldur's Gate Graveyard",
 	id       : "Baldurs-Gate-Graveyard",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Kurwin's Cauteriser",
 			id       : "Kurwins-Cauteriser",
-			completed: false,
 			categories : ["scimitar"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -8242,15 +7476,11 @@ entries  : [
 	{
 	title    : "Forge of the Nine",
 	id       : "Forge-of-the-Nine",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Unwanted Masterwork Gauntlets",
 			id       : "Unwanted-Masterwork-Gauntlets",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -8264,7 +7494,6 @@ entries  : [
 		{
 			title    : "Unwanted Masterwork Greaves",
 			id       : "Unwanted-Masterwork-Greaves",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "rare",
 			suggested: false,
@@ -8278,7 +7507,6 @@ entries  : [
 		{
 			title    : "Unwanted Masterwork Scalemail",
 			id       : "Unwanted-Masterwork-Scalemail",
-			completed: false,
 			categories : ["medium-armour"],
 			rarity   : "rare",
 			suggested: false,
@@ -8293,15 +7521,11 @@ entries  : [
 	{
 	title    : "Dammon",
 	id       : "Dammon-3",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: -2 Y: -7)</span> He is the blacksmith at the Forge of the Nine.",
 	entries  : [
 		{
 			title    : "Armour of Persistence",
 			id       : "Armour-of-Persistence",
-			completed: false,
 			categories : ["heavy-armour"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -8315,7 +7539,6 @@ entries  : [
 		{
 			title    : "Boots of Persistence",
 			id       : "Boots-of-Persistence",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -8329,7 +7552,6 @@ entries  : [
 		{
 			title    : "Legacy of the Masters",
 			id       : "Legacy-of-the-Masters",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -8344,15 +7566,11 @@ entries  : [
 	{
 	title    : "The Devil's Fee",
 	id       : "The-Devils-Fee",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Mask of Soul Perception",
 			id       : "Mask-of-Soul-Perception",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -8367,15 +7585,11 @@ entries  : [
 	{
 	title    : "Helsik",
 	id       : "Helsik",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: -39 Y: -13)</span> She is found in the Devil's Fee.",
 	entries  : [
 		{
 			title    : "Caitiff Staff",
 			id       : "Caitiff-Staff",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "rare",
 			suggested: false,
@@ -8389,7 +7603,6 @@ entries  : [
 		{
 			title    : "Cloak of the Weave",
 			id       : "Cloak-of-the-Weave",
-			completed: false,
 			categories : ["cloak"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -8403,7 +7616,6 @@ entries  : [
 		{
 			title    : "Gemini Gloves",
 			id       : "Gemini-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -8417,7 +7629,6 @@ entries  : [
 		{
 			title    : "Gibus of the Worshipful Servant",
 			id       : "Gibus-of-the-Worshipful-Servant",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "rare",
 			suggested: false,
@@ -8431,7 +7642,6 @@ entries  : [
 		{
 			title    : "Hellbeard Halberd",
 			id       : "Hellbeard-Halberd",
-			completed: false,
 			categories : ["halberd"],
 			rarity   : "rare",
 			suggested: false,
@@ -8445,7 +7655,6 @@ entries  : [
 		{
 			title    : "Shapeshifter Hat",
 			id       : "Shapeshifter-Hat",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -8459,7 +7668,6 @@ entries  : [
 		{
 			title    : "Spellseeking Gloves",
 			id       : "Spellseeking-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -8474,15 +7682,11 @@ entries  : [
 	{
 	title    : "Tara",
 	id       : "Tara",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "Tara will appear on various rooftops in the Lower City if Gale spoke to her during the quest \"<a href='https://bg3.wiki/wiki/Find_the_Missing_Letters'>Find the Missing Letters</a>\".",
 	entries  : [
 		{
 			title    : "Hat of the Sharp Caster",
 			id       : "Hat-of-the-Sharp-Caster",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "rare",
 			suggested: false,
@@ -8496,7 +7700,6 @@ entries  : [
 		{
 			title    : "Slinging Shoes",
 			id       : "Slinging-Shoes",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "rare",
 			suggested: false,
@@ -8510,7 +7713,6 @@ entries  : [
 		{
 			title    : "Tressym Collar",
 			id       : "Tressym-Collar",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -8525,15 +7727,11 @@ entries  : [
 	{
 	title    : "Highberry's Home",
 	id       : "Highberrys-Home",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Spaceshunt Boots",
 			id       : "Spaceshunt-Boots",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "rare",
 			suggested: false,
@@ -8547,7 +7745,6 @@ entries  : [
 		{
 			title    : "Dolor Amarus",
 			id       : "Dolor-Amarus",
-			completed: false,
 			categories : ["dagger"],
 			rarity   : "rare",
 			suggested: true,
@@ -8562,15 +7759,11 @@ entries  : [
 	{
 	title    : "Stormshore Armoury",
 	id       : "Stormshore-Armoury",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Armour of Agility",
 			id       : "Armour-of-Agility",
-			completed: false,
 			categories : ["medium-armour"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -8584,7 +7777,6 @@ entries  : [
 		{
 			title    : "Flail of Ages",
 			id       : "Flail-of-Ages",
-			completed: false,
 			categories : ["flail"],
 			rarity   : "rare",
 			suggested: false,
@@ -8598,7 +7790,6 @@ entries  : [
 		{
 			title    : "The Dead Shot",
 			id       : "The-Dead-Shot",
-			completed: false,
 			categories : ["longbow"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -8613,15 +7804,11 @@ entries  : [
 	{
 	title    : "Sorcerous Sundries",
 	id       : "Sorcerous-Sundries",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-25",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -8635,7 +7822,6 @@ entries  : [
 		{
 			title    : "Sights of the Seelie: Summon Deva",
 			id       : "Sights-of-the-Seelie:-Summon-Deva",
-			completed: false,
 			categories : ["spell"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -8649,7 +7835,6 @@ entries  : [
 		{
 			title    : "Curriculum of Strategy: Artistry of War",
 			id       : "Curriculum-of-Strategy:-Artistry-of-War",
-			completed: false,
 			categories : ["spell"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -8663,7 +7848,6 @@ entries  : [
 		{
 			title    : "The Tharchiate Codex: Blessing",
 			id       : "The-Tharchiate-Codex:-Blessing",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : null,
 			suggested: false,
@@ -8677,7 +7861,6 @@ entries  : [
 		{
 			title    : "Danse Macabre",
 			id       : "Danse-Macabre",
-			completed: false,
 			categories : ["spell"],
 			rarity   : null,
 			suggested: true,
@@ -8691,7 +7874,6 @@ entries  : [
 		{
 			title    : "Pyroquickness Hat",
 			id       : "Pyroquickness-Hat",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -8705,7 +7887,6 @@ entries  : [
 		{
 			title    : "Hellfire Greataxe",
 			id       : "Hellfire-Greataxe",
-			completed: false,
 			categories : ["greataxe"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -8719,7 +7900,6 @@ entries  : [
 		{
 			title    : "Dethrone",
 			id       : "Dethrone",
-			completed: false,
 			categories : ["scroll"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -8733,7 +7913,6 @@ entries  : [
 		{
 			title    : "Foebreaker",
 			id       : "Foebreaker",
-			completed: false,
 			categories : ["maul"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -8747,7 +7926,6 @@ entries  : [
 		{
 			title    : "Markoheshkir",
 			id       : "Markoheshkir",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "legendary",
 			suggested: true,
@@ -8761,7 +7939,6 @@ entries  : [
 		{
 			title    : "Robe of the Weave",
 			id       : "Robe-of-the-Weave",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -8775,7 +7952,6 @@ entries  : [
 		{
 			title    : "Despair of Athkatla",
 			id       : "Despair-of-Athkatla",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "rare",
 			suggested: false,
@@ -8789,7 +7965,6 @@ entries  : [
 		{
 			title    : "Shelter of Athkatla",
 			id       : "Shelter-of-Athkatla",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "rare",
 			suggested: false,
@@ -8804,15 +7979,11 @@ entries  : [
 	{
 	title    : "Rolan / Lorroakan's Projection",
 	id       : "Rolan-/-Lorroakans-Projection",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: -14 Y: -72)</span> He is found at Sorcerous Sundries' front desk.",
 	entries  : [
 		{
 			title    : "Armour of Landfall",
 			id       : "Armour-of-Landfall",
-			completed: false,
 			categories : ["light-armour"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -8826,7 +7997,6 @@ entries  : [
 		{
 			title    : "Birthright",
 			id       : "Birthright",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -8840,7 +8010,6 @@ entries  : [
 		{
 			title    : "Harper Sacredstriker",
 			id       : "Harper-Sacredstriker",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "rare",
 			suggested: false,
@@ -8854,7 +8023,6 @@ entries  : [
 		{
 			title    : "Quickspell Gloves",
 			id       : "Quickspell-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -8868,7 +8036,6 @@ entries  : [
 		{
 			title    : "Ring of Regeneration",
 			id       : "Ring-of-Regeneration",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -8882,7 +8049,6 @@ entries  : [
 		{
 			title    : "Vest of Soul Rejuvenation",
 			id       : "Vest-of-Soul-Rejuvenation",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -8897,15 +8063,11 @@ entries  : [
 	{
 	title    : "Felogyr's Fireworks",
 	id       : "Felogyrs-Fireworks",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-26",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -8919,7 +8081,6 @@ entries  : [
 		{
 			title    : "Infernal Mace",
 			id       : "Infernal-Mace",
-			completed: false,
 			categories : ["mace"],
 			rarity   : "rare",
 			suggested: false,
@@ -8933,7 +8094,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-27",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -8948,15 +8108,11 @@ entries  : [
 	{
 	title    : "Philgrave's Mansion",
 	id       : "Philgraves-Mansion",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Crypt Lord Ring",
 			id       : "Crypt-Lord-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -8970,7 +8126,6 @@ entries  : [
 		{
 			title    : "Torch of Revocation",
 			id       : "Torch-of-Revocation",
-			completed: false,
 			categories : ["club"],
 			rarity   : "story",
 			suggested: false,
@@ -8984,7 +8139,6 @@ entries  : [
 		{
 			title    : "Staff of Cherished Necromancy",
 			id       : "Staff-of-Cherished-Necromancy",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -8999,15 +8153,11 @@ entries  : [
 	{
 	title    : "Mystic Carrion",
 	id       : "Mystic-Carrion",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: 14 Y: -160)</span> He is found in Philgrave's Mansion.",
 	entries  : [
 		{
 			title    : "Armour of the Sporekeeper",
 			id       : "Armour-of-the-Sporekeeper",
-			completed: false,
 			categories : ["light-armour"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -9021,7 +8171,6 @@ entries  : [
 		{
 			title    : "Hood of the Weave",
 			id       : "Hood-of-the-Weave",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -9035,7 +8184,6 @@ entries  : [
 		{
 			title    : "Veil of the Morning",
 			id       : "Veil-of-the-Morning",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -9050,15 +8198,11 @@ entries  : [
 	{
 	title    : "Guildhall",
 	id       : "Guildhall",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Drunken Cloth",
 			id       : "Drunken-Cloth",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "rare",
 			suggested: false,
@@ -9072,7 +8216,6 @@ entries  : [
 		{
 			title    : "Shade-Slayer Cloak",
 			id       : "Shade-Slayer-Cloak",
-			completed: false,
 			categories : ["cloak"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -9087,15 +8230,11 @@ entries  : [
 	{
 	title    : "Old Garlow's Place",
 	id       : "Old-Garlows-Place",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Staff of Interruption",
 			id       : "Staff-of-Interruption",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "rare",
 			suggested: false,
@@ -9109,7 +8248,6 @@ entries  : [
 		{
 			title    : "Fey Semblance Amulet",
 			id       : "Fey-Semblance-Amulet",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -9124,15 +8262,11 @@ entries  : [
 	{
 	title    : "The Counting House",
 	id       : "The-Counting-House",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Nymph Cloak",
 			id       : "Nymph-Cloak",
-			completed: false,
 			categories : ["cloak"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -9146,7 +8280,6 @@ entries  : [
 		{
 			title    : "Spell Savant Amulet",
 			id       : "Spell-Savant-Amulet",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "rare",
 			suggested: false,
@@ -9160,7 +8293,6 @@ entries  : [
 		{
 			title    : "Jannath's Hat",
 			id       : "Jannaths-Hat",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -9174,7 +8306,6 @@ entries  : [
 		{
 			title    : "The Long Arm of the Gur",
 			id       : "The-Long-Arm-of-the-Gur",
-			completed: false,
 			categories : ["heavy-crossbow"],
 			rarity   : "rare",
 			suggested: false,
@@ -9188,7 +8319,6 @@ entries  : [
 		{
 			title    : "Trident of the Waves",
 			id       : "Trident-of-the-Waves",
-			completed: false,
 			categories : ["trident"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -9202,7 +8332,6 @@ entries  : [
 		{
 			title    : "Ravengard's Scourger",
 			id       : "Ravengards-Scourger",
-			completed: false,
 			categories : ["morningstar"],
 			rarity   : "rare",
 			suggested: false,
@@ -9216,7 +8345,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-28",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -9230,7 +8358,6 @@ entries  : [
 		{
 			title    : "Knock Knuckle Gloves",
 			id       : "Knock-Knuckle-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -9244,7 +8371,6 @@ entries  : [
 		{
 			title    : "Elegant Studded Leather",
 			id       : "Elegant-Studded-Leather",
-			completed: false,
 			categories : ["light-armour"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -9259,15 +8385,11 @@ entries  : [
 	{
 	title    : "Crimson Draughts",
 	id       : "Crimson-Draughts",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Unstable Blood",
 			id       : "Unstable-Blood",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : null,
 			suggested: false,
@@ -9281,7 +8403,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-29",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -9296,15 +8417,11 @@ entries  : [
 	{
 	title    : "Rainforest's Home ",
 	id       : "Rainforests-Home-",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Bottled Breath",
 			id       : "Bottled-Breath",
-			completed: false,
 			categories : ["potion"],
 			rarity   : "common",
 			suggested: false,
@@ -9319,15 +8436,11 @@ entries  : [
 	{
 	title    : "The Blushing Mermaid",
 	id       : "The-Blushing-Mermaid",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Scrap and Shrapnel Grenade",
 			id       : "Scrap-and-Shrapnel-Grenade",
-			completed: false,
 			categories : ["grenade"],
 			rarity   : "common",
 			suggested: false,
@@ -9341,7 +8454,6 @@ entries  : [
 		{
 			title    : "Salty Scimitar(rrr)",
 			id       : "Salty-Scimitar(rrr)",
-			completed: false,
 			categories : ["scimitar"],
 			rarity   : "rare",
 			suggested: false,
@@ -9355,7 +8467,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-30",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -9369,7 +8480,6 @@ entries  : [
 		{
 			title    : "Ring of Feywild Sparks",
 			id       : "Ring-of-Feywild-Sparks",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -9384,15 +8494,11 @@ entries  : [
 	{
 	title    : "Golbraith's House",
 	id       : "Golbraiths-House",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Abdel's Trusted Shield",
 			id       : "Abdels-Trusted-Shield",
-			completed: false,
 			categories : ["shield"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -9406,7 +8512,6 @@ entries  : [
 		{
 			title    : "Katana",
 			id       : "Katana",
-			completed: false,
 			categories : ["longsword"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -9421,15 +8526,11 @@ entries  : [
 	{
 	title    : "Bloomridge Park",
 	id       : "Bloomridge-Park",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-31",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -9444,15 +8545,11 @@ entries  : [
 	{
 	title    : "Szarr Palace",
 	id       : "Szarr-Palace",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Helmet of Grit",
 			id       : "Helmet-of-Grit",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -9466,7 +8563,6 @@ entries  : [
 		{
 			title    : "Mysterious Elixir",
 			id       : "Mysterious-Elixir",
-			completed: false,
 			categories : ["potion"],
 			rarity   : "common",
 			suggested: false,
@@ -9480,7 +8576,6 @@ entries  : [
 		{
 			title    : "Pelorsun Blade",
 			id       : "Pelorsun-Blade",
-			completed: false,
 			categories : ["rapier"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -9494,7 +8589,6 @@ entries  : [
 		{
 			title    : "Rhapsody",
 			id       : "Rhapsody",
-			completed: false,
 			categories : ["dagger"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -9508,7 +8602,6 @@ entries  : [
 		{
 			title    : "Woe",
 			id       : "Woe",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -9522,7 +8615,6 @@ entries  : [
 		{
 			title    : "Vampire Ascendant",
 			id       : "Vampire-Ascendant",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : null,
 			suggested: false,
@@ -9537,15 +8629,11 @@ entries  : [
 	{
 	title    : "Facemaker's Boutique",
 	id       : "Facemakers-Boutique",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Arrow of Piercing",
 			id       : "Arrow-of-Piercing",
-			completed: false,
 			categories : ["arrow"],
 			rarity   : "common",
 			suggested: false,
@@ -9560,15 +8648,11 @@ entries  : [
 	{
 	title    : "Society of Brilliance Lodge",
 	id       : "Society-of-Brilliance-Lodge",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-32",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -9582,7 +8666,6 @@ entries  : [
 		{
 			title    : "Unflinching Protector Amulet",
 			id       : "Unflinching-Protector-Amulet",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -9597,15 +8680,11 @@ entries  : [
 	{
 	title    : "Elerrathin's Home",
 	id       : "Elerrathins-Home",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Belm",
 			id       : "Belm",
-			completed: false,
 			categories : ["scimitar"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -9619,7 +8698,6 @@ entries  : [
 		{
 			title    : "Staff of the Ram",
 			id       : "Staff-of-the-Ram",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -9633,7 +8711,6 @@ entries  : [
 		{
 			title    : "Khalid's Gift",
 			id       : "Khalids-Gift",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -9647,7 +8724,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-33",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -9662,15 +8738,11 @@ entries  : [
 	{
 	title    : "Jannath's Estate",
 	id       : "Jannaths-Estate",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Till Death Do Us Part",
 			id       : "Till-Death-Do-Us-Part",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "rare",
 			suggested: false,
@@ -9684,7 +8756,6 @@ entries  : [
 		{
 			title    : "After Death Do Us Part",
 			id       : "After-Death-Do-Us-Part",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "rare",
 			suggested: false,
@@ -9699,15 +8770,11 @@ entries  : [
 	{
 	title    : "House of Grief",
 	id       : "House-of-Grief",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Handmaiden's Mace",
 			id       : "Handmaidens-Mace",
-			completed: false,
 			categories : ["mace"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -9721,7 +8788,6 @@ entries  : [
 		{
 			title    : "Viconia's Priestess Robe",
 			id       : "Viconias-Priestess-Robe",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "rare",
 			suggested: false,
@@ -9735,7 +8801,6 @@ entries  : [
 		{
 			title    : "Viconia's Walking Fortress",
 			id       : "Viconias-Walking-Fortress",
-			completed: false,
 			categories : ["shield"],
 			rarity   : "legendary",
 			suggested: true,
@@ -9749,7 +8814,6 @@ entries  : [
 		{
 			title    : "Mirror of Loss",
 			id       : "Mirror-of-Loss",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : null,
 			suggested: true,
@@ -9764,15 +8828,11 @@ entries  : [
 	{
 	title    : "Grey Harbour Docks",
 	id       : "Grey-Harbour-Docks",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-34",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -9786,7 +8846,6 @@ entries  : [
 		{
 			title    : "Slayer Knowledge",
 			id       : "Slayer-Knowledge",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : null,
 			suggested: false,
@@ -9800,7 +8859,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-35",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -9814,7 +8872,6 @@ entries  : [
 		{
 			title    : "Infernal Iron",
 			id       : "Infernal-Iron-5",
-			completed: false,
 			categories : ["crafting"],
 			rarity   : null,
 			suggested: false,
@@ -9828,7 +8885,6 @@ entries  : [
 		{
 			title    : "Wavemother's Cloak",
 			id       : "Wavemothers-Cloak",
-			completed: false,
 			categories : ["cloak"],
 			rarity   : "rare",
 			suggested: false,
@@ -9842,7 +8898,6 @@ entries  : [
 		{
 			title    : "Infernal Iron",
 			id       : "Infernal-Iron-6",
-			completed: false,
 			categories : ["crafting"],
 			rarity   : null,
 			suggested: false,
@@ -9856,7 +8911,6 @@ entries  : [
 		{
 			title    : "Wavemother's Robe",
 			id       : "Wavemothers-Robe",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -9870,7 +8924,6 @@ entries  : [
 		{
 			title    : "Wavemother's Sickle",
 			id       : "Wavemothers-Sickle",
-			completed: false,
 			categories : ["sickle"],
 			rarity   : "rare",
 			suggested: false,
@@ -9885,15 +8938,11 @@ entries  : [
 	{
 	title    : "Steel Watch Foundry",
 	id       : "Steel-Watch-Foundry",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Steelwatcher Helmet",
 			id       : "Steelwatcher-Helmet",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "rare",
 			suggested: false,
@@ -9907,7 +8956,6 @@ entries  : [
 		{
 			title    : "Hellfire Engine Crossbow",
 			id       : "Hellfire-Engine-Crossbow",
-			completed: false,
 			categories : ["heavy-crossbow"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -9921,7 +8969,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-36",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -9935,7 +8982,6 @@ entries  : [
 		{
 			title    : "Winkling Gloves",
 			id       : "Winkling-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -9949,7 +8995,6 @@ entries  : [
 		{
 			title    : "Gontr Mael",
 			id       : "Gontr-Mael",
-			completed: false,
 			categories : ["longbow"],
 			rarity   : "legendary",
 			suggested: true,
@@ -9964,15 +9009,11 @@ entries  : [
 	{
 	title    : "Iron Throne",
 	id       : "Iron-Throne",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "Duke Ravengard will not be present here (and will become a permanent enemy) if you don't attend Gortash's coronation first.",
 	entries  : [
 		{
 			title    : "Infernal Iron",
 			id       : "Infernal-Iron-7",
-			completed: false,
 			categories : ["crafting"],
 			rarity   : null,
 			suggested: false,
@@ -9986,7 +9027,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-37",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -10000,7 +9040,6 @@ entries  : [
 		{
 			title    : "Duke Ravengard's Longsword",
 			id       : "Duke-Ravengards-Longsword",
-			completed: false,
 			categories : ["longsword"],
 			rarity   : "rare",
 			suggested: false,
@@ -10014,7 +9053,6 @@ entries  : [
 		{
 			title    : "Emblazoned Plate of the Marshal",
 			id       : "Emblazoned-Plate-of-the-Marshal",
-			completed: false,
 			categories : ["heavy-armour"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -10029,15 +9067,11 @@ entries  : [
 	{
 	title    : "Wyrm's Rock Fortress",
 	id       : "Wyrms-Rock-Fortress",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Infernal Spear",
 			id       : "Infernal-Spear",
-			completed: false,
 			categories : ["spear"],
 			rarity   : "rare",
 			suggested: false,
@@ -10051,7 +9085,6 @@ entries  : [
 		{
 			title    : "Flame Enamelled Armour",
 			id       : "Flame-Enamelled-Armour",
-			completed: false,
 			categories : ["medium-armour"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -10065,7 +9098,6 @@ entries  : [
 		{
 			title    : "Reflectoguard",
 			id       : "Reflectoguard",
-			completed: false,
 			categories : ["grenade"],
 			rarity   : "common",
 			suggested: false,
@@ -10079,7 +9111,6 @@ entries  : [
 		{
 			title    : "Cloth of Authority",
 			id       : "Cloth-of-Authority",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "rare",
 			suggested: false,
@@ -10093,7 +9124,6 @@ entries  : [
 		{
 			title    : "Fabricated Arbalest",
 			id       : "Fabricated-Arbalest",
-			completed: false,
 			categories : ["heavy-crossbow"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -10107,7 +9137,6 @@ entries  : [
 		{
 			title    : "Gauntlet of the Tyrant",
 			id       : "Gauntlet-of-the-Tyrant",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -10121,7 +9150,6 @@ entries  : [
 		{
 			title    : "Tyrannical Jackboots",
 			id       : "Tyrannical-Jackboots",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -10135,7 +9163,6 @@ entries  : [
 		{
 			title    : "Helldusk Boots",
 			id       : "Helldusk-Boots",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -10149,7 +9176,6 @@ entries  : [
 		{
 			title    : "Mind Flayer Parasite Specimen",
 			id       : "Mind-Flayer-Parasite-Specimen-38",
-			completed: false,
 			categories : ["enhancement"],
 			rarity   : "story",
 			suggested: false,
@@ -10163,7 +9189,6 @@ entries  : [
 		{
 			title    : "Servitor of the Black Hand Gloves",
 			id       : "Servitor-of-the-Black-Hand-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -10177,7 +9202,6 @@ entries  : [
 		{
 			title    : "Elixir of Health",
 			id       : "Elixir-of-Health",
-			completed: false,
 			categories : ["potion"],
 			rarity   : "common",
 			suggested: false,
@@ -10192,15 +9216,11 @@ entries  : [
 	{
 	title    : "The Dragon's Sanctum",
 	id       : "The-Dragons-Sanctum",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Balduran's Giantslayer",
 			id       : "Baldurans-Giantslayer",
-			completed: false,
 			categories : ["greatsword"],
 			rarity   : "legendary",
 			suggested: true,
@@ -10214,7 +9234,6 @@ entries  : [
 		{
 			title    : "Helm of Balduran",
 			id       : "Helm-of-Balduran",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "legendary",
 			suggested: true,
@@ -10229,15 +9248,11 @@ entries  : [
 	{
 	title    : "Murder Tribunal",
 	id       : "Murder-Tribunal",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Blackguard's Gauntlets",
 			id       : "Blackguards-Gauntlets",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -10251,7 +9266,6 @@ entries  : [
 		{
 			title    : "Blackguard's Greaves",
 			id       : "Blackguards-Greaves",
-			completed: false,
 			categories : ["boots"],
 			rarity   : "rare",
 			suggested: false,
@@ -10265,7 +9279,6 @@ entries  : [
 		{
 			title    : "Blackguard's Plate",
 			id       : "Blackguards-Plate",
-			completed: false,
 			categories : ["heavy-armour"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -10279,7 +9292,6 @@ entries  : [
 		{
 			title    : "Blackguard's Sword",
 			id       : "Blackguards-Sword",
-			completed: false,
 			categories : ["longsword"],
 			rarity   : "rare",
 			suggested: false,
@@ -10293,7 +9305,6 @@ entries  : [
 		{
 			title    : "Shield of the Undevout",
 			id       : "Shield-of-the-Undevout",
-			completed: false,
 			categories : ["shield"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -10307,7 +9318,6 @@ entries  : [
 		{
 			title    : "Amulet of Bhaal",
 			id       : "Amulet-of-Bhaal",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "story",
 			suggested: false,
@@ -10321,7 +9331,6 @@ entries  : [
 		{
 			title    : "Sword of Chaos",
 			id       : "Sword-of-Chaos",
-			completed: false,
 			categories : ["greatsword"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -10335,7 +9344,6 @@ entries  : [
 		{
 			title    : "Sarevok's Horned Helmet",
 			id       : "Sarevoks-Horned-Helmet",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -10350,15 +9358,11 @@ entries  : [
 	{
 	title    : "Echo of Abazigal",
 	id       : "Echo-of-Abazigal",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: -1263 Y: 511)</span> He will appear in the main chamber after completing the quest \"<a href='https://bg3.wiki/wiki/Impress_the_Murder_Tribunal'>Impress the Murder Tribunal</a>\" and becoming an Unholy Assassin of Bhaal.",
 	entries  : [
 		{
 			title    : "Assassin of Bhaal Cowl",
 			id       : "Assassin-of-Bhaal-Cowl",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -10372,7 +9376,6 @@ entries  : [
 		{
 			title    : "Bhaalist Armour",
 			id       : "Bhaalist-Armour",
-			completed: false,
 			categories : ["light-armour"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -10386,7 +9389,6 @@ entries  : [
 		{
 			title    : "Bhaalist Gloves",
 			id       : "Bhaalist-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -10400,7 +9402,6 @@ entries  : [
 		{
 			title    : "Craterflesh Gloves",
 			id       : "Craterflesh-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "rare",
 			suggested: false,
@@ -10414,7 +9415,6 @@ entries  : [
 		{
 			title    : "Dread Iron Dagger",
 			id       : "Dread-Iron-Dagger",
-			completed: false,
 			categories : ["dagger"],
 			rarity   : "rare",
 			suggested: false,
@@ -10428,7 +9428,6 @@ entries  : [
 		{
 			title    : "Fleshrender",
 			id       : "Fleshrender",
-			completed: false,
 			categories : ["shortsword"],
 			rarity   : "rare",
 			suggested: false,
@@ -10442,7 +9441,6 @@ entries  : [
 		{
 			title    : "Vicious Battleaxe",
 			id       : "Vicious-Battleaxe",
-			completed: false,
 			categories : ["battleaxe"],
 			rarity   : "rare",
 			suggested: false,
@@ -10456,7 +9454,6 @@ entries  : [
 		{
 			title    : "Vicious Shortbow",
 			id       : "Vicious-Shortbow",
-			completed: false,
 			categories : ["shortbow"],
 			rarity   : "rare",
 			suggested: true,
@@ -10471,15 +9468,11 @@ entries  : [
 	{
 	title    : "Lower City Sewers",
 	id       : "Lower-City-Sewers",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Murderous Cut",
 			id       : "Murderous-Cut",
-			completed: false,
 			categories : ["dagger"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -10493,7 +9486,6 @@ entries  : [
 		{
 			title    : "Cindermoth Cloak",
 			id       : "Cindermoth-Cloak",
-			completed: false,
 			categories : ["cloak"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -10507,7 +9499,6 @@ entries  : [
 		{
 			title    : "Chancer's Carcanet",
 			id       : "Chancers-Carcanet",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "rare",
 			suggested: false,
@@ -10521,7 +9512,6 @@ entries  : [
 		{
 			title    : "Breaching Pikestaff",
 			id       : "Breaching-Pikestaff",
-			completed: false,
 			categories : ["pike"],
 			rarity   : "rare",
 			suggested: false,
@@ -10536,15 +9526,11 @@ entries  : [
 	{
 	title    : "Voiceless Penitent Bareki",
 	id       : "Voiceless-Penitent-Bareki",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "<span class='coordinates'>(X: -157 Y: 939)</span> He is found next to the Undercity Ruins waypoint.",
 	entries  : [
 		{
 			title    : "Armour of Moonbasking",
 			id       : "Armour-of-Moonbasking",
-			completed: false,
 			categories : ["light-armour"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -10558,7 +9544,6 @@ entries  : [
 		{
 			title    : "Bonespike Helmet",
 			id       : "Bonespike-Helmet",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -10573,15 +9558,11 @@ entries  : [
 	{
 	title    : "Bhaal Temple",
 	id       : "Bhaal-Temple",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Bonespike Gloves",
 			id       : "Bonespike-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -10595,7 +9576,6 @@ entries  : [
 		{
 			title    : "Bloodthirst",
 			id       : "Bloodthirst",
-			completed: false,
 			categories : ["dagger"],
 			rarity   : "legendary",
 			suggested: true,
@@ -10609,7 +9589,6 @@ entries  : [
 		{
 			title    : "Crimson Mischief",
 			id       : "Crimson-Mischief",
-			completed: false,
 			categories : ["shortsword"],
 			rarity   : "legendary",
 			suggested: true,
@@ -10623,7 +9602,6 @@ entries  : [
 		{
 			title    : "Mutilated Carapace",
 			id       : "Mutilated-Carapace",
-			completed: false,
 			categories : ["clothing"],
 			rarity   : "rare",
 			suggested: false,
@@ -10638,15 +9616,11 @@ entries  : [
 	{
 	title    : "House of Hope",
 	id       : "House-of-Hope",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Helldusk Helmet",
 			id       : "Helldusk-Helmet",
-			completed: false,
 			categories : ["helmet"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -10660,7 +9634,6 @@ entries  : [
 		{
 			title    : "Staff of Spellpower",
 			id       : "Staff-of-Spellpower",
-			completed: false,
 			categories : ["quarterstaff"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -10674,7 +9647,6 @@ entries  : [
 		{
 			title    : "Helldusk Gloves",
 			id       : "Helldusk-Gloves",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -10688,7 +9660,6 @@ entries  : [
 		{
 			title    : "Amulet of Greater Health",
 			id       : "Amulet-of-Greater-Health",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "very-rare",
 			suggested: true,
@@ -10702,7 +9673,6 @@ entries  : [
 		{
 			title    : "Gauntlets of Hill Giant Strength",
 			id       : "Gauntlets-of-Hill-Giant-Strength",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -10716,7 +9686,6 @@ entries  : [
 		{
 			title    : "Burnished Ring",
 			id       : "Burnished-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -10730,7 +9699,6 @@ entries  : [
 		{
 			title    : "Helldusk Armour",
 			id       : "Helldusk-Armour",
-			completed: false,
 			categories : ["heavy-armour"],
 			rarity   : "legendary",
 			suggested: true,
@@ -10744,7 +9712,6 @@ entries  : [
 		{
 			title    : "Gloves of Soul Catching",
 			id       : "Gloves-of-Soul-Catching",
-			completed: false,
 			categories : ["gloves"],
 			rarity   : "legendary",
 			suggested: true,
@@ -10758,7 +9725,6 @@ entries  : [
 		{
 			title    : "Amulet of Elemental Torment",
 			id       : "Amulet-of-Elemental-Torment",
-			completed: false,
 			categories : ["amulet"],
 			rarity   : "uncommon",
 			suggested: false,
@@ -10772,7 +9738,6 @@ entries  : [
 		{
 			title    : "Devotee's Mace",
 			id       : "Devotees-Mace",
-			completed: false,
 			categories : ["mace"],
 			rarity   : "legendary",
 			suggested: false,
@@ -10787,15 +9752,11 @@ entries  : [
 	{
 	title    : "Astral Plane",
 	id       : "Astral-Plane",
-	expanded : true,
-	progress : 0,
-	total    : 0,
 	tip      : "",
 	entries  : [
 		{
 			title    : "Orphic Ring",
 			id       : "Orphic-Ring",
-			completed: false,
 			categories : ["ring"],
 			rarity   : "very-rare",
 			suggested: false,
@@ -10808,10 +9769,3 @@ entries  : [
 		}
 	]}
 ]}];
-
-for (const act in entryData) {
-	for (const section in act.entries) {
-		section.total = section.entries.length;
-		act.total += section.total
-	}
-}
