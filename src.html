@@ -7,8 +7,10 @@
 <link rel="icon" href="./favicon.png"/>
 <link rel="stylesheet" href="./style.css"></style>
 <script src="https://unpkg.com/vue@3.5.13/dist/vue.global.js"></script>
+<script src="https://unpkg.com/vuex@4.0.0/dist/vuex.global.js"></script>
 <script src="./data.js"></script>
 <script>
+const { createStore } = Vuex;
 
 function get_difficulty_mod(difficulty) {
 	switch (difficulty) {
@@ -36,37 +38,38 @@ function get_final_price(value, persuasion_mod = 4, attitude = 0, difficulty = "
 document.addEventListener("DOMContentLoaded", () => {
 
 	const Entry = {
-		props: ["filters", "checked", "title", "id", "categories", "rarity", "suggested", "choice", "crafting", "exploit", "img", "link", "desc"],
+		props: ["title", "id", "categories", "rarity", "suggested", "choice", "crafting", "exploit", "img", "link", "desc", "filters"],
 		template: `
-<div :class="['entry', categories, rarity, {'top-tier': suggested, 'completed': completed}]" :id="id" v-show="visible">
-	<span class="checkbox"><input type="checkbox" v-model="completed"></span>
-	<span class="img" @click="completed = !completed"><img :src="img" width=50 height=50></span>
+<div :class="['entry', categories, rarity, {'top-tier': suggested, 'completed': $store.state.checkboxState[id]}]" :id="id" v-show="visible">
+	<span class="checkbox"><input type="checkbox" :checked="$store.state.checkboxState[id]" @change="$emit('toggleCheckbox')"></span>
+	<span class="img" @click="$emit('toggleCheckbox')"><img :src="img" width=50 height=50></span>
 	<span class="title"><a :href="link">{{ title }}</a></span>
 	<span class="desc" v-html="desc"></span>
 </div>
 `,
 		mounted() {
 			if (this.progress)
-				this.$emit("update:progress", 1, this.categories);
+				this.$emit("updateProgress", 1, this.categories);
 			if (this.total)
-				this.$emit("update:total", 1, this.categories);
+				this.$emit("updateTotal", 1, this.categories);
 		},
 		data() {
 			return {
-				completed: this.checked.includes(this.id)
+				completed: this.$store.state.checkboxState[this.id]
 			}
 		},
 		computed: {
 			visible() {
+				console.log("*");
 				for (const filter of this.filters) {
 					for (const cat of this.categories) {
-						if (filter.categories.includes(cat) && filter.enabled) {
+						if (filter.categories.includes(cat) && this.$store.state.filterState[filter.id]) {
 							return true;
 						}
 					}
 					for (const subfilter of filter.subfilters) {
 						for (const cat of this.categories) {
-							if (subfilter.categories.includes(cat) && filter.enabled) {
+							if (subfilter.categories.includes(cat) && this.$store.state.filterState[subfilter.id]) {
 								return true;
 							}
 						}
@@ -75,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				return false;
 			},
 			progress() {
-				return (this.visible && this.completed) ? 1 : 0;
+				return (this.visible && this.$store.state.checkboxState[this.id]) ? 1 : 0;
 			},
 			total() {
 				return (this.visible) ? 1 : 0;
@@ -83,29 +86,26 @@ document.addEventListener("DOMContentLoaded", () => {
 		},
 		watch: {
 			progress(newVal, oldVal) {
-				this.$emit("update:progress", newVal-oldVal, this.categories);
+				this.$emit("updateProgress", newVal-oldVal, this.categories);
 			},
 			total(newVal, oldVal) {
-				this.$emit("update:total", newVal-oldVal, this.categories);
-			},
-			completed(newVal, oldVal) {
-				this.$emit('update:completed', this.id);
-				this.$emit('save');
+				this.$emit("updateTotal", newVal-oldVal, this.categories);
 			}
 		}
 	}
 
 	const EntryContainer = {
-		props: ["filters", "checked", "collapsed", "title", "id", "tip", "entries"],
-		inject: ["countProgress", "countTotal"],
+// div class="container" :id="id" :class="{started: $store.state.countProgress[id] > 0, completed: $store.state.countProgress[id] == $store.state.countTotal[id], expanded: $store.state.expansionState[id]}" v-show="$store.state.countTotal[id] || preMount">
+// <span class="progress">{{ $store.state.countProgress[id] }}/{{ $store.state.countTotal[id] }}</span>
+		props: ["title", "id", "tip", "entries", "filters"],
 		template: `
 <div class="container" :id="id" :class="{started: progress > 0, completed: progress == total, expanded: expanded}" v-show="total || preMount">
 
 	<div class="header">
-		<span class="eye noselect" @click="expanded = !expanded; $emit('save');">👁️</span>
+		<span class="eye noselect" @click="expanded = !expanded; expandContent(expanded); $emit('toggleExpansion');">👁️</span>
 		<span class="title">{{ title }}</span>
-		<span class="progress">{{ progress }}/{{ total }}</span>
-		<span class="text-button noselect" @click="clearCheckboxes">Clear</span>
+		<span class="progress">{{ progress }}/{{total }}</span>
+		<span class="text-button noselect" @click="$emit('clearCheckboxes')">Clear</span>
 	</div>
 
 	<div ref="content" class="content">
@@ -116,17 +116,15 @@ document.addEventListener("DOMContentLoaded", () => {
 			ref="containers"
 			v-if="entries[0].entries !== undefined"
 			v-for="entry in entries"
-			:filters="filters"
-			:checked="checked"
-			:collapsed="collapsed"
 			:title="entry.title"
 			:id="entry.id"
+			:tip="entry.tip"
 			:entries="entry.entries"
-			@update:completed="id=>$emit('update:completed', id)"
-			@update:expanded="id=>$emit('update:expanded', id)"
-			@update:progress="updateProgress"
-			@update:total="updateTotal"
-			@save="id=>$emit('save')"
+			:filters="filters"
+			@toggleExpansion="$store.dispatch('toggleExpansionAndSave', entry)"
+			@clearCheckboxes="$store.dispatch('clearAllCheckboxesAndSave', entry)"
+			@updateProgress="updateProgress"
+			@updateTotal="updateTotal"
 			>
 		</EntryContainer>
 
@@ -134,8 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			ref="realEntries"
 			v-else
 			v-for="entry in entries"
-			:filters="filters"
-			:checked="checked"
 			:title="entry.title"
 			:id="entry.id"
 			:categories="entry.categories"
@@ -147,10 +143,10 @@ document.addEventListener("DOMContentLoaded", () => {
 			:img="entry.img"
 			:link="entry.link"
 			:desc="entry.desc"
-			@update:completed="id=>$emit('update:completed', id)"
-			@update:progress="updateProgress"
-			@update:total="updateTotal"
-			@save="id=>$emit('save')"
+			:filters="filters"
+			@toggleCheckbox="$store.dispatch('toggleCheckboxAndSave', entry)"
+			@updateProgress="updateProgress"
+			@updateTotal="updateTotal"
 			>
 		</Entry>
 	</div>
@@ -159,27 +155,27 @@ document.addEventListener("DOMContentLoaded", () => {
 		mounted() {
 			const contentDiv = this.$refs.content;
 			//contentDiv.style.maxHeight = contentDiv.scrollHeight + "px";
-			this.expandContent(this.expanded);
+			this.expandContent(this.$store.state.expansionState[this.id]);
 			this.preMount = false;
 		},
 		data() {
 			return {
 				progress: 0,
-				total : 0,
-				expanded: !this.collapsed.includes(this.id),
+				total: 0,
+				expanded: this.$store.state.expansionState[this.id],
 				preMount: true // needed to get correct scrollHeight during initial render
 			}
 		},
 		methods: {
 			updateProgress(amount, categories) {
 				this.progress += amount;
-				this.countProgress[this.id] = this.progress;
-				this.$emit("update:progress", amount, categories);
+				this.$store.state.countProgress[this.id] = this.progress;
+				this.$emit("updateProgress", amount, categories);
 			},
 			updateTotal(amount, categories) {
 				this.total += amount;
-				this.countTotal[this.id] = this.total;
-				this.$emit("update:total", amount, categories);
+				this.$store.state.countTotal[this.id] = this.total;
+				this.$emit("updateTotal", amount, categories);
 			},
 			expandContent(expand) {
 				const contentDiv = this.$refs.content;
@@ -188,44 +184,21 @@ document.addEventListener("DOMContentLoaded", () => {
 				} else {
 					contentDiv.style.maxHeight = "0px";
 				}
-			},
-			clearCheckboxes() {
-				console.log("in clearCheckboxes")
-				const _clearCheckboxes = (entries) => {
-					for (const entry of entries) {
-						if (entry.entries !== undefined) {
-							_clearCheckboxes(entry.entries)
-						} else if (this.checked.includes(entry.id)) {
-							console.log("emit: " + entry.id)
-							this.$emit('update:completed', entry.id);
-						}
-					}
-				}
-				_clearCheckboxes(this.entries)
-				this.$emit('save');
-			}
-		},
-		watch: {
-			expanded(newValue) {
-				this.expandContent(newValue);
-				this.$emit('update:expanded', this.id);
-				this.$emit('save');
 			}
 		}
 	}
 
 	const filterOption = {
 		props: ["filter"],
-		inject: ["countProgress", "countTotal"],
 		template: `
 <div class="category" tabindex="0" @focus="expandSubcategories(true)" @mouseover="expandSubcategories(true)" @blur="expandSubcategories(false)" @mouseout="expandSubcategories(false)">
-	<div class="filter category-filter main-filter" :class="{enabled: filter.enabled}">
-		<span class="eye" @click="toggleFilter(filter)">👁️</span>
+	<div class="filter category-filter main-filter" :class="{enabled: $store.state.filterState[filter.id]}">
+		<span class="eye" @click="$store.dispatch('toggleFilterAndSave', filter)">👁️</span>
 		<span>{{ filter.id }}</span>
 	</div>
 	<div ref="subcategories" class="subcategories">
-		<div v-for="subfilter in filter.subfilters" class="filter category-filter sub-filter" :class="{enabled: subfilter.enabled}">
-			<span class="eye" @click="toggleSubFilter(subfilter, filter)">👁️</span>
+		<div v-for="subfilter in filter.subfilters" class="filter category-filter sub-filter" :class="{enabled: $store.state.filterState[subfilter.id]}">
+			<span class="eye" @click="$store.dispatch('toggleFilterAndSave', subfilter)">👁️</span>
 			<span>{{ subfilter.id }}</span>
 		</div>
 
@@ -233,27 +206,6 @@ document.addEventListener("DOMContentLoaded", () => {
 </div>
 `,
 		methods: {
-			toggleFilter(filter) {
-				filter.enabled = !filter.enabled;
-				for (const subfilter of filter.subfilters) {
-					//if (subfilter.enabled != filter.enabled)
-					subfilter.enabled = filter.enabled;
-				}
-				this.$emit("update:disabled", filter.id);
-				this.$emit('save');
-			},
-			toggleSubFilter(subfilter, filter) {
-				subfilter.enabled = !subfilter.enabled;
-				const count = filter.subfilters.filter(sf => sf.enabled).length;
-				if (count == filter.subfilters.length) {
-					filter.enabled = true;
-				} else {
-					filter.enabled = false;
-				}
-				// TODO half-eye
-				this.$emit("update:disabled", subfilter.id);
-				this.$emit('save');
-			},
 			expandSubcategories(expand) {
 				const subcategoriesDiv = this.$refs.subcategories;
 				if (expand) {
@@ -274,13 +226,13 @@ document.addEventListener("DOMContentLoaded", () => {
 <div id="back-to-top" class="text-button noselect" @click="scrollToTop">Back to Top</div>
 
 <div id="TOC">
-	<ol v-for="act in acts">
+	<ol v-for="act in entryData.entries">
 		<li>
 			<ul>
-				<li v-for="section in act.entries" :class="{started: countProgress[section.id] > 0, completed: countProgress[section.id] == countTotal[section.id]}">
+				<li v-for="section in act.entries" :class="{started: $store.state.countProgress[section.id] > 0, completed: $store.state.countProgress[section.id] == $store.state.countTotal[section.id]}">
 					<span class="header">
 						<a :href="'#'+section.id">{{ section.title }}</a>
-						<span class="progress">{{ countProgress[section.id] }}/{{ countTotal[section.id] }}</span>
+						<span class="progress">{{ $store.state.countProgress[section.id] }}/{{ $store.state.countTotal[section.id] }}</span>
 					</span>
 				</li>
 			</ul>
@@ -290,65 +242,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <fieldset id="filters" class="noselect">
 	<legend>Filters</legend>
-	<filterOption v-for="filter in filters" :filter="filter" @update:disabled="toggleDisabled" @save="save"></filterOption>
+	<filterOption v-for="filter in filters" :filter="filter"></filterOption>
 </fieldset>
 
 <div id="search"></div>
 
 <EntryContainer
 	class="container"
-	:filters="filters"
-	:checked="checked"
-	:collapsed="collapsed"
 	:title="'All Items'"
-	:id="'table'"
-	:isExpanded="true"
+	:id="'BG3'"
 	:tip="''"
-	:entries="acts"
-	@update:completed="toggleCompleted"
-	@update:expanded="toggleCollapsed"
-	@save="save"
+	:entries="entryData.entries"
+	:filters="filters"
+	@toggleExpansion="$store.dispatch('toggleExpansionAndSave', entryData)"
+	@clearCheckboxes="$store.dispatch('clearAllCheckboxesAndSave', entryData)"
 	>
 </EntryContainer>
 `,
 		data() {
-			const checked   = (localStorage.getItem("checked") || "").split(",");
-			const collapsed = (localStorage.getItem("collapsed") || "").split(",");
-			const disabled  = (localStorage.getItem("disabled") || "").split(",");
-
-			const countProgress = {}
-			const countTotal = {}
-			for (const act of entryData) {
-				for (const section of act.entries) {
-					countProgress[section.id] = 0
-					countTotal[section.id] = 0
-				}
-			}
-
 			return {
-				acts    : entryData,
-				filters : filters,
-				checked : checked,
-				collapsed : collapsed,
-				disabled : disabled,
-				countProgress: countProgress,
-				countTotal: countTotal
+				entryData : entryData,
+				filters   : filters
 			};
 		},
-		provide() {
-
-			return {
-				countProgress: this.countProgress,
-				countTotal: this.countTotal
-			}
-
-		},
 		mounted() {
-			console.log("mounted");
-			//this.loadChecked();
-			//this.loadCollapsed();
-			//this.loadDisabled();
-
 			const backToTop = document.getElementById("back-to-top");
 			window.addEventListener("scroll", () => {
 				if (window.scrollY > 1200) {
@@ -383,154 +300,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			};
 		},
 		methods: {
-			toggleCompleted(id) {
-				const index = this.checked.indexOf(id);
-				if (index > -1) {
-					this.checked.splice(index, 1);
-				} else {
-					this.checked.push(id);
-				}
-			},
-			toggleCollapsed(id) {
-				const index = this.collapsed.indexOf(id);
-				if (index > -1) {
-					this.collapsed.splice(index, 1);
-				} else {
-					this.collapsed.push(id);
-				}
-			},
-			toggleDisabled(id) {
-				const index = this.disabled.indexOf(id);
-				if (index > -1) {
-					this.disabled.splice(index, 1);
-				} else {
-					this.disabled.push(id);
-				}
-			},
-			save() {
-				console.log("save")
-				let data = this.checked.join(",");
-				localStorage.setItem("checked", data);
-				data = this.collapsed.join(",");
-				localStorage.setItem("collapsed", data);
-				data = this.disabled.join(",");
-				localStorage.setItem("disabled", data);
-			},
-
-
-
-
-
-
-
-
-			loadChecked() {
-				let checked = localStorage.getItem("checked") || "";
-				checked = checked.split(",");
-				for (const act of this.acts) {
-					for (const section of act.entries) {
-						for (const entry of section.entries) {
-							if (checked.includes(entry.id)) {
-								entry.completed = true;
-								//section.progress++;
-								//act.progress++;
-							}
-						}
-					}
-				}
-			},
-			loadCollapsed() {
-				let collapsed = localStorage.getItem("collapsed") || "";
-				collapsed = collapsed.split(",");
-				for (const act of this.acts) {
-					if (collapsed.includes(act.id)) {
-						act.expanded = !act.expanded;
-					}
-					for (const section of act.entries) {
-						if (collapsed.includes(section.id)) {
-							section.expanded = !section.expanded;
-						}
-					}
-				}
-			},
-			loadDisabled() {
-				let toggledFilters = localStorage.getItem("disabled") || "";
-				toggledFilters = toggledFilters.split(",");
-				for (const filter of this.filters) {
-					if (toggledFilters.includes(filter.title)) {
-						filter.enabled = !filter.enabled;
-					}
-					for (const subfilter of filter.subfilters) {
-						if (toggledFilters.includes(subfilter.title)) {
-							subfilter.enabled = !subfilter.enabled;
-						}
-					}
-				}
-			},
-			saveCheckboxes() {
-				console.log("saving checkboxes");
-				// save to local storage
-				let data = [];
-				for (const act of this.acts) {
-					for (const section of act.entries) {
-						for (const entry of section.entries) {
-							if (entry.completed) {
-								data.push(entry.id);
-							}
-						}
-					}
-				}
-				data = data.join(",");
-				localStorage.setItem("checked", data);
-			},
-			saveCollapsed() {
-				// save to local storage
-				let data = [];
-				for (const act of this.acts) {
-					if (!act.expanded) {
-						data.push(act.id);
-					}
-					for (const section of act.entries) {
-						if (!section.expanded) {
-							data.push(section.id);
-						}
-					}
-				}
-				data = data.join(",");
-				localStorage.setItem("collapsed", data);
-			},
-			saveDisabled() {
-				// save to local storage
-				let data = [];
-				for (const filter of this.filters) {
-					if (!filter.enabled) {
-						data.push(filter.title);
-					}
-					for (const subfilter of filter.subfilters) {
-						if (!subfilter.enabled) {
-							data.push(subfilter.title);
-						}
-					}
-				}
-				data = data.join(",");
-				localStorage.setItem("disabled", data);
-			},
 			scrollToTop() {
 				window.scrollTo({top: 0, behavior: 'smooth'});
-			}
-		},
-		watch: {
-			checked() {
-				console.log("saving checked");
-				save();
-			},
-			collapsed() {
-				console.log("saving collapsed");
-				save();
-			},
-			disabled() {
-				console.log("saving disabled");
-				save();
 			}
 		}
 	});
@@ -538,6 +309,140 @@ document.addEventListener("DOMContentLoaded", () => {
 	app.component("filterOption", filterOption);
 	app.component("Entry", Entry);
 	app.component("EntryContainer", EntryContainer);
+
+
+
+
+
+
+
+
+	const setParentRefs = (container, childrenProperty) => {
+		if (container[childrenProperty] !== undefined) {
+			for (const entry of container[childrenProperty]) {
+				entry.parent = container;
+				setParentRefs(entry, childrenProperty);
+			}
+		}
+	}
+	setParentRefs(entryData, "entries");
+	for (const filter of filters) 
+		setParentRefs(filter, "subfilters");
+
+	const checked   = (localStorage.getItem("checked")   || "").split(",");
+	const collapsed = (localStorage.getItem("collapsed") || "").split(",");
+	const disabled  = (localStorage.getItem("disabled")  || "").split(",");
+
+	const filterState = {};
+	const expansionState = {};
+	const checkboxState = {};
+
+	const countProgress = {}
+	const countTotal = {}
+
+	for (const filter of filters) {
+		filterState[filter.id] = !disabled.includes(filter.id);
+		for (const subfilter of filter.subfilters) {
+			filterState[subfilter.id] = !disabled.includes(subfilter.id);
+		}
+	}
+
+	const fillState = (entry) => {
+		if (entry.entries === undefined) {
+			checkboxState[entry.id] = checked.includes(entry.id);
+		} else {
+			countProgress[entry.id] = 0
+			countTotal[entry.id] = 0
+			expansionState[entry.id] = !collapsed.includes(entry.id);
+			//console.log(entry.id +": "+!collapsed.includes(entry.id))
+			for (const entry2 of entry.entries) {
+				fillState(entry2);
+			}
+		}
+	}
+	fillState(entryData);
+
+	const store = createStore({
+		state () {
+			return {
+				filterState: filterState,
+				expansionState: expansionState,
+				checkboxState: checkboxState,
+				
+				countProgress: countProgress,
+				countTotal: countTotal
+			}
+		},
+		mutations: {
+			toggleFilter (state, filter) {
+				state.filterState[filter.id] = !state.filterState[filter.id];
+
+				if (filter.parent === undefined) {
+					for (const subfilter of filter.subfilters) {
+						state.filterState[subfilter.id] = state.filterState[filter.id];
+					}
+				} else {
+					const count = filter.parent.subfilters.filter(sf => state.filterState[sf.id]).length;
+					if (count == filter.parent.subfilters.length) {
+						state.filterState[filter.parent.id] = true;
+					} else {
+						state.filterState[filter.parent.id] = false;
+					}
+				}
+			},
+			toggleExpansion (state, container) {
+				state.expansionState[container.id] = !state.expansionState[container.id];
+			},
+			toggleCheckbox (state, entry) {
+				state.checkboxState[entry.id] = !state.checkboxState[entry.id];
+			},
+			clearAllCheckboxes (state, container) {
+				const clear = (container) => {
+					for (const entry of container.entries) {
+						if (entry.entries === undefined) {
+							state.checkboxState[entry.id] = false;
+						} else {
+							clear(entry);
+						}
+					}
+				}
+				clear(container);
+			}
+		},
+		actions: {
+			toggleFilterAndSave({ commit, state }, payload) {
+				commit("toggleFilter", payload);
+
+				let obj = state.filterState;
+				console.log(obj)
+				let data = Object.keys(obj).filter(key => obj[key] === false).join(",");
+				localStorage.setItem("disabled", data);
+			},
+			toggleExpansionAndSave({ commit, state }, payload) {
+				commit("toggleExpansion", payload);
+
+				let obj = state.expansionState;
+				let data = Object.keys(obj).filter(key => obj[key] === false).join(",");
+				localStorage.setItem("collapsed", data);
+			},
+			toggleCheckboxAndSave({ commit, state }, payload) {
+				commit("toggleCheckbox", payload);
+
+				let obj = state.checkboxState;
+				let data = Object.keys(obj).filter(key => obj[key] === true).join(",");
+				localStorage.setItem("checked", data);
+			},
+			clearAllCheckboxesAndSave({ commit, state }, payload) {
+				commit("clearAllCheckboxes", payload);
+
+				let obj = state.checkboxState;
+				let data = Object.keys(obj).filter(key => obj[key] === true).join(",");
+				localStorage.setItem("checked", data);
+			}
+		}
+	})
+
+	app.use(store)
 
 	app.mount("#app");
 });
