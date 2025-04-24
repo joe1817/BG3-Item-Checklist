@@ -53,14 +53,11 @@ document.addEventListener("DOMContentLoaded", () => {
 			if (this.total)
 				this.$emit("updateTotal", 1, this.categories);
 		},
-		data() {
-			return {
-				completed: this.$store.state.checkboxState[this.id]
-			}
-		},
 		computed: {
 			visible() {
-				console.log("*");
+				if (this.$store.state.checkboxState[this.id] && !this.$store.state.showCompleteState) {
+					return false;
+				}
 				for (const filter of this.filters) {
 					for (const cat of this.categories) {
 						if (filter.categories.includes(cat) && this.$store.state.filterState[filter.id]) {
@@ -99,10 +96,10 @@ document.addEventListener("DOMContentLoaded", () => {
 // <span class="progress">{{ $store.state.countProgress[id] }}/{{ $store.state.countTotal[id] }}</span>
 		props: ["title", "id", "tip", "entries", "filters"],
 		template: `
-<div class="container" :id="id" :class="{started: progress > 0, completed: progress == total, expanded: expanded}" v-show="total || preMount">
+<div class="container" :id="id" :class="{started: progress > 0, completed: progress == total, expanded: this.$store.state.expansionState[id]}" v-show="total || preMount">
 
 	<div class="header">
-		<span class="eye noselect" @click="expanded = !expanded; expandContent(expanded); $emit('toggleExpansion');">👁️</span>
+		<span class="eye noselect" @click="expandContent(!this.$store.state.expansionState[id]); $emit('toggleExpansion');">👁️</span>
 		<span class="title">{{ title }}</span>
 		<span class="progress">{{ progress }}/{{total }}</span>
 		<span class="text-button noselect" @click="$emit('clearCheckboxes')">Clear</span>
@@ -162,7 +159,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			return {
 				progress: 0,
 				total: 0,
-				expanded: this.$store.state.expansionState[this.id],
 				preMount: true // needed to get correct scrollHeight during initial render
 			}
 		},
@@ -176,6 +172,10 @@ document.addEventListener("DOMContentLoaded", () => {
 				this.total += amount;
 				this.$store.state.countTotal[this.id] = this.total;
 				this.$emit("updateTotal", amount, categories);
+				// ensure entry has actually become visible before updating height
+				this.$nextTick(() => {
+					this.expandContent(this.$store.state.expansionState[this.id]);
+				});
 			},
 			expandContent(expand) {
 				const contentDiv = this.$refs.content;
@@ -240,10 +240,20 @@ document.addEventListener("DOMContentLoaded", () => {
 	</ol>
 </div>
 
-<fieldset id="filters" class="noselect">
-	<legend>Filters</legend>
-	<filterOption v-for="filter in filters" :filter="filter"></filterOption>
-</fieldset>
+<div id="options">
+	<fieldset id="filters" class="noselect">
+		<legend>Filters</legend>
+		<filterOption v-for="filter in filters" :filter="filter"></filterOption>
+	</fieldset>
+
+	<fieldset id="more-options" class="noselect">
+		<legend>More Options</legend>
+		<div class="filter" :class="{enabled: $store.state.showCompleteState}">
+			<span class="eye" @click="$store.dispatch('toggleHideCompleteAndSave')">👁️</span>
+			<span>Show Completed</span>
+		</div>
+	</fieldset>
+</div>
 
 <div id="search"></div>
 
@@ -332,6 +342,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const checked   = (localStorage.getItem("checked")   || "").split(",");
 	const collapsed = (localStorage.getItem("collapsed") || "").split(",");
 	const disabled  = (localStorage.getItem("disabled")  || "").split(",");
+	const showComplete  = (localStorage.getItem("showComplete") == "false") ? false : true;
 
 	const filterState = {};
 	const expansionState = {};
@@ -354,7 +365,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			countProgress[entry.id] = 0
 			countTotal[entry.id] = 0
 			expansionState[entry.id] = !collapsed.includes(entry.id);
-			//console.log(entry.id +": "+!collapsed.includes(entry.id))
 			for (const entry2 of entry.entries) {
 				fillState(entry2);
 			}
@@ -363,18 +373,19 @@ document.addEventListener("DOMContentLoaded", () => {
 	fillState(entryData);
 
 	const store = createStore({
-		state () {
+		state() {
 			return {
 				filterState: filterState,
 				expansionState: expansionState,
-				checkboxState: checkboxState,
+				checkboxState: checkboxState,				
+				showCompleteState: showComplete,
 				
 				countProgress: countProgress,
 				countTotal: countTotal
 			}
 		},
 		mutations: {
-			toggleFilter (state, filter) {
+			toggleFilter(state, filter) {
 				state.filterState[filter.id] = !state.filterState[filter.id];
 
 				if (filter.parent === undefined) {
@@ -390,13 +401,16 @@ document.addEventListener("DOMContentLoaded", () => {
 					}
 				}
 			},
-			toggleExpansion (state, container) {
+			toggleExpansion(state, container) {
 				state.expansionState[container.id] = !state.expansionState[container.id];
 			},
-			toggleCheckbox (state, entry) {
+			toggleCheckbox(state, entry) {
 				state.checkboxState[entry.id] = !state.checkboxState[entry.id];
 			},
-			clearAllCheckboxes (state, container) {
+			toggleHideComplete(state) {
+				state.showCompleteState = !state.showCompleteState;
+			},
+			clearAllCheckboxes(state, container) {
 				const clear = (container) => {
 					for (const entry of container.entries) {
 						if (entry.entries === undefined) {
@@ -414,7 +428,6 @@ document.addEventListener("DOMContentLoaded", () => {
 				commit("toggleFilter", payload);
 
 				let obj = state.filterState;
-				console.log(obj)
 				let data = Object.keys(obj).filter(key => obj[key] === false).join(",");
 				localStorage.setItem("disabled", data);
 			},
@@ -431,6 +444,11 @@ document.addEventListener("DOMContentLoaded", () => {
 				let obj = state.checkboxState;
 				let data = Object.keys(obj).filter(key => obj[key] === true).join(",");
 				localStorage.setItem("checked", data);
+			},
+			toggleHideCompleteAndSave({ commit, state }) {
+				commit("toggleHideComplete");
+
+				localStorage.setItem("showComplete", state.showCompleteState);
 			},
 			clearAllCheckboxesAndSave({ commit, state }, payload) {
 				commit("clearAllCheckboxes", payload);
