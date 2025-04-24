@@ -38,7 +38,8 @@ function get_final_price(value, persuasion_mod = 4, attitude = 0, difficulty = "
 document.addEventListener("DOMContentLoaded", () => {
 
 	const Entry = {
-		props: ["title", "id", "categories", "rarity", "suggested", "choice", "crafting", "exploit", "img", "link", "desc", "filters"],
+		props: ["title", "id", "categories", "rarity", "suggested", "choice", "crafting", "exploit", "img", "link", "desc"],
+		inject: ["filters"],
 		template: `
 <div :class="['entry', categories, rarity, {'top-tier': suggested, 'completed': $store.state.checkboxState[id]}]" :id="id" v-show="visible">
 	<span class="checkbox"><input type="checkbox" :checked="$store.state.checkboxState[id]" @change="$emit('toggleCheckbox')"></span>
@@ -92,9 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	const EntryContainer = {
-// div class="container" :id="id" :class="{started: $store.state.countProgress[id] > 0, completed: $store.state.countProgress[id] == $store.state.countTotal[id], expanded: $store.state.expansionState[id]}" v-show="$store.state.countTotal[id] || preMount">
-// <span class="progress">{{ $store.state.countProgress[id] }}/{{ $store.state.countTotal[id] }}</span>
-		props: ["title", "id", "tip", "entries", "filters"],
+		props: ["title", "id", "tip", "entries"],
 		template: `
 <div class="container" :id="id" :class="{started: progress > 0, completed: progress == total, expanded: this.$store.state.expansionState[id]}" v-show="total || preMount">
 
@@ -110,23 +109,20 @@ document.addEventListener("DOMContentLoaded", () => {
 		<div v-if="tip" class="tip" v-html="tip"></div>
 
 		<EntryContainer
-			ref="containers"
 			v-if="entries[0].entries !== undefined"
 			v-for="entry in entries"
 			:title="entry.title"
 			:id="entry.id"
 			:tip="entry.tip"
 			:entries="entry.entries"
-			:filters="filters"
 			@toggleExpansion="$store.dispatch('toggleExpansionAndSave', entry)"
 			@clearCheckboxes="$store.dispatch('clearAllCheckboxesAndSave', entry)"
 			@updateProgress="updateProgress"
 			@updateTotal="updateTotal"
-			>
+		>
 		</EntryContainer>
 
 		<Entry
-			ref="realEntries"
 			v-else
 			v-for="entry in entries"
 			:title="entry.title"
@@ -140,11 +136,10 @@ document.addEventListener("DOMContentLoaded", () => {
 			:img="entry.img"
 			:link="entry.link"
 			:desc="entry.desc"
-			:filters="filters"
 			@toggleCheckbox="$store.dispatch('toggleCheckboxAndSave', entry)"
 			@updateProgress="updateProgress"
 			@updateTotal="updateTotal"
-			>
+		>
 		</Entry>
 	</div>
 </div>
@@ -258,15 +253,13 @@ document.addEventListener("DOMContentLoaded", () => {
 <div id="search"></div>
 
 <EntryContainer
-	class="container"
 	:title="'All Items'"
 	:id="'BG3'"
 	:tip="''"
 	:entries="entryData.entries"
-	:filters="filters"
 	@toggleExpansion="$store.dispatch('toggleExpansionAndSave', entryData)"
 	@clearCheckboxes="$store.dispatch('clearAllCheckboxesAndSave', entryData)"
-	>
+>
 </EntryContainer>
 `,
 		data() {
@@ -274,6 +267,11 @@ document.addEventListener("DOMContentLoaded", () => {
 				entryData : entryData,
 				filters   : filters
 			};
+		},
+		provide() {
+			return {
+				filters : this.filters
+			}
 		},
 		mounted() {
 			const backToTop = document.getElementById("back-to-top");
