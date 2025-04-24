@@ -55,7 +55,7 @@ const filters = [];
 const entryData = 
 {	
 title    : "All Items",
-id       : "BG3",
+id       : "all-items",
 entries  : [
 	{
 	title    : "Act 1",

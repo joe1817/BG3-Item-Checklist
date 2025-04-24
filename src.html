@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const EntryContainer = {
 		props: ["title", "id", "tip", "entries"],
 		template: `
-<div class="container" :id="id" :class="{started: progress > 0, completed: progress == total, expanded: this.$store.state.expansionState[id]}" v-show="total || preMount">
+<div :id="id" :class="[(entries[0].entries !== undefined) ? 'meta-container':'container', {started: progress, completed: progress == total, expanded: this.$store.state.expansionState[id]}]" v-show="total || preMount">
 
 	<div class="header">
 		<span class="eye noselect" @click="expandContent(!this.$store.state.expansionState[id]); $emit('toggleExpansion');">👁️</span>
@@ -186,23 +186,40 @@ document.addEventListener("DOMContentLoaded", () => {
 	const filterOption = {
 		props: ["filter"],
 		template: `
-<div class="category" tabindex="0" @focus="expandSubcategories(true)" @mouseover="expandSubcategories(true)" @blur="expandSubcategories(false)" @mouseout="expandSubcategories(false)">
-	<div class="filter category-filter main-filter" :class="{enabled: $store.state.filterState[filter.id]}">
-		<span class="eye" @click="$store.dispatch('toggleFilterAndSave', filter)">👁️</span>
+<div class="filter" @mouseover="mouse=true; expandSubcategories(true)" @mouseout="expandSubcategories(false)" @blur="expandSubcategories(false)">
+	<div
+		class="toggle-button"
+		:class="{
+			enabled: (filter.subfilters.length == 0 && $store.state.filterState[filter.id]) || filter.subfilters.some(sf => $store.state.filterState[sf.id]),
+			'fully-enabled': (filter.subfilters.length == 0 && $store.state.filterState[filter.id]) || (filter.subfilters.length && filter.subfilters.every(sf => $store.state.filterState[sf.id]))
+		}"
+		@click="mouse ? $store.dispatch('toggleFilterAndSave', filter) : expandSubcategories(true)"
+	>
+		<span class="eye" @click="mouse ? null : $store.dispatch('toggleFilterAndSave', filter)">👁️</span>
 		<span>{{ filter.id }}</span>
 	</div>
-	<div ref="subcategories" class="subcategories">
-		<div v-for="subfilter in filter.subfilters" class="filter category-filter sub-filter" :class="{enabled: $store.state.filterState[subfilter.id]}">
-			<span class="eye" @click="$store.dispatch('toggleFilterAndSave', subfilter)">👁️</span>
+	<div ref="subfilters" class="subfilters">
+		<div
+			v-for="subfilter in filter.subfilters"
+			class="toggle-button"
+			:class="{enabled: $store.state.filterState[subfilter.id], 'fully-enabled': $store.state.filterState[subfilter.id]}"
+			@click="$store.dispatch('toggleFilterAndSave', subfilter)"
+		>
+			<span class="eye">👁️</span>
 			<span>{{ subfilter.id }}</span>
 		</div>
 
 	</div>
 </div>
 `,
+		data() {
+			return {
+				mouse: false
+			}
+		},
 		methods: {
 			expandSubcategories(expand) {
-				const subcategoriesDiv = this.$refs.subcategories;
+				const subcategoriesDiv = this.$refs.subfilters;
 				if (expand) {
 					subcategoriesDiv.style.maxHeight = subcategoriesDiv.scrollHeight + "px";
 				} else {
@@ -214,9 +231,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	const app = Vue.createApp({
 		template: `
-<h1 class="center">BG3 Item Checklist</h1>
-<p class="center"><a href="https://github.com/joe1817/BG3-Item-Checklist">GitHub</a></p>
-<h2 class="center">Table of Contents</h2>
+<h1>BG3 Item Checklist</h1>
+<p><a href="https://github.com/joe1817/BG3-Item-Checklist">GitHub</a></p>
+<h2>Table of Contents</h2>
 
 <div id="back-to-top" class="text-button noselect" @click="scrollToTop">Back to Top</div>
 
@@ -224,9 +241,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	<ol v-for="act in entryData.entries">
 		<li>
 			<ul>
-				<li v-for="section in act.entries" :class="{started: $store.state.countProgress[section.id] > 0, completed: $store.state.countProgress[section.id] == $store.state.countTotal[section.id]}">
+				<li v-for="section in act.entries" :class="{started: $store.state.countProgress[section.id], completed: $store.state.countProgress[section.id] == $store.state.countTotal[section.id], active: $store.state.countTotal[section.id]}">
 					<span class="header">
-						<a :href="'#'+section.id">{{ section.title }}</a>
+						<a v-if="$store.state.countTotal[section.id]" :href="'#'+section.id">{{ section.title }}</a>
+						<span v-else>{{ section.title }}</span>
 						<span class="progress">{{ $store.state.countProgress[section.id] }}/{{ $store.state.countTotal[section.id] }}</span>
 					</span>
 				</li>
@@ -243,8 +261,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	<fieldset id="more-options" class="noselect">
 		<legend>More Options</legend>
-		<div class="filter" :class="{enabled: $store.state.showCompleteState}">
-			<span class="eye" @click="$store.dispatch('toggleHideCompleteAndSave')">👁️</span>
+		<div class="toggle-button"
+			:class="{enabled: $store.state.showCompleteState, 'fully-enabled': $store.state.showCompleteState}"
+			@click="$store.dispatch('toggleHideCompleteAndSave')"
+		>
+			<span class="eye">👁️</span>
 			<span>Show Completed</span>
 		</div>
 	</fieldset>
@@ -252,15 +273,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <div id="search"></div>
 
-<EntryContainer
-	:title="'All Items'"
-	:id="'BG3'"
-	:tip="''"
-	:entries="entryData.entries"
-	@toggleExpansion="$store.dispatch('toggleExpansionAndSave', entryData)"
-	@clearCheckboxes="$store.dispatch('clearAllCheckboxesAndSave', entryData)"
->
-</EntryContainer>
+<div id="table">
+	<EntryContainer
+		:title="'All Items'"
+		:id="'all-items'"
+		:tip="''"
+		:entries="entryData.entries"
+		@toggleExpansion="$store.dispatch('toggleExpansionAndSave', entryData)"
+		@clearCheckboxes="$store.dispatch('clearAllCheckboxesAndSave', entryData)"
+	>
+	</EntryContainer>
+</div>
 `,
 		data() {
 			return {
