@@ -63,6 +63,9 @@ const Entry = {
 	},
 	computed: {
 		visible() {
+			if (this.$store.state.searchString.length && !this.desc.toLowerCase().includes(this.$store.state.searchString)) {
+				return false;
+			}
 			if (this.$store.state.checkboxState[this.id] && !this.$store.state.showCompleteState) {
 				return false;
 			}
@@ -276,9 +279,21 @@ const app = Vue.createApp({
 		<span>Show Completed</span>
 	</div>
 </fieldset>
-</div>
 
-<div id="search"></div>
+<fieldset id="search">
+	<legend>Search</legend>
+	<div class="search-input-wrapper">
+		<input
+			type="text"
+			ref="searchBar"
+			class="search-input"
+			@keyup ="$store.commit('updateSearchString', $event.target.value.toLowerCase())"
+			placeholder="Search..."
+		>
+		<button class="clear-button" @click="$refs.searchBar.value=''; $store.commit('updateSearchString', '')">×</button>
+	</div>
+</fieldset>
+</div>
 
 <div id="table">
 <EntryContainer
@@ -397,6 +412,7 @@ const store = createStore({
 			checkboxState: checkboxState,
 			showCompleteState: showComplete,
 
+			searchString: "",
 			countProgress: countProgress,
 			countTotal: countTotal
 		}
@@ -438,6 +454,9 @@ const store = createStore({
 				}
 			}
 			clear(container);
+		},
+		updateSearchString(state, s) {
+			state.searchString = s;
 		}
 	},
 	actions: {
