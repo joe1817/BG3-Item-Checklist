@@ -355,8 +355,8 @@ fieldset {
 	}
 }
 
-.hidden {
-	display: none;
+.highlighted {
+	background-color: rgba(0, 96, 223, 0.7);
 }
 
 .noselect {

@@ -11,6 +11,7 @@
 <script src="https://unpkg.com/vuex@4.0.0/dist/vuex.global.js"></script>
 <script src="./data.js"></script>
 <script src="./loadSprites.js"></script>
+<script src="./highlight.js"></script>
 </head>
 
 <body>
@@ -52,7 +53,7 @@ const Entry = {
 <span class="checkbox"><input type="checkbox" :checked="$store.state.checkboxState[id]" @change="$emit('toggleCheckbox')"></span>
 <span class="img" @click="$emit('toggleCheckbox')"><img :src="img" width=50 height=50></span>
 <span class="title"><a :href="link">{{ title }}</a></span>
-<span class="desc" v-html="desc"></span>
+<span class="desc" v-html="highlight(desc)"></span>
 </div>
 `,
 	mounted() {
@@ -60,6 +61,17 @@ const Entry = {
 			this.$emit("updateProgress", 1, this.categories);
 		if (this.total)
 			this.$emit("updateTotal", 1, this.categories);
+	},
+	methods: {		
+		highlight(text){
+			if (!this.$store.state.searchString) {
+				return text;
+			} else if (text.toLowerCase().includes(this.$store.state.searchString)) {
+				return highlightSubstring(text, this.$store.state.searchString)
+			} else {
+				return text;
+			}
+		}
 	},
 	computed: {
 		visible() {
