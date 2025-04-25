@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			expandContent(expand) {
 				const contentDiv = this.$refs.content;
 				if (expand) {
-					contentDiv.style.maxHeight = contentDiv.scrollHeight + "px";
+					contentDiv.style.maxHeight = null; //contentDiv.scrollHeight + "px"; // TODO transitioning open is causing a lot of height errors
 				} else {
 					contentDiv.style.maxHeight = "0px";
 				}
