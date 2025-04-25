@@ -345,7 +345,7 @@ a:hover {
 
 #back-to-top {
 	padding: 10px;
-	display: none;
+	visibility: hidden;
 	position: fixed;
 	bottom: 20px;
 	right: 20px;
@@ -353,10 +353,5 @@ a:hover {
 	border: none;
 	cursor: pointer;
 	opacity: 0;
-	transition: opacity 0.3s ease-in-out;
-}
-
-#back-to-top.show {
-	display: block;
-	opacity: 1;
+	transition: opacity 0.2s ease-in-out;
 }

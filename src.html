@@ -300,9 +300,15 @@ document.addEventListener("DOMContentLoaded", () => {
 			const backToTop = document.getElementById("back-to-top");
 			window.addEventListener("scroll", () => {
 				if (window.scrollY > 1200) {
-					backToTop.classList.add("show");
+					backToTop.style.visibility = "visible";
+					backToTop.style.opacity = 1;
 				} else {
-					backToTop.classList.remove("show");
+					backToTop.style.opacity = 0;
+					setTimeout(() => {
+						if (backToTop.style.opacity === 0) {
+							backToTop.style.visibility = "hidden";
+						}
+					}, 200);
 				}
 			});
 
@@ -357,7 +363,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	}
 	setParentRefs(entryData, "entries");
-	for (const filter of filters) 
+	for (const filter of filters)
 		setParentRefs(filter, "subfilters");
 
 	const checked   = (localStorage.getItem("checked")   || "").split(",");
@@ -398,9 +404,9 @@ document.addEventListener("DOMContentLoaded", () => {
 			return {
 				filterState: filterState,
 				expansionState: expansionState,
-				checkboxState: checkboxState,				
+				checkboxState: checkboxState,
 				showCompleteState: showComplete,
-				
+
 				countProgress: countProgress,
 				countTotal: countTotal
 			}
