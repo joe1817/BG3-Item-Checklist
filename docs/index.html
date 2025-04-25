@@ -252,11 +252,9 @@ const app = Vue.createApp({
 	<li>
 		<ul>
 			<li v-for="section in act.entries" :class="{started: $store.state.countProgress[section.id], completed: $store.state.countProgress[section.id] == $store.state.countTotal[section.id], active: $store.state.countTotal[section.id]}">
-				<span class="header">
-					<a v-if="$store.state.countTotal[section.id]" :href="'#'+section.id">{{ section.title }}</a>
-					<span v-else>{{ section.title }}</span>
-					<span class="progress">{{ $store.state.countProgress[section.id] }}/{{ $store.state.countTotal[section.id] }}</span>
-				</span>
+				<a v-if="$store.state.countTotal[section.id]" :href="'#'+section.id">{{ section.title }}</a>
+				<span v-else>{{ section.title }}</span>
+				<span class="progress">{{ $store.state.countProgress[section.id] }}/{{ $store.state.countTotal[section.id] }}</span>
 			</li>
 		</ul>
 	</li>
