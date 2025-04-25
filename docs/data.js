@@ -581,7 +581,7 @@ entries : [
 				exploit    : false,
 				img        : "imgs/Scroll of True Resurrection.png",
 				link       : "https://bg3.wiki/wiki/Scroll_of_True_Resurrection",
-				desc       : "Obtained by following Gale's revival protocol after he dies. You can keep the scroll for later by simply having Withers revive Gale. The scroll is unobtainable after Gale is revived this way."
+				desc       : "Obtained by following Gale's revival protocol after he dies. You can then keep the scroll for later by simply reviving Gale through Withers. (Note: You must obtain the scroll before employing Withers' services; it becomes unobtainable after Gale is revived the first time.)"
 			},
 			{
 				title      : "Gloves of Power",
