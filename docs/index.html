@@ -49,7 +49,7 @@ const Entry = {
 	props: ["entry"],
 	inject: ["filters"],
 	template: `
-<div :class="['entry', entry.categories, entry.rarity, {'top-tier': entry.suggested, 'completed': $store.state.checkboxState[entry.id]}]" :id="entry.id" v-show="visible">
+<div ref="content" :class="['entry', entry.categories, entry.rarity, {'top-tier': entry.suggested, 'completed': $store.state.checkboxState[entry.id]}]" :id="entry.id" v-show="visible || preMount">
 <span class="checkbox"><input type="checkbox" :checked="$store.state.checkboxState[entry.id]" @change="$emit('toggleCheckbox')"></span>
 <span class="img" @click="$emit('toggleCheckbox')"><img :src="entry.img" width=50 height=50></span>
 <span class="title"><a :href="entry.link">{{ entry.title }}</a></span>
@@ -61,6 +61,14 @@ const Entry = {
 			this.$emit("updateProgress", 1, this.entry.categories);
 		if (this.total)
 			this.$emit("updateTotal", 1, this.entry.categories);
+		this.height = this.$refs.content.scrollHeight;
+		this.preMount = false;
+	},
+	data() {
+		return {
+			preMount: true,
+			height: null
+		}
 	},
 	methods: {		
 		highlight(text){
@@ -110,6 +118,13 @@ const Entry = {
 		},
 		total(newVal, oldVal) {
 			this.$emit("updateTotal", newVal-oldVal, this.entry.categories);
+		},
+		visible(newVal, oldVal) {
+			if (newVal) {
+				this.$emit("updateHeight", this.height);
+			} else {
+				this.$emit("updateHeight", -this.height);
+			}
 		}
 	}
 }
@@ -122,7 +137,7 @@ const EntryContainer = {
 <div class="header">
 	<span class="eye noselect" @click="expandContent(!this.$store.state.expansionState[entry.id]); $emit('toggleExpansion');">👁️</span>
 	<span class="title">{{ entry.title }}</span>
-	<span class="progress">{{ progress }}/{{total }}</span>
+	<span class="progress">{{ progress }}/{{ total }}</span>
 	<span class="text-button noselect" @click="$emit('clearCheckboxes')">Clear</span>
 </div>
 
@@ -138,6 +153,7 @@ const EntryContainer = {
 		@clearCheckboxes="$store.dispatch('clearAllCheckboxesAndSave', subentry)"
 		@updateProgress="updateProgress"
 		@updateTotal="updateTotal"
+		@updateHeight="updateHeight"
 	>
 	</EntryContainer>
 
@@ -148,21 +164,21 @@ const EntryContainer = {
 		@toggleCheckbox="$store.dispatch('toggleCheckboxAndSave', subentry)"
 		@updateProgress="updateProgress"
 		@updateTotal="updateTotal"
+		@updateHeight="updateHeight"
 	>
 	</Entry>
 </div>
 </div>
 `,
 	mounted() {
-		const contentDiv = this.$refs.content;
-		//contentDiv.style.maxHeight = contentDiv.scrollHeight + "px";
-		this.expandContent(this.$store.state.expansionState[this.entry.id]);
+		this.updateHeight(this.$refs.content.scrollHeight);
 		this.preMount = false;
 	},
 	data() {
 		return {
 			progress: 0,
 			total: 0,
+			height: 0,
 			preMount: true // needed to get correct scrollHeight during initial render
 		}
 	},
@@ -176,15 +192,16 @@ const EntryContainer = {
 			this.total += amount;
 			this.$store.state.countTotal[this.entry.id] = this.total;
 			this.$emit("updateTotal", amount, categories);
-			// ensure entry has actually become visible before updating height
-			this.$nextTick(() => {
-				this.expandContent(this.$store.state.expansionState[this.entry.id]);
-			});
+		},
+		updateHeight(amount) {
+			this.height += amount;
+			this.expandContent(this.$store.state.expansionState[this.entry.id]);
+			this.$emit("updateHeight", amount);
 		},
 		expandContent(expand) {
 			const contentDiv = this.$refs.content;
 			if (expand) {
-				contentDiv.style.maxHeight = null; //contentDiv.scrollHeight + "px"; // TODO transitioning open is causing a lot of height errors
+				contentDiv.style.maxHeight = this.height + "px";
 			} else {
 				contentDiv.style.maxHeight = "0px";
 			}
