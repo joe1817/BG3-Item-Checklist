@@ -46,21 +46,21 @@ function get_final_price(value, persuasion_mod = 4, attitude = 0, difficulty = "
 }
 
 const Entry = {
-	props: ["title", "id", "categories", "rarity", "suggested", "choice", "crafting", "exploit", "img", "link", "desc"],
+	props: ["entry"],
 	inject: ["filters"],
 	template: `
-<div :class="['entry', categories, rarity, {'top-tier': suggested, 'completed': $store.state.checkboxState[id]}]" :id="id" v-show="visible">
-<span class="checkbox"><input type="checkbox" :checked="$store.state.checkboxState[id]" @change="$emit('toggleCheckbox')"></span>
-<span class="img" @click="$emit('toggleCheckbox')"><img :src="img" width=50 height=50></span>
-<span class="title"><a :href="link">{{ title }}</a></span>
-<span class="desc" v-html="highlight(desc)"></span>
+<div :class="['entry', entry.categories, entry.rarity, {'top-tier': entry.suggested, 'completed': $store.state.checkboxState[entry.id]}]" :id="entry.id" v-show="visible">
+<span class="checkbox"><input type="checkbox" :checked="$store.state.checkboxState[entry.id]" @change="$emit('toggleCheckbox')"></span>
+<span class="img" @click="$emit('toggleCheckbox')"><img :src="entry.img" width=50 height=50></span>
+<span class="title"><a :href="entry.link">{{ entry.title }}</a></span>
+<span class="desc" v-html="highlight(entry.desc)"></span>
 </div>
 `,
 	mounted() {
 		if (this.progress)
-			this.$emit("updateProgress", 1, this.categories);
+			this.$emit("updateProgress", 1, this.entry.categories);
 		if (this.total)
-			this.$emit("updateTotal", 1, this.categories);
+			this.$emit("updateTotal", 1, this.entry.categories);
 	},
 	methods: {		
 		highlight(text){
@@ -75,20 +75,20 @@ const Entry = {
 	},
 	computed: {
 		visible() {
-			if (this.$store.state.searchString.length && !this.desc.toLowerCase().includes(this.$store.state.searchString)) {
+			if (this.$store.state.searchString.length && !this.entry.desc.toLowerCase().includes(this.$store.state.searchString)) {
 				return false;
 			}
-			if (this.$store.state.checkboxState[this.id] && !this.$store.state.showCompleteState) {
+			if (this.$store.state.checkboxState[this.entry.id] && !this.$store.state.showCompleteState) {
 				return false;
 			}
 			for (const filter of this.filters) {
-				for (const cat of this.categories) {
+				for (const cat of this.entry.categories) {
 					if (filter.categories.includes(cat) && this.$store.state.filterState[filter.id]) {
 						return true;
 					}
 				}
 				for (const subfilter of filter.subfilters) {
-					for (const cat of this.categories) {
+					for (const cat of this.entry.categories) {
 						if (subfilter.categories.includes(cat) && this.$store.state.filterState[subfilter.id]) {
 							return true;
 						}
@@ -98,7 +98,7 @@ const Entry = {
 			return false;
 		},
 		progress() {
-			return (this.visible && this.$store.state.checkboxState[this.id]) ? 1 : 0;
+			return (this.visible && this.$store.state.checkboxState[this.entry.id]) ? 1 : 0;
 		},
 		total() {
 			return (this.visible) ? 1 : 0;
@@ -106,39 +106,36 @@ const Entry = {
 	},
 	watch: {
 		progress(newVal, oldVal) {
-			this.$emit("updateProgress", newVal-oldVal, this.categories);
+			this.$emit("updateProgress", newVal-oldVal, this.entry.categories);
 		},
 		total(newVal, oldVal) {
-			this.$emit("updateTotal", newVal-oldVal, this.categories);
+			this.$emit("updateTotal", newVal-oldVal, this.entry.categories);
 		}
 	}
 }
 
 const EntryContainer = {
-	props: ["title", "id", "tip", "entries"],
+	props: ["entry"],
 	template: `
-<div :id="id" :class="[(entries[0].entries !== undefined) ? 'meta-container':'container', {started: progress, completed: progress == total, expanded: this.$store.state.expansionState[id]}]" v-show="total || preMount">
+<div :id="entry.id" :class="[(entry.entries[0].entries !== undefined) ? 'meta-container':'container', {started: progress, completed: progress == total, expanded: this.$store.state.expansionState[entry.id]}]" v-show="total || preMount">
 
 <div class="header">
-	<span class="eye noselect" @click="expandContent(!this.$store.state.expansionState[id]); $emit('toggleExpansion');">👁️</span>
-	<span class="title">{{ title }}</span>
+	<span class="eye noselect" @click="expandContent(!this.$store.state.expansionState[entry.id]); $emit('toggleExpansion');">👁️</span>
+	<span class="title">{{ entry.title }}</span>
 	<span class="progress">{{ progress }}/{{total }}</span>
 	<span class="text-button noselect" @click="$emit('clearCheckboxes')">Clear</span>
 </div>
 
 <div ref="content" class="content">
 
-	<div v-if="tip" class="tip" v-html="tip"></div>
+	<div v-if="entry.tip" class="tip" v-html="entry.tip"></div>
 
 	<EntryContainer
-		v-if="entries[0].entries !== undefined"
-		v-for="entry in entries"
-		:title="entry.title"
-		:id="entry.id"
-		:tip="entry.tip"
-		:entries="entry.entries"
-		@toggleExpansion="$store.dispatch('toggleExpansionAndSave', entry)"
-		@clearCheckboxes="$store.dispatch('clearAllCheckboxesAndSave', entry)"
+		v-if="entry.entries[0].entries !== undefined"
+		v-for="subentry in entry.entries"
+		:entry="subentry"
+		@toggleExpansion="$store.dispatch('toggleExpansionAndSave', subentry)"
+		@clearCheckboxes="$store.dispatch('clearAllCheckboxesAndSave', subentry)"
 		@updateProgress="updateProgress"
 		@updateTotal="updateTotal"
 	>
@@ -146,19 +143,9 @@ const EntryContainer = {
 
 	<Entry
 		v-else
-		v-for="entry in entries"
-		:title="entry.title"
-		:id="entry.id"
-		:categories="entry.categories"
-		:rarity="entry.rarity"
-		:suggested="entry.suggested"
-		:choice="entry.choice"
-		:crafting="entry.crafting"
-		:exploit="entry.exploit"
-		:img="entry.img"
-		:link="entry.link"
-		:desc="entry.desc"
-		@toggleCheckbox="$store.dispatch('toggleCheckboxAndSave', entry)"
+		v-for="subentry in entry.entries"
+		:entry="subentry"
+		@toggleCheckbox="$store.dispatch('toggleCheckboxAndSave', subentry)"
 		@updateProgress="updateProgress"
 		@updateTotal="updateTotal"
 	>
@@ -169,7 +156,7 @@ const EntryContainer = {
 	mounted() {
 		const contentDiv = this.$refs.content;
 		//contentDiv.style.maxHeight = contentDiv.scrollHeight + "px";
-		this.expandContent(this.$store.state.expansionState[this.id]);
+		this.expandContent(this.$store.state.expansionState[this.entry.id]);
 		this.preMount = false;
 	},
 	data() {
@@ -182,16 +169,16 @@ const EntryContainer = {
 	methods: {
 		updateProgress(amount, categories) {
 			this.progress += amount;
-			this.$store.state.countProgress[this.id] = this.progress;
+			this.$store.state.countProgress[this.entry.id] = this.progress;
 			this.$emit("updateProgress", amount, categories);
 		},
 		updateTotal(amount, categories) {
 			this.total += amount;
-			this.$store.state.countTotal[this.id] = this.total;
+			this.$store.state.countTotal[this.entry.id] = this.total;
 			this.$emit("updateTotal", amount, categories);
 			// ensure entry has actually become visible before updating height
 			this.$nextTick(() => {
-				this.expandContent(this.$store.state.expansionState[this.id]);
+				this.expandContent(this.$store.state.expansionState[this.entry.id]);
 			});
 		},
 		expandContent(expand) {
@@ -307,10 +294,7 @@ const app = Vue.createApp({
 
 <div id="table">
 <EntryContainer
-	:title="'All Items'"
-	:id="'all-items'"
-	:tip="''"
-	:entries="entryData.entries"
+	:entry="entryData"
 	@toggleExpansion="$store.dispatch('toggleExpansionAndSave', entryData)"
 	@clearCheckboxes="$store.dispatch('clearAllCheckboxesAndSave', entryData)"
 >
@@ -407,8 +391,8 @@ const fillState = (entry) => {
 		countProgress[entry.id] = 0
 		countTotal[entry.id] = 0
 		expansionState[entry.id] = !collapsed.includes(entry.id);
-		for (const entry2 of entry.entries) {
-			fillState(entry2);
+		for (const subentry of entry.entries) {
+			fillState(subentry);
 		}
 	}
 }
