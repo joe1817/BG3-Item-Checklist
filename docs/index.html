@@ -49,11 +49,17 @@ const Entry = {
 	props: ["entry"],
 	inject: ["filters"],
 	template: `
-<div ref="content" :class="['entry', entry.categories, entry.rarity, {'top-tier': entry.suggested, 'completed': $store.state.checkboxState[entry.id]}]" :id="entry.id" v-show="visible || preMount">
-<span class="checkbox"><input type="checkbox" :checked="$store.state.checkboxState[entry.id]" @change="$emit('toggleCheckbox')"></span>
-<span class="img" @click="$emit('toggleCheckbox')"><img :src="entry.img" width=50 height=50></span>
-<span class="title"><a :href="entry.link">{{ entry.title }}</a></span>
-<span class="desc" v-html="highlight(entry.desc)"></span>
+<div
+	ref="content"
+	:class="['entry', entry.categories, entry.rarity, {'top-tier': entry.suggested, 'completed': $store.state.checkboxState[entry.id]}]"
+	:id="entry.id"
+	v-show="visible || preMount"
+	@click="handleClick($event)"
+>
+	<span class="checkbox"><input type="checkbox" :checked="$store.state.checkboxState[entry.id]"></span>
+	<span v-show="$store.state.showImagesState" class="img"><img :src="entry.img" width=50 height=50></span>
+	<span class="title"><a :href="entry.link">{{ entry.title }}</a></span>
+	<span class="desc" v-html="highlight(entry.desc)"></span>
 </div>
 `,
 	mounted() {
@@ -70,7 +76,12 @@ const Entry = {
 			height: null
 		}
 	},
-	methods: {		
+	methods: {
+		handleClick(event) {
+			if (event.target.tagName !== "A") {
+				this.$store.dispatch('toggleCheckboxAndSave', this.entry)
+			}
+		},
 		highlight(text){
 			if (!this.$store.state.searchString) {
 				return text;
@@ -132,42 +143,46 @@ const Entry = {
 const EntryContainer = {
 	props: ["entry", "collapsible"],
 	template: `
-<div :id="entry.id" :class="[(entry.entries[0].entries !== undefined) ? 'meta-container':'container', {started: progress, completed: progress == total, expanded: this.$store.state.expansionState[entry.id]}]" v-show="total || preMount">
+<div
+	:id="entry.id"
+	:class="[(entry.entries[0].entries !== undefined) ? 'meta-container':'container', {started: progress, completed: progress == total, expanded: this.$store.state.expansionState[entry.id]}]"
+	v-show="total || preMount"
+>
 
-<div class="header">
-	<span v-if="collapsible" class="eye noselect" @click="expandContent(!this.$store.state.expansionState[entry.id]); $emit('toggleExpansion');">👁️</span>
-	<span class="title">{{ entry.title }}</span>
-	<span v-if="trackable"  class="progress">{{ progress }}/{{ total }}</span>
-	<span v-if="clearable" class="text-button noselect" @click="$emit('clearCheckboxes')">Clear</span>
-</div>
+	<div class="header">
+		<span v-if="collapsible" class="eye noselect" @click="collapseHandler">👁️</span>
+		<span class="title">{{ entry.title }}</span>
+		<span v-if="trackable"  class="progress">{{ progress }}/{{ total }}</span>
+		<span v-if="clearable" class="text-button clear-button noselect" @click="clearHandler">Clear</span>
+	</div>
 
-<div ref="content" class="content">
+	<div ref="content" class="content">
 
-	<div v-if="entry.tip" class="tip" v-html="entry.tip"></div>
+		<div v-if="entry.tip" class="tip" v-html="entry.tip"></div>
 
-	<EntryContainer
-		v-if="entry.entries[0].entries !== undefined"
-		v-for="subentry in entry.entries"
-		:entry="subentry"
-		@toggleExpansion="$store.dispatch('toggleExpansionAndSave', subentry)"
-		@clearCheckboxes="$store.dispatch('clearAllCheckboxesAndSave', subentry)"
-		@updateProgress="updateProgress"
-		@updateTotal="updateTotal"
-		@updateHeight="updateHeight"
-	>
-	</EntryContainer>
+		<EntryContainer
+			v-if="entry.entries[0].entries !== undefined"
+			v-for="subentry in entry.entries"
+			:entry="subentry"
+			@toggleExpansion="$store.dispatch('toggleExpansionAndSave', subentry)"
+			@clearCheckboxes="$store.dispatch('clearAllCheckboxesAndSave', subentry)"
+			@updateProgress="updateProgress"
+			@updateTotal="updateTotal"
+			@updateHeight="updateHeight"
+		>
+		</EntryContainer>
 
-	<Entry
-		v-else
-		v-for="subentry in entry.entries"
-		:entry="subentry"
-		@toggleCheckbox="$store.dispatch('toggleCheckboxAndSave', subentry)"
-		@updateProgress="updateProgress"
-		@updateTotal="updateTotal"
-		@updateHeight="updateHeight"
-	>
-	</Entry>
-</div>
+		<Entry
+			v-else
+			v-for="subentry in entry.entries"
+			:entry="subentry"
+			@toggleCheckbox="$store.dispatch('toggleCheckboxAndSave', subentry)"
+			@updateProgress="updateProgress"
+			@updateTotal="updateTotal"
+			@updateHeight="updateHeight"
+		>
+		</Entry>
+	</div>
 </div>
 `,
 	props: {
@@ -198,6 +213,15 @@ const EntryContainer = {
 		}
 	},
 	methods: {
+		collapseHandler() {
+			this.expandContent(!this.$store.state.expansionState[this.entry.id]);
+			this. $store.dispatch("toggleExpansionAndSave", this.entry);
+		},
+		clearHandler() {
+			if (window.confirm("Clear all checkboxes for section \"" + this.entry.title + "\"?")) {
+				this.$store.dispatch("clearAllCheckboxesAndSave", this.entry);
+			}
+		},
 		updateProgress(amount, categories) {
 			this.progress += amount;
 			this.$store.state.countProgress[this.entry.id] = this.progress;
@@ -227,30 +251,30 @@ const EntryContainer = {
 const filterOption = {
 	props: ["filter"],
 	template: `
-<div class="filter" @mouseover="mouse=true; expandSubcategories(true)" @mouseout="expandSubcategories(false)" @blur="expandSubcategories(false)">
-<div
-	class="toggle-button"
-	:class="{
-		enabled: (filter.subfilters.length == 0 && $store.state.filterState[filter.id]) || filter.subfilters.some(sf => $store.state.filterState[sf.id]),
-		'fully-enabled': (filter.subfilters.length == 0 && $store.state.filterState[filter.id]) || (filter.subfilters.length && filter.subfilters.every(sf => $store.state.filterState[sf.id]))
-	}"
-	@click="mouse ? $store.dispatch('toggleFilterAndSave', filter) : expandSubcategories(true)"
->
-	<span class="eye" @click="mouse ? null : $store.dispatch('toggleFilterAndSave', filter)">👁️</span>
-	<span>{{ filter.id }}</span>
-</div>
-<div ref="subfilters" class="subfilters">
+<div ref="filter" class="filter main-option" @mouseover="mouseoverHandlder($event)" @mouseout="mouseoutHandlder($event)" @blur="blurHandlder($event)">
 	<div
-		v-for="subfilter in filter.subfilters"
 		class="toggle-button"
-		:class="{enabled: $store.state.filterState[subfilter.id], 'fully-enabled': $store.state.filterState[subfilter.id]}"
-		@click="$store.dispatch('toggleFilterAndSave', subfilter)"
+		:class="{
+			enabled: (filter.subfilters.length == 0 && $store.state.filterState[filter.id]) || filter.subfilters.some(sf => $store.state.filterState[sf.id]),
+			'fully-enabled': (filter.subfilters.length == 0 && $store.state.filterState[filter.id]) || (filter.subfilters.length && filter.subfilters.every(sf => $store.state.filterState[sf.id]))
+		}"
+		@click="mouse ? $store.dispatch('toggleFilterAndSave', filter) : expandSubcategories(true)"
 	>
-		<span class="eye">👁️</span>
-		<span>{{ subfilter.id }}</span>
+		<span class="eye" @click="mouse ? null : $store.dispatch('toggleFilterAndSave', filter)">👁️</span>
+		<span>{{ filter.id }} <span v-if="filter.subfilters.length" style="font-size:8px;line-height:1;">▼</span></span>
 	</div>
+	<div ref="subfilters" class="subfilters">
+		<div
+			v-for="subfilter in filter.subfilters"
+			class="toggle-button"
+			:class="{enabled: $store.state.filterState[subfilter.id], 'fully-enabled': $store.state.filterState[subfilter.id]}"
+			@click="$store.dispatch('toggleFilterAndSave', subfilter)"
+		>
+			<span class="eye">👁️</span>
+			<span>{{ subfilter.id }}</span>
+		</div>
 
-</div>
+	</div>
 </div>
 `,
 	data() {
@@ -259,6 +283,16 @@ const filterOption = {
 		}
 	},
 	methods: {
+		mouseoverHandlder(event) {
+			this.mouse = true;
+			this.expandSubcategories(true);
+		},
+		mouseoutHandlder(event) {
+			this.expandSubcategories(false);
+		},
+		blurHandlder(event) {
+			this.expandSubcategories(false);
+		},
 		expandSubcategories(expand) {
 			const subcategoriesDiv = this.$refs.subfilters;
 			if (expand) {
@@ -272,54 +306,66 @@ const filterOption = {
 
 const app = Vue.createApp({
 	template: `
-<h1>BG3 Item Checklist</h1>
-<p><a href="https://github.com/joe1817/BG3-Item-Checklist">GitHub</a></p>
-<h2>Table of Contents</h2>
-
 <div id="back-to-top" class="text-button noselect" @click="scrollToTop">Back to Top</div>
 
+<h1>BG3 Item Checklist</h1>
+<p><a href="https://github.com/joe1817/BG3-Item-Checklist">GitHub</a></p>
+
 <div id="TOC">
-<ol v-for="act in entryData.entries">
-	<li>
-		<ul>
-			<li v-for="section in act.entries" :class="{started: $store.state.countProgress[section.id], completed: $store.state.countProgress[section.id] == $store.state.countTotal[section.id], active: $store.state.countTotal[section.id]}">
+	<h2>Table of Contents</h2>
+	<div class="acts">
+		<div v-for="act in entryData.entries" class="act" ref="act">
+			<h3 class="title">{{ act.title }}</h3>
+			<div v-for="section in act.entries" :class="['section', {started: $store.state.countProgress[section.id], completed: $store.state.countProgress[section.id] == $store.state.countTotal[section.id], active: $store.state.countTotal[section.id]}]">
 				<a v-if="$store.state.countTotal[section.id]" :href="'#'+section.id">{{ section.title }}</a>
 				<span v-else>{{ section.title }}</span>
-				<span class="progress">{{ $store.state.countProgress[section.id] }}/{{ $store.state.countTotal[section.id] }}</span>
-			</li>
-		</ul>
-	</li>
-</ol>
+				<span><span class="progress">{{ $store.state.countProgress[section.id] }}/{{ $store.state.countTotal[section.id] }}</span></span>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div id="options">
 <fieldset id="filters" class="noselect">
 	<legend>Filters</legend>
-	<filterOption v-for="filter in filters" :filter="filter"></filterOption>
+	<div class="content">
+		<filterOption v-for="filter in filters" :filter="filter"></filterOption>
+	</div>
 </fieldset>
 
 <fieldset id="more-options" class="noselect">
 	<legend>More Options</legend>
-	<div class="toggle-button"
-		:class="{enabled: $store.state.showCompleteState, 'fully-enabled': $store.state.showCompleteState}"
-		@click="$store.dispatch('toggleHideCompleteAndSave')"
-	>
-		<span class="eye">👁️</span>
-		<span>Show Completed</span>
+	<div class="content">
+		<div class="toggle-button main-option"
+			:class="{enabled: $store.state.showCompleteState, 'fully-enabled': $store.state.showCompleteState}"
+			@click="$store.dispatch('toggleShowCompleteAndSave')"
+		>
+			<span class="eye">👁️</span>
+			<span>Show Completed</span>
+		</div>
+		<div class="toggle-button main-option"
+			:class="{enabled: $store.state.showImagesState, 'fully-enabled': $store.state.showImagesState}"
+			@click="$store.dispatch('toggleShowImagesAndSave')"
+		>
+			<span class="eye">👁️</span>
+			<span>Show Images</span>
+		</div>
 	</div>
 </fieldset>
 
 <fieldset id="search">
 	<legend>Search</legend>
-	<div class="search-input-wrapper">
-		<input
-			type="text"
-			ref="searchBar"
-			class="search-input"
-			@keyup ="$store.commit('updateSearchString', $event.target.value.toLowerCase())"
-			placeholder="Search..."
-		>
-		<button class="clear-button" @click="$refs.searchBar.value=''; $store.commit('updateSearchString', '')">×</button>
+	<div class="content">
+		<div class="search-input-wrapper">
+			<input
+				type="text"
+				ref="searchBar"
+				class="search-input main-option"
+				@keyup ="$store.commit('updateSearchString', $event.target.value.toLowerCase())"
+				placeholder="Search..."
+			>
+			<div class="clear-button" @click="$refs.searchBar.value=''; $store.commit('updateSearchString', '')">×</div>
+		</div>
 	</div>
 </fieldset>
 </div>
@@ -328,7 +374,6 @@ const app = Vue.createApp({
 <EntryContainer
 	:entry="entryData"
 	:collapsible=false
-	@toggleExpansion="$store.dispatch('toggleExpansionAndSave', entryData)"
 	@clearCheckboxes="$store.dispatch('clearAllCheckboxesAndSave', entryData)"
 >
 </EntryContainer>
@@ -359,6 +404,21 @@ const app = Vue.createApp({
 					}
 				}, 200);
 			}
+		});
+
+		// set each act in TOC to the same width
+		let max = 0;
+		this.$refs.act.forEach(act => {
+			//act.clientWidth and act.offsetWidth are too small
+			// window.getComputedStyle(act).width is too big
+			// act.getBoundingClientRect().width is best, but it is a float
+			const width = act.offsetWidth + 1; // add 1 to "round up"
+			if (width > max) {
+				max = width;
+			}
+		});
+		this.$refs.act.forEach(act => {
+			act.style.width = max+"px";
 		});
 
 		// calculate buy prices from entry value
@@ -402,6 +462,7 @@ const checked   = (localStorage.getItem("checked")   || "").split(",");
 const collapsed = (localStorage.getItem("collapsed") || "").split(",");
 const disabled  = (localStorage.getItem("disabled")  || "").split(",");
 const showComplete  = (localStorage.getItem("showComplete") == "false") ? false : true;
+const showImages  = (localStorage.getItem("showImages") == "false") ? false : (window.innerWidth > 768);
 
 const filterState = {};
 const expansionState = {};
@@ -438,6 +499,7 @@ const store = createStore({
 			expansionState: expansionState,
 			checkboxState: checkboxState,
 			showCompleteState: showComplete,
+			showImagesState: showImages,
 
 			searchString: "",
 			countProgress: countProgress,
@@ -467,8 +529,11 @@ const store = createStore({
 		toggleCheckbox(state, entry) {
 			state.checkboxState[entry.id] = !state.checkboxState[entry.id];
 		},
-		toggleHideComplete(state) {
+		toggleShowComplete(state) {
 			state.showCompleteState = !state.showCompleteState;
+		},
+		toggleShowImages(state) {
+			state.showImagesState = !state.showImagesState;
 		},
 		clearAllCheckboxes(state, container) {
 			const clear = (container) => {
@@ -508,10 +573,15 @@ const store = createStore({
 			let data = Object.keys(obj).filter(key => obj[key] === true).join(",");
 			localStorage.setItem("checked", data);
 		},
-		toggleHideCompleteAndSave({ commit, state }) {
-			commit("toggleHideComplete");
+		toggleShowCompleteAndSave({ commit, state }) {
+			commit("toggleShowComplete");
 
 			localStorage.setItem("showComplete", state.showCompleteState);
+		},
+		toggleShowImagesAndSave({ commit, state }) {
+			commit("toggleShowImages");
+
+			localStorage.setItem("showImages", state.showImagesState);
 		},
 		clearAllCheckboxesAndSave({ commit, state }, payload) {
 			commit("clearAllCheckboxes", payload);
