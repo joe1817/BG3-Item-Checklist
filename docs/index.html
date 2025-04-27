@@ -360,10 +360,10 @@ const app = Vue.createApp({
 				type="text"
 				ref="searchBar"
 				class="search-input main-option"
-				@keyup ="$store.commit('updateSearchString', $event.target.value.toLowerCase())"
+				@keyup ="keyupHandler($event)"
 				placeholder="Search..."
 			>
-			<div class="clear-button" @click="$refs.searchBar.value=''; $store.commit('updateSearchString', '')">×</div>
+			<div class="clear-button" @click="clearSearchHandler">×</div>
 		</div>
 	</div>
 </fieldset>
@@ -429,7 +429,18 @@ const app = Vue.createApp({
 	},
 	methods: {
 		scrollToTop() {
-			window.scrollTo({top: 0, behavior: 'smooth'});
+			window.scrollTo({top: 0, behavior: "smooth"});
+		},
+		clearSearchHandler() {
+			this.$refs.searchBar.value="";
+			this.$store.commit("updateSearchString", "");		
+		},
+		keyupHandler(event) {
+			if (event.key == "Escape") {
+				this.clearSearchHandler();
+			} else {
+				this.$store.commit("updateSearchString", event.target.value.toLowerCase());
+			}
 		}
 	}
 });
