@@ -130,15 +130,15 @@ const Entry = {
 }
 
 const EntryContainer = {
-	props: ["entry"],
+	props: ["entry", "collapsible"],
 	template: `
 <div :id="entry.id" :class="[(entry.entries[0].entries !== undefined) ? 'meta-container':'container', {started: progress, completed: progress == total, expanded: this.$store.state.expansionState[entry.id]}]" v-show="total || preMount">
 
 <div class="header">
-	<span class="eye noselect" @click="expandContent(!this.$store.state.expansionState[entry.id]); $emit('toggleExpansion');">👁️</span>
+	<span v-if="collapsible" class="eye noselect" @click="expandContent(!this.$store.state.expansionState[entry.id]); $emit('toggleExpansion');">👁️</span>
 	<span class="title">{{ entry.title }}</span>
-	<span class="progress">{{ progress }}/{{ total }}</span>
-	<span class="text-button noselect" @click="$emit('clearCheckboxes')">Clear</span>
+	<span v-if="trackable"  class="progress">{{ progress }}/{{ total }}</span>
+	<span v-if="clearable" class="text-button noselect" @click="$emit('clearCheckboxes')">Clear</span>
 </div>
 
 <div ref="content" class="content">
@@ -170,6 +170,21 @@ const EntryContainer = {
 </div>
 </div>
 `,
+	props: {
+		entry: {},
+		collapsible: {
+			type: Boolean,
+			default: true
+		},
+		trackable: {
+			type: Boolean,
+			default: true
+		},
+		clearable: {
+			type: Boolean,
+			default: true
+		}
+	},
 	mounted() {
 		this.updateHeight(this.$refs.content.scrollHeight);
 		this.preMount = false;
@@ -312,6 +327,7 @@ const app = Vue.createApp({
 <div id="table">
 <EntryContainer
 	:entry="entryData"
+	:collapsible=false
 	@toggleExpansion="$store.dispatch('toggleExpansionAndSave', entryData)"
 	@clearCheckboxes="$store.dispatch('clearAllCheckboxesAndSave', entryData)"
 >
