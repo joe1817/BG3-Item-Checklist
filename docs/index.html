@@ -46,7 +46,7 @@ function get_final_price(value, persuasion_mod = 4, attitude = 0, difficulty = "
 }
 
 const Entry = {
-	props: ["entry"],
+	props: ["entry", "parentMatchesSearch"],
 	inject: ["filters"],
 	template: `
 <div
@@ -58,7 +58,7 @@ const Entry = {
 >
 	<span class="checkbox"><input type="checkbox" :checked="$store.state.checkboxState[entry.id]"></span>
 	<span v-show="$store.state.showImagesState" class="img"><img :src="entry.img" width=50 height=50></span>
-	<span class="title"><a :href="entry.link">{{ entry.title }}</a></span>
+	<span class="title"><a :href="entry.link" v-html="highlight(entry.title)"></a></span>
 	<span class="desc" v-html="highlight(entry.desc)"></span>
 </div>
 `,
@@ -94,7 +94,7 @@ const Entry = {
 	},
 	computed: {
 		visible() {
-			if (this.$store.state.searchString.length && !this.entry.desc.toLowerCase().includes(this.$store.state.searchString)) {
+			if (!this.parentMatchesSearch && this.$store.state.searchString.length && !this.entry.desc.toLowerCase().includes(this.$store.state.searchString)) {
 				return false;
 			}
 			if (this.$store.state.checkboxState[this.entry.id] && !this.$store.state.showCompleteState) {
@@ -141,7 +141,6 @@ const Entry = {
 }
 
 const EntryContainer = {
-	props: ["entry", "collapsible"],
 	template: `
 <div
 	:id="entry.id"
@@ -151,7 +150,7 @@ const EntryContainer = {
 
 	<div class="header">
 		<span v-if="collapsible" class="eye noselect" @click="collapseHandler">👁️</span>
-		<span class="title">{{ entry.title }}</span>
+		<span class="title" v-html="highlight(entry.title)"></span>
 		<span v-if="trackable"  class="progress">{{ progress }}/{{ total }}</span>
 		<span v-if="clearable" class="text-button clear-button noselect" @click="clearHandler">Clear</span>
 	</div>
@@ -164,6 +163,7 @@ const EntryContainer = {
 			v-if="entry.entries[0].entries !== undefined"
 			v-for="subentry in entry.entries"
 			:entry="subentry"
+			:parentMatchesSearch="parentMatchesSearch || entry.title.toLowerCase().includes($store.state.searchString)"
 			@x=""
 			@updateProgress="updateProgress"
 			@updateTotal="updateTotal"
@@ -175,6 +175,7 @@ const EntryContainer = {
 			v-else
 			v-for="subentry in entry.entries"
 			:entry="subentry"
+			:parentMatchesSearch="parentMatchesSearch || entry.title.toLowerCase().includes($store.state.searchString)"
 			@x=""
 			@updateProgress="updateProgress"
 			@updateTotal="updateTotal"
@@ -197,6 +198,10 @@ const EntryContainer = {
 		clearable: {
 			type: Boolean,
 			default: true
+		},
+		parentMatchesSearch: {
+			type: Boolean,
+			default: false
 		}
 	},
 	mounted() {
@@ -242,6 +247,15 @@ const EntryContainer = {
 				contentDiv.style.maxHeight = this.height + "px";
 			} else {
 				contentDiv.style.maxHeight = "0px";
+			}
+		},
+		highlight(text){
+			if (!this.$store.state.searchString) {
+				return text;
+			} else if (text.toLowerCase().includes(this.$store.state.searchString)) {
+				return highlightSubstring(text, this.$store.state.searchString)
+			} else {
+				return text;
 			}
 		}
 	}
