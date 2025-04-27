@@ -164,8 +164,7 @@ const EntryContainer = {
 			v-if="entry.entries[0].entries !== undefined"
 			v-for="subentry in entry.entries"
 			:entry="subentry"
-			@toggleExpansion="$store.dispatch('toggleExpansionAndSave', subentry)"
-			@clearCheckboxes="$store.dispatch('clearAllCheckboxesAndSave', subentry)"
+			@x=""
 			@updateProgress="updateProgress"
 			@updateTotal="updateTotal"
 			@updateHeight="updateHeight"
@@ -176,7 +175,7 @@ const EntryContainer = {
 			v-else
 			v-for="subentry in entry.entries"
 			:entry="subentry"
-			@toggleCheckbox="$store.dispatch('toggleCheckboxAndSave', subentry)"
+			@x=""
 			@updateProgress="updateProgress"
 			@updateTotal="updateTotal"
 			@updateHeight="updateHeight"
