@@ -50,15 +50,15 @@ const App = {
 <fieldset id="search">
 	<legend>Search</legend>
 	<div class="content">
-		<div class="search-input-wrapper">
+		<div class="main-option search-input-wrapper">
 			<input
 				type="text"
 				ref="searchBar"
-				class="search-input main-option"
+				class="search-input"
 				@keyup ="keyupHandler($event)"
 				placeholder="Search..."
 			>
-			<div class="clear-button" @click="clearSearchHandler">×</div>
+			<div id="clear-button" class="text-button" @click="clearSearchHandler">Clear</div>
 		</div>
 	</div>
 </fieldset>

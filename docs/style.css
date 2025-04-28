@@ -51,6 +51,7 @@ input[type="checkbox"] {
 	font-size: 16px;
 	border-radius: 5px;
 	background-color: #0C448B;
+	cursor: pointer;
 }
 
 .text-button:hover {
@@ -172,7 +173,8 @@ input[type="checkbox"] {
 	}
 
 	.main-option {
-		margin-right: 4px;
+		margin-top: 5px;
+		margin-right: 5px;
 	}
 }
 
@@ -334,17 +336,17 @@ input[type="checkbox"] {
 	color: white;
 	padding: 10px;
 	border: none;
-	cursor: pointer;
 	opacity: 0;
 	transition: opacity 0.2s ease-in-out;
 }
 
 .search-input-wrapper {
-    position: relative;
-    display: inline-block;
+    display: flex;
+	flex-direction: row;
 
 	.search-input {
 		padding: 5px 10px;
+		margin-right: 5px;
 		font-family: "Open Sans", sans-serif;
 		font-size: 14px;
 		border: 1px solid grey;
@@ -371,22 +373,12 @@ input[type="checkbox"] {
 		background-color: #0D3460;
 	}
 
-	.clear-button {
-		position: absolute;
-		right: 10px;
-		top: 50%;
-		transform: translateY(-50%);
-		background: none;
-		font-size: 16px;
-		font-weight: bold;
-		cursor: pointer;
-		color: #BBB;
-		opacity: 0;
-		transition: opacity 0.2s ease-in-out;
+	#clear-button {
+		display: none;
 	}
 
-	.search-input:not(:placeholder-shown) + .clear-button {
-		opacity: 1;
+	.search-input:not(:placeholder-shown) + #clear-button {
+		display: block;
 	}
 
 	.clear-button:hover {
