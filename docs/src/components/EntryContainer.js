@@ -81,7 +81,7 @@ const EntryContainer = {
 			this. $store.dispatch("toggleExpansionAndSave", this.entry);
 		},
 		clearHandler() {
-			if (window.confirm("Clear all checkboxes for section \"" + this.entry.title + "\"?")) {
+			if (window.confirm("Clear all checkboxes for section \"" + this.entry.title + "\"?")) {	
 				this.$store.dispatch("clearAllCheckboxesAndSave", this.entry);
 			}
 		},

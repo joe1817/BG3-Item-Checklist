@@ -1,7 +1,7 @@
 const Filter = {
 	props: ["filter"],
 	template: `
-<div ref="filter" class="filter main-option" @mouseover="expandSubcategories(true)" @mouseout="expandSubcategories(false)" @blur="expandSubcategories(false)">
+<div ref="filter" :name="filter.id" class="filter main-option" @mouseenter="mouseenterHandler" @mouseleave="mouseleaveHandler">
 	<div
 		class="toggle-button"
 		:class="{
@@ -20,31 +20,51 @@ const Filter = {
 			:class="{enabled: $store.state.filterState[subfilter.id], 'fully-enabled': $store.state.filterState[subfilter.id]}"
 			@click="clickHandler($event, subfilter)"
 		>
+			<span class="arrow">↳</span>
 			<span class="eye">👁️</span>
 			<span>{{ subfilter.id }}</span>
 		</div>
-
 	</div>
 </div>
 `,
+	data() {
+		return {
+			expanded: false,
+			touch: "ontouchstart" in window || navigator.maxTouchPoints > 0
+		}
+	},
 	methods: {
 		clickHandler(event, filter) {
-			if (event.target.classList.contains("eye")) {
-				this.$store.dispatch("toggleFilterAndSave", filter);
-			}
-			else if ((filter.subfilters && filter.subfilters.length) && ("ontouchstart" in window || navigator.maxTouchPoints > 0)) {
-				this.expandSubcategories(true);
-				event.preventDefault(); // don't continue to process automatic mouse events
+			if (this.touch) {
+				if (event.target.classList.contains("eye")) {
+					this.$store.dispatch("toggleFilterAndSave", filter);
+				} else if ((filter.subfilters && filter.subfilters.length)) {
+					this.expanded = !this.expanded;
+				} else {
+					this.$store.dispatch("toggleFilterAndSave", filter);
+				}				
 			} else {
 				this.$store.dispatch("toggleFilterAndSave", filter);
 			}
 		},
-		expandSubcategories(expand) {
+		mouseenterHandler(){
+			if (!this.touch) {
+				this.expanded = true;
+			}
+		},
+		mouseleaveHandler(){
+			this.expanded = false;
+		}
+	},
+	watch: {
+		expanded(expand) {
 			const subcategoriesDiv = this.$refs.subfilters;
 			if (expand) {
 				subcategoriesDiv.style.maxHeight = subcategoriesDiv.scrollHeight + "px";
+				this.$emit("expanded", this.filter);
 			} else {
 				subcategoriesDiv.style.maxHeight = "0px";
+				this.$emit("expanded", null);
 			}
 		}
 	}

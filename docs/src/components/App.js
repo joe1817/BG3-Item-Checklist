@@ -20,48 +20,48 @@ const App = {
 </div>
 
 <div id="options">
-<fieldset id="filters" class="noselect">
-	<legend>Filters</legend>
-	<div class="content">
-		<Filter v-for="filter in filters" :filter="filter"></Filter>
-	</div>
-</fieldset>
-
-<fieldset id="more-options" class="noselect">
-	<legend>More Options</legend>
-	<div class="content">
-		<div class="toggle-button main-option"
-			:class="{enabled: $store.state.showCompleteState, 'fully-enabled': $store.state.showCompleteState}"
-			@click="$store.dispatch('toggleShowCompleteAndSave')"
-		>
-			<span class="eye">👁️</span>
-			<span>Show Completed</span>
+	<fieldset id="filters" class="noselect">
+		<legend>Filters</legend>
+		<div class="content">
+			<Filter ref="filters" v-for="filter in filters" :filter="filter" @expanded="expandHandler"></Filter>
 		</div>
-		<div class="toggle-button main-option"
-			:class="{enabled: $store.state.showImagesState, 'fully-enabled': $store.state.showImagesState}"
-			@click="$store.dispatch('toggleShowImagesAndSave')"
-		>
-			<span class="eye">👁️</span>
-			<span>Show Images</span>
-		</div>
-	</div>
-</fieldset>
+	</fieldset>
 
-<fieldset id="search">
-	<legend>Search</legend>
-	<div class="content">
-		<div class="main-option search-input-wrapper">
-			<input
-				type="text"
-				ref="searchBar"
-				class="search-input"
-				@keyup ="keyupHandler($event)"
-				placeholder="Search..."
+	<fieldset id="more-options" class="noselect">
+		<legend>More Options</legend>
+		<div class="content">
+			<div class="toggle-button main-option"
+				:class="{enabled: $store.state.showCompleteState, 'fully-enabled': $store.state.showCompleteState}"
+				@click="$store.dispatch('toggleShowCompleteAndSave')"
 			>
-			<div id="clear-button" class="text-button" @click="clearSearchHandler">Clear</div>
+				<span class="eye">👁️</span>
+				<span>Show Completed</span>
+			</div>
+			<div class="toggle-button main-option"
+				:class="{enabled: $store.state.showImagesState, 'fully-enabled': $store.state.showImagesState}"
+				@click="$store.dispatch('toggleShowImagesAndSave')"
+			>
+				<span class="eye">👁️</span>
+				<span>Show Images</span>
+			</div>
 		</div>
-	</div>
-</fieldset>
+	</fieldset>
+
+	<fieldset id="search">
+		<legend>Search</legend>
+		<div class="content">
+			<div class="main-option search-input-wrapper">
+				<input
+					type="text"
+					ref="searchBar"
+					class="search-input"
+					@keyup ="keyupHandler($event)"
+					placeholder="Search..."
+				>
+				<div id="clear-button" class="text-button" @click="clearSearchHandler">Clear</div>
+			</div>
+		</div>
+	</fieldset>
 </div>
 
 <div id="table">
@@ -125,6 +125,19 @@ const App = {
 	methods: {
 		scrollToTop() {
 			window.scrollTo({top: 0, behavior: "smooth"});
+		},
+		expandHandler(filter) {
+			if (filter === null) {
+				this.$refs.filters.forEach(f => {
+					f.$el.classList.remove("faded");
+				});
+			} else if (filter.subfilters && filter.subfilters.length) {
+				this.$refs.filters.forEach(f => {
+					if (filter.id !== f.$el.getAttribute("name")) {
+						f.$el.classList.add("faded");
+					}
+				});
+			}
 		},
 		clearSearchHandler() {
 			this.$refs.searchBar.value="";
