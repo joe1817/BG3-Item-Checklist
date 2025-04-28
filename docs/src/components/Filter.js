@@ -29,7 +29,6 @@ const Filter = {
 `,
 	methods: {
 		clickHandler(event, filter) {
-			//alert(event.target)
 			if (event.target.classList.contains("eye")) {
 				this.$store.dispatch("toggleFilterAndSave", filter);
 			}
