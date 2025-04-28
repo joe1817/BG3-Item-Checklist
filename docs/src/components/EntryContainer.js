@@ -17,6 +17,7 @@ const EntryContainer = {
 
 		<div v-if="entry.tip" class="tip" v-html="entry.tip"></div>
 
+		<!-- the @x event handler prevents a recursion error for some reason -->
 		<EntryContainer
 			v-if="entry.entries[0].entries !== undefined"
 			v-for="subentry in entry.entries"
