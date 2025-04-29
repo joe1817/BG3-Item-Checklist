@@ -474,7 +474,7 @@ entries : [
 				exploit    : false,
 				img        : "imgs/Dragon's Grasp.png",
 				link       : "https://bg3.wiki/wiki/Dragon's_Grasp",
-				desc       : "<span class='value'>65 gp (Note: Recommended to feed Gale.)</span>"
+				desc       : "<span class='value'>65 gp</span> (Note: Recommended to feed Gale.)"
 			},
 			{
 				title      : "Gloves of Missile Snaring",
@@ -539,7 +539,7 @@ entries : [
 				exploit    : false,
 				img        : "imgs/Spellthief.png",
 				link       : "https://bg3.wiki/wiki/Spellthief",
-				desc       : "<span class='value'>100 gp (Note: Recommended to feed Gale.)</span>"
+				desc       : "<span class='value'>100 gp</span> (Note: Recommended to feed Gale.)"
 			}
 		]},
 		{
