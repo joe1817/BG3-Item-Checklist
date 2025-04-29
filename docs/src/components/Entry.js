@@ -39,7 +39,7 @@ const Entry = {
 	},
 	computed: {
 		visible() {
-			if (!this.parentMatchesSearch && this.$store.state.searchString.length && !this.entry.desc.toLowerCase().includes(this.$store.state.searchString)) {
+			if (!this.parentMatchesSearch && this.$store.state.searchString.length && !this.entry.desc.toLowerCase().includes(this.$store.state.searchString) && !this.entry.title.toLowerCase().includes(this.$store.state.searchString)) {
 				return false;
 			}
 			if (this.$store.state.checkboxState[this.entry.id] && !this.$store.state.showCompleteState) {
