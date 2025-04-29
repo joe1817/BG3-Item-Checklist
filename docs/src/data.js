@@ -13,6 +13,71 @@ const filters = [];
 		"melee": ["battleaxe", "club", "dagger", "flail", "glaive", "greataxe", "greatclub", "greatsword", "halberd", "handaxe", "light-hammer", "longsword", "mace", "maul", "morningstar", "pike", "quarterstaff", "rapier", "scimitar", "shortsword", "sickle", "spear", "trident", "war-pick", "warhammer"],
 		"ranged": ["hand-crossbow", "heavy-crossbow", "light-crossbow", "longbow", "shortbow"]
 	};
+	
+	const categoryAliases = {
+		"accessory": "Accessories",
+		"armour": "Armour",
+		"bonus": "Bonuses",
+		"consumable": "Consumables",
+		"follower": "Followers",
+		"misc": "Misc",
+		"shield": "Shields",
+		"weapon": "Weapons",
+		"amulet": "Amulets",
+		"ring": "Rings",
+		"boots": "Bootss",
+		"cloak": "Cloaks",
+		"clothing": "Clothings",
+		"gloves": "Glovess",
+		"heavy-armour": "Heavy Armour",
+		"helmet": "Helmets",
+		"light-armour": "Light Armour",
+		"medium-armour": "Medium Armour",
+		"action": "Actions",
+		"condition": "Conditions",
+		"enhancement": "Enhancements",
+		"non-spell": "Non-spells",
+		"spell": "Spells",
+		"arrow": "Arrows",
+		"barrel": "Barrels",
+		"camp-supplies": "Camp Suppliess",
+		"crafting": "Craftings",
+		"grenade": "Grenades",
+		"potion": "Potions",
+		"scroll": "Scrolls",
+		"melee": "Melee",
+		"ranged": "Ranged",
+		"battleaxe": "Battleaxes",
+		"club": "Clubs",
+		"dagger": "Daggers",
+		"flail": "Flails",
+		"glaive": "Glaives",
+		"greataxe": "Greataxes",
+		"greatclub": "Greatclubs",
+		"greatsword": "Greatswords",
+		"halberd": "Halberds",
+		"handaxe": "Handaxes",
+		"light-hammer": "Light Hammers",
+		"longsword": "Longswords",
+		"mace": "Maces",
+		"maul": "Mauls",
+		"morningstar": "Morningstars",
+		"pike": "Pikes",
+		"quarterstaff": "Quarterstaves",
+		"rapier": "Rapiers",
+		"scimitar": "Scimitars",
+		"shortsword": "Shortswords",
+		"sickle": "Sickles",
+		"spear": "Spears",
+		"trident": "Tridents",
+		"war-pick": "War Picks",
+		"warhammer": "Warhammers",
+		"hand-crossbow": "Hand Crossbows",
+		"heavy-crossbow": "Heavy Crossbows",
+		"light-crossbow": "Light Crossbows",
+		"longbow": "Longbows",
+		"shortbow": "Shortbow"
+	};
 
 	// all children, grandchildren, etc.
 	const expandedHierarchy = {};
@@ -39,12 +104,14 @@ const filters = [];
 			categoryHierachy[cat].forEach(subcat => {
 				subfilters.push({
 					"id"         : subcat,
+					"title"      : categoryAliases[subcat],
 					"categories" : expandedHierarchy[subcat]
 				});
 			});
 		}
 		filters.push({
 			"id"         : cat,
+			"title"      : categoryAliases[cat],
 			"categories" : expandedHierarchy[cat],
 			"subfilters" : subfilters
 		});

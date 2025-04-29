@@ -11,7 +11,7 @@ const Filter = {
 		@click="clickHandler($event, filter)"
 	>
 		<span class="eye">👁️</span>
-		<span>{{ filter.id }} <span v-if="filter.subfilters.length" style="font-size:8px;line-height:1;">▼</span></span>
+		<span>{{ filter.title }} <span v-if="filter.subfilters.length" style="font-size:8px;line-height:1;">▼</span></span>
 	</div>
 	<div ref="subfilters" class="subfilters">
 		<div
@@ -22,7 +22,7 @@ const Filter = {
 		>
 			<span class="arrow">↳</span>
 			<span class="eye">👁️</span>
-			<span>{{ subfilter.id }}</span>
+			<span>{{ subfilter.title }}</span>
 		</div>
 	</div>
 </div>
