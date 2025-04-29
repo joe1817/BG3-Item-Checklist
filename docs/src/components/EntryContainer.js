@@ -26,6 +26,7 @@ const EntryContainer = {
 			@x=""
 			@updateProgress="updateProgress"
 			@updateTotal="updateTotal"
+			@confirm="opts => $emit('confirm', opts)"
 		>
 		</EntryContainer>
 
@@ -98,9 +99,12 @@ const EntryContainer = {
 			}, 200);
 		},
 		clearHandler() {
-			if (window.confirm("Clear all checkboxes for section \"" + this.entry.title + "\"?")) {
-				this.$store.dispatch("clearAllCheckboxesAndSave", this.entry);
-			}
+			this.$emit("confirm", {
+				message: "Clear all checkboxes for the section \"" + this.entry.title + "\"?",
+				callback: () => {
+					this.$store.dispatch("clearAllCheckboxesAndSave", this.entry);
+				}
+			});
 		},
 		updateProgress(amount, categories) {
 			this.progress += amount;

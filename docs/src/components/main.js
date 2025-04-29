@@ -3,6 +3,7 @@ const app = Vue.createApp(App);
 app.component("Filter", Filter);
 app.component("Entry", Entry);
 app.component("EntryContainer", EntryContainer);
+app.component("ConfirmDialog", ConfirmDialog);
 
 const { createStore } = Vuex;
 const store = createStore(State);
