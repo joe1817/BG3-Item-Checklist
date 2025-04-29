@@ -243,7 +243,6 @@ input[type="checkbox"] {
 		display: flex;
 		flex-direction: column;
 		overflow: hidden;
-		transition: max-height 0.2s ease-out;
 
 		.tip {
 			border: 1px solid #606A73;

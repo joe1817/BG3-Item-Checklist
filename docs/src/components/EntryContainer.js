@@ -3,7 +3,7 @@ const EntryContainer = {
 <div
 	:id="entry.id"
 	:class="[(entry.entries[0].entries !== undefined) ? 'meta-container':'container', {started: progress, completed: progress == total, expanded: this.$store.state.expansionState[entry.id]}]"
-	v-show="total || preMount"
+	v-show="total"
 >
 
 	<div class="header">
@@ -26,7 +26,6 @@ const EntryContainer = {
 			@x=""
 			@updateProgress="updateProgress"
 			@updateTotal="updateTotal"
-			@updateHeight="updateHeight"
 		>
 		</EntryContainer>
 
@@ -38,7 +37,6 @@ const EntryContainer = {
 			@x=""
 			@updateProgress="updateProgress"
 			@updateTotal="updateTotal"
-			@updateHeight="updateHeight"
 		>
 		</Entry>
 	</div>
@@ -63,25 +61,44 @@ const EntryContainer = {
 			default: false
 		}
 	},
-	mounted() {
-		this.updateHeight(this.$refs.content.scrollHeight);
-		this.preMount = false;
-	},
 	data() {
 		return {
 			progress: 0,
-			total: 0,
-			height: 0,
-			preMount: true // needed to get correct scrollHeight during initial render
+			total: 0
+		}
+	},
+	mounted() {
+		if (!this.$store.state.expansionState[this.entry.id]) {
+			this.$refs.content.style.maxHeight = "0px";
 		}
 	},
 	methods: {
 		collapseHandler() {
-			this.expandContent(!this.$store.state.expansionState[this.entry.id]);
+
+			this.$refs.content.style.maxHeight = this.$refs.content.scrollHeight + "px";
+			this.$refs.content.style.transition = "max-height 0.2s ease-out";
+
+			// force a reflow
+			void this.$refs.content.offsetHeight;
+
+			const expand = !this.$store.state.expansionState[this.entry.id];
+			if (expand) {
+				this.$refs.content.style.maxHeight = this.$refs.content.scrollHeight + "px";
+			} else {
+				this.$refs.content.style.maxHeight = "0px";
+			}
+
 			this. $store.dispatch("toggleExpansionAndSave", this.entry);
+
+			setTimeout(() => {
+				this.$refs.content.style.transition = null;
+				if (expand) {
+					this.$refs.content.style.maxHeight = "auto";
+				}
+			}, 200);
 		},
 		clearHandler() {
-			if (window.confirm("Clear all checkboxes for section \"" + this.entry.title + "\"?")) {	
+			if (window.confirm("Clear all checkboxes for section \"" + this.entry.title + "\"?")) {
 				this.$store.dispatch("clearAllCheckboxesAndSave", this.entry);
 			}
 		},
@@ -94,19 +111,6 @@ const EntryContainer = {
 			this.total += amount;
 			this.$store.state.countTotal[this.entry.id] = this.total;
 			this.$emit("updateTotal", amount, categories);
-		},
-		updateHeight(amount) {
-			this.height += amount;
-			this.expandContent(this.$store.state.expansionState[this.entry.id]);
-			this.$emit("updateHeight", amount);
-		},
-		expandContent(expand) {
-			const contentDiv = this.$refs.content;
-			if (expand) {
-				contentDiv.style.maxHeight = this.height + "px";
-			} else {
-				contentDiv.style.maxHeight = "0px";
-			}
 		},
 		highlight(text){
 			if (!this.$store.state.searchString) {

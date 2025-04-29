@@ -6,7 +6,7 @@ const Entry = {
 	ref="content"
 	:class="['entry', entry.categories, entry.rarity, {'top-tier': entry.suggested, 'completed': $store.state.checkboxState[entry.id]}]"
 	:id="entry.id"
-	v-show="visible || preMount"
+	v-show="visible"
 	@click="handleClick($event)"
 >
 	<span class="checkbox"><input type="checkbox" :checked="$store.state.checkboxState[entry.id]"></span>
@@ -20,14 +20,21 @@ const Entry = {
 			this.$emit("updateProgress", 1, this.entry.categories);
 		if (this.total)
 			this.$emit("updateTotal", 1, this.entry.categories);
-		this.height = this.$refs.content.scrollHeight;
-		this.preMount = false;
-	},
-	data() {
-		return {
-			preMount: true,
-			height: null
-		}
+
+		// TODO: works, but its probably better to add a temporary transition style to content divs when user clicks collapse button
+		/*
+		new ResizeObserver(entries => {
+			console.log("*")
+			let h = 0;
+			entries.forEach(entry => {
+				h += entry.borderBoxSize[0].blockSize;
+			});
+			if (this.visible && h != this.height) {
+				this.$emit("updateHeight", h - this.height);
+				this.height = h;
+			}
+		}).observe(this.$refs.content);
+		//*/
 	},
 	methods: {
 		handleClick(event) {
@@ -82,13 +89,6 @@ const Entry = {
 		},
 		total(newVal, oldVal) {
 			this.$emit("updateTotal", newVal-oldVal, this.entry.categories);
-		},
-		visible(newVal, oldVal) {
-			if (newVal) {
-				this.$emit("updateHeight", this.height);
-			} else {
-				this.$emit("updateHeight", -this.height);
-			}
 		}
 	}
 }
