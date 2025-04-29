@@ -20,21 +20,6 @@ const Entry = {
 			this.$emit("updateProgress", 1, this.entry.categories);
 		if (this.total)
 			this.$emit("updateTotal", 1, this.entry.categories);
-
-		// TODO: works, but its probably better to add a temporary transition style to content divs when user clicks collapse button
-		/*
-		new ResizeObserver(entries => {
-			console.log("*")
-			let h = 0;
-			entries.forEach(entry => {
-				h += entry.borderBoxSize[0].blockSize;
-			});
-			if (this.visible && h != this.height) {
-				this.$emit("updateHeight", h - this.height);
-				this.height = h;
-			}
-		}).observe(this.$refs.content);
-		//*/
 	},
 	methods: {
 		handleClick(event) {

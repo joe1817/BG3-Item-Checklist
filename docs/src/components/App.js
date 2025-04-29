@@ -7,8 +7,8 @@ const App = {
 
 <div id="TOC">
 	<h2>Table of Contents</h2>
-	<div class="acts">
-		<div v-for="act in entryData.entries" class="act" ref="act">
+	<div class="acts" ref="acts">
+		<div v-for="act in entryData.entries" class="act">
 			<h3 class="title">{{ act.title }}</h3>
 			<div v-for="section in act.entries" :class="['section', {started: $store.state.countProgress[section.id], completed: $store.state.countProgress[section.id] == $store.state.countTotal[section.id], active: $store.state.countTotal[section.id]}]">
 				<a v-if="$store.state.countTotal[section.id]" :href="'#'+section.id">{{ section.title }}</a>
@@ -16,6 +16,7 @@ const App = {
 				<span><span class="progress">{{ $store.state.countProgress[section.id] }}/{{ $store.state.countTotal[section.id] }}</span></span>
 			</div>
 		</div>
+		<div v-if="entryData.entries.length % 2" ref="act-spacer" class="act" style="display:none;"></div>
 	</div>
 </div>
 
@@ -102,7 +103,7 @@ const App = {
 
 		// set each act in TOC to the same width
 		let max = 0;
-		this.$refs.act.forEach(act => {
+		for (const act of this.$refs.acts.children) {
 			//act.clientWidth and act.offsetWidth are too small
 			// window.getComputedStyle(act).width is too big
 			// act.getBoundingClientRect().width is best, but it is a float
@@ -110,10 +111,23 @@ const App = {
 			if (width > max) {
 				max = width;
 			}
-		});
-		this.$refs.act.forEach(act => {
+		}
+		for (const act of this.$refs.acts.children) {
 			act.style.width = max+"px";
-		});
+		}
+
+		// add another act column when they begin to wrap so there's an even number of columns
+		if (this.$refs["act-spacer"]) {
+			new ResizeObserver(entries => {
+				const a = this.$refs.acts.children[0].getBoundingClientRect().top;
+				const b = Array.from(this.$refs.acts.children).at(-2).getBoundingClientRect().top;
+				if (a == b) {
+					this.$refs["act-spacer"].style.display = "none";
+				} else if (b > a) {
+					this.$refs["act-spacer"].style.display = "block";
+				}
+			}).observe(this.$refs.acts);
+		}
 
 		// calculate buy prices from entry value
 		document.querySelectorAll(".value").forEach(value => {
