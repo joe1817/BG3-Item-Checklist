@@ -1,7 +1,7 @@
 const Filter = {
 	props: ["filter"],
 	template: `
-<div ref="filter" :name="filter.id" class="filter main-option" @mouseenter="mouseenterHandler" @mouseleave="mouseleaveHandler">
+<div ref="filter" :id="'filter-'+filter.id" class="filter main-option" @mouseenter="mouseenterHandler" @mouseleave="mouseleaveHandler">
 	<div
 		class="toggle-button"
 		:class="{
@@ -42,17 +42,18 @@ const Filter = {
 					this.expanded = !this.expanded;
 				} else {
 					this.$store.dispatch("toggleFilterAndSave", filter);
-				}				
+				}
 			} else {
 				this.$store.dispatch("toggleFilterAndSave", filter);
 			}
 		},
-		mouseenterHandler(){
-			if (!this.touch) {
+		mouseenterHandler() {
+			const canExpand = this.filter.subfilters && this.filter.subfilters.length;
+			if (!this.touch && canExpand) {
 				this.expanded = true;
 			}
 		},
-		mouseleaveHandler(){
+		mouseleaveHandler() {
 			this.expanded = false;
 		}
 	},
@@ -61,10 +62,10 @@ const Filter = {
 			const subcategoriesDiv = this.$refs.subfilters;
 			if (expand) {
 				subcategoriesDiv.style.maxHeight = subcategoriesDiv.scrollHeight + "px";
-				this.$emit("expanded", this.filter);
+				this.$emit("expanded", 'filter-'+this.filter.id, true);
 			} else {
 				subcategoriesDiv.style.maxHeight = "0px";
-				this.$emit("expanded", null);
+				this.$emit("expanded", 'filter-'+this.filter.id, false);
 			}
 		}
 	}

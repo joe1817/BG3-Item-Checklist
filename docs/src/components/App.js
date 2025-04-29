@@ -20,7 +20,7 @@ const App = {
 	</div>
 </div>
 
-<div id="options">
+<div id="options" ref="options">
 	<fieldset id="filters" class="noselect">
 		<legend>Filters</legend>
 		<div class="content">
@@ -140,17 +140,41 @@ const App = {
 		scrollToTop() {
 			window.scrollTo({top: 0, behavior: "smooth"});
 		},
-		expandHandler(filter) {
-			if (filter === null) {
-				this.$refs.filters.forEach(f => {
-					f.$el.classList.remove("faded");
-				});
-			} else if (filter.subfilters && filter.subfilters.length) {
-				this.$refs.filters.forEach(f => {
-					if (filter.id !== f.$el.getAttribute("name")) {
-						f.$el.classList.add("faded");
+		expandHandler(filter, expanded) {
+
+			const fade = (el, id) => {
+				if (el.getAttribute("id") == id) {
+					return true;
+				}
+				let found = null;
+				for (const child of el.children) {
+					if (fade(child, id)) {
+						found = child;
+						break;
 					}
-				});
+				}
+				if (found) {
+					for (const child of el.children) {
+						if (child !== found) {
+							child.classList.add("faded");
+						}
+					}
+					return true;
+				}
+				return false;
+			};
+
+			const unfade = (el) => {
+				el.classList.remove("faded");
+				for (const child of el.children) {
+					unfade(child);
+				}
+			};
+
+			if (expanded) {
+				fade(this.$refs.options, filter);
+			} else {
+				unfade(this.$refs.options);
 			}
 		},
 		clearSearchHandler() {

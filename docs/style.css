@@ -187,17 +187,17 @@ input[type="checkbox"] {
 			position: absolute;
 			z-index: 1000;
 		}
-		
+
 		.subfilters .arrow {
 			display: inline-block;
 			width: 1.5em;
 			text-align: center;
 		}
 	}
-	
-	.filter.faded {
-		opacity: 0.3;
-	}
+}
+
+.faded {
+	opacity: 0.3;
 }
 
 #table {
@@ -232,7 +232,7 @@ input[type="checkbox"] {
 
 	.container > .header {
 		background-color: #14212D;
-		
+
 		.clear-button {
 			margin-right: 1em;
 			margin-left: auto;
