@@ -12,11 +12,11 @@ const App = {
 	<div class="acts" ref="acts">
 		<div v-for="act in entryData.entries" class="act">
 			<h3 class="title">{{ act.title }}</h3>
-			<div v-for="section in act.entries" :class="['section', {started: $store.state.countProgress[section.id], completed: $store.state.countProgress[section.id] == $store.state.countTotal[section.id], active: $store.state.countTotal[section.id]}]">
+			<span v-for="section in act.entries" :class="{'section-progress':true, active: $store.state.countTotal[section.id]}">
 				<a v-if="$store.state.countTotal[section.id]" @click="clickHandlerTOC(section.id)">{{ section.title }}</a>
 				<span v-else>{{ section.title }}</span>
-				<span><span class="progress">{{ $store.state.countProgress[section.id] }}/{{ $store.state.countTotal[section.id] }}</span></span>
-			</div>
+				<span :class="{'progress':true, started: $store.state.countProgress[section.id], completed: $store.state.countProgress[section.id] == $store.state.countTotal[section.id]}">{{ $store.state.countProgress[section.id] }}/{{ $store.state.countTotal[section.id] }}</span>
+			</span>
 		</div>
 		<div v-if="entryData.entries.length % 2" ref="act-spacer" class="act" style="display:none;"></div>
 	</div>

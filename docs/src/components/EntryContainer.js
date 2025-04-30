@@ -2,14 +2,16 @@ const EntryContainer = {
 	template: `
 <div
 	:id="entry.id"
-	:class="[(entry.entries[0].entries !== undefined) ? 'meta-container':'container', {started: progress, completed: progress == total, expanded: this.$store.state.expansionState[entry.id]}]"
+	:class="[(entry.entries[0].entries !== undefined) ? 'meta-container':'container', {expanded: this.$store.state.expansionState[entry.id]}]"
 	v-show="total"
 >
 
 	<div class="header">
 		<span v-if="collapsible" class="eye noselect" @click="collapseHandler">👁️</span>
-		<span class="title" v-html="highlight(entry.title)"></span>
-		<span v-if="trackable"  class="progress">{{ progress }}/{{ total }}</span>
+		<span class="section-progress">
+			<span class="title" v-html="highlight(entry.title)"></span>
+			<span v-if="trackable" :class="{'progress': true, started: progress, completed: progress == total} ">{{ progress }}/{{ total }}</span>
+		</span>
 		<span v-if="clearable" class="text-button clear-button noselect" @click="clearHandler">Clear</span>
 	</div>
 
