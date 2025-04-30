@@ -26,6 +26,7 @@ a {
 	text-decoration: underline dotted;
 	text-decoration-thickness: 1px;
 	text-decoration-color: #636D78;
+	cursor: pointer;
 }
 
 a:hover {

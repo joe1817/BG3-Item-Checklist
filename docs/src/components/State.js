@@ -17,6 +17,7 @@ const State = {
 		const disabled  = (localStorage.getItem("disabled")  || "").split(",");
 		const showComplete  = (localStorage.getItem("showComplete") == "false") ? false : true;
 		const showImages  = (localStorage.getItem("showImages") == "false") ? false : (window.innerWidth > 768);
+		const lastViewed  = localStorage.getItem("lastViewed");
 
 		const filterState = {};
 		const expansionState = {};
@@ -52,7 +53,9 @@ const State = {
 			checkboxState: checkboxState,
 			showCompleteState: showComplete,
 			showImagesState: showImages,
+			lastViewedState: lastViewed,
 
+			lastViewedWritePending: false, // scrolling too fast can cause too many writes, limit the rate
 			searchString: "",
 			countProgress: countProgress,
 			countTotal: countTotal
@@ -99,6 +102,9 @@ const State = {
 			}
 			clear(container);
 		},
+		updateLastViewed(state, s) {
+			state.lastViewedState = s;
+		},
 		updateSearchString(state, s) {
 			state.searchString = s;
 		}
@@ -141,6 +147,22 @@ const State = {
 			let obj = state.checkboxState;
 			let data = Object.keys(obj).filter(key => obj[key] === true).join(",");
 			localStorage.setItem("checked", data);
+		},
+		updateLastViewedAndSave({ commit, state }, payload) {
+			if (state.searchString || payload === state.lastViewedState) {
+				return;
+			}
+
+			commit("updateLastViewed", payload);
+
+			if (!state.lastViewedWritePending) {
+				state.lastViewedWritePending = true;
+				setTimeout(() => {
+					let data = state.lastViewedState;
+					localStorage.setItem("lastViewed", data);
+					state.lastViewedWritePending = false;
+				}, 2000);
+			}
 		}
 	}
 }

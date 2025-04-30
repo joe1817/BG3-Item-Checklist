@@ -13,7 +13,7 @@ const App = {
 		<div v-for="act in entryData.entries" class="act">
 			<h3 class="title">{{ act.title }}</h3>
 			<div v-for="section in act.entries" :class="['section', {started: $store.state.countProgress[section.id], completed: $store.state.countProgress[section.id] == $store.state.countTotal[section.id], active: $store.state.countTotal[section.id]}]">
-				<a v-if="$store.state.countTotal[section.id]" :href="'#'+section.id">{{ section.title }}</a>
+				<a v-if="$store.state.countTotal[section.id]" @click="clickHandlerTOC(section.id)">{{ section.title }}</a>
 				<span v-else>{{ section.title }}</span>
 				<span><span class="progress">{{ $store.state.countProgress[section.id] }}/{{ $store.state.countTotal[section.id] }}</span></span>
 			</div>
@@ -136,11 +136,46 @@ const App = {
 			value.innerText = this.get_final_price(value.innerText);
 		});
 
+		// scroll to last viewed section
+		if (this.$store.state.lastViewedState) {
+			setTimeout(() => {
+				document.getElementById(this.$store.state.lastViewedState).scrollIntoView({ behavior: "smooth" });
+			}, 1000);
+		}
+
+		// keep track of last viewed section
+		const containers = document.querySelectorAll("#table .container > .header");
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						let id = "TOC";
+						if (entry.target.id !== "TOC") {
+							id = entry.target.parentNode.id;
+						}
+						this.$store.dispatch("updateLastViewedAndSave", id)
+					}
+				});
+			},
+			{
+				threshold: 0,
+				rootMargin: "0px 0px -80%",
+			}
+		);
+		containers.forEach((section) => {
+			observer.observe(section);
+		});
+		observer.observe(document.getElementById("TOC"));
+
+		// replace image links with coordinates in the spritesheet
 		loadSprites();
 	},
 	methods: {
 		scrollToTop() {
 			window.scrollTo({top: 0, behavior: "smooth"});
+		},
+		clickHandlerTOC(id) {
+			document.getElementById(id).scrollIntoView({behavior: "smooth"});
 		},
 		expandHandler(filter, expanded) {
 
