@@ -1,17 +1,5 @@
 const State = {
 	state() {
-		const setParentRefs = (container, childrenProperty) => {
-			if (container[childrenProperty] !== undefined) {
-				for (const entry of container[childrenProperty]) {
-					entry.parent = container;
-					setParentRefs(entry, childrenProperty);
-				}
-			}
-		}
-		setParentRefs(entryData, "entries");
-		for (const filter of filters)
-			setParentRefs(filter, "subfilters");
-
 		const checked   = (localStorage.getItem("checked")   || "").split(",");
 		const collapsed = (localStorage.getItem("collapsed") || "").split(",");
 		const disabled  = (localStorage.getItem("disabled")  || "").split(",");

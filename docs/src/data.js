@@ -13,7 +13,7 @@ const filters = [];
 		"melee": ["battleaxe", "club", "dagger", "flail", "glaive", "greataxe", "greatclub", "greatsword", "halberd", "handaxe", "light-hammer", "longsword", "mace", "maul", "morningstar", "pike", "quarterstaff", "rapier", "scimitar", "shortsword", "sickle", "spear", "trident", "war-pick", "warhammer"],
 		"ranged": ["hand-crossbow", "heavy-crossbow", "light-crossbow", "longbow", "shortbow"]
 	};
-	
+
 	const categoryAliases = {
 		"accessory": "Accessories",
 		"armour": "Armour",
@@ -97,7 +97,7 @@ const filters = [];
 		}
 	}
 	expandHierarchy(expandedHierarchy, categoryHierachy, "_root_");
-	
+
 	categoryHierachy["_root_"].forEach(cat => {
 		const subfilters = []
 		if (categoryHierachy[cat]) {
@@ -116,11 +116,13 @@ const filters = [];
 			"subfilters" : subfilters
 		});
 	})
+
 })();
 
+// setting parent references below entryData declaration
 
-const entryData = 
-{	
+const entryData =
+{
 title   : "All Items",
 id      : "all-items",
 entries : [
@@ -9834,3 +9836,18 @@ entries : [
 		]}
 	]}
 ]};
+
+
+(function() {
+	const setParentRefs = (container, childrenProperty) => {
+		if (container[childrenProperty] !== undefined) {
+			for (const entry of container[childrenProperty]) {
+				entry.parent = container;
+				setParentRefs(entry, childrenProperty);
+			}
+		}
+	}
+	setParentRefs(entryData, "entries");
+	for (const filter of filters)
+		setParentRefs(filter, "subfilters");
+})();
