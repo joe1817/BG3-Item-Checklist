@@ -15,7 +15,7 @@ const App = {
 			<span v-for="section in act.entries" :class="{'section-progress':true, active: $store.state.countTotal[section.id]}">
 				<a v-if="$store.state.countTotal[section.id]" @click="clickHandlerTOC(section.id)">{{ section.title }}</a>
 				<span v-else>{{ section.title }}</span>
-				<span :class="{'progress':true, started: $store.state.countProgress[section.id], completed: $store.state.countProgress[section.id] == $store.state.countTotal[section.id]}">{{ $store.state.countProgress[section.id] }}/{{ $store.state.countTotal[section.id] }}</span>
+				<span :class="{'progress':true, started: $store.state.countProgress[section.id], completed: $store.state.countProgress[section.id] == $store.state.countTotal[section.id]}">{{$store.state.countProgress[section.id] || 0}}/{{$store.state.countTotal[section.id] || 0}}</span>
 			</span>
 		</div>
 		<div v-if="entryData.entries.length % 2" ref="act-spacer" class="act" style="display:none;"></div>
@@ -106,10 +106,7 @@ const App = {
 		// set each act in TOC to the same width
 		let max = 0;
 		for (const act of this.$refs.acts.children) {
-			//act.clientWidth and act.offsetWidth are too small
-			// window.getComputedStyle(act).width is too big
-			// act.getBoundingClientRect().width is best, but it is a float
-			const width = act.offsetWidth + 1; // add 1 to "round up"
+			const width = act.offsetWidth+1; // add 1 to "round up"
 			if (width > max) {
 				max = width;
 			}

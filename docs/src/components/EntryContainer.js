@@ -3,14 +3,14 @@ const EntryContainer = {
 <div
 	:id="entry.id"
 	:class="[(entry.entries[0].entries !== undefined) ? 'meta-container':'container', {expanded: this.$store.state.expansionState[entry.id]}]"
-	v-show="total"
+	v-show="$store.state.countTotal[entry.id]"
 >
 
 	<div class="header">
 		<span v-if="collapsible" class="eye noselect" @click="collapseHandler">👁️</span>
 		<span class="section-progress">
 			<span class="title" v-html="highlight(entry.title)"></span>
-			<span v-if="trackable" :class="{'progress': true, started: progress, completed: progress == total} ">{{ progress }}/{{ total }}</span>
+			<span v-if="trackable" :class="{'progress': true, started: $store.state.countProgress[entry.id], completed: $store.state.countProgress[entry.id] == $store.state.countTotal[entry.id]} ">{{ $store.state.countProgress[entry.id] }}/{{ $store.state.countTotal[entry.id] }}</span>
 		</span>
 		<span v-if="clearable" class="text-button clear-button noselect" @click="clearHandler">Clear</span>
 	</div>
@@ -26,8 +26,6 @@ const EntryContainer = {
 			:entry="subentry"
 			:parentMatchesSearch="parentMatchesSearch || entry.title.toLowerCase().includes($store.state.searchString)"
 			@x=""
-			@updateProgress="updateProgress"
-			@updateTotal="updateTotal"
 			@confirm="opts => $emit('confirm', opts)"
 		>
 		</EntryContainer>
@@ -38,8 +36,6 @@ const EntryContainer = {
 			:entry="subentry"
 			:parentMatchesSearch="parentMatchesSearch || entry.title.toLowerCase().includes($store.state.searchString)"
 			@x=""
-			@updateProgress="updateProgress"
-			@updateTotal="updateTotal"
 		>
 		</Entry>
 	</div>
@@ -64,11 +60,9 @@ const EntryContainer = {
 			default: false
 		}
 	},
-	data() {
-		return {
-			progress: 0,
-			total: 0
-		}
+	beforeMount() {
+		this.$store.state.countProgress[this.entry.id] = 0;
+		this.$store.state.countTotal[this.entry.id] = 0;
 	},
 	mounted() {
 		if (!this.$store.state.expansionState[this.entry.id]) {
@@ -107,16 +101,6 @@ const EntryContainer = {
 					this.$store.dispatch("clearAllCheckboxesAndSave", this.entry);
 				}
 			});
-		},
-		updateProgress(amount, categories) {
-			this.progress += amount;
-			this.$store.state.countProgress[this.entry.id] = this.progress;
-			this.$emit("updateProgress", amount, categories);
-		},
-		updateTotal(amount, categories) {
-			this.total += amount;
-			this.$store.state.countTotal[this.entry.id] = this.total;
-			this.$emit("updateTotal", amount, categories);
 		},
 		highlight(text){
 			if (!this.$store.state.searchString) {

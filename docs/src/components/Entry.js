@@ -16,15 +16,17 @@ const Entry = {
 </div>
 `,
 	mounted() {
-		if (this.progress)
-			this.$emit("updateProgress", 1, this.entry.categories);
-		if (this.total)
-			this.$emit("updateTotal", 1, this.entry.categories);
+		if (this.progress) {
+			this.updateProgress(1);
+		}
+		if (this.total) {
+			this.updateTotal(1);
+		}
 	},
 	methods: {
 		handleClick(event) {
 			if (event.target.tagName !== "A") {
-				this.$store.dispatch('toggleCheckboxAndSave', this.entry)
+				this.$store.dispatch("toggleCheckboxAndSave", this.entry)
 			}
 		},
 		highlight(text){
@@ -34,6 +36,20 @@ const Entry = {
 				return highlightSubstring(text, this.$store.state.searchString)
 			} else {
 				return text;
+			}
+		},
+		updateProgress(amount) {
+			let parent = this.entry.parent;
+			while (parent) {
+				this.$store.state.countProgress[parent.id] += amount;
+				parent = parent.parent;
+			}
+		},
+		updateTotal(amount) {
+			let parent = this.entry.parent;
+			while (parent) {
+				this.$store.state.countTotal[parent.id] += amount;
+				parent = parent.parent;
 			}
 		}
 	},
@@ -70,10 +86,10 @@ const Entry = {
 	},
 	watch: {
 		progress(newVal, oldVal) {
-			this.$emit("updateProgress", newVal-oldVal, this.entry.categories);
+			this.updateProgress(newVal-oldVal);
 		},
 		total(newVal, oldVal) {
-			this.$emit("updateTotal", newVal-oldVal, this.entry.categories);
+			this.updateTotal(newVal-oldVal);
 		}
 	}
 }

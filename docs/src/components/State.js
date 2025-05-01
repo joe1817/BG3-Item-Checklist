@@ -11,9 +11,6 @@ const State = {
 		const expansionState = {};
 		const checkboxState = {};
 
-		const countProgress = {}
-		const countTotal = {}
-
 		for (const filter of filters) {
 			filterState[filter.id] = !disabled.includes(filter.id);
 			for (const subfilter of filter.subfilters) {
@@ -25,8 +22,6 @@ const State = {
 			if (entry.entries === undefined) {
 				checkboxState[entry.id] = checked.includes(entry.id);
 			} else {
-				countProgress[entry.id] = 0
-				countTotal[entry.id] = 0
 				expansionState[entry.id] = !collapsed.includes(entry.id);
 				for (const subentry of entry.entries) {
 					fillState(subentry);
@@ -45,8 +40,8 @@ const State = {
 
 			lastViewedWritePending: false, // scrolling too fast can cause too many writes, limit the rate
 			searchString: "",
-			countProgress: countProgress,
-			countTotal: countTotal
+			countProgress: {},
+			countTotal: {}
 		}
 	},
 	mutations: {
