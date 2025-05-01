@@ -136,8 +136,11 @@ const App = {
 		// scroll to last viewed section
 		if (this.$store.state.lastViewedState) {
 			const lastViewed = this.$store.state.lastViewedState;
+			const yPos = window.scrollY;
 			setTimeout(() => {
-				document.getElementById(lastViewed).scrollIntoView({ behavior: "smooth" });
+				if (window.scrollY == yPos) {
+					document.getElementById(lastViewed).scrollIntoView({ behavior: "smooth" });
+				}
 			}, 1000);
 		}
 
