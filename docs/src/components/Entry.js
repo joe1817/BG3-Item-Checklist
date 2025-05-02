@@ -86,10 +86,14 @@ const Entry = {
 	},
 	watch: {
 		progress(newVal, oldVal) {
-			this.updateProgress(newVal-oldVal);
+			this.$nextTick(() => {
+				this.updateProgress(newVal-oldVal);
+			});
 		},
 		total(newVal, oldVal) {
-			this.updateTotal(newVal-oldVal);
+			this.$nextTick(() => {
+				this.updateTotal(newVal-oldVal);
+			});
 		}
 	}
 }

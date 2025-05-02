@@ -19,13 +19,11 @@ const EntryContainer = {
 
 		<div v-if="entry.tip" class="tip" v-html="entry.tip"></div>
 
-		<!-- the @x event handler prevents a recursion error for some reason -->
 		<EntryContainer
 			v-if="entry.entries[0].entries !== undefined"
 			v-for="subentry in entry.entries"
 			:entry="subentry"
 			:parentMatchesSearch="parentMatchesSearch || entry.title.toLowerCase().includes($store.state.searchString)"
-			@x=""
 			@confirm="opts => $emit('confirm', opts)"
 		>
 		</EntryContainer>
@@ -35,7 +33,6 @@ const EntryContainer = {
 			v-for="subentry in entry.entries"
 			:entry="subentry"
 			:parentMatchesSearch="parentMatchesSearch || entry.title.toLowerCase().includes($store.state.searchString)"
-			@x=""
 		>
 		</Entry>
 	</div>
@@ -85,7 +82,7 @@ const EntryContainer = {
 				this.$refs.content.style.maxHeight = "0px";
 			}
 
-			this. $store.dispatch("toggleExpansionAndSave", this.entry);
+			this.$store.dispatch("toggleExpansionAndSave", this.entry);
 
 			setTimeout(() => {
 				this.$refs.content.style.transition = null;
