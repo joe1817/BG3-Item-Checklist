@@ -3,9 +3,11 @@ const ConfirmDialog = {
 <div ref="confirmModal" class="modal" style="display: none;">
 	<div class="modal-content">
 		<p ref="confirmMessage" id="confirmMessage">Are you sure?</p>
-		<div class="confirm-buttons">
-			<button ref="confirmOk" id="confirmOk">OK</button>
-			<button ref="confirmCancel" id="confirmCancel">Cancel</button>
+		<div class="confirm-buttons-wrapper">
+			<div class="confirm-buttons">
+				<button ref="confirmOk" id="confirmOk">OK</button>
+				<button ref="confirmCancel" id="confirmCancel">Cancel</button>
+			</div>
 		</div>
 	</div>
 </div>

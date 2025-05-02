@@ -453,9 +453,13 @@ input[type="checkbox"] {
 		box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 	}
 
+	.confirm-buttons-wrapper {
+		text-align: right;
+	}
+
 	.confirm-buttons {
-		display: flex;
-		justify-content: flex-end;
+		display: inline-grid;
+		grid-template-columns: 1fr 1fr;
 		margin-top: 20px;
 	}
 
