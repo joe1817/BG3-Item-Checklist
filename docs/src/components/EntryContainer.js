@@ -2,13 +2,11 @@ const EntryContainer = {
 	template: `
 <Container
 	:entry="entry"
-	:parentMatchesSearch="parentMatchesSearch"
 >
 
 	<template #nestedContainer="props">
 		<EntryContainer
 			:entry="props.entry"
-			:parentMatchesSearch="props.parentMatchesSearch"
 		>
 		</EntryContainer>
 	</template>
@@ -16,7 +14,6 @@ const EntryContainer = {
 	<template #leaf="props">
 		<Entry
 			:entry="props.entry"
-			:parentMatchesSearch="props.parentMatchesSearch"
 		>
 		</Entry>
 	</template>
@@ -24,10 +21,6 @@ const EntryContainer = {
 </Container>
 `,
 	props: {
-		entry: {},
-		parentMatchesSearch: {
-			type: Boolean,
-			default: false
-		}
+		entry: {}
 	}
 }

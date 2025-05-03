@@ -1,5 +1,5 @@
 const Entry = {
-	props: ["entry", "parentMatchesSearch"],
+	props: ["entry"],
 	inject: ["filters"],
 	template: `
 <div
@@ -55,7 +55,7 @@ const Entry = {
 	},
 	computed: {
 		visible() {
-			if (!this.parentMatchesSearch && this.$store.state.searchString.length && !this.entry.desc.toLowerCase().includes(this.$store.state.searchString) && !this.entry.title.toLowerCase().includes(this.$store.state.searchString)) {
+			if (!this.$store.state.matchesSearch[this.entry.parent.id] && this.$store.state.searchString.length && !this.entry.desc.toLowerCase().includes(this.$store.state.searchString) && !this.entry.title.toLowerCase().includes(this.$store.state.searchString)) {
 				return false;
 			}
 			if (this.$store.state.checkboxState[this.entry.id] && !this.$store.state.showCompleteState) {

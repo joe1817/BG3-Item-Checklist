@@ -40,6 +40,7 @@ const State = {
 
 			lastViewedWritePending: false, // scrolling too fast can cause too many writes, limit the rate
 			searchString: "",
+			matchesSearch: {},
 			countProgress: {},
 			countTotal: {}
 		}

@@ -31,7 +31,6 @@ const Container = {
 			v-if="entry.entries[0].entries !== undefined"
 			v-for="subentry in entry.entries"
 			:entry="subentry"
-			:parentMatchesSearch="parentMatchesSearch || (searchable && entry.title.toLowerCase().includes($store.state.searchString))"
 		>
 		</slot>
 
@@ -40,7 +39,6 @@ const Container = {
 			v-else
 			v-for="subentry in entry.entries"
 			:entry="subentry"
-			:parentMatchesSearch="parentMatchesSearch || (searchable && entry.title.toLowerCase().includes($store.state.searchString))"
 		>
 		</slot>
 	</div>
@@ -67,19 +65,24 @@ const Container = {
 		searchable: {
 			type: Boolean,
 			default: true
-		},
-		parentMatchesSearch: {
-			type: Boolean,
-			default: false
 		}
 	},
 	beforeMount() {
 		this.$store.state.countProgress[this.entry.id] = 0;
 		this.$store.state.countTotal[this.entry.id] = 0;
+		this.$store.state.matchesSearch[this.entry.id] = true;
 	},
 	mounted() {
 		if (!this.$store.state.expansionState[this.entry.id]) {
 			this.$refs.content.style.maxHeight = "0px";
+		}
+	},
+	computed: {
+		parentMatchesSearch() {
+			return this.entry.parent && this.$store.state.matchesSearch[this.entry.parent.id];
+		},
+		matchesSearch() {
+			return this.parentMatchesSearch || (this.searchable && this.entry.title.toLowerCase().includes(this.$store.state.searchString));
 		}
 	},
 	methods: {
@@ -123,6 +126,11 @@ const Container = {
 			} else {
 				return text;
 			}
+		}
+	},
+	watch: {
+		matchesSearch(newVal, oldVal) {
+			this.$store.state.matchesSearch[this.entry.id] = newVal;
 		}
 	}
 }
