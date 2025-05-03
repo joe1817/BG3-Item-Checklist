@@ -2,6 +2,7 @@ const app = Vue.createApp(App);
 
 app.component("Filter", Filter);
 app.component("Entry", Entry);
+app.component("Container", Container);
 app.component("EntryContainer", EntryContainer);
 app.component("ConfirmDialog", ConfirmDialog);
 

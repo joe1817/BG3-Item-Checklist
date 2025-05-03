@@ -259,6 +259,13 @@ input[type="checkbox"] {
 			padding: 8px;
 			text-align: center;
 			margin: 0 auto 0.5em;
+			max-width: 60%;
+		}
+		
+		@media (max-width : 768px) {
+			.tip {
+				max-width: 100%;
+			}
 		}
 	}
 
