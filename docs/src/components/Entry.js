@@ -11,8 +11,8 @@ const Entry = {
 >
 	<span class="checkbox"><input type="checkbox" :checked="$store.state.checkboxState[data.id]"></span>
 	<span v-show="$store.state.showImagesState" class="img"><img :src="data.img" width=50 height=50></span>
-	<span class="title"><a :href="data.link" v-html="highlight(data.title)"></a></span>
-	<span class="desc" v-html="highlight(data.desc)"></span>
+	<span class="title"><a :href="data.link" v-html="$highlight(data.title)"></a></span>
+	<span class="desc" v-html="$highlight(data.desc)"></span>
 </div>
 `,
 	mounted() {
@@ -27,15 +27,6 @@ const Entry = {
 		handleClick(event) {
 			if (event.target.tagName !== "A") {
 				this.$store.dispatch("toggleCheckboxAndSave", this.data)
-			}
-		},
-		highlight(text) {
-			if (!this.$store.state.searchString) {
-				return text;
-			} else if (text.toLowerCase().includes(this.$store.state.searchString)) {
-				return highlightSubstring(text, this.$store.state.searchString)
-			} else {
-				return text;
 			}
 		},
 		updateProgress(amount) {

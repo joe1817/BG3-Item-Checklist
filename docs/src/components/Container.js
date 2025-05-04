@@ -9,7 +9,7 @@ const Container = {
 	<div class="header">
 		<span v-if="collapsible" class="eye noselect" @click="collapseHandler">👁️</span>
 		<span class="section-progress">
-			<span v-if="searchable" class="title" v-html="highlight(data.title)"></span>
+			<span v-if="searchable" class="title" v-html="$highlight(data.title)"></span>
 			<span v-else class="title">{{ data.title }}</span>
 			<span v-if="trackable"
 				:class="{
@@ -117,15 +117,6 @@ const Container = {
 					this.$store.dispatch("clearAllCheckboxesAndSave", this.data);
 			//	}
 			//});
-		},
-		highlight(text){
-			if (!this.$store.state.searchString) {
-				return text;
-			} else if (text.toLowerCase().includes(this.$store.state.searchString)) {
-				return highlightSubstring(text, this.$store.state.searchString)
-			} else {
-				return text;
-			}
 		}
 	},
 	watch: {

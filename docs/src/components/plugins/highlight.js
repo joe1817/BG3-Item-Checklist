@@ -1,3 +1,17 @@
+const highlightPlugin = {
+	install: (app, options) => {
+		app.config.globalProperties.$highlight = (text) => {
+			if (!options.state.searchString) {
+				return text;
+			} else if (text.toLowerCase().includes(options.state.searchString)) {
+				return highlightSubstring(text, options.state.searchString)
+			} else {
+				return text;
+			}
+		}
+	}
+};
+
 function highlightSubstring(htmlString, searchString) {
 	const tempDiv = document.createElement('div');
 	tempDiv.innerHTML = htmlString;
