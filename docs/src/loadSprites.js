@@ -649,13 +649,13 @@ const spriteCoords = {
 // if run locally, loadSprites will not work for security reasons, so don't bother replacing links
 if (window.location.protocol !== "file:") {
 	// clear images first to prevent broken link icons
-	(function clearImgs(entry) {
-		if (entry.img !== undefined) {
-			entry.spriteCoords = spriteCoords[entry.img]
-			entry.img = "";
+	(function clearImgs(data) {
+		if (data.img !== undefined) {
+			data.spriteCoords = spriteCoords[data.img]
+			data.img = "";
 		}
-		if (entry.entries !== undefined) {
-			for (const entry2 of entry.entries) {
+		if (data.children !== undefined) {
+			for (const entry2 of data.children) {
 				clearImgs(entry2);
 			}
 		}
@@ -665,14 +665,14 @@ if (window.location.protocol !== "file:") {
 
 function loadSprites() {
 	if (window.location.protocol !== "file:") {
-		const getCoords = (id, entry=entryData) => {
-			if (entry.img !== undefined) {
-				if (entry.id == id) {
-					return entry.spriteCoords;
+		const getCoords = (id, data=entryData) => {
+			if (data.img !== undefined) {
+				if (data.id == id) {
+					return data.spriteCoords;
 				}
 			}
-			if (entry.entries !== undefined) {
-				for (const entry2 of entry.entries) {
+			if (data.children !== undefined) {
+				for (const entry2 of data.children) {
 					let coords = getCoords(id, entry2);
 					if (coords != null) {
 						return coords;

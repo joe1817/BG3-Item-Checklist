@@ -123,18 +123,18 @@ const filters = [];
 
 const entryData =
 {
-title   : "All Items",
-id      : "all-items",
-entries : [
+title    : "All Items",
+id       : "all-items",
+children : [
 	{
-	title   : "Act 1",
-	id      : "Act-1",
-	entries : [
+	title    : "Act 1",
+	id       : "Act-1",
+	children : [
 		{
-		title   : "Nautiloid",
-		id      : "Nautiloid",
-		tip     : "It's recommended to help the friendly intellect devourer and keep it alive.",
-		entries : [
+		title    : "Nautiloid",
+		id       : "Nautiloid",
+		tip      : "It's recommended to help the friendly intellect devourer and keep it alive.",
+		children : [
 			{
 				title      : "Everburn Blade",
 				id         : "Everburn-Blade",
@@ -150,10 +150,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Dank Crypt",
-		id      : "Dank-Crypt",
-		tip     : "",
-		entries : [
+		title    : "Dank Crypt",
+		id       : "Dank-Crypt",
+		tip      : "",
+		children : [
 			{
 				title      : "The Watcher's Guide",
 				id         : "The-Watchers-Guide",
@@ -182,10 +182,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Druid Grove",
-		id      : "Druid-Grove",
-		tip     : "",
-		entries : [
+		title    : "Druid Grove",
+		id       : "Druid-Grove",
+		tip      : "",
+		children : [
 			{
 				title      : "Hellrider's Pride",
 				id         : "Hellriders-Pride",
@@ -461,10 +461,10 @@ entries : [
 			} // TODO The actual reward is https://bg3.wiki/wiki/Gift_from_the_Absolute
 		]},
 		{
-		title   : "Arron",
-		id      : "Arron",
-		tip     : "<span class='coordinates'>(X: 205 Y: 516)</span>",
-		entries : [
+		title    : "Arron",
+		id       : "Arron",
+		tip      : "<span class='coordinates'>(X: 205 Y: 516)</span>",
+		children : [
 			{
 				title      : "Dragon's Grasp",
 				id         : "Dragons-Grasp",
@@ -545,10 +545,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Dammon",
-		id      : "Dammon-1",
-		tip     : "<span class='coordinates'>(X: 177 Y: 562)</span>",
-		entries : [
+		title    : "Dammon",
+		id       : "Dammon-1",
+		tip      : "<span class='coordinates'>(X: 177 Y: 562)</span>",
+		children : [
 			{
 				title      : "Hunting Shortbow",
 				id         : "Hunting-Shortbow",
@@ -590,10 +590,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Auntie Ethel",
-		id      : "Auntie-Ethel",
-		tip     : "<span class='coordinates'>(X: 192 Y: 546)</span> She will cease being a trader when encountered south of the Blighted Village.",
-		entries : [
+		title    : "Auntie Ethel",
+		id       : "Auntie-Ethel",
+		tip      : "<span class='coordinates'>(X: 192 Y: 546)</span> She will cease being a trader when encountered south of the Blighted Village.",
+		children : [
 			{
 				title      : "Corellon's Grace",
 				id         : "Corellons-Grace",
@@ -609,10 +609,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Outside Druid Grove",
-		id      : "Outside-Druid-Grove",
-		tip     : "",
-		entries : [
+		title    : "Outside Druid Grove",
+		id       : "Outside-Druid-Grove",
+		tip      : "",
+		children : [
 			{
 				title      : "The Deathstalker Mantle",
 				id         : "The-Deathstalker-Mantle",
@@ -732,10 +732,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Owlbear Nest",
-		id      : "Owlbear-Nest",
-		tip     : "",
-		entries : [
+		title    : "Owlbear Nest",
+		id       : "Owlbear-Nest",
+		tip      : "",
+		children : [
 			{
 				title      : "The Oak Father's Embrace",
 				id         : "The-Oak-Fathers-Embrace",
@@ -790,10 +790,10 @@ entries : [
 			} // TODO coords
 		]},
 		{
-		title   : "Blighted Village",
-		id      : "Blighted-Village",
-		tip     : "",
-		entries : [
+		title    : "Blighted Village",
+		id       : "Blighted-Village",
+		tip      : "",
+		children : [
 			{
 				title      : "Haste Helm",
 				id         : "Haste-Helm",
@@ -978,10 +978,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Whispering Depths",
-		id      : "Whispering-Depths",
-		tip     : "",
-		entries : [
+		title    : "Whispering Depths",
+		id       : "Whispering-Depths",
+		tip      : "",
+		children : [
 			{
 				title      : "Spiderstep Boots",
 				id         : "Spiderstep-Boots",
@@ -1023,10 +1023,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Sunlit Wetlands",
-		id      : "Sunlit-Wetlands",
-		tip     : "",
-		entries : [
+		title    : "Sunlit Wetlands",
+		id       : "Sunlit-Wetlands",
+		tip      : "",
+		children : [
 			{
 				title      : "The Sparkle Hands",
 				id         : "The-Sparkle-Hands",
@@ -1172,10 +1172,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Goblin Camp",
-		id      : "Goblin-Camp",
-		tip     : "",
-		entries : [
+		title    : "Goblin Camp",
+		id       : "Goblin-Camp",
+		tip      : "",
+		children : [
 			{
 				title      : "Blazer of Benevolence",
 				id         : "Blazer-of-Benevolence",
@@ -1256,10 +1256,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Grat the Trader",
-		id      : "Grat-the-Trader",
-		tip     : "<span class='coordinates'>(X: -99 Y: 425)</span> He will cease being a trader if the booze is poisoned.",
-		entries : [
+		title    : "Grat the Trader",
+		id       : "Grat-the-Trader",
+		tip      : "<span class='coordinates'>(X: -99 Y: 425)</span> He will cease being a trader if the booze is poisoned.",
+		children : [
 			{
 				title      : "Boots of Aid and Comfort",
 				id         : "Boots-of-Aid-and-Comfort",
@@ -1327,10 +1327,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Shattered Sanctum",
-		id      : "Shattered-Sanctum",
-		tip     : "",
-		entries : [
+		title    : "Shattered Sanctum",
+		id       : "Shattered-Sanctum",
+		tip      : "",
+		children : [
 			{
 				title      : "Brand of the Absolute",
 				id         : "Brand-of-the-Absolute",
@@ -1619,10 +1619,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Roah Moonglow",
-		id      : "Roah-Moonglow",
-		tip     : "<span class='coordinates'>(X: 274 Y: -30)</span>",
-		entries : [
+		title    : "Roah Moonglow",
+		id       : "Roah-Moonglow",
+		tip      : "<span class='coordinates'>(X: 274 Y: -30)</span>",
+		children : [
 			{
 				title      : "Blooded Greataxe",
 				id         : "Blooded-Greataxe",
@@ -1690,10 +1690,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Worg Pens",
-		id      : "Worg-Pens",
-		tip     : "<span class='coordinates'>(X: 342 Y: 31)</span>",
-		entries : [
+		title    : "Worg Pens",
+		id       : "Worg-Pens",
+		tip      : "<span class='coordinates'>(X: 342 Y: 31)</span>",
+		children : [
 			{
 				title      : "Worgfang",
 				id         : "Worgfang",
@@ -1735,10 +1735,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Waukeen's Rest",
-		id      : "Waukeens-Rest",
-		tip     : "You must complete this area upon your first visit, before resting or fast-travelling away. Otherwise, several quests and items become unavailable.",
-		entries : [
+		title    : "Waukeen's Rest",
+		id       : "Waukeens-Rest",
+		tip      : "You must complete this area upon your first visit, before resting or fast-travelling away. Otherwise, several quests and items become unavailable.",
+		children : [
 			{
 				title      : "Svartlebee's Woundseeker",
 				id         : "Svartlebees-Woundseeker",
@@ -1806,10 +1806,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Zhentarim Hideout",
-		id      : "Zhentarim-Hideout",
-		tip     : "",
-		entries : [
+		title    : "Zhentarim Hideout",
+		id       : "Zhentarim-Hideout",
+		tip      : "",
+		children : [
 			{
 				title      : "Harold",
 				id         : "Harold",
@@ -1851,10 +1851,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Brem",
-		id      : "Brem",
-		tip     : "<span class='coordinates'>(X: 295 Y: -251)</span> Brem's secret stock is unlocked after completing the quest \"<a href='https://bg3.wiki/wiki/Find_the_Missing_Shipment'>Find the Missing Shipment</a>\".",
-		entries : [
+		title    : "Brem",
+		id       : "Brem",
+		tip      : "<span class='coordinates'>(X: 295 Y: -251)</span> Brem's secret stock is unlocked after completing the quest \"<a href='https://bg3.wiki/wiki/Find_the_Missing_Shipment'>Find the Missing Shipment</a>\".",
+		children : [
 			{
 				title      : "Giantbreaker",
 				id         : "Giantbreaker",
@@ -1935,10 +1935,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Githyanki Patrol",
-		id      : "Githyanki-Patrol",
-		tip     : "",
-		entries : [
+		title    : "Githyanki Patrol",
+		id       : "Githyanki-Patrol",
+		tip      : "",
+		children : [
 			{
 				title      : "Silver Sword of the Astral Plane",
 				id         : "Silver-Sword-of-the-Astral-Plane",
@@ -1980,10 +1980,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Risen Road",
-		id      : "Risen-Road",
-		tip     : "",
-		entries : [
+		title    : "Risen Road",
+		id       : "Risen-Road",
+		tip      : "",
+		children : [
 			{
 				title      : "Infernal Robe",
 				id         : "Infernal-Robe",
@@ -2103,10 +2103,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Underdark",
-		id      : "Underdark",
-		tip     : "",
-		entries : [
+		title    : "Underdark",
+		id       : "Underdark",
+		tip      : "",
+		children : [
 			{
 				title      : "Helmet of Smiting",
 				id         : "Helmet-of-Smiting",
@@ -2317,10 +2317,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Myconoid Colony",
-		id      : "Myconoid-Colony",
-		tip     : "",
-		entries : [
+		title    : "Myconoid Colony",
+		id       : "Myconoid-Colony",
+		tip      : "",
+		children : [
 			{
 				title      : "Boots of Speed",
 				id         : "Boots-of-Speed",
@@ -2401,10 +2401,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Blurg",
-		id      : "Blurg",
-		tip     : "<span class='coordinates'>(X: 111 Y: -90)</span>",
-		entries : [
+		title    : "Blurg",
+		id       : "Blurg",
+		tip      : "<span class='coordinates'>(X: 111 Y: -90)</span>",
+		children : [
 			{
 				title      : "Boots of Genial Striding",
 				id         : "Boots-of-Genial-Striding",
@@ -2511,10 +2511,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Omeluum",
-		id      : "Omeluum",
-		tip     : "<span class='coordinates'>(X: 112 Y: -88)</span> Blurg will summon him.",
-		entries : [
+		title    : "Omeluum",
+		id       : "Omeluum",
+		tip      : "<span class='coordinates'>(X: 112 Y: -88)</span> Blurg will summon him.",
+		children : [
 			{
 				title      : "Boots of Stormy Clamour",
 				id         : "Boots-of-Stormy-Clamour",
@@ -2608,10 +2608,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Derryth Bonecloak",
-		id      : "Derryth-Bonecloak",
-		tip     : "<span class='coordinates'>(X: 50 Y: -94)</span>",
-		entries : [
+		title    : "Derryth Bonecloak",
+		id       : "Derryth-Bonecloak",
+		tip      : "<span class='coordinates'>(X: 50 Y: -94)</span>",
+		children : [
 			{
 				title      : "Amulet of Restoration",
 				id         : "Amulet-of-Restoration",
@@ -2705,10 +2705,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "The Festering Cove",
-		id      : "The-Festering-Cove",
-		tip     : "<span class='coordinates'>(X: 81 Y: -241)</span> The entrance to The Festering Cove can be found in the torchstalk field northeast of the Arcane Tower and southeast of the Decrepit Village. There is a Cragged Rock that can be reached by jumping over two mushrooms growing out of the cliff face. Climb down the Cragged Rock to reach The Festering Cove. (Note: Be careful of the exploding mushroom that can throw you to your death.)",
-		entries : [
+		title    : "The Festering Cove",
+		id       : "The-Festering-Cove",
+		tip      : "<span class='coordinates'>(X: 81 Y: -241)</span> The entrance to The Festering Cove can be found in the torchstalk field northeast of the Arcane Tower and southeast of the Decrepit Village. There is a Cragged Rock that can be reached by jumping over two mushrooms growing out of the cliff face. Climb down the Cragged Rock to reach The Festering Cove. (Note: Be careful of the exploding mushroom that can throw you to your death.)",
+		children : [
 			{
 				title      : "Slippery Chain Shirt",
 				id         : "Slippery-Chain-Shirt",
@@ -2750,10 +2750,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Arcane Tower",
-		id      : "Arcane-Tower",
-		tip     : "",
-		entries : [
+		title    : "Arcane Tower",
+		id       : "Arcane-Tower",
+		tip      : "",
+		children : [
 			{
 				title      : "Skybreaker",
 				id         : "Skybreaker",
@@ -2873,10 +2873,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Zurkhwood Skiffs",
-		id      : "Zurkhwood-Skiffs",
-		tip     : "",
-		entries : [
+		title    : "Zurkhwood Skiffs",
+		id       : "Zurkhwood-Skiffs",
+		tip      : "",
+		children : [
 			{
 				title      : "Intransigent Warhammer",
 				id         : "Intransigent-Warhammer",
@@ -2931,10 +2931,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Grymforge",
-		id      : "Grymforge",
-		tip     : "",
-		entries : [
+		title    : "Grymforge",
+		id       : "Grymforge",
+		tip      : "",
+		children : [
 			{
 				title      : "Fetish of Callarduran Smoothhands",
 				id         : "Fetish-of-Callarduran-Smoothhands",
@@ -3262,10 +3262,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "The Adamantine Forge",
-		id      : "The-Adamantine-Forge",
-		tip     : "",
-		entries : [
+		title    : "The Adamantine Forge",
+		id       : "The-Adamantine-Forge",
+		tip      : "",
+		children : [
 			{
 				title      : "Scimitar Mould",
 				id         : "Scimitar-Mould",
@@ -3437,10 +3437,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Lady Esther",
-		id      : "Lady-Esther",
-		tip     : "<span class='coordinates'>(X: -43 Y: -129)</span> She is in the Mountain Pass area, down the stairs and to the right from the Trielta Crags waypoint.",
-		entries : [
+		title    : "Lady Esther",
+		id       : "Lady-Esther",
+		tip      : "<span class='coordinates'>(X: -43 Y: -129)</span> She is in the Mountain Pass area, down the stairs and to the right from the Trielta Crags waypoint.",
+		children : [
 			{
 				title      : "Boots of Elemental Momentum",
 				id         : "Boots-of-Elemental-Momentum",
@@ -3547,10 +3547,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Rosymorn Monastery",
-		id      : "Rosymorn-Monastery",
-		tip     : "",
-		entries : [
+		title    : "Rosymorn Monastery",
+		id       : "Rosymorn-Monastery",
+		tip      : "",
+		children : [
 			{
 				title      : "Ceremonial Mace",
 				id         : "Ceremonial-Mace",
@@ -3618,10 +3618,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Crèche Y'llek",
-		id      : "Crèche-Yllek",
-		tip     : "",
-		entries : [
+		title    : "Crèche Y'llek",
+		id       : "Crèche-Yllek",
+		tip      : "",
+		children : [
 			{
 				title      : "Varsh Ko'kuu's Boots",
 				id         : "Varsh-Kokuus-Boots",
@@ -3832,10 +3832,10 @@ entries : [
 			} // TODO add DC
 		]},
 		{
-		title   : "A'jak'nir Jeera",
-		id      : "Ajaknir-Jeera",
-		tip     : "<span class='coordinates'>(X: 1383 Y: -812)</span> She is found in the camp area.",
-		entries : [
+		title    : "A'jak'nir Jeera",
+		id       : "Ajaknir-Jeera",
+		tip      : "<span class='coordinates'>(X: 1383 Y: -812)</span> She is found in the camp area.",
+		children : [
 			{
 				title      : "Daredevil Gloves",
 				id         : "Daredevil-Gloves",
@@ -3955,10 +3955,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "At Camp",
-		id      : "At-Camp",
-		tip     : "This is a camp event during a Long Rest after encountering Vlaakith at Crèche Y'llek and before starting Act 3.",
-		entries : [
+		title    : "At Camp",
+		id       : "At-Camp",
+		tip      : "This is a camp event during a Long Rest after encountering Vlaakith at Crèche Y'llek and before starting Act 3.",
+		children : [
 			{
 				title      : "Voss' Silver Sword",
 				id         : "Voss-Silver-Sword",
@@ -3988,14 +3988,14 @@ entries : [
 		]}
 	]},
 	{
-	title   : "Act 2",
-	id      : "Act-2",
-	entries : [
+	title    : "Act 2",
+	id       : "Act-2",
+	children : [
 		{
-		title   : "Ruined Battlefield",
-		id      : "Ruined-Battlefield",
-		tip     : "",
-		entries : [
+		title    : "Ruined Battlefield",
+		id       : "Ruined-Battlefield",
+		tip      : "",
+		children : [
 			{
 				title      : "Frost Prince",
 				id         : "Frost-Prince",
@@ -4193,10 +4193,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Last Light Inn",
-		id      : "Last-Light-Inn",
-		tip     : "",
-		entries : [
+		title    : "Last Light Inn",
+		id       : "Last-Light-Inn",
+		tip      : "",
+		children : [
 			{
 				title      : "Hat of Fire Acuity",
 				id         : "Hat-of-Fire-Acuity",
@@ -4381,10 +4381,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Quartermaster Talli",
-		id      : "Quartermaster-Talli",
-		tip     : "<span class='coordinates'>(X: -31 Y: 130)</span> She is found near the bridge.",
-		entries : [
+		title    : "Quartermaster Talli",
+		id       : "Quartermaster-Talli",
+		tip      : "<span class='coordinates'>(X: -31 Y: 130)</span> She is found near the bridge.",
+		children : [
 			{
 				title      : "Amulet of the Harpers",
 				id         : "Amulet-of-the-Harpers",
@@ -4556,10 +4556,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Dammon",
-		id      : "Dammon-2",
-		tip     : "<span class='coordinates'>(X: -34 Y: 166)</span> He is found in the barn.",
-		entries : [
+		title    : "Dammon",
+		id       : "Dammon-2",
+		tip      : "<span class='coordinates'>(X: -34 Y: 166)</span> He is found in the barn.",
+		children : [
 			{
 				title      : "Charge-Bound Warhammer",
 				id         : "Charge-Bound-Warhammer",
@@ -4705,10 +4705,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Mattis",
-		id      : "Mattis-1",
-		tip     : "<span class='coordinates'>(X: -54 Y: 141)</span> He is found by the main entrance to Last Light Inn.",
-		entries : [
+		title    : "Mattis",
+		id       : "Mattis-1",
+		tip      : "<span class='coordinates'>(X: -54 Y: 141)</span> He is found by the main entrance to Last Light Inn.",
+		children : [
 			{
 				title      : "Cloak of Cunning Brume",
 				id         : "Cloak-of-Cunning-Brume",
@@ -4737,10 +4737,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Barcus Wroot",
-		id      : "Barcus-Wroot",
-		tip     : "<span class='coordinates'>(X: -56 Y: 133)</span> If Barcus was saved in Grymforge he can be found in his lab at Last Light Inn.",
-		entries : [
+		title    : "Barcus Wroot",
+		id       : "Barcus-Wroot",
+		tip      : "<span class='coordinates'>(X: -56 Y: 133)</span> If Barcus was saved in Grymforge he can be found in his lab at Last Light Inn.",
+		children : [
 			{
 				title      : "Acrobat Shoes",
 				id         : "Acrobat-Shoes",
@@ -4795,10 +4795,10 @@ entries : [
 			} // TODO Found in the inventory of Hogi Nuners?
 		]},
 		{
-		title   : "Reithwin Tollhouse",
-		id      : "Reithwin-Tollhouse",
-		tip     : "",
-		entries : [
+		title    : "Reithwin Tollhouse",
+		id       : "Reithwin-Tollhouse",
+		tip      : "",
+		children : [
 			{
 				title      : "Flesh to Gold",
 				id         : "Flesh-to-Gold",
@@ -4892,10 +4892,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Mason's Guild",
-		id      : "Masons-Guild",
-		tip     : "",
-		entries : [
+		title    : "Mason's Guild",
+		id       : "Masons-Guild",
+		tip      : "",
+		children : [
 			{
 				title      : "Infernal Iron",
 				id         : "Infernal-Iron-4",
@@ -4924,10 +4924,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Reithwin Graveyard",
-		id      : "Reithwin-Graveyard",
-		tip     : "",
-		entries : [
+		title    : "Reithwin Graveyard",
+		id       : "Reithwin-Graveyard",
+		tip      : "",
+		children : [
 			{
 				title      : "True Love's Caress",
 				id         : "True-Loves-Caress",
@@ -4982,10 +4982,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "House of Healing",
-		id      : "House-of-Healing",
-		tip     : "",
-		entries : [
+		title    : "House of Healing",
+		id       : "House-of-Healing",
+		tip      : "",
+		children : [
 			{
 				title      : "True Love's Embrace",
 				id         : "True-Loves-Embrace",
@@ -5066,10 +5066,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "House of Healing Morgue",
-		id      : "House-of-Healing-Morgue",
-		tip     : "There are two entrances to this location: one west of the House of Healing, and another east of the Grand Mausoleum waypoint through the Ominous Crevice <span class='coordinates'>(X: -150 Y: 105)</span>",
-		entries : [
+		title    : "House of Healing Morgue",
+		id       : "House-of-Healing-Morgue",
+		tip      : "There are two entrances to this location: one west of the House of Healing, and another east of the Grand Mausoleum waypoint through the Ominous Crevice <span class='coordinates'>(X: -150 Y: 105)</span>",
+		children : [
 			{
 				title      : "Assassin's Shortsword",
 				id         : "Assassins-Shortsword",
@@ -5176,10 +5176,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "The Waning Moon",
-		id      : "The-Waning-Moon",
-		tip     : "",
-		entries : [
+		title    : "The Waning Moon",
+		id       : "The-Waning-Moon",
+		tip      : "",
+		children : [
 			{
 				title      : "Rat Bat",
 				id         : "Rat-Bat",
@@ -5234,10 +5234,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Moonrise Towers",
-		id      : "Moonrise-Towers",
-		tip     : "",
-		entries : [
+		title    : "Moonrise Towers",
+		id       : "Moonrise-Towers",
+		tip      : "",
+		children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-13",
@@ -5487,10 +5487,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Lann Tarv",
-		id      : "Lann-Tarv",
-		tip     : "<span class='coordinates'>(X: -164 Y: -167)</span> He is found near the stairs inside Moonrise Towers. (Note: You must ask for extra help from Z'rell to unlock his full stock.)",
-		entries : [
+		title    : "Lann Tarv",
+		id       : "Lann-Tarv",
+		tip      : "<span class='coordinates'>(X: -164 Y: -167)</span> He is found near the stairs inside Moonrise Towers. (Note: You must ask for extra help from Z'rell to unlock his full stock.)",
+		children : [
 			{
 				title      : "Bigboy's Chew Toy",
 				id         : "Bigboys-Chew-Toy",
@@ -5623,10 +5623,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Roah Moonglow",
-		id      : "Roah-Moonglow",
-		tip     : "<span class='coordinates'>(X: -174 Y: -176)</span> She is found in Moonrise Towers' entrance hall.",
-		entries : [
+		title    : "Roah Moonglow",
+		id       : "Roah-Moonglow",
+		tip      : "<span class='coordinates'>(X: -174 Y: -176)</span> She is found in Moonrise Towers' entrance hall.",
+		children : [
 			{
 				title      : "Armour of Devotion",
 				id         : "Armour-of-Devotion",
@@ -5733,10 +5733,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Araj Oblodra",
-		id      : "Araj-Oblodra",
-		tip     : "<span class='coordinates'>(X: -128 Y: -193)</span> She is found in a side room to the left as you enter Moonrise Towers.",
-		entries : [
+		title    : "Araj Oblodra",
+		id       : "Araj-Oblodra",
+		tip      : "<span class='coordinates'>(X: -128 Y: -193)</span> She is found in a side room to the left as you enter Moonrise Towers.",
+		children : [
 			{
 				title      : "Boots of Arcane Bolstering",
 				id         : "Boots-of-Arcane-Bolstering",
@@ -5869,10 +5869,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Gauntlet of Shar",
-		id      : "Gauntlet-of-Shar",
-		tip     : "",
-		entries : [
+		title    : "Gauntlet of Shar",
+		id       : "Gauntlet-of-Shar",
+		tip      : "",
+		children : [
 			{
 				title      : "Vivacious Cloak",
 				id         : "Vivacious-Cloak",
@@ -6083,10 +6083,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Shadowfell",
-		id      : "Shadowfell",
-		tip     : "",
-		entries : [
+		title    : "Shadowfell",
+		id       : "Shadowfell",
+		tip      : "",
+		children : [
 			{
 				title      : "Moonlight Glaive",
 				id         : "Moonlight-Glaive",
@@ -6180,10 +6180,10 @@ entries : [
 			} // TODO The actual reward is https://bg3.wiki/wiki/Gift_from_the_Absolute
 		]},
 		{
-		title   : "Mind Flayer Colony",
-		id      : "Mind-Flayer-Colony",
-		tip     : "",
-		entries : [
+		title    : "Mind Flayer Colony",
+		id       : "Mind-Flayer-Colony",
+		tip      : "",
+		children : [
 			{
 				title      : "Us",
 				id         : "Us",
@@ -6342,10 +6342,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "To Baldur's Gate",
-		id      : "To-Baldurs-Gate",
-		tip     : "",
-		entries : [
+		title    : "To Baldur's Gate",
+		id       : "To-Baldurs-Gate",
+		tip      : "",
+		children : [
 			{
 				title      : "Hr'a'cknir Bracers",
 				id         : "Hracknir-Bracers",
@@ -6374,10 +6374,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Astral Plane",
-		id      : "Astral-Plane-1",
-		tip     : "",
-		entries : [
+		title    : "Astral Plane",
+		id       : "Astral-Plane-1",
+		tip      : "",
+		children : [
 			{
 				title      : "Staff of the Emperor",
 				id         : "Staff-of-the-Emperor",
@@ -6420,14 +6420,14 @@ entries : [
 		]}
 	]},
 	{
-	title   : "Act 3",
-	id      : "Act-3",
-	entries : [
+	title    : "Act 3",
+	id       : "Act-3",
+	children : [
 		{
-		title   : "Gur Camp",
-		id      : "Gur-Camp",
-		tip     : "",
-		entries : [
+		title    : "Gur Camp",
+		id       : "Gur-Camp",
+		tip      : "",
+		children : [
 			{
 				title      : "The Undead Bane",
 				id         : "The-Undead-Bane",
@@ -6482,10 +6482,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Ferg Drogher",
-		id      : "Ferg-Drogher",
-		tip     : "<span class='coordinates'>(X: 45 Y: -98)</span> He is the Sharran lookout watching for Shadowheart's return. He is willing to trade, but if Shadowheart is in your party, he will flat-out refuse and then leave, never to return.",
-		entries : [
+		title    : "Ferg Drogher",
+		id       : "Ferg-Drogher",
+		tip      : "<span class='coordinates'>(X: 45 Y: -98)</span> He is the Sharran lookout watching for Shadowheart's return. He is willing to trade, but if Shadowheart is in your party, he will flat-out refuse and then leave, never to return.",
+		children : [
 			{
 				title      : "Cold Snap",
 				id         : "Cold-Snap",
@@ -6566,10 +6566,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Mattis",
-		id      : "Mattis-2",
-		tip     : "<span class='coordinates'>(X: 59 Y: -127)</span> He is found near the Requisitioned Barn in Rivington.",
-		entries : [
+		title    : "Mattis",
+		id       : "Mattis-2",
+		tip      : "<span class='coordinates'>(X: 59 Y: -127)</span> He is found near the Requisitioned Barn in Rivington.",
+		children : [
 			{
 				title      : "Corvid Token",
 				id         : "Corvid-Token",
@@ -6598,10 +6598,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Circus of the Last Days",
-		id      : "Circus-of-the-Last-Days",
-		tip     : "",
-		entries : [
+		title    : "Circus of the Last Days",
+		id       : "Circus-of-the-Last-Days",
+		tip      : "",
+		children : [
 			{
 				title      : "Boots of Very Fast Blinking",
 				id         : "Boots-of-Very-Fast-Blinking",
@@ -6773,10 +6773,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Jungle",
-		id      : "Jungle",
-		tip     : "The player is teleported here if they win the jackpot in Akabi's spin the wheel game by pickpocketing his Djinni Ring before playing his game. (Note: You can visit this area only once.)",
-		entries : [
+		title    : "Jungle",
+		id       : "Jungle",
+		tip      : "The player is teleported here if they win the jackpot in Akabi's spin the wheel game by pickpocketing his Djinni Ring before playing his game. (Note: You can visit this area only once.)",
+		children : [
 			{
 				title      : "Band of the Mystic Scoundrel",
 				id         : "Band-of-the-Mystic-Scoundrel",
@@ -6805,10 +6805,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Open Hand Temple",
-		id      : "Open-Hand-Temple",
-		tip     : "",
-		entries : [
+		title    : "Open Hand Temple",
+		id       : "Open-Hand-Temple",
+		tip      : "",
+		children : [
 			{
 				title      : "Seraphic Pugilist Gloves",
 				id         : "Seraphic-Pugilist-Gloves",
@@ -6876,10 +6876,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Exxvikyap",
-		id      : "Exxvikyap",
-		tip     : "<span class='coordinates'>(X: 8 Y: -32)</span> She is found in the blacksmith shop.",
-		entries : [
+		title    : "Exxvikyap",
+		id       : "Exxvikyap",
+		tip      : "<span class='coordinates'>(X: 8 Y: -32)</span> She is found in the blacksmith shop.",
+		children : [
 			{
 				title      : "Ambusher",
 				id         : "Ambusher",
@@ -6960,10 +6960,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Angleiron's Cellar",
-		id      : "Angleirons-Cellar",
-		tip     : "Entered via a cave entrance.",
-		entries : [
+		title    : "Angleiron's Cellar",
+		id       : "Angleirons-Cellar",
+		tip      : "Entered via a cave entrance.",
+		children : [
 			{
 				title      : "Runepowder Barrel",
 				id         : "Runepowder-Barrel-2",
@@ -6992,10 +6992,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Bumpnagel",
-		id      : "Bumpnagel",
-		tip     : "<span class='coordinates'>(X: 30 Y: 29)</span> He is found in Angleiron's Cellar.",
-		entries : [
+		title    : "Bumpnagel",
+		id       : "Bumpnagel",
+		tip      : "<span class='coordinates'>(X: 30 Y: 29)</span> He is found in Angleiron's Cellar.",
+		children : [
 			{
 				title      : "Martial Exertion Gloves",
 				id         : "Martial-Exertion-Gloves",
@@ -7037,10 +7037,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Rivington Docks",
-		id      : "Rivington-Docks",
-		tip     : "",
-		entries : [
+		title    : "Rivington Docks",
+		id       : "Rivington-Docks",
+		tip      : "",
+		children : [
 			{
 				title      : "Corpsegrinder",
 				id         : "Corpsegrinder",
@@ -7108,10 +7108,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Wyrm's Crossing",
-		id      : "Wyrms-Crossing",
-		tip     : "",
-		entries : [
+		title    : "Wyrm's Crossing",
+		id       : "Wyrms-Crossing",
+		tip      : "",
+		children : [
 			{
 				title      : "Amulet of the Drunkard",
 				id         : "Amulet-of-the-Drunkard",
@@ -7179,10 +7179,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Entharl Danthelon",
-		id      : "Entharl-Danthelon",
-		tip     : "<span class='coordinates'>(X: -6 Y: 133)</span> He can be found in Danthelon's Dancing Axe in Wyrm's Crossing.",
-		entries : [
+		title    : "Entharl Danthelon",
+		id       : "Entharl-Danthelon",
+		tip      : "<span class='coordinates'>(X: -6 Y: 133)</span> He can be found in Danthelon's Dancing Axe in Wyrm's Crossing.",
+		children : [
 			{
 				title      : "Blightbringer",
 				id         : "Blightbringer",
@@ -7289,10 +7289,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Basilisk Gate Barracks",
-		id      : "Basilisk-Gate-Barracks",
-		tip     : "",
-		entries : [ // TODO coords for all 3
+		title    : "Basilisk Gate Barracks",
+		id       : "Basilisk-Gate-Barracks",
+		tip      : "",
+		children : [ // TODO coords for all 3
 			{
 				title      : "Cloth Armour",
 				id         : "Cloth-Armour",
@@ -7334,10 +7334,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Stormshore Tabernacle",
-		id      : "Stormshore-Tabernacle",
-		tip     : "",
-		entries : [
+		title    : "Stormshore Tabernacle",
+		id       : "Stormshore-Tabernacle",
+		tip      : "",
+		children : [
 			{
 				title      : "Anointed in Splendour",
 				id         : "Anointed-in-Splendour",
@@ -7405,10 +7405,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Vicar Humbletoes",
-		id      : "Vicar-Humbletoes",
-		tip     : "<span class='coordinates'>(X: 109 Y: -16)</span> He is the guardian of the Stormshore Tabernacle.",
-		entries : [
+		title    : "Vicar Humbletoes",
+		id       : "Vicar-Humbletoes",
+		tip      : "<span class='coordinates'>(X: 109 Y: -16)</span> He is the guardian of the Stormshore Tabernacle.",
+		children : [
 			{
 				title      : "Mantle of the Holy Warrior",
 				id         : "Mantle-of-the-Holy-Warrior",
@@ -7450,10 +7450,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Elfsong Tavern",
-		id      : "Elfsong-Tavern",
-		tip     : "",
-		entries : [
+		title    : "Elfsong Tavern",
+		id       : "Elfsong-Tavern",
+		tip      : "",
+		children : [
 			{
 				title      : "Keepsake Ring",
 				id         : "Keepsake-Ring",
@@ -7521,10 +7521,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Baldur's Gate Graveyard",
-		id      : "Baldurs-Gate-Graveyard",
-		tip     : "",
-		entries : [
+		title    : "Baldur's Gate Graveyard",
+		id       : "Baldurs-Gate-Graveyard",
+		tip      : "",
+		children : [
 			{
 				title      : "Kurwin's Cauteriser",
 				id         : "Kurwins-Cauteriser",
@@ -7540,10 +7540,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Forge of the Nine",
-		id      : "Forge-of-the-Nine",
-		tip     : "",
-		entries : [
+		title    : "Forge of the Nine",
+		id       : "Forge-of-the-Nine",
+		tip      : "",
+		children : [
 			{
 				title      : "Unwanted Masterwork Gauntlets",
 				id         : "Unwanted-Masterwork-Gauntlets",
@@ -7585,10 +7585,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Dammon",
-		id      : "Dammon-3",
-		tip     : "<span class='coordinates'>(X: -2 Y: -7)</span> He is the blacksmith at the Forge of the Nine.",
-		entries : [
+		title    : "Dammon",
+		id       : "Dammon-3",
+		tip      : "<span class='coordinates'>(X: -2 Y: -7)</span> He is the blacksmith at the Forge of the Nine.",
+		children : [
 			{
 				title      : "Armour of Persistence",
 				id         : "Armour-of-Persistence",
@@ -7630,10 +7630,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "The Devil's Fee",
-		id      : "The-Devils-Fee",
-		tip     : "",
-		entries : [
+		title    : "The Devil's Fee",
+		id       : "The-Devils-Fee",
+		tip      : "",
+		children : [
 			{
 				title      : "Mask of Soul Perception",
 				id         : "Mask-of-Soul-Perception",
@@ -7649,10 +7649,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Helsik",
-		id      : "Helsik",
-		tip     : "<span class='coordinates'>(X: -39 Y: -13)</span> She is found in the Devil's Fee.",
-		entries : [
+		title    : "Helsik",
+		id       : "Helsik",
+		tip      : "<span class='coordinates'>(X: -39 Y: -13)</span> She is found in the Devil's Fee.",
+		children : [
 			{
 				title      : "Caitiff Staff",
 				id         : "Caitiff-Staff",
@@ -7746,10 +7746,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Tara",
-		id      : "Tara",
-		tip     : "Tara will appear on various rooftops in the Lower City if Gale spoke to her during the quest \"<a href='https://bg3.wiki/wiki/Find_the_Missing_Letters'>Find the Missing Letters</a>\".",
-		entries : [
+		title    : "Tara",
+		id       : "Tara",
+		tip      : "Tara will appear on various rooftops in the Lower City if Gale spoke to her during the quest \"<a href='https://bg3.wiki/wiki/Find_the_Missing_Letters'>Find the Missing Letters</a>\".",
+		children : [
 			{
 				title      : "Hat of the Sharp Caster",
 				id         : "Hat-of-the-Sharp-Caster",
@@ -7791,10 +7791,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Highberry's Home",
-		id      : "Highberrys-Home",
-		tip     : "",
-		entries : [
+		title    : "Highberry's Home",
+		id       : "Highberrys-Home",
+		tip      : "",
+		children : [
 			{
 				title      : "Spaceshunt Boots",
 				id         : "Spaceshunt-Boots",
@@ -7823,10 +7823,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Stormshore Armoury",
-		id      : "Stormshore-Armoury",
-		tip     : "",
-		entries : [
+		title    : "Stormshore Armoury",
+		id       : "Stormshore-Armoury",
+		tip      : "",
+		children : [
 			{
 				title      : "Armour of Agility",
 				id         : "Armour-of-Agility",
@@ -7868,10 +7868,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Sorcerous Sundries",
-		id      : "Sorcerous-Sundries",
-		tip     : "",
-		entries : [
+		title    : "Sorcerous Sundries",
+		id       : "Sorcerous-Sundries",
+		tip      : "",
+		children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-25",
@@ -8043,10 +8043,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Rolan / Lorroakan's Projection",
-		id      : "Rolan-/-Lorroakans-Projection",
-		tip     : "<span class='coordinates'>(X: -14 Y: -72)</span> He is found at Sorcerous Sundries' front desk.",
-		entries : [
+		title    : "Rolan / Lorroakan's Projection",
+		id       : "Rolan-/-Lorroakans-Projection",
+		tip      : "<span class='coordinates'>(X: -14 Y: -72)</span> He is found at Sorcerous Sundries' front desk.",
+		children : [
 			{
 				title      : "Armour of Landfall",
 				id         : "Armour-of-Landfall",
@@ -8127,10 +8127,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Felogyr's Fireworks",
-		id      : "Felogyrs-Fireworks",
-		tip     : "",
-		entries : [
+		title    : "Felogyr's Fireworks",
+		id       : "Felogyrs-Fireworks",
+		tip      : "",
+		children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-26",
@@ -8172,10 +8172,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Philgrave's Mansion",
-		id      : "Philgraves-Mansion",
-		tip     : "",
-		entries : [
+		title    : "Philgrave's Mansion",
+		id       : "Philgraves-Mansion",
+		tip      : "",
+		children : [
 			{
 				title      : "Crypt Lord Ring",
 				id         : "Crypt-Lord-Ring",
@@ -8217,10 +8217,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Mystic Carrion",
-		id      : "Mystic-Carrion",
-		tip     : "<span class='coordinates'>(X: 14 Y: -160)</span> He is found in Philgrave's Mansion.",
-		entries : [
+		title    : "Mystic Carrion",
+		id       : "Mystic-Carrion",
+		tip      : "<span class='coordinates'>(X: 14 Y: -160)</span> He is found in Philgrave's Mansion.",
+		children : [
 			{
 				title      : "Armour of the Sporekeeper",
 				id         : "Armour-of-the-Sporekeeper",
@@ -8262,10 +8262,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Guildhall",
-		id      : "Guildhall",
-		tip     : "",
-		entries : [
+		title    : "Guildhall",
+		id       : "Guildhall",
+		tip      : "",
+		children : [
 			{
 				title      : "Drunken Cloth",
 				id         : "Drunken-Cloth",
@@ -8294,10 +8294,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Old Garlow's Place",
-		id      : "Old-Garlows-Place",
-		tip     : "",
-		entries : [
+		title    : "Old Garlow's Place",
+		id       : "Old-Garlows-Place",
+		tip      : "",
+		children : [
 			{
 				title      : "Staff of Interruption",
 				id         : "Staff-of-Interruption",
@@ -8326,10 +8326,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "The Counting House",
-		id      : "The-Counting-House",
-		tip     : "",
-		entries : [
+		title    : "The Counting House",
+		id       : "The-Counting-House",
+		tip      : "",
+		children : [
 			{
 				title      : "Nymph Cloak",
 				id         : "Nymph-Cloak",
@@ -8449,10 +8449,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Crimson Draughts",
-		id      : "Crimson-Draughts",
-		tip     : "",
-		entries : [
+		title    : "Crimson Draughts",
+		id       : "Crimson-Draughts",
+		tip      : "",
+		children : [
 			{
 				title      : "Unstable Blood",
 				id         : "Unstable-Blood",
@@ -8481,10 +8481,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Rainforest's Home ",
-		id      : "Rainforests-Home-",
-		tip     : "",
-		entries : [
+		title    : "Rainforest's Home ",
+		id       : "Rainforests-Home-",
+		tip      : "",
+		children : [
 			{
 				title      : "Bottled Breath",
 				id         : "Bottled-Breath",
@@ -8500,10 +8500,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "The Blushing Mermaid",
-		id      : "The-Blushing-Mermaid",
-		tip     : "",
-		entries : [
+		title    : "The Blushing Mermaid",
+		id       : "The-Blushing-Mermaid",
+		tip      : "",
+		children : [
 			{
 				title      : "Scrap and Shrapnel Grenade",
 				id         : "Scrap-and-Shrapnel-Grenade",
@@ -8558,10 +8558,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Golbraith's House",
-		id      : "Golbraiths-House",
-		tip     : "",
-		entries : [
+		title    : "Golbraith's House",
+		id       : "Golbraiths-House",
+		tip      : "",
+		children : [
 			{
 				title      : "Abdel's Trusted Shield",
 				id         : "Abdels-Trusted-Shield",
@@ -8590,10 +8590,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Bloomridge Park",
-		id      : "Bloomridge-Park",
-		tip     : "",
-		entries : [
+		title    : "Bloomridge Park",
+		id       : "Bloomridge-Park",
+		tip      : "",
+		children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-31",
@@ -8609,10 +8609,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Szarr Palace",
-		id      : "Szarr-Palace",
-		tip     : "",
-		entries : [
+		title    : "Szarr Palace",
+		id       : "Szarr-Palace",
+		tip      : "",
+		children : [
 			{
 				title      : "Helmet of Grit",
 				id         : "Helmet-of-Grit",
@@ -8693,10 +8693,10 @@ entries : [
 			} // TODO is condition, Vampire Spawn is also a possible bonus
 		]},
 		{
-		title   : "Facemaker's Boutique",
-		id      : "Facemakers-Boutique",
-		tip     : "",
-		entries : [
+		title    : "Facemaker's Boutique",
+		id       : "Facemakers-Boutique",
+		tip      : "",
+		children : [
 			{
 				title      : "Arrow of Piercing",
 				id         : "Arrow-of-Piercing",
@@ -8712,10 +8712,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Society of Brilliance Lodge",
-		id      : "Society-of-Brilliance-Lodge",
-		tip     : "",
-		entries : [
+		title    : "Society of Brilliance Lodge",
+		id       : "Society-of-Brilliance-Lodge",
+		tip      : "",
+		children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-32",
@@ -8744,10 +8744,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Elerrathin's Home",
-		id      : "Elerrathins-Home",
-		tip     : "",
-		entries : [
+		title    : "Elerrathin's Home",
+		id       : "Elerrathins-Home",
+		tip      : "",
+		children : [
 			{
 				title      : "Belm",
 				id         : "Belm",
@@ -8802,10 +8802,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Jannath's Estate",
-		id      : "Jannaths-Estate",
-		tip     : "",
-		entries : [
+		title    : "Jannath's Estate",
+		id       : "Jannaths-Estate",
+		tip      : "",
+		children : [
 			{
 				title      : "Till Death Do Us Part",
 				id         : "Till-Death-Do-Us-Part",
@@ -8834,10 +8834,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "House of Grief",
-		id      : "House-of-Grief",
-		tip     : "",
-		entries : [
+		title    : "House of Grief",
+		id       : "House-of-Grief",
+		tip      : "",
+		children : [
 			{
 				title      : "Handmaiden's Mace",
 				id         : "Handmaidens-Mace",
@@ -8892,10 +8892,10 @@ entries : [
 			} // TODO better desc
 		]},
 		{
-		title   : "Grey Harbour Docks",
-		id      : "Grey-Harbour-Docks",
-		tip     : "",
-		entries : [
+		title    : "Grey Harbour Docks",
+		id       : "Grey-Harbour-Docks",
+		tip      : "",
+		children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-34",
@@ -9002,10 +9002,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Steel Watch Foundry",
-		id      : "Steel-Watch-Foundry",
-		tip     : "",
-		entries : [
+		title    : "Steel Watch Foundry",
+		id       : "Steel-Watch-Foundry",
+		tip      : "",
+		children : [
 			{
 				title      : "Steelwatcher Helmet",
 				id         : "Steelwatcher-Helmet",
@@ -9073,10 +9073,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Iron Throne",
-		id      : "Iron-Throne",
-		tip     : "Duke Ravengard will not be present here (and will become a permanent enemy) if you don't attend Gortash's coronation first.",
-		entries : [
+		title    : "Iron Throne",
+		id       : "Iron-Throne",
+		tip      : "Duke Ravengard will not be present here (and will become a permanent enemy) if you don't attend Gortash's coronation first.",
+		children : [
 			{
 				title      : "Infernal Iron",
 				id         : "Infernal-Iron-7",
@@ -9131,10 +9131,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Wyrm's Rock Fortress",
-		id      : "Wyrms-Rock-Fortress",
-		tip     : "",
-		entries : [
+		title    : "Wyrm's Rock Fortress",
+		id       : "Wyrms-Rock-Fortress",
+		tip      : "",
+		children : [
 			{
 				title      : "Infernal Spear",
 				id         : "Infernal-Spear",
@@ -9280,10 +9280,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "The Dragon's Sanctum",
-		id      : "The-Dragons-Sanctum",
-		tip     : "",
-		entries : [
+		title    : "The Dragon's Sanctum",
+		id       : "The-Dragons-Sanctum",
+		tip      : "",
+		children : [
 			{
 				title      : "Balduran's Giantslayer",
 				id         : "Baldurans-Giantslayer",
@@ -9312,10 +9312,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Murder Tribunal",
-		id      : "Murder-Tribunal",
-		tip     : "",
-		entries : [
+		title    : "Murder Tribunal",
+		id       : "Murder-Tribunal",
+		tip      : "",
+		children : [
 			{
 				title      : "Blackguard's Gauntlets",
 				id         : "Blackguards-Gauntlets",
@@ -9422,10 +9422,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Echo of Abazigal",
-		id      : "Echo-of-Abazigal",
-		tip     : "<span class='coordinates'>(X: -1263 Y: 511)</span> He will appear in the main chamber after completing the quest \"<a href='https://bg3.wiki/wiki/Impress_the_Murder_Tribunal'>Impress the Murder Tribunal</a>\" and becoming an Unholy Assassin of Bhaal.",
-		entries : [
+		title    : "Echo of Abazigal",
+		id       : "Echo-of-Abazigal",
+		tip      : "<span class='coordinates'>(X: -1263 Y: 511)</span> He will appear in the main chamber after completing the quest \"<a href='https://bg3.wiki/wiki/Impress_the_Murder_Tribunal'>Impress the Murder Tribunal</a>\" and becoming an Unholy Assassin of Bhaal.",
+		children : [
 			{
 				title      : "Assassin of Bhaal Cowl",
 				id         : "Assassin-of-Bhaal-Cowl",
@@ -9532,10 +9532,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Lower City Sewers",
-		id      : "Lower-City-Sewers",
-		tip     : "",
-		entries : [
+		title    : "Lower City Sewers",
+		id       : "Lower-City-Sewers",
+		tip      : "",
+		children : [
 			{
 				title      : "Murderous Cut",
 				id         : "Murderous-Cut",
@@ -9590,10 +9590,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Voiceless Penitent Bareki",
-		id      : "Voiceless-Penitent-Bareki",
-		tip     : "<span class='coordinates'>(X: -157 Y: 939)</span> He is found next to the Undercity Ruins waypoint.",
-		entries : [
+		title    : "Voiceless Penitent Bareki",
+		id       : "Voiceless-Penitent-Bareki",
+		tip      : "<span class='coordinates'>(X: -157 Y: 939)</span> He is found next to the Undercity Ruins waypoint.",
+		children : [
 			{
 				title      : "Armour of Moonbasking",
 				id         : "Armour-of-Moonbasking",
@@ -9622,10 +9622,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Bhaal Temple",
-		id      : "Bhaal-Temple",
-		tip     : "",
-		entries : [
+		title    : "Bhaal Temple",
+		id       : "Bhaal-Temple",
+		tip      : "",
+		children : [
 			{
 				title      : "Bonespike Gloves",
 				id         : "Bonespike-Gloves",
@@ -9680,10 +9680,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "House of Hope",
-		id      : "House-of-Hope",
-		tip     : "",
-		entries : [
+		title    : "House of Hope",
+		id       : "House-of-Hope",
+		tip      : "",
+		children : [
 			{
 				title      : "Helldusk Helmet",
 				id         : "Helldusk-Helmet",
@@ -9816,10 +9816,10 @@ entries : [
 			}
 		]},
 		{
-		title   : "Astral Plane",
-		id      : "Astral-Plane-2",
-		tip     : "",
-		entries : [
+		title    : "Astral Plane",
+		id       : "Astral-Plane-2",
+		tip      : "",
+		children : [
 			{
 				title      : "Orphic Ring",
 				id         : "Orphic-Ring",
@@ -9847,7 +9847,7 @@ entries : [
 			}
 		}
 	}
-	setParentRefs(entryData, "entries");
+	setParentRefs(entryData, "children");
 	for (const filter of filters)
 		setParentRefs(filter, "subfilters");
 })();

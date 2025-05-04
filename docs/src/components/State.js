@@ -19,11 +19,11 @@ const State = {
 		}
 
 		const fillState = (entry) => {
-			if (entry.entries === undefined) {
+			if (entry.children === undefined) {
 				checkboxState[entry.id] = checked.includes(entry.id);
 			} else {
 				expansionState[entry.id] = !collapsed.includes(entry.id);
-				for (const subentry of entry.entries) {
+				for (const subentry of entry.children) {
 					fillState(subentry);
 				}
 			}
@@ -76,8 +76,8 @@ const State = {
 		},
 		clearAllCheckboxes(state, container) {
 			const clear = (container) => {
-				for (const entry of container.entries) {
-					if (entry.entries === undefined) {
+				for (const entry of container.children) {
+					if (entry.children === undefined) {
 						state.checkboxState[entry.id] = false;
 					} else {
 						clear(entry);

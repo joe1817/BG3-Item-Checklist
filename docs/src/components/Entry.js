@@ -29,7 +29,7 @@ const Entry = {
 				this.$store.dispatch("toggleCheckboxAndSave", this.data)
 			}
 		},
-		highlight(text){
+		highlight(text) {
 			if (!this.$store.state.searchString) {
 				return text;
 			} else if (text.toLowerCase().includes(this.$store.state.searchString)) {

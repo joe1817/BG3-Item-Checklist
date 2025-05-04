@@ -2,7 +2,7 @@ const Container = {
 	template: `
 <div
 	:id="data.id"
-	:class="[(data.entries[0].entries !== undefined) ? 'meta-container':'container', {expanded: $store.state.expansionState[data.id]}]"
+	:class="[(data.children[0].children !== undefined) ? 'meta-container':'container', {expanded: $store.state.expansionState[data.id]}]"
 	v-show="!autoHide || !trackable || $store.state.countTotal[data.id]"
 >
 
@@ -28,8 +28,8 @@ const Container = {
 
 		<slot
 			name="nestedContainer"
-			v-if="data.entries[0].entries !== undefined"
-			v-for="subdata in data.entries"
+			v-if="data.children[0].children !== undefined"
+			v-for="subdata in data.children"
 			:data="subdata"
 		>
 		</slot>
@@ -37,7 +37,7 @@ const Container = {
 		<slot
 			name="leaf"
 			v-else
-			v-for="subdata in data.entries"
+			v-for="subdata in data.children"
 			:data="subdata"
 		>
 		</slot>
