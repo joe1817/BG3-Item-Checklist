@@ -111,12 +111,12 @@ const Container = {
 			}, 200);
 		},
 		clearHandler() {
-			//this.$emit("confirm", {
-			//	message: "Clear all checkboxes for the section \"" + this.data.title + "\"?",
-			//	callback: () => {
+			this.$confirm(
+				"Clear all checkboxes for the section \"" + this.data.title + "\"?",
+				() => {
 					this.$store.dispatch("clearAllCheckboxesAndSave", this.data);
-			//	}
-			//});
+				}
+			);
 		}
 	},
 	watch: {

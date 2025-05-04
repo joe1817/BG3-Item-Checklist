@@ -1,7 +1,5 @@
 const App = {
 	template: `
-<ConfirmDialog ref="confirmDialog"></ConfirmDialog>
-
 <div id="back-to-top" class="text-button noselect" @click="scrollToTop">Back to Top</div>
 
 <h1>BG3 Item Checklist</h1>
@@ -68,12 +66,10 @@ const App = {
 </div>
 
 <div id="table">
-<EntryContainer
-	:data="entryData"
-	:collapsible=false
-	@confirm="confirmHandler"
->
-</EntryContainer>
+	<EntryContainer
+		:data="entryData"
+		:collapsible=false
+	></EntryContainer>
 </div>
 `,
 	data() {
@@ -214,9 +210,6 @@ const App = {
 			} else {
 				unfade(this.$refs.options);
 			}
-		},
-		confirmHandler(opts) {
-			this.$refs.confirmDialog.confirm(opts);
 		},
 		clearSearchHandler() {
 			this.$refs.searchBar.value="";
