@@ -26,7 +26,7 @@ Story Item:
 	Bloody Amulet
 	Hag's Bane
 
-Temporary
+Temporary:
 	Shadow Blade
 	Concussion Grenade
 	Orthonic Handbomb
