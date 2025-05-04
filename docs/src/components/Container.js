@@ -1,22 +1,22 @@
 const Container = {
 	template: `
 <div
-	:id="entry.id"
-	:class="[(entry.entries[0].entries !== undefined) ? 'meta-container':'container', {expanded: $store.state.expansionState[entry.id]}]"
-	v-show="!autoHide || !trackable || $store.state.countTotal[entry.id]"
+	:id="data.id"
+	:class="[(data.entries[0].entries !== undefined) ? 'meta-container':'container', {expanded: $store.state.expansionState[data.id]}]"
+	v-show="!autoHide || !trackable || $store.state.countTotal[data.id]"
 >
 
 	<div class="header">
 		<span v-if="collapsible" class="eye noselect" @click="collapseHandler">👁️</span>
 		<span class="section-progress">
-			<span v-if="searchable" class="title" v-html="highlight(entry.title)"></span>
-			<span v-else class="title">{{ entry.title }}</span>
+			<span v-if="searchable" class="title" v-html="highlight(data.title)"></span>
+			<span v-else class="title">{{ data.title }}</span>
 			<span v-if="trackable"
 				:class="{
 					'progress': true,
-					started: $store.state.countProgress[entry.id],
-					completed: $store.state.countProgress[entry.id] == $store.state.countTotal[entry.id]}"
-			>{{ $store.state.countProgress[entry.id] }}/{{ $store.state.countTotal[entry.id] }}
+					started: $store.state.countProgress[data.id],
+					completed: $store.state.countProgress[data.id] == $store.state.countTotal[data.id]}"
+			>{{ $store.state.countProgress[data.id] }}/{{ $store.state.countTotal[data.id] }}
 			</span>
 		</span>
 		<span v-if="clearable" class="text-button clear-button noselect" @click="clearHandler">Clear</span>
@@ -24,28 +24,28 @@ const Container = {
 
 	<div ref="content" class="content">
 
-		<div v-if="entry.tip" class="tip" v-html="entry.tip"></div>
+		<div v-if="data.tip" class="tip" v-html="data.tip"></div>
 
 		<slot
 			name="nestedContainer"
-			v-if="entry.entries[0].entries !== undefined"
-			v-for="subentry in entry.entries"
-			:entry="subentry"
+			v-if="data.entries[0].entries !== undefined"
+			v-for="subdata in data.entries"
+			:data="subdata"
 		>
 		</slot>
 
 		<slot
 			name="leaf"
 			v-else
-			v-for="subentry in entry.entries"
-			:entry="subentry"
+			v-for="subdata in data.entries"
+			:data="subdata"
 		>
 		</slot>
 	</div>
 </div>
 `,
 	props: {
-		entry: {},
+		data: {},
 		autoHide: {
 			type: Boolean,
 			default: true
@@ -68,21 +68,21 @@ const Container = {
 		}
 	},
 	beforeMount() {
-		this.$store.state.countProgress[this.entry.id] = 0;
-		this.$store.state.countTotal[this.entry.id] = 0;
-		this.$store.state.matchesSearch[this.entry.id] = true;
+		this.$store.state.countProgress[this.data.id] = 0;
+		this.$store.state.countTotal[this.data.id] = 0;
+		this.$store.state.matchesSearch[this.data.id] = true;
 	},
 	mounted() {
-		if (!this.$store.state.expansionState[this.entry.id]) {
+		if (!this.$store.state.expansionState[this.data.id]) {
 			this.$refs.content.style.maxHeight = "0px";
 		}
 	},
 	computed: {
 		parentMatchesSearch() {
-			return this.entry.parent && this.$store.state.matchesSearch[this.entry.parent.id];
+			return this.data.parent && this.$store.state.matchesSearch[this.data.parent.id];
 		},
 		matchesSearch() {
-			return this.parentMatchesSearch || (this.searchable && this.entry.title.toLowerCase().includes(this.$store.state.searchString));
+			return this.parentMatchesSearch || (this.searchable && this.data.title.toLowerCase().includes(this.$store.state.searchString));
 		}
 	},
 	methods: {
@@ -94,14 +94,14 @@ const Container = {
 			// force a reflow
 			void this.$refs.content.offsetHeight;
 
-			const expand = !this.$store.state.expansionState[this.entry.id];
+			const expand = !this.$store.state.expansionState[this.data.id];
 			if (expand) {
 				this.$refs.content.style.maxHeight = this.$refs.content.scrollHeight + "px";
 			} else {
 				this.$refs.content.style.maxHeight = "0px";
 			}
 
-			this.$store.dispatch("toggleExpansionAndSave", this.entry);
+			this.$store.dispatch("toggleExpansionAndSave", this.data);
 
 			setTimeout(() => {
 				this.$refs.content.style.transition = null;
@@ -112,9 +112,9 @@ const Container = {
 		},
 		clearHandler() {
 			//this.$emit("confirm", {
-			//	message: "Clear all checkboxes for the section \"" + this.entry.title + "\"?",
+			//	message: "Clear all checkboxes for the section \"" + this.data.title + "\"?",
 			//	callback: () => {
-					this.$store.dispatch("clearAllCheckboxesAndSave", this.entry);
+					this.$store.dispatch("clearAllCheckboxesAndSave", this.data);
 			//	}
 			//});
 		},
@@ -130,7 +130,7 @@ const Container = {
 	},
 	watch: {
 		matchesSearch(newVal, oldVal) {
-			this.$store.state.matchesSearch[this.entry.id] = newVal;
+			this.$store.state.matchesSearch[this.data.id] = newVal;
 		}
 	}
 }

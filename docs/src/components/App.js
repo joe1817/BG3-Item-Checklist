@@ -69,7 +69,7 @@ const App = {
 
 <div id="table">
 <EntryContainer
-	:entry="entryData"
+	:data="entryData"
 	:collapsible=false
 	@confirm="confirmHandler"
 >
@@ -147,12 +147,12 @@ const App = {
 		// keep track of last viewed section
 		const containers = document.querySelectorAll("#table .container > .header");
 		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
+			(sections) => {
+				sections.forEach((section) => {
+					if (section.isIntersecting) {
 						let id = "TOC";
-						if (entry.target.id !== "TOC") {
-							id = entry.target.parentNode.id;
+						if (section.target.id !== "TOC") {
+							id = section.target.parentNode.id;
 						}
 						this.$store.dispatch("updateLastViewedAndSave", id)
 					}

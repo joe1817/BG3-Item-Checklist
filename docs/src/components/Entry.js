@@ -1,18 +1,18 @@
 const Entry = {
-	props: ["entry"],
+	props: ["data"],
 	inject: ["filters"],
 	template: `
 <div
 	ref="content"
-	:class="['entry', entry.categories, entry.rarity, {'top-tier': entry.suggested, 'completed': $store.state.checkboxState[entry.id]}]"
-	:id="entry.id"
+	:class="['entry', data.categories, data.rarity, {'top-tier': data.suggested, 'completed': $store.state.checkboxState[data.id]}]"
+	:id="data.id"
 	v-show="visible"
 	@click="handleClick($event)"
 >
-	<span class="checkbox"><input type="checkbox" :checked="$store.state.checkboxState[entry.id]"></span>
-	<span v-show="$store.state.showImagesState" class="img"><img :src="entry.img" width=50 height=50></span>
-	<span class="title"><a :href="entry.link" v-html="highlight(entry.title)"></a></span>
-	<span class="desc" v-html="highlight(entry.desc)"></span>
+	<span class="checkbox"><input type="checkbox" :checked="$store.state.checkboxState[data.id]"></span>
+	<span v-show="$store.state.showImagesState" class="img"><img :src="data.img" width=50 height=50></span>
+	<span class="title"><a :href="data.link" v-html="highlight(data.title)"></a></span>
+	<span class="desc" v-html="highlight(data.desc)"></span>
 </div>
 `,
 	mounted() {
@@ -26,7 +26,7 @@ const Entry = {
 	methods: {
 		handleClick(event) {
 			if (event.target.tagName !== "A") {
-				this.$store.dispatch("toggleCheckboxAndSave", this.entry)
+				this.$store.dispatch("toggleCheckboxAndSave", this.data)
 			}
 		},
 		highlight(text){
@@ -39,14 +39,14 @@ const Entry = {
 			}
 		},
 		updateProgress(amount) {
-			let parent = this.entry.parent;
+			let parent = this.data.parent;
 			while (parent) {
 				this.$store.state.countProgress[parent.id] += amount;
 				parent = parent.parent;
 			}
 		},
 		updateTotal(amount) {
-			let parent = this.entry.parent;
+			let parent = this.data.parent;
 			while (parent) {
 				this.$store.state.countTotal[parent.id] += amount;
 				parent = parent.parent;
@@ -55,20 +55,20 @@ const Entry = {
 	},
 	computed: {
 		visible() {
-			if (!this.$store.state.matchesSearch[this.entry.parent.id] && this.$store.state.searchString.length && !this.entry.desc.toLowerCase().includes(this.$store.state.searchString) && !this.entry.title.toLowerCase().includes(this.$store.state.searchString)) {
+			if (!this.$store.state.matchesSearch[this.data.parent.id] && this.$store.state.searchString.length && !this.data.desc.toLowerCase().includes(this.$store.state.searchString) && !this.data.title.toLowerCase().includes(this.$store.state.searchString)) {
 				return false;
 			}
-			if (this.$store.state.checkboxState[this.entry.id] && !this.$store.state.showCompleteState) {
+			if (this.$store.state.checkboxState[this.data.id] && !this.$store.state.showCompleteState) {
 				return false;
 			}
 			for (const filter of this.filters) {
-				for (const cat of this.entry.categories) {
+				for (const cat of this.data.categories) {
 					if (filter.categories.includes(cat) && this.$store.state.filterState[filter.id]) {
 						return true;
 					}
 				}
 				for (const subfilter of filter.subfilters) {
-					for (const cat of this.entry.categories) {
+					for (const cat of this.data.categories) {
 						if (subfilter.categories.includes(cat) && this.$store.state.filterState[subfilter.id]) {
 							return true;
 						}
@@ -78,7 +78,7 @@ const Entry = {
 			return false;
 		},
 		progress() {
-			return (this.visible && this.$store.state.checkboxState[this.entry.id]) ? 1 : 0;
+			return (this.visible && this.$store.state.checkboxState[this.data.id]) ? 1 : 0;
 		},
 		total() {
 			return (this.visible) ? 1 : 0;

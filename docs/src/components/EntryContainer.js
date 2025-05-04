@@ -1,19 +1,19 @@
 const EntryContainer = {
 	template: `
 <Container
-	:entry="entry"
+	:data="data"
 >
 
 	<template #nestedContainer="props">
 		<EntryContainer
-			:entry="props.entry"
+			:data="props.data"
 		>
 		</EntryContainer>
 	</template>
 
 	<template #leaf="props">
 		<Entry
-			:entry="props.entry"
+			:data="props.data"
 		>
 		</Entry>
 	</template>
@@ -21,6 +21,6 @@ const EntryContainer = {
 </Container>
 `,
 	props: {
-		entry: {}
+		data: {}
 	}
 }
