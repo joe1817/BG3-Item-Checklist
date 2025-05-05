@@ -289,13 +289,26 @@ input[type="checkbox"] {
 	margin-left: 3em;
 
 	.checkbox, .title, .desc {
-		padding-top: 1em;
+		margin-top: 1em;
 	}
 
 	.title {
 		width: 120px;
 		flex-grow: 0;
 		flex-shrink: 0;
+	}
+}
+
+.entry.hide-image {
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+
+	.checkbox, .title, .desc {
+		margin-top: 0;
+	}
+
+	.img {
+		display: none;
 	}
 }
 

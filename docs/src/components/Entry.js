@@ -4,13 +4,13 @@ const Entry = {
 	template: `
 <div
 	ref="content"
-	:class="['entry', data.categories, data.rarity, {'top-tier': data.suggested, 'completed': $store.state.checkboxState[data.id]}]"
+	:class="['entry', data.categories, data.rarity, {'top-tier': data.suggested, completed: $store.state.checkboxState[data.id], 'hide-image': !$store.state.showImagesState}]"
 	:id="data.id"
 	v-show="visible"
 	@click="handleClick($event)"
 >
 	<span class="checkbox"><input type="checkbox" :checked="$store.state.checkboxState[data.id]"></span>
-	<span v-show="$store.state.showImagesState" class="img"><img :src="data.img" width=50 height=50></span>
+	<span class="img"><img :src="data.img" width=50 height=50></span>
 	<span class="title"><a :href="data.link" v-html="$highlight(data.title)"></a></span>
 	<span class="desc" v-html="$highlight(data.desc)"></span>
 </div>
