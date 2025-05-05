@@ -128,7 +128,7 @@ input[type="checkbox"] {
 		text-align: center;
 	}
 
-	.section-progress {
+	.progress-header {
 		display: flex;
 		justify-content: space-between;
 		padding: 0;
@@ -140,7 +140,7 @@ input[type="checkbox"] {
 		}
 	}
 
-	.section-progress.active {
+	.progress-header.active {
 		opacity: 1;
 	}
 }
@@ -219,7 +219,7 @@ input[type="checkbox"] {
 			margin-left: 0.5em;
 		}
 
-		.section-progress {
+		.progress-header {
 			display: flex;
 			flex-direction: row;
 			align-items: center;

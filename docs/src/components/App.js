@@ -10,11 +10,13 @@ const App = {
 	<div class="acts" ref="acts">
 		<div v-for="act in entryData.children" class="act">
 			<h3 class="title">{{ act.title }}</h3>
-			<span v-for="section in act.children" :class="{'section-progress':true, active: $store.state.countTotal[section.id]}">
-				<a v-if="$store.state.countTotal[section.id]" @click="clickHandlerTOC(section.id)">{{ section.title }}</a>
-				<span v-else>{{ section.title }}</span>
-				<span :class="{'progress':true, started: $store.state.countProgress[section.id], completed: $store.state.countProgress[section.id] == $store.state.countTotal[section.id]}">{{$store.state.countProgress[section.id] || 0}}/{{$store.state.countTotal[section.id] || 0}}</span>
-			</span>
+			<ProgressHeader
+				v-for="section in act.children"
+				:id="section.id"
+				:title="section.title"
+				@click="clickHandlerTOC(section.id)"
+			>
+			</ProgressHeader>			
 		</div>
 		<div v-if="entryData.children.length % 2" ref="act-spacer" class="act" style="display:none;"></div>
 	</div>

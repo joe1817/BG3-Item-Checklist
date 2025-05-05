@@ -8,17 +8,12 @@ const Container = {
 
 	<div class="header">
 		<span v-if="collapsible" class="eye noselect" @click="collapseHandler">👁️</span>
-		<span class="section-progress">
-			<span v-if="searchable" class="title" v-html="$highlight(data.title)"></span>
-			<span v-else class="title">{{ data.title }}</span>
-			<span v-if="trackable"
-				:class="{
-					'progress': true,
-					started: $store.state.countProgress[data.id],
-					completed: $store.state.countProgress[data.id] == $store.state.countTotal[data.id]}"
-			>{{ $store.state.countProgress[data.id] }}/{{ $store.state.countTotal[data.id] }}
-			</span>
-		</span>
+		<ProgressHeader
+			:id="data.id"
+			:title="data.title"
+			:trackable="trackable"
+		>
+		</ProgressHeader>
 		<span v-if="clearable" class="text-button clear-button noselect" @click="clearHandler">Clear</span>
 	</div>
 
