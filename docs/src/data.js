@@ -262,7 +262,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/The Whispering Promise.png",
 				link       : "https://bg3.wiki/wiki/The_Whispering_Promise",
-				desc       : "<span class='coordinates'>(X: 260 Y: 510)</span> Bought from Volo (<span class='value'>40 gp / 85 gp</span>), who may not initially appear to be a trader, but there is a coin icon button in the bottom left that will allow you to start trading with him. Bought from Grat the Trader in the Goblin Camp after Volo is captured."
+				desc       : "<span class='coordinates'>(X: 260 Y: 510)</span> Bought from Volo (<span class='value'>40 gp / 85 gp</span>), who may not initially appear to be a trader, but there is a coin icon button in the bottom left that will allow you to start trading with him. Alternatively, bought from Grat the Trader in the Goblin Camp after Volo is captured."
 			},
 			{
 				title      : "Instrument Proficiency",
