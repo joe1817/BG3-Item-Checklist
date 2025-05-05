@@ -365,13 +365,13 @@ input[type="checkbox"] {
 }
 
 #back-to-top {
-	visibility: hidden;
 	position: fixed;
 	bottom: 20px;
 	right: 20px;
 	z-index: 1000;
 	padding: 0.8em;
 	border: none;
+	visibility: hidden;
 	opacity: 0;
 	transition: opacity 0.2s ease-in-out;
 }

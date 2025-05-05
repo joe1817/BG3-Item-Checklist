@@ -94,7 +94,7 @@ const App = {
 			} else {
 				backToTop.style.opacity = 0;
 				setTimeout(() => {
-					if (backToTop.style.opacity === 0) {
+					if (backToTop.style.opacity === "0") {
 						backToTop.style.visibility = "hidden";
 					}
 				}, 200);
