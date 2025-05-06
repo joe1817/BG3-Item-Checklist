@@ -12,7 +12,7 @@ const App = {
 ></TableOfContents>
 
 <Options
-	:filters="filters"
+	:filterData="filterData"
 ></Options>
 
 <div id="table">
@@ -24,14 +24,9 @@ const App = {
 `,
 	data() {
 		return {
-			entryData : entryData,
-			filters   : filters
+			entryData  : entryData,
+			filterData : filterData
 		};
-	},
-	provide() {
-		return {
-			filters : this.filters
-		}
 	},
 	mounted() {
 		// scroll to last viewed section

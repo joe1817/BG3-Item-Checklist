@@ -5,17 +5,17 @@ const Filter = {
 	<div
 		class="toggle-button"
 		:class="{
-			enabled: (filter.subfilters.length == 0 && $store.state.filterState[filter.id]) || filter.subfilters.some(sf => $store.state.filterState[sf.id]),
-			'fully-enabled': (filter.subfilters.length == 0 && $store.state.filterState[filter.id]) || (filter.subfilters.length && filter.subfilters.every(sf => $store.state.filterState[sf.id]))
+			enabled: (!filter.children && $store.state.filterState[filter.id]) || (filter.children && filter.children.some(sf => $store.state.filterState[sf.id])),
+			'fully-enabled': (!filter.children && $store.state.filterState[filter.id]) || (filter.children && filter.children.every(sf => $store.state.filterState[sf.id]))
 		}"
 		@click="clickHandler($event, filter)"
 	>
 		<span class="eye">👁️</span>
-		<span>{{ filter.title }} <span v-if="filter.subfilters.length" style="font-size:8px;line-height:1;">▼</span></span>
+		<span>{{ filter.title }} <span v-if="filter.children" style="font-size:8px;line-height:1;">▼</span></span>
 	</div>
 	<div ref="subfilters" class="subfilters">
 		<div
-			v-for="subfilter in filter.subfilters"
+			v-for="subfilter in filter.children"
 			class="toggle-button"
 			:class="{enabled: $store.state.filterState[subfilter.id], 'fully-enabled': $store.state.filterState[subfilter.id]}"
 			@click="clickHandler($event, subfilter)"
@@ -35,20 +35,27 @@ const Filter = {
 	},
 	methods: {
 		clickHandler(event, filter) {
-			if (this.touch) {
-				if (event.target.classList.contains("eye")) {
-					this.$store.dispatch("toggleFilterAndSave", filter);
-				} else if ((filter.subfilters && filter.subfilters.length)) {
-					this.expanded = !this.expanded;
-				} else {
-					this.$store.dispatch("toggleFilterAndSave", filter);
-				}
+			if (this.touch && !event.target.classList.contains("eye") && (filter.children && filter.children.length)) {
+				this.expanded = !this.expanded;
 			} else {
-				this.$store.dispatch("toggleFilterAndSave", filter);
+				updates = {};
+				updates[filter.id] = !this.$store.state.filterState[filter.id];
+				for (const id of filter.descendants) {
+					updates[id] = updates[filter.id];
+				}
+				if (filter.parent !== undefined) {
+					const count = filter.parent.children.filter(sf => updates[sf.id] ?? this.$store.state.filterState[sf.id] ?? true).length;
+					if (count == filter.parent.children.length) {
+						updates[filter.parent.id] = true;
+					} else {
+						updates[filter.parent.id] = false;
+					}
+				}
+				this.$store.dispatch("toggleFilterAndSave", updates);
 			}
 		},
 		mouseenterHandler() {
-			const canExpand = this.filter.subfilters && this.filter.subfilters.length;
+			const canExpand = this.filter.children && this.filter.children.length;
 			if (!this.touch && canExpand) {
 				this.expanded = true;
 			}

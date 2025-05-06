@@ -63,6 +63,11 @@ const Container = {
 		}
 	},
 	beforeMount() {
+		if (this.data.children) {
+			this.data.children.forEach(child => {
+				child.parent = this.data;
+			});
+		}
 		this.$store.state.countProgress[this.data.id] = 0;
 		this.$store.state.countTotal[this.data.id] = 0;
 		this.$store.state.matchesSearch[this.data.id] = true;

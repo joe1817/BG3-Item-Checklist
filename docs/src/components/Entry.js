@@ -1,6 +1,5 @@
 const Entry = {
 	props: ["data"],
-	inject: ["filters"],
 	template: `
 <div
 	ref="content"
@@ -52,18 +51,9 @@ const Entry = {
 			if (this.$store.state.checkboxState[this.data.id] && !this.$store.state.showCompleteState) {
 				return false;
 			}
-			for (const filter of this.filters) {
-				for (const cat of this.data.categories) {
-					if (filter.categories.includes(cat) && this.$store.state.filterState[filter.id]) {
-						return true;
-					}
-				}
-				for (const subfilter of filter.subfilters) {
-					for (const cat of this.data.categories) {
-						if (subfilter.categories.includes(cat) && this.$store.state.filterState[subfilter.id]) {
-							return true;
-						}
-					}
+			for (const cat of this.data.categories) {
+				if (this.$store.state.filterState[cat] === true) {
+					return true;
 				}
 			}
 			return false;

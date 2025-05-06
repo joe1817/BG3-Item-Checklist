@@ -1,125 +1,76 @@
-const filters = [];
-
-(function() {
-	// only direct children
-	const categoryHierachy = {
-		"_root_": ["accessory", "armour", "bonus", "consumable", "follower", "misc", "shield", "weapon"],
-		"accessory": ["amulet", "ring"],
-		"armour": ["boots", "cloak", "clothing", "gloves", "heavy-armour", "helmet", "light-armour", "medium-armour"],
-		"bonus": ["action", "condition", "enhancement"],
-		"action": ["non-spell", "spell"],
-		"consumable": ["arrow", "barrel", "camp-supplies", "crafting", "grenade", "potion", "scroll"],
-		"weapon": ["melee", "ranged"],
-		"melee": ["battleaxe", "club", "dagger", "flail", "glaive", "greataxe", "greatclub", "greatsword", "halberd", "handaxe", "light-hammer", "longsword", "mace", "maul", "morningstar", "pike", "quarterstaff", "rapier", "scimitar", "shortsword", "sickle", "spear", "trident", "war-pick", "warhammer"],
-		"ranged": ["hand-crossbow", "heavy-crossbow", "light-crossbow", "longbow", "shortbow"]
-	};
-
-	const categoryAliases = {
-		"accessory": "Accessories",
-		"armour": "Armour",
-		"bonus": "Bonuses",
-		"consumable": "Consumables",
-		"follower": "Followers",
-		"misc": "Misc",
-		"shield": "Shields",
-		"weapon": "Weapons",
-		"amulet": "Amulets",
-		"ring": "Rings",
-		"boots": "Bootss",
-		"cloak": "Cloaks",
-		"clothing": "Clothings",
-		"gloves": "Glovess",
-		"heavy-armour": "Heavy Armour",
-		"helmet": "Helmets",
-		"light-armour": "Light Armour",
-		"medium-armour": "Medium Armour",
-		"action": "Actions",
-		"condition": "Conditions",
-		"enhancement": "Enhancements",
-		"non-spell": "Non-spells",
-		"spell": "Spells",
-		"arrow": "Arrows",
-		"barrel": "Barrels",
-		"camp-supplies": "Camp Suppliess",
-		"crafting": "Craftings",
-		"grenade": "Grenades",
-		"potion": "Potions",
-		"scroll": "Scrolls",
-		"melee": "Melee",
-		"ranged": "Ranged",
-		"battleaxe": "Battleaxes",
-		"club": "Clubs",
-		"dagger": "Daggers",
-		"flail": "Flails",
-		"glaive": "Glaives",
-		"greataxe": "Greataxes",
-		"greatclub": "Greatclubs",
-		"greatsword": "Greatswords",
-		"halberd": "Halberds",
-		"handaxe": "Handaxes",
-		"light-hammer": "Light Hammers",
-		"longsword": "Longswords",
-		"mace": "Maces",
-		"maul": "Mauls",
-		"morningstar": "Morningstars",
-		"pike": "Pikes",
-		"quarterstaff": "Quarterstaves",
-		"rapier": "Rapiers",
-		"scimitar": "Scimitars",
-		"shortsword": "Shortswords",
-		"sickle": "Sickles",
-		"spear": "Spears",
-		"trident": "Tridents",
-		"war-pick": "War Picks",
-		"warhammer": "Warhammers",
-		"hand-crossbow": "Hand Crossbows",
-		"heavy-crossbow": "Heavy Crossbows",
-		"light-crossbow": "Light Crossbows",
-		"longbow": "Longbows",
-		"shortbow": "Shortbow"
-	};
-
-	// all children, grandchildren, etc.
-	const expandedHierarchy = {};
-
-	function expandHierarchy(expandedHierarchy, categoryHierachy, key) {
-		if (categoryHierachy[key] == undefined){
-			expandedHierarchy[key] = [key];
-		}
-		else {
-			expandedHierarchy[key] = [];
-			categoryHierachy[key].forEach(item => {
-				expandHierarchy(expandedHierarchy, categoryHierachy, item);
-				expandedHierarchy[item].forEach(item2 => {
-					expandedHierarchy[key].push(item2);
-				});
-			});
-		}
-	}
-	expandHierarchy(expandedHierarchy, categoryHierachy, "_root_");
-
-	categoryHierachy["_root_"].forEach(cat => {
-		const subfilters = []
-		if (categoryHierachy[cat]) {
-			categoryHierachy[cat].forEach(subcat => {
-				subfilters.push({
-					"id"         : subcat,
-					"title"      : categoryAliases[subcat],
-					"categories" : expandedHierarchy[subcat]
-				});
-			});
-		}
-		filters.push({
-			"id"         : cat,
-			"title"      : categoryAliases[cat],
-			"categories" : expandedHierarchy[cat],
-			"subfilters" : subfilters
-		});
-	})
-
-})();
-
-// setting parent references below entryData declaration
+filterData = [
+	{ title: "Accessories", 			id: "accessory", children: [
+		{ title: "Amulets", 			id: "amulet", },
+		{ title: "Rings", 				id: "ring", },
+	]},
+	{ title: "Armour", 					id: "armour", children: [
+		{ title: "Boots", 				id: "boots", },
+		{ title: "Cloaks", 				id: "cloak", },
+		{ title: "Clothing", 			id: "clothing", },
+		{ title: "Gloves", 				id: "gloves", },
+		{ title: "Heavy Armour", 		id: "heavy-armour", },
+		{ title: "Helmets", 			id: "helmet", },
+		{ title: "Light Armour", 		id: "light-armour", },
+		{ title: "Medium Armour", 		id: "medium-armour", },
+	]},
+	{ title: "Bonuses", 				id: "bonus", 	children: [
+		{ title: "Actions", 			id: "action", 	children: [
+			{ title: "Non-spells", 		id: "non-spell", },
+			{ title: "Spells", 			id: "spell", },
+		]
+		},
+		{ title: "Conditions", 			id: "condition", },
+		{ title: "Enhancements", 		id: "enhancement", },
+	]},
+	{ title: "Consumables", 			id: "consumable", children: [
+		{ title: "Arrows", 				id: "arrow", },
+		{ title: "Barrels", 			id: "barrel", },
+		{ title: "Camp-supplies", 		id: "camp-supplies", },
+		{ title: "Crafting", 			id: "crafting", },
+		{ title: "Grenades", 			id: "grenade", },
+		{ title: "Potions", 			id: "potion", },
+		{ title: "Scrolls", 			id: "scroll", },
+	]},
+	{ title: "Followers", 				id: "follower", },
+	{ title: "Misc", 					id: "misc", },
+	{ title: "Shields", 				id: "shield", },
+	{ title: "Weapons", 				id: "weapon", 	children: [
+		{ title: "Melee", 				id: "melee", 	children: [
+			{ title: "Battleaxes", 		id: "battleaxe", },
+			{ title: "Clubs", 			id: "club", },
+			{ title: "Daggers", 		id: "dagger", },
+			{ title: "Flails", 			id: "flail", },
+			{ title: "Glaives", 		id: "glaive", },
+			{ title: "Greataxes", 		id: "greataxe", },
+			{ title: "Greatclubs", 		id: "greatclub", },
+			{ title: "Greatswords", 	id: "greatsword", },
+			{ title: "Halberds", 		id: "halberd", },
+			{ title: "Handaxes", 		id: "handaxe", },
+			{ title: "Light Hammers",	id: "light-hammer", },
+			{ title: "Longswords", 		id: "longsword", },
+			{ title: "Maces", 			id: "mace", },
+			{ title: "Mauls", 			id: "maul", },
+			{ title: "Morningstars", 	id: "morningstar", },
+			{ title: "Pikes", 			id: "pike", },
+			{ title: "Quarterstaves", 	id: "quarterstaff", },
+			{ title: "Rapiers", 		id: "rapier", },
+			{ title: "Scimitars", 		id: "scimitar", },
+			{ title: "Shortswords", 	id: "shortsword", },
+			{ title: "Sickles", 		id: "sickle", },
+			{ title: "Spears", 			id: "spear", },
+			{ title: "Tridents", 		id: "trident", },
+			{ title: "War Picks", 		id: "war-pick", },
+			{ title: "Warhammers", 		id: "warhammer", },
+		]},
+		{ title: "Ranged", 				id: "ranged", children: [
+			{ title: "Hand Crossbows", 	id: "hand-crossbow", },
+			{ title: "Heavy Crossbows", id: "heavy-crossbow", },
+			{ title: "Light Crossbows", id: "light-crossbow", },
+			{ title: "Longbows", 		id: "longbow", },
+			{ title: "Shortbows", 		id: "shortbow", },
+		]},
+	]},
+]
 
 const entryData =
 {
@@ -9836,18 +9787,3 @@ children : [
 		]}
 	]}
 ]};
-
-
-(function() {
-	const setParentRefs = (container, childrenProperty) => {
-		if (container[childrenProperty] !== undefined) {
-			for (const entry of container[childrenProperty]) {
-				entry.parent = container;
-				setParentRefs(entry, childrenProperty);
-			}
-		}
-	}
-	setParentRefs(entryData, "children");
-	for (const filter of filters)
-		setParentRefs(filter, "subfilters");
-})();

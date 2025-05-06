@@ -1,11 +1,11 @@
 const Options = {
-	props: ["filters"],
+	props: ["filterData"],
 	template: `
 <div id="options" ref="options">
 	<fieldset id="filters" class="noselect">
 		<legend>Filters</legend>
 		<div class="content">
-			<Filter ref="filters" v-for="filter in filters" :filter="filter" @expanded="expandHandler"></Filter>
+			<Filter ref="filters" v-for="filter in filterData" :filter="filter" @expanded="expandHandler"></Filter>
 		</div>
 	</fieldset>
 
@@ -46,6 +46,21 @@ const Options = {
 	</fieldset>
 </div>
 `,
+	beforeMount() {
+		const scan = (filter) => {
+			filter.descendants = [filter.id];
+			if (filter.children) {
+				filter.children.forEach(child => {
+					scan(child);
+					child.parent = filter;
+					filter.descendants.push(...child.descendants);
+				});
+			}			
+		};
+		this.filterData.forEach(filter => {
+			scan(filter);
+		});
+	},
 	methods: {
 		clearSearchHandler() {
 			this.$refs.searchBar.value="";

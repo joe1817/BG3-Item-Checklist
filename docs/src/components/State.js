@@ -11,24 +11,27 @@ const State = {
 		const expansionState = {};
 		const checkboxState = {};
 
-		for (const filter of filters) {
-			filterState[filter.id] = !disabled.includes(filter.id);
-			for (const subfilter of filter.subfilters) {
-				filterState[subfilter.id] = !disabled.includes(subfilter.id);
+		const fillFilterState = (filters) => {
+			for (const filter of filters) {
+				filterState[filter.id] = !disabled.includes(filter.id);
+				if (filter.children) {
+					fillFilterState(filter.children);
+				}
 			}
 		}
+		fillFilterState(filterData);
 
-		const fillState = (entry) => {
+		const fillEntryState = (entry) => {
 			if (entry.children === undefined) {
 				checkboxState[entry.id] = checked.includes(entry.id);
 			} else {
 				expansionState[entry.id] = !collapsed.includes(entry.id);
 				for (const subentry of entry.children) {
-					fillState(subentry);
+					fillEntryState(subentry);
 				}
 			}
 		}
-		fillState(entryData);
+		fillEntryState(entryData);
 
 		return {
 			filterState: filterState,
@@ -48,21 +51,10 @@ const State = {
 		}
 	},
 	mutations: {
-		toggleFilter(state, filter) {
-			state.filterState[filter.id] = !state.filterState[filter.id];
-
-			if (filter.parent === undefined) {
-				for (const subfilter of filter.subfilters) {
-					state.filterState[subfilter.id] = state.filterState[filter.id];
-				}
-			} else {
-				const count = filter.parent.subfilters.filter(sf => state.filterState[sf.id]).length;
-				if (count == filter.parent.subfilters.length) {
-					state.filterState[filter.parent.id] = true;
-				} else {
-					state.filterState[filter.parent.id] = false;
-				}
-			}
+		toggleFilter(state, updates) {
+			Object.entries(updates).forEach(([key, val]) => {
+				state.filterState[key] = updates[key];
+			});
 		},
 		toggleExpansion(state, container) {
 			state.expansionState[container.id] = !state.expansionState[container.id];
