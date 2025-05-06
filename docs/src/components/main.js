@@ -1,5 +1,6 @@
 const app = Vue.createApp(App);
 
+app.component("ScrollToTop", ScrollToTop);
 app.component("TableOfContents", TableOfContents);
 app.component("Filter", Filter);
 app.component("Options", Options);

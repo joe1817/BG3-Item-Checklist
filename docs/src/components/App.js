@@ -1,6 +1,8 @@
 const App = {
 	template: `
-<div id="back-to-top" class="text-button noselect" @click="scrollToTop">Back to Top</div>
+<ScrollToTop	
+	class="text-button noselect"
+></ScrollToTop>
 
 <h1>BG3 Item Checklist</h1>
 <p><a href="https://github.com/joe1817/BG3-Item-Checklist">GitHub</a></p>
@@ -32,26 +34,6 @@ const App = {
 		}
 	},
 	mounted() {
-		const backToTop = document.getElementById("back-to-top");
-		window.addEventListener("scroll", () => {
-			if (window.scrollY > 1200) {
-				backToTop.style.visibility = "visible";
-				backToTop.style.opacity = 1;
-			} else {
-				backToTop.style.opacity = 0;
-				setTimeout(() => {
-					if (backToTop.style.opacity === "0") {
-						backToTop.style.visibility = "hidden";
-					}
-				}, 200);
-			}
-		});
-
-		// calculate buy prices from entry value
-		document.querySelectorAll(".value").forEach(value => {
-			value.innerText = this.get_final_price(value.innerText);
-		});
-
 		// scroll to last viewed section
 		if (this.$store.state.lastViewedState) {
 			const lastViewed = this.$store.state.lastViewedState;
@@ -89,11 +71,13 @@ const App = {
 
 		// replace image links with coordinates in the spritesheet
 		loadSprites();
+		
+		// calculate buy prices from entry value
+		document.querySelectorAll(".value").forEach(value => {
+			value.innerText = this.get_final_price(value.innerText);
+		});		
 	},
 	methods: {
-		scrollToTop() {
-			window.scrollTo({top: 0, behavior: "smooth"});
-		},
 		get_difficulty_mod(difficulty) {
 			switch (difficulty) {
 				case "explorer": return 0.5;
