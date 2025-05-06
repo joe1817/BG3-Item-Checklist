@@ -1,6 +1,7 @@
 const app = Vue.createApp(App);
 
 app.component("Filter", Filter);
+app.component("Options", Options);
 app.component("Entry", Entry);
 app.component("ProgressHeader", ProgressHeader);
 app.component("Container", Container);

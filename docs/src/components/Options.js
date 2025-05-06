@@ -1,4 +1,4 @@
-const Filter = {
+const Options = {
 	props: ["filters"],
 	template: `
 <div id="options" ref="options">
@@ -46,46 +46,53 @@ const Filter = {
 	</fieldset>
 </div>
 `,
-	data() {
-		return {
-			expanded: false,
-			touch: "ontouchstart" in window || navigator.maxTouchPoints > 0
-		}
-	},
 	methods: {
-		clickHandler(event, filter) {
-			if (this.touch) {
-				if (event.target.classList.contains("eye")) {
-					this.$store.dispatch("toggleFilterAndSave", filter);
-				} else if ((filter.subfilters && filter.subfilters.length)) {
-					this.expanded = !this.expanded;
-				} else {
-					this.$store.dispatch("toggleFilterAndSave", filter);
+		clearSearchHandler() {
+			this.$refs.searchBar.value="";
+			this.$store.commit("updateSearchString", "");
+		},
+		keyupHandler(event) {
+			if (event.key == "Escape") {
+				this.clearSearchHandler();
+			} else {
+				this.$store.commit("updateSearchString", event.target.value.toLowerCase());
+			}
+		},
+		expandHandler(filter, expanded) {
+			const fade = (el, id) => {
+				if (el.getAttribute("id") == id) {
+					return true;
 				}
+				let found = null;
+				for (const child of el.children) {
+					if (fade(child, id)) {
+						found = child;
+						break;
+					}
+				}
+				if (found) {
+					for (const child of el.children) {
+						if (child !== found) {
+							child.classList.add("faded");
+						}
+					}
+					return true;
+				}
+				return false;
+			};
+
+			const unfade = (el) => {
+				el.classList.remove("faded");
+				for (const child of el.children) {
+					unfade(child);
+				}
+			};
+
+			if (expanded) {
+				fade(this.$refs.options, filter);
 			} else {
-				this.$store.dispatch("toggleFilterAndSave", filter);
+				unfade(this.$refs.options);
 			}
 		},
-		mouseenterHandler() {
-			const canExpand = this.filter.subfilters && this.filter.subfilters.length;
-			if (!this.touch && canExpand) {
-				this.expanded = true;
-			}
-		},
-		mouseleaveHandler() {
-			this.expanded = false;
-		}
 	},
-	watch: {
-		expanded(expand) {
-			const subcategoriesDiv = this.$refs.subfilters;
-			if (expand) {
-				subcategoriesDiv.style.maxHeight = subcategoriesDiv.scrollHeight + "px";
-				this.$emit("expanded", 'filter-'+this.filter.id, true);
-			} else {
-				subcategoriesDiv.style.maxHeight = "0px";
-				this.$emit("expanded", 'filter-'+this.filter.id, false);
-			}
-		}
-	}
 }
