@@ -101,7 +101,7 @@ const Container = {
 			setTimeout(() => {
 				this.$refs.content.style.transition = null;
 				if (expand) {
-					this.$refs.content.style.maxHeight = "auto";
+					this.$refs.content.style.maxHeight = null;
 				}
 			}, 200);
 		},
