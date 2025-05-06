@@ -1,5 +1,6 @@
 const app = Vue.createApp(App);
 
+app.component("TableOfContents", TableOfContents);
 app.component("Filter", Filter);
 app.component("Options", Options);
 app.component("Entry", Entry);
