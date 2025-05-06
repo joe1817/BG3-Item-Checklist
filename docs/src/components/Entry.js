@@ -25,7 +25,7 @@ const Entry = {
 	methods: {
 		handleClick(event) {
 			if (event.target.tagName !== "A") {
-				this.$store.dispatch("toggleCheckboxAndSave", this.data)
+				this.$store.dispatch("toggleCheckboxAndSave", this.data.id)
 			}
 		},
 		updateProgress(amount) {

@@ -101,7 +101,7 @@ const Container = {
 				this.$refs.content.style.maxHeight = "0px";
 			}
 
-			this.$store.dispatch("toggleExpansionAndSave", this.data);
+			this.$store.dispatch("toggleExpansionAndSave", this.data.id);
 
 			setTimeout(() => {
 				this.$refs.content.style.transition = null;
@@ -114,7 +114,18 @@ const Container = {
 			this.$confirm(
 				"Clear all checkboxes for the section \"" + this.data.title + "\"?",
 				() => {
-					this.$store.dispatch("clearAllCheckboxesAndSave", this.data);
+					updates = {};
+					const scan = (data) => {
+						for (const child of data.children) {
+							if (child.children === undefined) {
+								updates[child.id] = false;
+							} else {
+								scan(child);
+							}
+						}
+					}
+					scan(this.data);
+					this.$store.dispatch("setAllCheckboxesAndSave", updates);
 				}
 			);
 		}

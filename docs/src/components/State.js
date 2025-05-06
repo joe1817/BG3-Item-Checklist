@@ -34,19 +34,23 @@ const State = {
 		fillEntryState(entryData);
 
 		return {
+			// Options
 			filterState: filterState,
 			showCompleteState: showComplete,
 			showImagesState: showImages,
 			lastViewedWritePending: false, // scrolling too fast can cause too many writes, limit the rate
 			searchString: "",
 
+			// Containers
 			expansionState: expansionState,
 			matchesSearch: {},
 			countProgress: {},
 			countTotal: {},
 
+			// Entries
 			checkboxState: checkboxState,
 
+			// App
 			lastViewedState: lastViewed,
 		}
 	},
@@ -56,11 +60,11 @@ const State = {
 				state.filterState[key] = updates[key];
 			});
 		},
-		toggleExpansion(state, container) {
-			state.expansionState[container.id] = !state.expansionState[container.id];
+		toggleExpansion(state, id) {
+			state.expansionState[id] = !state.expansionState[id];
 		},
-		toggleCheckbox(state, entry) {
-			state.checkboxState[entry.id] = !state.checkboxState[entry.id];
+		toggleCheckbox(state, id) {
+			state.checkboxState[id] = !state.checkboxState[id];
 		},
 		toggleShowComplete(state) {
 			state.showCompleteState = !state.showCompleteState;
@@ -68,20 +72,13 @@ const State = {
 		toggleShowImages(state) {
 			state.showImagesState = !state.showImagesState;
 		},
-		clearAllCheckboxes(state, container) {
-			const clear = (container) => {
-				for (const entry of container.children) {
-					if (entry.children === undefined) {
-						state.checkboxState[entry.id] = false;
-					} else {
-						clear(entry);
-					}
-				}
-			}
-			clear(container);
+		setAllCheckboxes(state, updates) {
+			Object.entries(updates).forEach(([key, val]) => {
+				state.checkboxState[key] = val;
+			});
 		},
-		updateLastViewed(state, s) {
-			state.lastViewedState = s;
+		updateLastViewed(state, id) {
+			state.lastViewedState = id;
 		},
 		updateSearchString(state, s) {
 			state.searchString = s;
@@ -119,8 +116,8 @@ const State = {
 
 			localStorage.setItem("showImages", state.showImagesState);
 		},
-		clearAllCheckboxesAndSave({ commit, state }, payload) {
-			commit("clearAllCheckboxes", payload);
+		setAllCheckboxesAndSave({ commit, state }, payload) {
+			commit("setAllCheckboxes", payload);
 
 			let obj = state.checkboxState;
 			let data = Object.keys(obj).filter(key => obj[key] === true).join(",");
