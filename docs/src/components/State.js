@@ -32,17 +32,19 @@ const State = {
 
 		return {
 			filterState: filterState,
-			expansionState: expansionState,
-			checkboxState: checkboxState,
 			showCompleteState: showComplete,
 			showImagesState: showImages,
-			lastViewedState: lastViewed,
-
 			lastViewedWritePending: false, // scrolling too fast can cause too many writes, limit the rate
 			searchString: "",
+
+			expansionState: expansionState,
 			matchesSearch: {},
 			countProgress: {},
-			countTotal: {}
+			countTotal: {},
+
+			checkboxState: checkboxState,
+
+			lastViewedState: lastViewed,
 		}
 	},
 	mutations: {
