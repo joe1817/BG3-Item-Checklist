@@ -34,11 +34,11 @@ const ProgressHeader = {
 		title: {
 			type: String,
 		},
-		searchable: {
+		trackable: {
 			type: Boolean,
 			default: true,
 		},
-		trackable: {
+		searchable: {
 			type: Boolean,
 			default: true,
 		},

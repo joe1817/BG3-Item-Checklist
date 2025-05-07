@@ -12,6 +12,7 @@ const Container = {
 			:id="data.id"
 			:title="data.title"
 			:trackable="trackable"
+			:searchable="searchable"
 		>
 		</ProgressHeader>
 		<span v-if="clearable" class="text-button clear-button noselect" @click="clearHandler">Clear</span>
