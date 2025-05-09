@@ -16,10 +16,10 @@ const App = {
 ></Options>
 
 <div id="table">
-	<EntryContainer
+	<DefaultContainer
 		:data="entryData"
 		:collapsible=false
-	></EntryContainer>
+	></DefaultContainer>
 </div>
 `,
 	data() {

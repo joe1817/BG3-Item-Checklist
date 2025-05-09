@@ -1,14 +1,14 @@
-const EntryContainer = {
+const DefaultContainer = {
 	template: `
 <Container
 	:data="data"
 >
 
 	<template #nestedContainer="props">
-		<EntryContainer
+		<DefaultContainer
 			:data="props.data"
 		>
-		</EntryContainer>
+		</DefaultContainer>
 	</template>
 
 	<template #leaf="props">
