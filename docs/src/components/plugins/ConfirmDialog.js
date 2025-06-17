@@ -1,6 +1,7 @@
 const ConfirmDialogPlugin = {
 	install: (app, options) => {
 		const mountPoint = document.createElement("div");
+		mountPoint.setAttribute("id", "app-confirm-dialog");
 		const dialog = Vue.createApp(ConfirmDialog).mount(mountPoint);
 		app.config.globalProperties.$confirm = (message, successCallback) => {
 			dialog.confirm(message, successCallback);

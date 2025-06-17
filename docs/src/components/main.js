@@ -17,5 +17,5 @@ app.use(highlightPlugin, {state: store.state});
 app.use(ConfirmDialogPlugin);
 
 document.addEventListener("DOMContentLoaded", () => {
-	app.mount("#app");
+	app.mount("#app-main");
 });

@@ -15,7 +15,7 @@ const App = {
 	:filterData="filterData"
 ></Options>
 
-<div id="table">
+<div id="checklist">
 	<DefaultContainer
 		:data="entryData"
 		:collapsible=false
@@ -41,7 +41,7 @@ const App = {
 		}
 
 		// keep track of last viewed section
-		const containers = document.querySelectorAll("#table .container > .header");
+		const containers = document.querySelectorAll("#checklist .container > .header");
 		const observer = new IntersectionObserver(
 			(sections) => {
 				sections.forEach((section) => {
