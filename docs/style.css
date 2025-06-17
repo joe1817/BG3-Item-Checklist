@@ -312,6 +312,10 @@ input[type="checkbox"] {
 	}
 }
 
+.entry.indented {
+	margin-left: 6em;
+}
+
 @media (max-width : 768px) {
 	.entry {
 		margin-left: 0;
@@ -319,6 +323,10 @@ input[type="checkbox"] {
 		.title {
 			width: 100px;
 		}
+	}
+
+	.entry.indented {
+		margin-left: 3em;
 	}
 }
 

@@ -3,7 +3,7 @@ const Entry = {
 <div
 	ref="content"
 	:id="data.id"
-	:class="['entry', data.categories, data.rarity, {'top-tier': data.suggested, completed: $store.state.checkboxState[data.id], 'hide-image': !$store.state.showImagesState}]"
+	:class="['entry', data.categories, data.rarity, {'top-tier': data.suggested, completed: $store.state.checkboxState[data.id], 'hide-image': !$store.state.showImagesState, 'indented': data.indented}]"
 	v-show="visible"
 	@click="handleClick($event)"
 >
