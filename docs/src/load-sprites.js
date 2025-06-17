@@ -648,11 +648,10 @@ const spriteCoords = {
 
 // if run locally, loadSprites will not work for security reasons, so don't bother replacing links
 if (window.location.protocol !== "file:") {
-	// clear images first to prevent broken link icons
 	(function clearImgs(data) {
 		if (data.img !== undefined) {
 			data.spriteCoords = spriteCoords[data.img]
-			data.img = "";
+			data.img = true; // needed to still render img element
 		}
 		if (data.children !== undefined) {
 			for (const entry2 of data.children) {
@@ -661,6 +660,7 @@ if (window.location.protocol !== "file:") {
 		}
 	})(entryData);
 }
+
 
 
 function loadSprites() {
@@ -689,15 +689,19 @@ function loadSprites() {
 			document.querySelectorAll(".entry").forEach(entryElement => {
 				const title = entryElement.querySelector("a").innerText;
 				const img = entryElement.querySelector("img");
-				const canvas = document.createElement("canvas");
-				const ctx = canvas.getContext("2d");
-				const [x, y] = getCoords(entryElement.getAttribute("id"));
-				const cropWidth = 50;
-				const cropHeight = 50;
-				canvas.width = cropWidth;
-				canvas.height = cropHeight;
-				ctx.drawImage(spritesheet, x, y, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
-				img.src = canvas.toDataURL();
+				if (img !== undefined) {
+					const [x, y] = getCoords(entryElement.getAttribute("id"));
+					if (x !== undefined && y !== undefined) {
+						const canvas = document.createElement("canvas");
+						const ctx = canvas.getContext("2d");
+						const cropWidth = 50;
+						const cropHeight = 50;
+						canvas.width = cropWidth;
+						canvas.height = cropHeight;
+						ctx.drawImage(spritesheet, x, y, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
+						img.src = canvas.toDataURL();
+					}
+				}
 			});
 		};
 	}
