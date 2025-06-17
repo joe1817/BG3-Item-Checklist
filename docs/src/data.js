@@ -130,6 +130,19 @@ children : [
 				img        : "imgs/The Amulet of Lost Voices.png",
 				link       : "https://bg3.wiki/wiki/The_Amulet_of_Lost_Voices",
 				desc       : "<span class='coordinates'>(X: -290 Y: -235)</span> Found in a chest in the same room as Withers."
+			},
+			{
+				title      : "Book of the Dead Gods",
+				id         : "Book-of-the-Dead-Gods",
+				categories : ["misc"],
+				rarity     : "common",
+				suggested  : false,
+				choice     : false,
+				crafting   : false,
+				exploit    : false,
+				img        : "imgs/Book of the Dead Gods.png",
+				link       : "https://bg3.wiki/wiki/Book_of_Dead_Gods",
+				desc       : "<span class='coordinates'>(X: -321 Y: -269)</span> Found in a side room before reaching Withers. Grants an inspiration point when read by Gale."
 			}
 		]},
 		{
@@ -292,6 +305,19 @@ children : [
 				img        : "imgs/Komira's Locket.png",
 				link       : "https://bg3.wiki/wiki/Komira's_Locket",
 				desc       : "<span class='coordinates'>(X: 261 Y: 543)</span> Rewarded by Arabella's parents after protecting her from Kagha. (Note: Recommended to feed Gale.)"
+			},
+			{
+				title      : "Faldorn's Canticle: The Shadow Druids' Doctrine",
+				id         : "Faldorns-Canticle",
+				categories : ["misc"],
+				rarity     : "common",
+				suggested  : false,
+				choice     : false,
+				crafting   : false,
+				exploit    : false,
+				img        : "imgs/Faldorn's Canticle The Shadow Druids' Doctrine.png",
+				link       : "https://bg3.wiki/wiki/Faldorn%27s_Canticle:_The_Shadow_Druids%27_Doctrine",
+				desc       : "<span class='coordinates'>(X: -489 Y: -7)</span> Found in Kagha's chest. Grants an inspiration point when read by Gale."
 			},
 			{
 				title      : "Ring of Colour Spray",
@@ -759,6 +785,19 @@ children : [
 				desc       : "<span class='coordinates'>(X: 32 Y: 403)</span> Found in a chest near the waypoint."
 			},
 			{
+				title      : "Lump's War Horn",
+				id         : "Lumps-War-Horn",
+				categories : ["misc"],
+				rarity     : "common",
+				suggested  : true,
+				choice     : false,
+				crafting   : false,
+				exploit    : false,
+				img        : "imgs/Lump's War Horn.png",
+				link       : "https://bg3.wiki/wiki/Lump%27s_War_Horn",
+				desc       : "<span class='coordinates'>(X: 13 Y: 366)</span> Given by Lump the Enlightened after hiring his Ogres."
+			},
+			{
 				title      : "Warped Headband of Intellect",
 				id         : "Warped-Headband-of-Intellect",
 				categories : ["helmet"],
@@ -769,7 +808,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Warped Headband of Intellect.png",
 				link       : "https://bg3.wiki/wiki/Warped_Headband_of_Intellect",
-				desc       : "<span class='coordinates'>(X: 13 Y: 366)</span> Looted from Lump the Enlightened."
+				desc       : "<span class='coordinates'>(X: 13 Y: 366)</span> Looted from Lump the Enlightened. This can be done after summoning him with his horn."
 			},
 			{
 				title      : "Very Heavy Greataxe",
@@ -944,7 +983,20 @@ children : [
 				exploit    : false,
 				img        : "imgs/Spiderstep Boots.png",
 				link       : "https://bg3.wiki/wiki/Spiderstep_Boots",
-				desc       : "<span class='coordinates'>(X: -514 Y: -411)</span> Found in a chest in the Arachnomancer's lab within the Whispering Depths."
+				desc       : "<span class='coordinates'>(X: -514 Y: -411)</span> Found in a chest in the Arachnomancer's lab."
+			},
+			{
+				title      : "Arachnomancer's Journals",
+				id         : "Arachnomancers-Journals",
+				categories : ["misc"],
+				rarity     : "common",
+				suggested  : false,
+				choice     : false,
+				crafting   : false,
+				exploit    : false,
+				img        : "imgs/Arachnomancer's Journals.png",
+				link       : "https://bg3.wiki/wiki/Bloody_Journal",
+				desc       : "<span class='coordinates'>(X: -514 Y: -411)</span> Four journals are found in the Arachnomancer's lab, including the Bloody Journal, Burnt Journal, Tattered Journal, and Web-Covered Journal. Grants an inspiration point when all are read by Gale."
 			},
 			{
 				title      : "Spurred Band",
@@ -957,7 +1009,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Spurred Band.png",
 				link       : "https://bg3.wiki/wiki/Spurred_Band",
-				desc       : "<span class='coordinates'>(X: -495 Y: -365)</span> Found on a skeleton in the Whispering Depths."
+				desc       : "<span class='coordinates'>(X: -495 Y: -365)</span> Found on a skeleton."
 			},
 			{
 				title      : "Poisoner's Robe",
@@ -1191,6 +1243,19 @@ children : [
 				img        : "imgs/Glowing Shield.png",
 				link       : "https://bg3.wiki/wiki/Glowing_Shield",
 				desc       : "<span class='coordinates'>(X: -53 Y: 461)</span> Found in a chest on a ridge behind the Goblin Camp."
+			},
+			{
+				title      : "On Goblins: My Life Among the Conquering Host",
+				id         : "On-Goblins",
+				categories : ["misc"],
+				rarity     : "common",
+				suggested  : false,
+				choice     : false,
+				crafting   : false,
+				exploit    : false,
+				img        : "imgs/On Goblins.png",
+				link       : "https://bg3.wiki/wiki/On_Goblins:_My_Life_Among_the_Conquering_Host",
+				desc       : "<span class='coordinates'>(X: -92 Y: 442)</span> Found on a turret in the Goblin Camp, near a wicker basket and pile of food waste. Grants an inspiration point when read by Gale."
 			},
 			{
 				title      : "Potion of Vitality",
@@ -2163,6 +2228,19 @@ children : [
 				desc       : "<span class='coordinates'>(X: -41 Y: -209)</span> Found in a grave on the cliff overlooking Arcane Tower to the south of the Sussur Tree waypoint. (On the 4th floor of the Arcane Tower, there's a button in the North-Eastern corner. When pressed, it seems inactive. However, if you wear the Dog Collar and interact with it, you'll discover it's actually a food dispenser for Lenore's pet, as it dispenses a piece of raw steak.)"
 			},
 			{
+				title      : "On Educating the Faithful",
+				id         : "On-Educating-the-Faithful",
+				categories : ["misc"],
+				rarity     : "common",
+				suggested  : false,
+				choice     : false,
+				crafting   : false,
+				exploit    : false,
+				img        : "imgs/On Educating the Faithful.png",
+				link       : "https://bg3.wiki/wiki/On_Educating_the_Faithful",
+				desc       : "<span class='coordinates'>(X: 84 Y: -207)</span> Found in a spider nest. Grants an inspiration point when read by Gale."
+			},
+			{
 				title      : "Shortsword of First Blood",
 				id         : "Shortsword-of-First-Blood",
 				categories : ["shortsword"],
@@ -2491,6 +2569,19 @@ children : [
 				img        : "imgs/Creation's Echo.png",
 				link       : "https://bg3.wiki/wiki/Creation's_Echo",
 				desc       : "<span class='value'>310 gp</span>"
+			},
+			{
+				title      : "On Illithids, Volume XXVI",
+				id         : "On-Illithids-Volume-XXVI",
+				categories : ["misc"],
+				rarity     : "common",
+				suggested  : false,
+				choice     : false,
+				crafting   : false,
+				exploit    : false,
+				img        : "imgs/On Illithids, Volume XXVI.png",
+				link       : "https://bg3.wiki/wiki/On_Illithids,_Volume_XXVI",
+				desc       : "<span class='value'>14 gp</span>. Grants an inspiration point when read by Gale."
 			},
 			{
 				title      : "Pearl of Power Amulet",
@@ -4130,6 +4221,19 @@ children : [
 				desc       : "<span class='coordinates'>(X: 126 Y: 106)</span> Rewarded by He Who Was for completing the quest \"<a href='https://bg3.wiki/wiki/Punish_the_Wicked'>Punish the Wicked</a>\" by either calling Madeline a coward or commanding her to stab herself exactly once."
 			},
 			{
+				title      : "Dead Druid's Journal",
+				id         : "Dead-Druids-Journal",
+				categories : ["misc"],
+				rarity     : "common",
+				suggested  : false,
+				choice     : false,
+				crafting   : false,
+				exploit    : false,
+				img        : "imgs/Dead Druid's Journal.png",
+				link       : "https://bg3.wiki/wiki/Dead_Druid%27s_Journal",
+				desc       : "<span class='coordinates'>(X: 132 Y: 170)</span> Found on the ground. Grants an inspiration point when read by Gale." // TODO check this
+			},
+			{
 				title      : "Gloomstrand Shield",
 				id         : "Gloomstrand-Shield",
 				categories : ["shield"],
@@ -5395,7 +5499,20 @@ children : [
 				exploit    : false,
 				img        : "imgs/Cloak of Elemental Absorption.png",
 				link       : "https://bg3.wiki/wiki/Cloak_of_Elemental_Absorption",
-				desc       : "<span class='coordinates'>(X: -170 Y: -171)</span> Found in a chest in Ketheric Thorm's chambers on the 1st floor."
+				desc       : "<span class='coordinates'>(X: -170 Y: -171)</span> Found in a chest in Ketheric Thorm's chambers on the 2nd floor."
+			},
+			{
+				title      : "Letter to Ketheric",
+				id         : "Letter-to-Ketheric",
+				categories : ["misc"],
+				rarity     : "common",
+				suggested  : false,
+				choice     : false,
+				crafting   : false,
+				exploit    : false,
+				img        : "imgs/Letter to Ketheric.png",
+				link       : "https://bg3.wiki/wiki/Letter_to_Ketheric",
+				desc       : "<span class='coordinates'>(X: -170 Y: -171)</span> Found in a chest in Ketheric Thorm's chambers on the 2nd floor. Grants an inspiration point when read by Gale."
 			},
 			{
 				title      : "Spineshudder Amulet",
@@ -5803,7 +5920,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Blood-Draw Elixir.png",
 				link       : "https://bg3.wiki/wiki/Araj_Oblodra#Blood-draw_elixirs",
-				desc       : "Rewarded to each character for allowing Araj Oblodra to draw their blood."
+				desc       : "Rewarded to each character for allowing Araj Oblodra to draw their blood. (Note: Halfling and Human elixirs are particularly useful.)"
 			},
 			{
 				title      : "Potion of Everlasting Vigour",

@@ -32,7 +32,7 @@ Temporary:
 	Orthonic Handbomb
 
 Other:
-	Shadow Blade: Temporarily granted by casting Shadow Blade spell.
+	Memory Shard, Scribbled Notes, The Great Furnace of Grymforge: Other inspiration-granting items are much more convenient to carry around and use.
 
 Inaccessible:
 	Ring of Restorative Gravity

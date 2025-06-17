@@ -41,7 +41,7 @@ def create_sprite_sheet(img_dir, image_size, out_dir):
 		f.write(these_images)
 	#with open("_sprite_map.txt", "w", encoding="utf-8") as f:
 	#	f.write(json.dumps(sprite_map))
-	with open("load_sprites.js", "w", encoding="utf-8") as f:
+	with open("load-sprites.js", "w", encoding="utf-8") as f:
 		f.write("const sprite_coords = {\n")
 		for path in paths[:-1]:
 			x, y = sprite_map[path]

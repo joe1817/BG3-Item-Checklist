@@ -7,6 +7,7 @@ Checklist for getting all unique gear in Baldur's Gate 3. Up-to-date as of Patch
 - any weapons/armor/consumables that are limited in number available
 - mind flayer parasite specimens
 - permanent bonuses
+- inspiration point books
 
 ## Not Included
 - common, +1, and +2 gear (can be bought from traders)
