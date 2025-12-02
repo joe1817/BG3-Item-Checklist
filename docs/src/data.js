@@ -72,8 +72,7 @@ filterData = [
 	]},
 ]
 
-const entryData =
-{
+const entryData = {
 title    : "All Items",
 id       : "all-items",
 children : [

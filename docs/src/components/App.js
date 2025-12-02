@@ -66,11 +66,11 @@ const App = {
 
 		// replace image links with coordinates in the spritesheet
 		loadSprites();
-		
-		// calculate buy prices from entry value
+
+		// calculate buy prices from values
 		document.querySelectorAll(".value").forEach(value => {
 			value.innerText = this.get_final_price(value.innerText);
-		});		
+		});
 	},
 	methods: {
 		get_difficulty_mod(difficulty) {
