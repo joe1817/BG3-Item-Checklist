@@ -277,7 +277,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Elixir of Silvanus.png",
 				link       : "https://bg3.wiki/wiki/Elixir_of_Silvanus",
-				desc       : "Stolen from Nettie."
+				desc       : "<span class='coordinates'>(X: -440 Y: 6)</span> Stolen from Nettie."
 			}, // TODO coords
 			{
 				title      : "Mind Flayer Parasite Specimen",
@@ -355,7 +355,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Broodmother's Revenge.png",
 				link       : "https://bg3.wiki/wiki/Broodmother's_Revenge",
-				desc       : "Looted from Kagha."
+				desc       : "<span class='coordinates'>(X: -461 Y: -22)</span> Looted from Kagha."
 			},
 			{
 				title      : "Sorrow",
@@ -600,7 +600,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/The Deathstalker Mantle.png",
 				link       : "https://bg3.wiki/wiki/The_Deathstalker_Mantle",
-				desc       : "Rewarded to The Dark Urge (Origin) by Sceleritas Fel for murdering either Alfira or Quil during a camp event. (Note: It's recommended to leave Alfira alive by non-lethally knocking her out before each Long Rest.)"
+				desc       : "Rewarded to The Dark Urge (Origin) by Sceleritas Fel for murdering either Alfira or Quil during a camp event. (Note: It's recommended to leave Alfira alive by non-lethally knocking her out before each Long Rest until the event occurs.)"
 			},
 			{
 				title      : "Ring of Evasion",
@@ -3416,7 +3416,7 @@ children : [
 				id         : "Adamantine-Shield",
 				categories : ["shield"],
 				rarity     : "rare",
-				suggested  : false,
+				suggested  : true,
 				choice     : true,
 				crafting   : false,
 				exploit    : false,
@@ -3442,7 +3442,7 @@ children : [
 				id         : "Adamantine-Splint-Armor",
 				categories : ["heavy-armour"],
 				rarity     : "very-rare",
-				suggested  : false,
+				suggested  : true,
 				choice     : true,
 				crafting   : false,
 				exploit    : false,
@@ -3998,7 +3998,7 @@ children : [
 		{
 		title    : "At Camp",
 		id       : "At-Camp",
-		tip      : "This is a camp event during a Long Rest after encountering Vlaakith at Crèche Y'llek and before starting Act 3.",
+		tip      : "This is a camp event during a Long Rest after encountering Vlaakith at Crèche Y'llek and before starting Act 2.",
 		children : [
 			{
 				title      : "Voss' Silver Sword",
