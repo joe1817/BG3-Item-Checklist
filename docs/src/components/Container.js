@@ -2,7 +2,7 @@ const Container = {
 	template: `
 <div
 	:id="data.id"
-	:class="[(data.children[0].children !== undefined) ? 'meta-container':'container', {expanded: $store.state.expansionState[data.id]}]"
+	:class="[(data.children[0].children !== undefined) ? 'meta-container':'container', {expanded: $store.getters.expansionState[data.id]}]"
 	v-show="!autoHide || !trackable || $store.state.countTotal[data.id]"
 >
 
@@ -74,7 +74,7 @@ const Container = {
 		this.$store.state.matchesSearch[this.data.id] = true;
 	},
 	mounted() {
-		if (!this.$store.state.expansionState[this.data.id]) {
+		if (!this.$store.getters.expansionState[this.data.id]) {
 			this.$refs.content.style.maxHeight = "0px";
 		}
 	},
@@ -88,14 +88,13 @@ const Container = {
 	},
 	methods: {
 		collapseHandler() {
-
 			this.$refs.content.style.maxHeight = this.$refs.content.scrollHeight + "px";
 			this.$refs.content.style.transition = "max-height 0.2s ease-out";
 
 			// force a reflow
 			void this.$refs.content.offsetHeight;
 
-			const expand = !this.$store.state.expansionState[this.data.id];
+			const expand = !this.$store.getters.expansionState[this.data.id];
 			if (expand) {
 				this.$refs.content.style.maxHeight = this.$refs.content.scrollHeight + "px";
 			} else {

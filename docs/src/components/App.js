@@ -1,11 +1,12 @@
 const App = {
 	template: `
-<ScrollToTop	
+<TopMenu></TopMenu>
+
+<ScrollToTop
 	class="text-button noselect"
 ></ScrollToTop>
 
 <h1>BG3 Item Checklist</h1>
-<p><a href="https://github.com/joe1817/BG3-Item-Checklist">GitHub</a></p>
 
 <TableOfContents
 	:data="entryData"
@@ -30,8 +31,8 @@ const App = {
 	},
 	mounted() {
 		// scroll to last viewed section
-		if (this.$store.state.lastViewedState) {
-			const lastViewed = this.$store.state.lastViewedState;
+		if (this.$store.getters.lastViewed) {
+			const lastViewed = this.$store.getters.lastViewed;
 			const yPos = window.scrollY;
 			setTimeout(() => {
 				if (window.scrollY == yPos) {

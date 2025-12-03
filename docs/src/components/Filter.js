@@ -5,8 +5,8 @@ const Filter = {
 	<div
 		class="toggle-button"
 		:class="{
-			enabled: (!filter.children && $store.state.filterState[filter.id]) || (filter.children && filter.children.some(sf => $store.state.filterState[sf.id])),
-			'fully-enabled': (!filter.children && $store.state.filterState[filter.id]) || (filter.children && filter.children.every(sf => $store.state.filterState[sf.id]))
+			enabled: (!filter.children && $store.getters.filterState[filter.id]) || (filter.children && filter.children.some(sf => $store.getters.filterState[sf.id])),
+			'fully-enabled': (!filter.children && $store.getters.filterState[filter.id]) || (filter.children && filter.children.every(sf => $store.getters.filterState[sf.id]))
 		}"
 		@click="clickHandler($event, filter)"
 	>
@@ -17,7 +17,7 @@ const Filter = {
 		<div
 			v-for="subfilter in filter.children"
 			class="toggle-button"
-			:class="{enabled: $store.state.filterState[subfilter.id], 'fully-enabled': $store.state.filterState[subfilter.id]}"
+			:class="{enabled: $store.getters.filterState[subfilter.id], 'fully-enabled': $store.getters.filterState[subfilter.id]}"
 			@click="clickHandler($event, subfilter)"
 		>
 			<span class="arrow">↳</span>
@@ -39,12 +39,12 @@ const Filter = {
 				this.expanded = !this.expanded;
 			} else {
 				updates = {};
-				updates[filter.id] = !this.$store.state.filterState[filter.id];
+				updates[filter.id] = !this.$store.getters.filterState[filter.id];
 				for (const id of filter.descendants) {
 					updates[id] = updates[filter.id];
 				}
 				if (filter.parent !== undefined) {
-					const count = filter.parent.children.filter(sf => updates[sf.id] ?? this.$store.state.filterState[sf.id] ?? true).length;
+					const count = filter.parent.children.filter(sf => updates[sf.id] ?? this.$store.getters.filterState[sf.id] ?? true).length;
 					if (count == filter.parent.children.length) {
 						updates[filter.parent.id] = true;
 					} else {

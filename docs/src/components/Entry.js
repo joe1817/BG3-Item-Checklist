@@ -3,11 +3,11 @@ const Entry = {
 <div
 	ref="content"
 	:id="data.id"
-	:class="['entry', data.categories, data.rarity, {'top-tier': data.suggested, completed: $store.state.checkboxState[data.id], 'hide-image': !$store.state.showImagesState, 'indented': data.indented}]"
+	:class="['entry', data.categories, data.rarity, {'top-tier': data.suggested, completed: $store.getters.checkboxState[data.id], 'hide-image': !$store.getters.showImages, 'indented': data.indented}]"
 	v-show="visible"
 	@click="handleClick($event)"
 >
-	<span v-if="checkbox" class="checkbox"><input type="checkbox" :checked="$store.state.checkboxState[data.id]"></span>
+	<span v-if="checkbox" class="checkbox"><input type="checkbox" :checked="$store.getters.checkboxState[data.id]"></span>
 	<span v-if="data.img" class="img"><img :src="data.img" width=50 height=50></span>
 
 	<template v-if="data.title">
@@ -84,12 +84,12 @@ const Entry = {
 			if (this.searchable && !this.$store.state.matchesSearch[this.data.parent.id] && this.$store.state.searchString.length && !this.searchableArr.some(s => this.data[s].toLowerCase().includes(this.$store.state.searchString))) {
 				return false;
 			}
-			if (this.$store.state.checkboxState[this.data.id] && !this.$store.state.showCompleteState) {
+			if (this.$store.getters.checkboxState[this.data.id] && !this.$store.getters.showComplete) {
 				return false;
 			}
 			if (this.data.categories !== undefined) {
 				for (const cat of this.data.categories) {
-					if (this.$store.state.filterState[cat] === true) {
+					if (this.$store.getters.filterState[cat] === true) {
 						return true;
 					}
 				}
@@ -102,7 +102,7 @@ const Entry = {
 			if (!this.checkbox) {
 				return 0;
 			}
-			return (this.visible && this.$store.state.checkboxState[this.data.id]) ? 1 : 0;
+			return (this.visible && this.$store.getters.checkboxState[this.data.id]) ? 1 : 0;
 		},
 		total() {
 			if (!this.checkbox) {

@@ -1,5 +1,6 @@
 const app = Vue.createApp(App);
 
+app.component("TopMenu", TopMenu);
 app.component("ScrollToTop", ScrollToTop);
 app.component("TableOfContents", TableOfContents);
 app.component("Filter", Filter);
@@ -15,6 +16,7 @@ const store = createStore(State);
 app.use(store);
 app.use(highlightPlugin, {state: store.state});
 app.use(ConfirmDialogPlugin);
+app.use(InputDialogPlugin);
 
 document.addEventListener("DOMContentLoaded", () => {
 	app.mount("#app-main");

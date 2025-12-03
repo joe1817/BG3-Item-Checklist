@@ -49,21 +49,22 @@ input[type="checkbox"] {
 .text-button {
 	font-size: 1.15em;
 	color: #DDD;
+	background-color: #0C448B;
 	padding: 0.3em 0.5em;
 	border-radius: 5px;
-	background-color: #0C448B;
 	cursor: pointer;
 }
 
 .text-button:hover {
 	background-color: #115FC2;
+	box-shadow: 0 0 5px rgba(0, 96, 223, 0.5);
 }
 
 .eye {
 	border: 0px solid #0060DF;
 	border-radius: 10px;
 	padding: 0 1px;
-	background-color: #ACABAB;
+	color: rgba(0, 0, 0, 0.9);
 	cursor: pointer;
 	opacity: 0.3;
 }
@@ -77,6 +78,13 @@ input[type="checkbox"] {
 	background-color: #0060DF;
 	opacity: 1;
 }
+
+/*
+.eye:hover {
+	background-color: #115FC2;
+	box-shadow: 0 0 5px rgba(0, 96, 223, 0.5);
+}
+*/
 
 .toggle-button {
 	font-size: 1.15em;
@@ -103,8 +111,63 @@ input[type="checkbox"] {
 		}
 	}
 
+.toggle-button:hover {
+	border-color: #007BFF;
+	box-shadow: 0 0 5px rgba(0, 96, 223, 0.5);
+}
+
 .toggle-button.fully-enabled {
 	background-color: #0D3460;
+}
+
+#top-menu {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	height: 40px;
+	background-color: #14212D;
+	color: #EEE;
+	line-height: 1.2em;
+
+	#link-section {
+		height: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		align-items: center;
+
+		.top-link {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 40px;
+			height: 100%;
+			background-color: #0C448B;
+			border-radius: 5px;
+
+			img {
+				opacity: 0.9;
+			}
+		}
+
+		.top-link:hover {
+			background-color: #115FC2;
+			box-shadow: 0 0 5px rgba(0, 96, 223, 0.5);
+		}
+	}
+
+	#profile-section {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		align-items: center;
+
+		> * {
+			margin-right: 0.5em;
+		}
+	}
 }
 
 #TOC {
@@ -207,6 +270,7 @@ input[type="checkbox"] {
 	min-height: 50vh;
 
 	.header {
+		width: 100%;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
@@ -397,6 +461,69 @@ input[type="checkbox"] {
 	transition: opacity 0.2s ease-in-out;
 }
 
+.custom-select {
+	position: relative;
+	display: inline-block;
+	font-size: 14px;
+
+	label {
+		margin-right: 0.5em;
+	}
+
+	select {
+		/* Remove default browser appearance */
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+
+		/* Basic modern box styling */
+		font-size: 14px;
+		display: inline-block;
+		border: 1px solid grey;
+		border-radius: 5px;
+		padding-left: 0.5em;
+		background-color: #14212D;
+		color: #EEE;
+		line-height: 2;
+		cursor: pointer;
+		width: 150px;
+		box-sizing: border-box; /* Ensure padding doesn't affect width */
+		transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+	}
+
+	select:hover {
+		outline: none;
+		border-color: #007BFF;
+		box-shadow: 0 0 5px rgba(0, 96, 223, 0.5);
+	}
+
+	select:focus {
+		outline: none;
+		border-color: #007BFF;
+		box-shadow: 0 0 5px rgba(0, 96, 223, 0.5);
+	}
+
+	/* Hiding the default arrow in Internet Explorer/Edge */
+	select::-ms-expand {
+		display: none;
+	}
+}
+
+.custom-select::after {
+	content: '▼';
+	position: absolute;
+	top: 50%;
+	right: 15px;
+	transform: translateY(-50%);
+
+	/* Styling the arrow */
+	color: #333;
+	font-size: 10px;
+
+	/* Ensure the arrow doesn't interfere with clicks on the select */
+	pointer-events: none;
+}
+
 .search-input-wrapper {
     display: flex;
 	flex-direction: row;
@@ -422,7 +549,7 @@ input[type="checkbox"] {
 
 	.search-input:focus {
 		outline: none;
-		border-color: #007bff;
+		border-color: #007BFF;
 		box-shadow: 0 0 5px rgba(0, 96, 223, 0.5);
 	}
 

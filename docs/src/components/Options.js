@@ -13,14 +13,14 @@ const Options = {
 		<legend>More Options</legend>
 		<div class="content">
 			<div class="toggle-button main-option"
-				:class="{enabled: $store.state.showCompleteState, 'fully-enabled': $store.state.showCompleteState}"
+				:class="{enabled: $store.getters.showComplete, 'fully-enabled': $store.getters.showComplete}"
 				@click="$store.dispatch('toggleShowCompleteAndSave')"
 			>
 				<span class="eye">👁️</span>
 				<span>Show Completed</span>
 			</div>
 			<div class="toggle-button main-option"
-				:class="{enabled: $store.state.showImagesState, 'fully-enabled': $store.state.showImagesState}"
+				:class="{enabled: $store.getters.showImages, 'fully-enabled': $store.getters.showImages}"
 				@click="$store.dispatch('toggleShowImagesAndSave')"
 			>
 				<span class="eye">👁️</span>
