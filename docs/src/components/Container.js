@@ -84,6 +84,9 @@ const Container = {
 		},
 		matchesSearch() {
 			return this.parentMatchesSearch || (this.searchable && this.data.title.toLowerCase().includes(this.$store.state.searchString));
+		},
+		expanded() {
+			return this.$store.getters.expansionState[this.data.id];
 		}
 	},
 	methods: {
@@ -94,18 +97,11 @@ const Container = {
 			// force a reflow
 			void this.$refs.content.offsetHeight;
 
-			const expand = !this.$store.getters.expansionState[this.data.id];
-			if (expand) {
-				this.$refs.content.style.maxHeight = this.$refs.content.scrollHeight + "px";
-			} else {
-				this.$refs.content.style.maxHeight = "0px";
-			}
-
 			this.$store.dispatch("toggleExpansionAndSave", this.data.id);
 
 			setTimeout(() => {
 				this.$refs.content.style.transition = null;
-				if (expand) {
+				if (this.expanded) {
 					this.$refs.content.style.maxHeight = null;
 				}
 			}, 200);
@@ -133,6 +129,13 @@ const Container = {
 	watch: {
 		matchesSearch(newVal, oldVal) {
 			this.$store.state.matchesSearch[this.data.id] = newVal;
+		},
+		expanded(newVal, oldVal) {
+			if (newVal) {
+				this.$refs.content.style.maxHeight = this.$refs.content.scrollHeight + "px";
+			} else {
+				this.$refs.content.style.maxHeight = "0px";
+			}
 		}
 	}
 }
