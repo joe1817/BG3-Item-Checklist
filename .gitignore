@@ -1,0 +1,6 @@
+.editorconfig
+
+__pycache__/
+.mypy_cache/
+
+.images.txt
