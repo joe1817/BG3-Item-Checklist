@@ -1,7 +1,38 @@
 const State = {
 	state() {
-		const activeProfile = localStorage.getItem("activeProfile") || "(Default)";
-		const allProfiles   = (localStorage.getItem("allProfiles") || "(Default)").split(",");
+		// loads data from localStorage that has been stored by various names during development
+		function loadCompatibleData(activeProfile, key, _default=null) {
+			let data = null;
+			data = localStorage.getItem(key);
+			if (data !== null) {
+				localStorage.removeItem(key);
+				localStorage.setItem("bg3items." + (activeProfile ? activeProfile + "." : "") + key, data);
+				return data;
+			}
+			if (activeProfile === null) {
+				data = localStorage.getItem("bg3items." + key);
+				if (data !== null) {
+					return data;
+				}
+			} else {
+				data = localStorage.getItem(activeProfile + "_" + key);
+				if (data !== null) {
+					localStorage.removeItem(activeProfile + "_" + key);
+					localStorage.setItem("bg3items." + activeProfile + "." + key, data);
+					return data;
+				}
+				data = localStorage.getItem("bg3items." + activeProfile + "." + key);
+				if (data !== null) {
+					return data;
+				}
+			}
+			return _default;
+		}
+
+		const defaultShowImages = window.innerWidth > 768 ? "true" : "false";
+
+		const activeProfile = loadCompatibleData(null, "activeProfile", "(Default)");
+		const allProfiles   = loadCompatibleData(null, "allProfiles", "(Default)").split(",");
 
 		const allShowComplete = {}
 		const allShowImages   = {}
@@ -12,15 +43,13 @@ const State = {
 		const allExpansionState = {}
 
 		for (const profile of allProfiles) {
-			const storagePrefix = activeProfile == "(Default)" ? "" : activeProfile + "_";
+			allShowComplete[profile] = loadCompatibleData(profile, "showComplete", "true") == "true";
+			allShowImages[profile]   = loadCompatibleData(profile, "showImages", defaultShowImages) == "true";
+			allLastViewed[profile]   = loadCompatibleData(profile, "lastViewed");
 
-			allShowComplete[profile] = (localStorage.getItem(storagePrefix + "showComplete") == "false") ? false : true;
-			allShowImages[profile]   = (localStorage.getItem(storagePrefix + "showImages") == "false") ? false : (window.innerWidth > 768);
-			allLastViewed[profile]   = localStorage.getItem(storagePrefix + "lastViewed");
-
-			disabled  = (localStorage.getItem(storagePrefix + "disabled")  || "").split(",");
-			checked   = (localStorage.getItem(storagePrefix + "checked")   || "").split(",");
-			collapsed = (localStorage.getItem(storagePrefix + "collapsed") || "").split(",");
+			disabled  = loadCompatibleData(profile, "disabled", "").split(",");
+			checked   = loadCompatibleData(profile, "checked", "").split(",");
+			collapsed = loadCompatibleData(profile, "collapsed", "").split(",");
 
 			allFilterState[profile]    = {};
 			allCheckboxState[profile]  = {};
@@ -177,7 +206,7 @@ const State = {
 		setProfileAndSave({ commit, state }, payload) {
 			commit("setProfile", payload);
 
-			localStorage.setItem("activeProfile", state.activeProfile);
+			localStorage.setItem("bg3items.activeProfile", state.activeProfile);
 		},
 		createProfileAndSave({ commit, state }, payload) {
 			if (payload.trim() === "") {
@@ -188,10 +217,10 @@ const State = {
 
 			let obj = state.allProfiles
 			let data = obj.join(",");
-			localStorage.setItem("allProfiles", data);
-			localStorage.setItem("activeProfile", state.activeProfile);
+			localStorage.setItem("bg3items.allProfiles", data);
+			localStorage.setItem("bg3items.activeProfile", state.activeProfile);
 
-			const storagePrefix = state.activeProfile == "(Default)" ? "" : state.activeProfile + "_";
+			const storagePrefix = "bg3items." + state.activeProfile + ".";
 
 			localStorage.setItem(storagePrefix + "showComplete", state.allShowComplete[state.activeProfile]);
 			localStorage.setItem(storagePrefix + "showImages", state.allShowImages[state.activeProfile]);
@@ -216,10 +245,10 @@ const State = {
 
 			let obj = state.allProfiles
 			let data = obj.join(",");
-			localStorage.setItem("allProfiles", data);
-			localStorage.setItem("activeProfile", state.activeProfile);
+			localStorage.setItem("bg3items.allProfiles", data);
+			localStorage.setItem("bg3items.activeProfile", state.activeProfile);
 
-			const storagePrefix = payload == "(Default)" ? "" : payload + "_";
+			const storagePrefix = "bg3items." + payload + ".";
 
 			localStorage.removeItem(storagePrefix + "showComplete");
 			localStorage.removeItem(storagePrefix + "showImages");
@@ -232,7 +261,7 @@ const State = {
 		toggleFilterAndSave({ commit, state }, payload) {
 			commit("toggleFilter", payload);
 
-			const storagePrefix = state.activeProfile == "(Default)" ? "" : state.activeProfile + "_";
+			const storagePrefix = "bg3items." + state.activeProfile + ".";
 			const obj = state.allFilterState[state.activeProfile];
 			const data = Object.keys(obj).filter(key => obj[key] === false).join(",");
 			localStorage.setItem(storagePrefix + "disabled", data);
@@ -240,7 +269,7 @@ const State = {
 		toggleExpansionAndSave({ commit, state }, payload) {
 			commit("toggleExpansion", payload);
 
-			const storagePrefix = state.activeProfile == "(Default)" ? "" : state.activeProfile + "_";
+			const storagePrefix = "bg3items." + state.activeProfile + ".";
 			const obj = state.allExpansionState[state.activeProfile];
 			const data = Object.keys(obj).filter(key => obj[key] === false).join(",");
 			localStorage.setItem(storagePrefix + "collapsed", data);
@@ -248,7 +277,7 @@ const State = {
 		toggleCheckboxAndSave({ commit, state }, payload) {
 			commit("toggleCheckbox", payload);
 
-			const storagePrefix = state.activeProfile == "(Default)" ? "" : state.activeProfile + "_";
+			const storagePrefix = "bg3items." + state.activeProfile + ".";
 			const obj = state.allCheckboxState[state.activeProfile];
 			const data = Object.keys(obj).filter(key => obj[key] === true).join(",");
 			localStorage.setItem(storagePrefix + "checked", data);
@@ -256,21 +285,21 @@ const State = {
 		toggleShowCompleteAndSave({ commit, state }) {
 			commit("toggleShowComplete");
 
-			const storagePrefix = state.activeProfile == "(Default)" ? "" : state.activeProfile + "_";
+			const storagePrefix = "bg3items." + state.activeProfile + ".";
 			const data = state.allShowComplete[state.activeProfile];
 			localStorage.setItem(storagePrefix + "showComplete", data);
 		},
 		toggleShowImagesAndSave({ commit, state }) {
 			commit("toggleShowImages");
 
-			const storagePrefix = state.activeProfile == "(Default)" ? "" : state.activeProfile + "_";
+			const storagePrefix = "bg3items." + state.activeProfile + ".";
 			const data = state.allShowImages[state.activeProfile];
 			localStorage.setItem(storagePrefix + "showImages", data);
 		},
 		setAllCheckboxesAndSave({ commit, state }, payload) {
 			commit("setAllCheckboxes", payload);
 
-			const storagePrefix = state.activeProfile == "(Default)" ? "" : state.activeProfile + "_";
+			const storagePrefix = "bg3items." + state.activeProfile + ".";
 			const obj = state.allCheckboxState[state.activeProfile];
 			const data = Object.keys(obj).filter(key => obj[key] === true).join(",");
 			localStorage.setItem(storagePrefix + "checked", data);
@@ -282,7 +311,7 @@ const State = {
 
 			commit("updateLastViewed", payload);
 
-			const storagePrefix = state.activeProfile == "(Default)" ? "" : state.activeProfile + "_";
+			const storagePrefix = "bg3items." + state.activeProfile + ".";
 			if (!state.lastViewedWritePending) {
 				state.lastViewedWritePending = true;
 				setTimeout(() => {
