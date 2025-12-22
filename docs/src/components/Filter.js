@@ -10,8 +10,10 @@ const Filter = {
 		}"
 		@click="clickHandler($event, filter)"
 	>
-		<span class="eye">👁️</span>
-		<span>{{ filter.title }} <span v-if="filter.children" style="font-size:8px;line-height:1;">▼</span></span>
+		<div class="header">
+			<span class="eye">👁️</span>
+			<span>{{ filter.title }} <span v-if="filter.children" style="font-size:8px;line-height:1;">▼</span></span>
+		</div>
 	</div>
 	<div ref="subfilters" class="subfilters">
 		<div
@@ -20,9 +22,11 @@ const Filter = {
 			:class="{enabled: $store.getters.filterState[subfilter.id], 'fully-enabled': $store.getters.filterState[subfilter.id]}"
 			@click="clickHandler($event, subfilter)"
 		>
-			<span class="arrow">↳</span>
-			<span class="eye">👁️</span>
-			<span>{{ subfilter.title }}</span>
+			<div class="header">
+				<span class="arrow">↳</span>
+				<span class="eye">👁️</span>
+				<span>{{ subfilter.title }}</span>
+			</div>
 		</div>
 	</div>
 </div>

@@ -66,17 +66,14 @@ input[type="checkbox"] {
 	padding: 0 1px;
 	color: rgba(0, 0, 0, 0.9);
 	cursor: pointer;
-	opacity: 0.3;
 }
 
 .enabled .eye {
 	background-color: #0060DF;
-	opacity: 1;
 }
 
-.expanded .eye {
+.expanded > .header > .eye {
 	background-color: #0060DF;
-	opacity: 1;
 }
 
 /*
@@ -96,24 +93,33 @@ input[type="checkbox"] {
 	cursor: pointer;
 	white-space: nowrap;
 
-	> *:not(:nth-child(1)) {
-		margin-left: 2px;
+	.header {
+		opacity: 0.5;
+		
+		.eye {
+			margin-right: 4px;
+		}
 	}
 }
 
-	@media (max-width : 768px) {
-		.toggle-button {
-			font-size: 1.3em;
-		}
-		.toggle-button {
-			font-size: 1.3em;
-			padding: 0.5em;
-		}
+
+@media (max-width : 768px) {
+	.toggle-button {
+		font-size: 1.3em;
 	}
+	.toggle-button {
+		font-size: 1.3em;
+		padding: 0.5em;
+	}
+}
 
 .toggle-button:hover {
 	border-color: #007BFF;
 	box-shadow: 0 0 5px rgba(0, 96, 223, 0.5);
+}
+
+.toggle-button.enabled > .header {
+	opacity: 1;
 }
 
 .toggle-button.fully-enabled {
@@ -262,7 +268,7 @@ input[type="checkbox"] {
 }
 
 .faded {
-	opacity: 0.3;
+	opacity: 0.5;
 }
 
 #checklist {
@@ -277,7 +283,7 @@ input[type="checkbox"] {
 		padding: 0.75em 0;
 		margin: 0.5em 0;
 		color: #EEE;
-		opacity: 0.3;
+		opacity: 0.5;
 
 		> * {
 			margin-left: 0.5em;

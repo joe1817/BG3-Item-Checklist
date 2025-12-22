@@ -16,15 +16,19 @@ const Options = {
 				:class="{enabled: $store.getters.showComplete, 'fully-enabled': $store.getters.showComplete}"
 				@click="$store.dispatch('toggleShowCompleteAndSave')"
 			>
-				<span class="eye">👁️</span>
-				<span>Show Completed</span>
+				<div class="header">
+					<span class="eye">👁️</span>
+					<span>Show Completed</span>
+				</div>
 			</div>
 			<div class="toggle-button main-option"
 				:class="{enabled: $store.getters.showImages, 'fully-enabled': $store.getters.showImages}"
 				@click="$store.dispatch('toggleShowImagesAndSave')"
 			>
-				<span class="eye">👁️</span>
-				<span>Show Images</span>
+				<div class="header">
+					<span class="eye">👁️</span>
+					<span>Show Images</span>
+				</div>
 			</div>
 		</div>
 	</fieldset>
@@ -55,7 +59,7 @@ const Options = {
 					child.parent = filter;
 					filter.descendants.push(...child.descendants);
 				});
-			}			
+			}
 		};
 		this.filterData.forEach(filter => {
 			scan(filter);
