@@ -25,7 +25,7 @@ filterData = [
 	{ title: "Consumables", 			id: "consumable", children: [
 		{ title: "Arrows", 				id: "arrow", },
 		{ title: "Barrels", 			id: "barrel", },
-		{ title: "Camp-supplies", 		id: "camp-supplies", },
+		{ title: "Camp Supplies", 		id: "camp-supplies", },
 		{ title: "Crafting", 			id: "crafting", },
 		{ title: "Grenades", 			id: "grenade", },
 		{ title: "Potions", 			id: "potion", },

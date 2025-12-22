@@ -38,7 +38,7 @@ const Options = {
 					ref="searchBar"
 					class="search-input"
 					@keyup ="keyupHandler($event)"
-					placeholder="Search..."
+					placeholder="..."
 				>
 				<div id="clear-button" class="text-button" @click="clearSearchHandler">Clear</div>
 			</div>
