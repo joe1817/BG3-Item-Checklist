@@ -654,12 +654,14 @@ const spriteCoords = {
 	"imgs/Yuan-Ti Scale Mail.png": [100, 1250]
 };
 
+const pixel = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+
 // if run locally, loadSprites will not work for security reasons, so don't bother replacing links
 if (window.location.protocol !== "file:") {
 	(function clearImgs(data) {
 		if (data.img !== undefined) {
 			data.spriteCoords = spriteCoords[data.img]
-			data.img = true; // needed to still render img element
+			data.img = pixel; // needed to still render img element in Entry
 		}
 		if (data.children !== undefined) {
 			for (const entry2 of data.children) {

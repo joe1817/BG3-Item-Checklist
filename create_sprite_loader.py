@@ -45,13 +45,15 @@ def create_sprite_sheet(img_dir, image_size, img_list):
 		x, y = sprite_map[paths[-1]]
 		f.write(f"\t\"{paths[-1]}\": [{x}, {y}]\n")
 		f.write("""};
+		
+const pixel = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
 // if run locally, loadSprites will not work for security reasons, so don't bother replacing links
 if (window.location.protocol !== "file:") {
 	(function clearImgs(data) {
 		if (data.img !== undefined) {
 			data.spriteCoords = spriteCoords[data.img]
-			data.img = true; // needed to still render img element
+			data.img = pixel; // needed to still render img element
 		}
 		if (data.children !== undefined) {
 			for (const entry2 of data.children) {
