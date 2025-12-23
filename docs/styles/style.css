@@ -95,7 +95,7 @@ input[type="checkbox"] {
 
 	.header {
 		opacity: 0.5;
-		
+
 		.eye {
 			margin-right: 4px;
 		}
@@ -358,6 +358,11 @@ input[type="checkbox"] {
 	gap: 5px;
 	margin-left: 3em;
 
+	.sprite {
+		display: inline-block;
+		overflow: hidden;
+	}
+
 	.checkbox, .title, .desc {
 		margin-top: 1em;
 	}
@@ -377,7 +382,7 @@ input[type="checkbox"] {
 		margin-top: 0;
 	}
 
-	.img {
+	.entry-img {
 		display: none;
 	}
 }

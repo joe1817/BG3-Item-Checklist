@@ -1,4 +1,6 @@
-const spriteCoords = {
+const SPRITE_SIZE  = 50;
+
+const SPRITE_COORDS = {
 	"imgs/Abdel's Trusted Shield.png": [0, 0],
 	"imgs/Aberration Hunters' Amulet.png": [50, 0],
 	"imgs/Absolute Confidence Amulet.png": [100, 0],
@@ -654,69 +656,13 @@ const spriteCoords = {
 	"imgs/Yuan-Ti Scale Mail.png": [100, 1250]
 };
 
-const pixel = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
-
-// if run locally, loadSprites will not work for security reasons, so don't bother replacing links
-if (window.location.protocol !== "file:") {
-	(function clearImgs(data) {
-		if (data.img !== undefined) {
-			data.spriteCoords = spriteCoords[data.img]
-			data.img = pixel; // needed to still render img element in Entry
-		}
-		if (data.children !== undefined) {
-			for (const entry2 of data.children) {
-				clearImgs(entry2);
-			}
-		}
-	})(entryData);
-}
-
-
-
-function loadSprites() {
-	if (window.location.protocol !== "file:") {
-		const getCoords = (id, data=entryData) => {
-			if (data.img !== undefined) {
-				if (data.id == id) {
-					return data.spriteCoords;
-				}
-			}
-			if (data.children !== undefined) {
-				for (const entry2 of data.children) {
-					let coords = getCoords(id, entry2);
-					if (coords != null) {
-						return coords;
-					}
-				}
-			}
-			return null;
-		}
-
-		const spritesheet = new Image();
-		spritesheet.src = "./sprites.png";
-		spritesheet.onload = () => {
-
-			document.querySelectorAll(".entry").forEach(entryElement => {
-				const title = entryElement.querySelector("a").innerText;
-				const img = entryElement.querySelector("img");
-				const id = entryElement.getAttribute("id");
-				if (img !== undefined) {
-					const coords = getCoords(id);
-					if (coords === null) {
-						console.log("Could not find spritesheet coords for: " + id);
-					} else {
-						const [x, y] = coords;
-						const canvas = document.createElement("canvas");
-						const ctx = canvas.getContext("2d");
-						const cropWidth = 50;
-						const cropHeight = 50;
-						canvas.width = cropWidth;
-						canvas.height = cropHeight;
-						ctx.drawImage(spritesheet, x, y, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
-						img.src = canvas.toDataURL();
-					}
-				}
-			});
-		};
+(function clearImgs(data) {
+	if (data.img !== undefined) {
+		data.spriteCoords = SPRITE_COORDS[data.img]
 	}
-}
+	if (data.children !== undefined) {
+		for (const entry2 of data.children) {
+			clearImgs(entry2);
+		}
+	}
+})(entryData);

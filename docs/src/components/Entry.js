@@ -8,7 +8,16 @@ const Entry = {
 	@click="handleClick($event)"
 >
 	<span v-if="checkbox" class="checkbox"><input type="checkbox" :checked="$store.getters.checkboxState[data.id]"></span>
-	<span v-if="data.img" class="img"><img :src="data.img" width=50 height=50></span>
+	<template v-if="data.spriteCoords">
+		<div
+			class="entry-img sprite"
+			:style="spriteStyle"
+		></div>
+	</template>
+	<template v-else>
+		<img class="entry-img" :src="data.img" width=50 height=50>
+	</template>
+
 
 	<template v-if="data.title">
 		<template v-if="data.link">
@@ -80,6 +89,19 @@ const Entry = {
 		}
 	},
 	computed: {
+		spriteStyle() {
+			const x = this.data.spriteCoords[0];
+			const y = this.data.spriteCoords[1];
+
+			return {
+				width: `${SPRITE_SIZE}px`,
+				height: `${SPRITE_SIZE}px`,
+				backgroundImage: "url(sprites.png)",
+				backgroundPosition: `-${x}px -${y}px`,
+				backgroundRepeat: "no-repeat",
+				flexShrink: 0
+			};
+		},
 		visible() {
 			if (this.searchable && !this.$store.state.matchesSearch[this.data.parent.id] && this.$store.state.searchString.length && !this.searchableArr.some(s => this.data[s].toLowerCase().includes(this.$store.state.searchString))) {
 				return false;
