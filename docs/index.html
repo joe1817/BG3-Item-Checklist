@@ -9,8 +9,19 @@
 <link rel="stylesheet" href="./styles/style.css"></style>
 <link rel="stylesheet" href="./styles/confirm-dialog.css"></style>
 <link rel="stylesheet" href="./styles/input-dialog.css"></style>
-<script src="https://unpkg.com/vue@3.5.13/dist/vue.global.js"></script>
+
+<script>
+	const isLocal =
+		location.hostname === "localhost" ||
+		location.hostname === "127.0.0.1" ||
+		location.hostname === "[::1]";
+	const vuePath = isLocal
+		? "https://unpkg.com/vue@3.5.13/dist/vue.global.js"
+		: "https://unpkg.com/vue@3.5.13/dist/vue.global.prod.js";
+	document.write(`<script src="${vuePath}"><\/script>`);
+</script>
 <script src="https://unpkg.com/vuex@4.0.0/dist/vuex.global.js"></script>
+
 <script src="src/data.js"></script>
 <script src="src/load-sprites.js"></script>
 <script src="src/components/plugins/highlight.js"></script>
