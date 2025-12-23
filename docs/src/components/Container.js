@@ -107,9 +107,10 @@ const Container = {
 			}, 200);
 		},
 		clearHandler() {
-			this.$confirm(
-				"Clear all checkboxes for the section \"" + this.data.title + "\"?",
-				() => {
+			this.$confirm({
+				message  : "Clear all checkboxes for this section?",
+				selection: this.data.title,
+				onOK     : () => {
 					updates = {};
 					const scan = (data) => {
 						for (const child of data.children) {
@@ -123,7 +124,7 @@ const Container = {
 					scan(this.data);
 					this.$store.dispatch("setAllCheckboxesAndSave", updates);
 				}
-			);
+			});
 		}
 	},
 	watch: {

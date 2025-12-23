@@ -1,0 +1,166 @@
+#confirm-dialog {
+	position: fixed;
+	z-index: 1001;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(20,20,20,0.5);
+
+	.window {
+		position: relative;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		width: 400px;
+		border: 2px solid #888;
+		border-radius: 4px;
+		box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+		background-color: #DDD;
+		font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+
+		.header, .footer {
+			padding: 10px;
+		}
+
+		.header {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			color: #333;
+			background-color: #CCC;
+
+			.icon {
+				display: inline-block;
+				width: 50px;
+				font-size: 18px;
+				text-align: center;
+				margin-bottom: 2px;
+				margin-left: -10px;
+			}
+
+			.title-wrapper {
+				display: flex;
+				align-items: center;
+			}
+
+			.title {
+				font-size: 18px;
+				font-weight: bold;
+			}
+
+			.close-button {
+				width: 30px;
+				height: 30px;
+				padding: 0 0 2px;
+				border: none;
+				border-radius: 50%;
+				color: inherit;
+				background: none;
+				font-size: 16px;
+				font-weight: bold;
+				cursor: pointer;
+			}
+
+			.close-button:hover {
+				background-color: #DDD;
+			}
+		}
+
+		.body {
+			padding: 10px 50px;
+			color: #333;
+
+			p {
+				margin: 0;
+			}
+
+			.message {
+				font-size: 16px;
+			}
+
+			.selection {
+				margin-top: 10px;
+				font-size: 16px;
+				text-align: center;
+				font-style: italic;
+				/*font-weight: bold;*/
+			}
+		}
+
+		.footer {
+			margin-top: 10px;
+			text-align: right;
+
+			.buttons {
+				display: inline-grid;
+				grid-template-columns: 1fr 1fr;
+			}
+
+			.ok-button, .cancel-button {
+				padding: 10px 20px;
+				margin-left: 10px;
+				font-size: 1.15em;
+				padding: 0.3em 0.5em;
+				border-radius: 4px;
+				cursor: pointer;
+			}
+
+			.ok-button {
+				color: #DDD;
+				background-color: #0C448B;
+				border: none;
+			}
+
+			.ok-button:hover {
+				background-color: #115FC2;
+				/* box-shadow: 0 0 5px rgba(0, 96, 223, 0.5); */
+			}
+
+			.cancel-button{
+				color: #333;
+				background: none;
+				border: 1px solid #888;
+			}
+
+			.cancel-button:hover {
+				background-color: #CCC;
+			}
+		}
+	}
+}
+
+#confirm-dialog.danger {
+	.window {
+		border: 2px solid #D32;
+
+		.header {
+			color: #EEE;
+			background-color: #D32;
+
+			.close-button:hover {
+				background-color: #E43;
+			}
+		}
+
+		.footer {
+			.ok-button {
+				color: #D32;
+				background: none;
+				border: 1px solid #888;
+			}
+
+			.ok-button:hover {
+				color: #EEE;
+				background-color: #D32;
+				border: 1px solid #D32;
+				box-shadow: none;
+			}
+
+		}
+	}
+}

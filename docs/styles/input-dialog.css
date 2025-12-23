@@ -1,0 +1,176 @@
+#input-dialog {
+	position: fixed;
+	z-index: 1001;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(20,20,20,0.5);
+
+	.window {
+		position: relative;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		width: 400px;
+		border: 1px solid #888;
+		border-radius: 4px;
+		box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+		background-color: #DDD;
+		font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+
+		.header, .footer {
+			padding: 10px;
+		}
+
+		.header {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			color: #333;
+			background-color: #CCC;
+
+			.icon {
+				display: inline-block;
+				width: 50px;
+				font-size: 18px;
+				text-align: center;
+				margin-bottom: 2px;
+				margin-left: -10px;
+			}
+
+			.title-wrapper {
+				display: flex;
+				align-items: center;
+			}
+
+			.title {
+				font-size: 18px;
+				font-weight: bold;
+			}
+
+			.close-button {
+				width: 30px;
+				height: 30px;
+				padding: 0 0 2px;
+				border: none;
+				border-radius: 50%;
+				color: inherit;
+				background: none;
+				font-size: 16px;
+				font-weight: bold;
+				cursor: pointer;
+			}
+
+			.close-button:hover {
+				background-color: #DDD;
+			}
+
+			.close-button:hover {
+				color: #555;
+			}
+		}
+
+		.body {
+			padding: 10px 50px;
+			color: #333;
+
+			p {
+				margin: 0;
+			}
+
+			input {
+				width: 100%;
+				border: none;
+				outline: none;
+				padding: 8px 0;
+
+				border-bottom: 1px solid #333;
+
+				font-family: 'Inter', sans-serif;
+				font-size: 1rem;
+				text-align: center;
+				color: #333;
+				
+				background: transparent;
+
+				transition: border-color 0.3s ease, box-shadow 0.3s ease;
+			}
+
+			input:focus {
+				border-bottom: 1px solid #007BFF;
+			}
+
+			input::placeholder {
+				color: #9ca3af;
+				opacity: 1;
+			}
+
+			input:focus::placeholder {
+				color: transparent;
+			}
+
+			.message {
+				font-size: 16px;
+			}
+			/*
+			.text-input {
+				width: 300px;
+				box-sizing: border-box;
+				margin-top: 10px;
+				padding: 6px 10px;
+				border-radius: 5px;
+				border: 1px solid grey;
+				transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+				color: #333;
+				background-color: #CCC;
+				font-size: 1.15em;
+			}
+			*/
+		}
+
+		.footer {
+			margin-top: 10px;
+			text-align: right;
+
+			.buttons {
+				display: inline-grid;
+				grid-template-columns: 1fr 1fr;
+			}
+
+			.ok-button, .cancel-button {
+				padding: 10px 20px;
+				margin-left: 10px;
+				font-size: 1.15em;
+				padding: 0.3em 0.5em;
+				border-radius: 4px;
+				cursor: pointer;
+			}
+
+			.ok-button {
+				color: #DDD;
+				background-color: #0C448B;
+				border: none;
+			}
+
+			.ok-button:hover {
+				background-color: #115FC2;
+				/* box-shadow: 0 0 5px rgba(0, 96, 223, 0.5); */
+			}
+
+			.cancel-button{
+				color: #333;
+				background: none;
+				border: 1px solid #888;
+			}
+
+			.cancel-button:hover {
+				background-color: #CCC;
+			}
+		}
+	}
+}

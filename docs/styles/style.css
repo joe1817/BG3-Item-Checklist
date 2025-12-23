@@ -106,10 +106,10 @@ input[type="checkbox"] {
 @media (max-width : 768px) {
 	.toggle-button {
 		font-size: 1.3em;
-	}
-	.toggle-button {
-		font-size: 1.3em;
 		padding: 0.5em;
+	}
+	.eye {
+		font-size: 1.3em;
 	}
 }
 
@@ -557,6 +557,10 @@ input[type="checkbox"] {
 		outline: none;
 		border-color: #007BFF;
 		box-shadow: 0 0 5px rgba(0, 96, 223, 0.5);
+	}
+
+	.search-input:focus::placeholder {
+		color: transparent;
 	}
 
 	.search-input:not(:placeholder-shown) {

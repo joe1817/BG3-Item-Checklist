@@ -23,13 +23,14 @@ const TopMenu = {
 				</option>
 			</select>
 		</div>
-		<div class="text-button noselect"
+		<div
+			class="text-button noselect"
 			@click="createProfile"
 		>
 			+
 		</div>
-		<div class="text-button noselect"
-			:class="{enabled: $store.state.activeProfile != '(Default)'}"
+		<div
+			class="text-button noselect"
 			@click="deleteProfile"
 		>
 			🗑
@@ -43,23 +44,28 @@ const TopMenu = {
 			this.$store.dispatch("setProfileAndSave", profile);
 		},
 		createProfile() {
-			this.$input(
-				"Please input the name of the new profile.",
-				(profile) => this.$store.dispatch("createProfileAndSave", profile)
-			);
+			this.$input({
+				title    : "Create Profile",
+				message  : "Profile Name:",
+				onOK     : (profile) => this.$store.dispatch("createProfileAndSave", profile)
+			});
 		},
 		deleteProfile() {
 			const profile = this.$store.state.activeProfile;
-			this.$confirm(
-				"Delete profile \"" + profile + "\"?",
-				() => {
-					if (profile === "(Default)") {
+			this.$confirm({
+				danger   : true,
+				title    : "Confirm Delete",
+				message  : "Delete this profile?",
+				selection: profile,
+				okText   : "Delete",
+				onOK     : () => {
+					if (profile == "(Default)") {
 						this.$store.dispatch("createProfileAndSave", profile);
 					} else {
 						this.$store.dispatch("deleteProfileAndSave", profile);
 					}
 				}
-			);
+			});
 		},
 	}
 }
