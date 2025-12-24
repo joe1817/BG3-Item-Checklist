@@ -3,8 +3,8 @@ const InputDialogPlugin = {
 		const mountPoint = document.createElement("div");
 		mountPoint.setAttribute("id", "app-input-dialog");
 		const dialog = Vue.createApp(InputDialog).mount(mountPoint);
-		app.config.globalProperties.$input = (message, successCallback) => {
-			dialog.input(message, successCallback);
+		app.config.globalProperties.$input = (prompt, successCallback) => {
+			dialog.input(prompt, successCallback);
 		}
 		document.addEventListener("DOMContentLoaded", () => {
 			document.body.appendChild(mountPoint);
@@ -14,7 +14,7 @@ const InputDialogPlugin = {
 
 const InputDialog = {
 	template: `
-<div v-show="show" ref="inputDialog" id="input-dialog">
+<div ref="inputDialog" v-show="show" id="input-dialog">
 	<div class="window">
 		<div class="header">
 			<div class="title-wrapper">
@@ -24,7 +24,7 @@ const InputDialog = {
 			<button ref="xButton" class="close-button">&times;</button>
 		</div>
 		<div class="body">
-			<p ref="message" class="message">{{ message }}</p>
+			<p ref="prompt" class="prompt">{{ prompt }}</p>
 			<p>
 				<input
 					type="text"
@@ -33,8 +33,10 @@ const InputDialog = {
 					v-model="value"
 					:placeholder="placeholder"
 					@keydown.enter="submitForm"
+					@input="errorMessage=''"
 				>
 			</p>
+			<p ref="errorMessage" v-show="errorMessage" class="error-message">{{ errorMessage }}</p>
 		</div>
 		<div class="footer">
 			<div class="buttons">
@@ -48,12 +50,13 @@ const InputDialog = {
 
 	data() {
 		return {
-			show        : false,
-			value       : "",
-			title       : "",
-			message     : "",
-			placeholder : "",
-			okText      : "",
+			show         : false,
+			value        : "",
+			errorMessage : "",
+			title        : "",
+			prompt       : "",
+			placeholder  : "",
+			okText       : "",
 		}
 	},
 
@@ -62,14 +65,15 @@ const InputDialog = {
 			this.$refs.okButton.click();
 		},
 
-		input({title = "Input", message = "Awaiting input...", placeholder = "(„• ֊ •„)", okText = "OK", onOK = null} = {}) {
+		input({title = "Input", prompt = "Awaiting input...", placeholder = "(„• ֊ •„)", okText = "OK", validate = null, onOK = null} = {}) {
 			if (this.show)
 				return;
 
 			this.value = "";
+			this.errorMessage = "";
 
 			this.title = title;
-			this.message = message;
+			this.prompt = prompt;
 			this.placeholder = placeholder;
 			this.okText = okText;
 
@@ -82,9 +86,15 @@ const InputDialog = {
 			};
 
 			okButton.onclick = () => {
-				this.show = false;
-				if (onOK)
-					onOK(this.value);
+				error = validate ? validate(this.value) : "";
+				if (error) {
+					this.errorMessage = error;
+				}
+				else {
+					this.show = false;
+					if (onOK)
+						onOK(this.value);
+				}
 			};
 
 			cancelButton.onclick = () => {

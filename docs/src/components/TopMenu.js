@@ -46,7 +46,17 @@ const TopMenu = {
 		createProfile() {
 			this.$input({
 				title    : "Create Profile",
-				message  : "Profile Name:",
+				prompt   : "Profile Name:",
+				validate : (text) => {
+					text = text.trim();
+					if (text.length === 0) {
+						return "This profile name is invalid.";
+					}
+					if (this.$store.state.allProfiles.includes(text)) {
+						return "This profile already exists.";
+					}
+					return "";
+				},
 				onOK     : (profile) => this.$store.dispatch("createProfileAndSave", profile)
 			});
 		},
@@ -55,7 +65,7 @@ const TopMenu = {
 			this.$confirm({
 				danger   : true,
 				title    : "Confirm Delete",
-				message  : "Delete this profile?",
+				prompt   : "Delete this profile?",
 				selection: profile,
 				okText   : "Delete",
 				onOK     : () => {

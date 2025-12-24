@@ -83,6 +83,10 @@
 				margin: 0;
 			}
 
+			.prompt {
+				font-size: 16px;
+			}
+
 			input {
 				width: 100%;
 				border: none;
@@ -95,7 +99,7 @@
 				font-size: 1rem;
 				text-align: center;
 				color: #333;
-				
+
 				background: transparent;
 
 				transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -114,23 +118,10 @@
 				color: transparent;
 			}
 
-			.message {
-				font-size: 16px;
+			.error-message {
+				text-align: center;
+				color: red;
 			}
-			/*
-			.text-input {
-				width: 300px;
-				box-sizing: border-box;
-				margin-top: 10px;
-				padding: 6px 10px;
-				border-radius: 5px;
-				border: 1px solid grey;
-				transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-				color: #333;
-				background-color: #CCC;
-				font-size: 1.15em;
-			}
-			*/
 		}
 
 		.footer {

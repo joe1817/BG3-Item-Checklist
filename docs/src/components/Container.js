@@ -108,7 +108,7 @@ const Container = {
 		},
 		clearHandler() {
 			this.$confirm({
-				message  : "Clear all checkboxes for this section?",
+				prompt   : "Clear all checkboxes for this section?",
 				selection: this.data.title,
 				onOK     : () => {
 					updates = {};

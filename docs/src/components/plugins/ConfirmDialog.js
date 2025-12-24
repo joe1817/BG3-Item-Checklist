@@ -3,8 +3,8 @@ const ConfirmDialogPlugin = {
 		const mountPoint = document.createElement("div");
 		mountPoint.setAttribute("id", "app-confirm-dialog");
 		const dialog = Vue.createApp(ConfirmDialog).mount(mountPoint);
-		app.config.globalProperties.$confirm = (message, successCallback) => {
-			dialog.confirm(message, successCallback);
+		app.config.globalProperties.$confirm = (prompt, successCallback) => {
+			dialog.confirm(prompt, successCallback);
 		}
 		document.addEventListener("DOMContentLoaded", () => {
 			document.body.appendChild(mountPoint);
@@ -14,7 +14,7 @@ const ConfirmDialogPlugin = {
 
 const ConfirmDialog = {
 	template: `
-<div v-show="show" ref="confirmDialog" id="confirm-dialog" :class="{danger: danger}">
+<div ref="confirmDialog" v-show="show" id="confirm-dialog" :class="{danger: danger}">
 	<div class="window">
 		<div class="header">
 			<div class="title-wrapper">
@@ -24,7 +24,7 @@ const ConfirmDialog = {
 			<button ref="xButton" class="close-button">&times;</button>
 		</div>
 		<div class="body">
-			<p ref="message" class="message">{{ message }}</p>
+			<p ref="prompt" class="prompt">{{ prompt }}</p>
 			<p ref="selection" class="selection">{{ selection }}</p>
 		</div>
 		<div class="footer">
@@ -42,20 +42,20 @@ const ConfirmDialog = {
 			show      : false,
 			danger    : false,
 			title     : "",
-			message   : "",
+			prompt    : "",
 			selection : "",
 			okText    : "",
 		}
 	},
 
 	methods: {
-		confirm({danger = false, title = "Confirm", message = "Are you sure?", selection = "", okText = "OK", onOK = null} = {}) {
+		confirm({danger = false, title = "Confirm", prompt = "Are you sure?", selection = "", okText = "OK", onOK = null} = {}) {
 			if (this.show)
 				return;
 
 			this.danger = danger;
 			this.title = title;
-			this.message = message;
+			this.prompt = prompt;
 			this.selection = selection;
 			this.okText = okText;
 

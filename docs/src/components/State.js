@@ -209,35 +209,44 @@ const State = {
 			localStorage.setItem("bg3items.activeProfile", state.activeProfile);
 		},
 		createProfileAndSave({ commit, state }, payload) {
-			if (payload.trim() === "") {
+			const profileName = payload.trim();
+
+			if (profileName === "") {
+				return;
+			}
+			if (profileName !== "(Default)" && state.allProfiles.includes(profileName)) {
 				return;
 			}
 
-			commit("createProfile", payload);
+			commit("createProfile", profileName);
 
 			let obj = state.allProfiles
 			let data = obj.join(",");
 			localStorage.setItem("bg3items.allProfiles", data);
-			localStorage.setItem("bg3items.activeProfile", state.activeProfile);
+			localStorage.setItem("bg3items.activeProfile", profileName);
 
-			const storagePrefix = "bg3items." + state.activeProfile + ".";
+			const storagePrefix = "bg3items." + profileName + ".";
 
-			localStorage.setItem(storagePrefix + "showComplete", state.allShowComplete[state.activeProfile]);
-			localStorage.setItem(storagePrefix + "showImages", state.allShowImages[state.activeProfile]);
+			localStorage.setItem(storagePrefix + "showComplete", state.allShowComplete[profileName]);
+			localStorage.setItem(storagePrefix + "showImages", state.allShowImages[profileName]);
 			localStorage.setItem(storagePrefix + "lastViewed", null);
 
-			obj = state.allFilterState[state.activeProfile];
+			obj = state.allFilterState[profileName];
 			data = Object.keys(obj).filter(key => obj[key] === false).join(",");
 			localStorage.setItem(storagePrefix + "disabled", data);
-			obj = state.allCheckboxState[state.activeProfile];
+			obj = state.allCheckboxState[profileName];
 			data = Object.keys(obj).filter(key => obj[key] === true).join(",");
 			localStorage.setItem(storagePrefix + "checked", data);
-			obj = state.allExpansionState[state.activeProfile];
+			obj = state.allExpansionState[profileName];
 			data = Object.keys(obj).filter(key => obj[key] === false).join(",");
 			localStorage.setItem(storagePrefix + "collapsed", data);
 		},
 		deleteProfileAndSave({ commit, state }, payload) {
 			if (payload === "(Default)") {
+				// (Default) is "deleted" by calling createProfileAndSave
+				return;
+			}
+			if (!state.allProfiles.includes(payload)) {
 				return;
 			}
 
