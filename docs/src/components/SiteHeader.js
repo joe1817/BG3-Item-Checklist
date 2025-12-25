@@ -1,12 +1,14 @@
-const TopMenu = {
+const SiteHeader = {
 	template: `
-<div id="top-menu" ref="top-menu">
-	<div id="link-section">
-		<a class="top-link" href="https://github.com/joe1817/BG3-Item-Checklist">
-			<img src="github-mark-white.png" height="30px">
+<div id="site-header" class="header" ref="top-menu">
+	<div id="link-section" class="header-component">
+		<a href="https://github.com/joe1817/BG3-Item-Checklist">
+			<button>
+				<img src="github-mark-white.png" height="30px">
+			</button>
 		</a>
 	</div>
-	<div id="profile-section">
+	<div id="profile-section" class="header-component">
 		<div id="profiles" class="custom-select">
 			<label for="profile-choice">Profile: </label>
 			<select
@@ -23,18 +25,19 @@ const TopMenu = {
 				</option>
 			</select>
 		</div>
-		<div
-			class="text-button noselect"
+		<button
+			class="noselect"
 			@click="createProfile"
+			style="padding-bottom: 2px;"
 		>
 			+
-		</div>
-		<div
-			class="text-button noselect"
+		</button>
+		<button
+			class="noselect"
 			@click="deleteProfile"
 		>
 			🗑
-		</div>
+		</button>
 	</div>
 </div>
 `,
@@ -44,10 +47,15 @@ const TopMenu = {
 			this.$store.dispatch("setProfileAndSave", profile);
 		},
 		createProfile() {
+			const placeholders = [
+				"(∩｀-´)⊃━☆ﾟ.*･｡ﾟ",
+				"(„• ֊ •„)",
+			];
 			this.$input({
-				title    : "Create Profile",
-				prompt   : "Profile Name:",
-				validate : (text) => {
+				title       : "Create Profile",
+				prompt      : "Profile Name:",
+				placeholder : placeholders[Math.floor(Math.random() * placeholders.length)],
+				validate    : (text) => {
 					text = text.trim();
 					if (text.length === 0) {
 						return "This profile name is invalid.";
@@ -57,18 +65,18 @@ const TopMenu = {
 					}
 					return "";
 				},
-				onOK     : (profile) => this.$store.dispatch("createProfileAndSave", profile)
+				onOK        : (profile) => this.$store.dispatch("createProfileAndSave", profile)
 			});
 		},
 		deleteProfile() {
 			const profile = this.$store.state.activeProfile;
 			this.$confirm({
-				danger   : true,
-				title    : "Confirm Delete",
-				prompt   : "Delete this profile?",
-				selection: profile,
-				okText   : "Delete",
-				onOK     : () => {
+				danger    : true,
+				title     : "Confirm Delete",
+				prompt    : "Delete this profile?",
+				selection : profile,
+				okText    : "Delete",
+				onOK      : () => {
 					if (profile == "(Default)") {
 						this.$store.dispatch("createProfileAndSave", profile);
 					} else {

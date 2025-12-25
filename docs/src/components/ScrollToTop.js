@@ -1,10 +1,11 @@
 const ScrollToTop = {
 	template: `
-<div
+<button
 	id="back-to-top"
+	class="tall"
 	ref="back-to-top"
 	@click="scrollToTop"
->Back to Top</div>
+>Back to Top</button>
 `,
 	mounted() {
 		// toggle visibility based on scroll position

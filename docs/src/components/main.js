@@ -1,6 +1,6 @@
 const app = Vue.createApp(App);
 
-app.component("TopMenu", TopMenu);
+app.component("SiteHeader", SiteHeader);
 app.component("ScrollToTop", ScrollToTop);
 app.component("TableOfContents", TableOfContents);
 app.component("Filter", Filter);

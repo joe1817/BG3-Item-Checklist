@@ -14,7 +14,12 @@ const InputDialogPlugin = {
 
 const InputDialog = {
 	template: `
-<div ref="inputDialog" v-show="show" id="input-dialog">
+<div
+	ref="inputDialog"
+	v-show="show"
+	id="input-dialog"
+	class="dialog"
+>
 	<div class="window">
 		<div class="header">
 			<div class="title-wrapper">
@@ -36,7 +41,11 @@ const InputDialog = {
 					@input="errorMessage=''"
 				>
 			</p>
-			<p ref="errorMessage" v-show="errorMessage" class="error-message">{{ errorMessage }}</p>
+			<p
+				ref="errorMessage"
+				v-show="errorMessage"
+				class="error-message"
+			>{{ errorMessage }}</p>
 		</div>
 		<div class="footer">
 			<div class="buttons">
@@ -65,7 +74,7 @@ const InputDialog = {
 			this.$refs.okButton.click();
 		},
 
-		input({title = "Input", prompt = "Awaiting input...", placeholder = "(„• ֊ •„)", okText = "OK", validate = null, onOK = null} = {}) {
+		input({title = "Input", prompt = "Awaiting input...", placeholder = "...", okText = "OK", validate = null, onOK = null} = {}) {
 			if (this.show)
 				return;
 

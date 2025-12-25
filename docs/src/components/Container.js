@@ -2,20 +2,42 @@ const Container = {
 	template: `
 <div
 	:id="data.id"
-	:class="[(data.children[0].children !== undefined) ? 'meta-container':'container', {expanded: $store.getters.expansionState[data.id]}]"
+	:class="[
+		(data.children[0].children !== undefined) ? 'meta-container':'container',
+		{expanded: expanded}
+	]"
 	v-show="!autoHide || !trackable || $store.state.countTotal[data.id]"
 >
 
 	<div class="header">
-		<span v-if="collapsible" class="eye noselect" @click="collapseHandler">👁️</span>
-		<ProgressHeader
-			:id="data.id"
-			:title="data.title"
-			:trackable="trackable"
-			:searchable="searchable"
-		>
-		</ProgressHeader>
-		<span v-if="clearable" class="text-button clear-button noselect" @click="clearHandler">Clear</span>
+		<div class="header-component">
+			<span
+				v-if="collapsible"
+				:class="{
+					eye      : true,
+					noselect : true,
+					off      : !expanded
+				}"
+				@click="collapseHandler"
+			>👁️</span>
+		</div>
+		<div class="header-component">
+			<ProgressHeader
+				:id="data.id"
+				:title="data.title"
+				:trackable="trackable"
+				:searchable="searchable"
+			>
+			</ProgressHeader>
+		</div>
+		<div class="header-component">
+			<button
+				v-if="clearable"
+				v-show="$store.state.countProgress[data.id]"
+				class="clear-button noselect"
+				@click="clearHandler"
+			>Clear</button>
+		</div>
 	</div>
 
 	<div ref="content" class="content">

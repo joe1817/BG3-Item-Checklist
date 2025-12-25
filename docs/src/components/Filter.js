@@ -1,33 +1,46 @@
 const Filter = {
 	props: ["filter"],
 	template: `
-<div ref="filter" :id="'filter-'+filter.id" class="filter main-option" @mouseenter="mouseenterHandler" @mouseleave="mouseleaveHandler">
-	<div
+<div
+	ref="filter"
+	:id="'filter-'+filter.id"
+	class="filter main-option"
+	@mouseenter="mouseenterHandler"
+	@mouseleave="mouseleaveHandler"
+>
+	<button
 		class="toggle-button"
 		:class="{
-			enabled: (!filter.children && $store.getters.filterState[filter.id]) || (filter.children && filter.children.some(sf => $store.getters.filterState[sf.id])),
-			'fully-enabled': (!filter.children && $store.getters.filterState[filter.id]) || (filter.children && filter.children.every(sf => $store.getters.filterState[sf.id]))
+			off: !$store.getters.filterState[filter.id] || (filter.children && filter.children.some(sf => !$store.getters.filterState[sf.id]))
 		}"
 		@click="clickHandler($event, filter)"
 	>
-		<div class="header">
-			<span class="eye">👁️</span>
-			<span>{{ filter.title }} <span v-if="filter.children" style="font-size:8px;line-height:1;">▼</span></span>
-		</div>
-	</div>
+		<span
+			:class="{
+				eye: true,
+				off: (!filter.children && !$store.getters.filterState[filter.id]) || (filter.children && filter.children.every(sf => !$store.getters.filterState[sf.id]))
+			}"
+		>👁️</span>
+		<span>{{ filter.title }} <span v-if="filter.children" style="font-size:8px;line-height:1;">▼</span></span>
+	</button>
 	<div ref="subfilters" class="subfilters">
-		<div
+		<button
 			v-for="subfilter in filter.children"
 			class="toggle-button"
-			:class="{enabled: $store.getters.filterState[subfilter.id], 'fully-enabled': $store.getters.filterState[subfilter.id]}"
+			:class="{
+				off: !$store.getters.filterState[subfilter.id]
+			}"
 			@click="clickHandler($event, subfilter)"
 		>
-			<div class="header">
-				<span class="arrow">↳</span>
-				<span class="eye">👁️</span>
-				<span>{{ subfilter.title }}</span>
-			</div>
-		</div>
+			<span class="arrow">↳</span>
+			<span
+				:class="{
+					eye: true,
+					off: !$store.getters.filterState[subfilter.id]
+				}"
+			>👁️</span>
+			<span>{{ subfilter.title }}</span>
+		</button>
 	</div>
 </div>
 `,
@@ -42,7 +55,7 @@ const Filter = {
 			if (this.touch && !event.target.classList.contains("eye") && (filter.children && filter.children.length)) {
 				this.expanded = !this.expanded;
 			} else {
-				updates = {};
+				const updates = {};
 				updates[filter.id] = !this.$store.getters.filterState[filter.id];
 				for (const id of filter.descendants) {
 					updates[id] = updates[filter.id];
@@ -73,10 +86,10 @@ const Filter = {
 			const subcategoriesDiv = this.$refs.subfilters;
 			if (expand) {
 				subcategoriesDiv.style.maxHeight = subcategoriesDiv.scrollHeight + "px";
-				this.$emit("expanded", 'filter-'+this.filter.id, true);
+				this.$emit("expanded", "filter-"+this.filter.id, true);
 			} else {
 				subcategoriesDiv.style.maxHeight = "0px";
-				this.$emit("expanded", 'filter-'+this.filter.id, false);
+				this.$emit("expanded", "filter-"+this.filter.id, false);
 			}
 		}
 	}

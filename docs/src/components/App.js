@@ -1,9 +1,9 @@
 const App = {
 	template: `
-<TopMenu></TopMenu>
+<SiteHeader></SiteHeader>
 
 <ScrollToTop
-	class="text-button noselect"
+	class="noselect"
 ></ScrollToTop>
 
 <h1>BG3 Item Checklist</h1>
@@ -20,6 +20,7 @@ const App = {
 	<DefaultContainer
 		:data="entryData"
 		:collapsible=false
+		:clearable=false
 	></DefaultContainer>
 </div>
 `,
@@ -31,14 +32,16 @@ const App = {
 	},
 	mounted() {
 		// scroll to last viewed section
-		const lastViewed = this.$store.getters.lastViewed;
-		if (lastViewed) {
-			const yPos = window.scrollY;
-			setTimeout(() => {
-				if (window.scrollY == yPos) {
-					document.getElementById(lastViewed).scrollIntoView({ behavior: "smooth" });
-				}
-			}, 1000);
+		if (!isLocal) {
+			const lastViewed = this.$store.getters.lastViewed;
+			if (lastViewed) {
+				const yPos = window.scrollY;
+				setTimeout(() => {
+					if (window.scrollY == yPos) {
+						document.getElementById(lastViewed).scrollIntoView({ behavior: "smooth" });
+					}
+				}, 1000);
+			}
 		}
 
 		// keep track of last viewed section

@@ -1,0 +1,231 @@
+.dialog {
+	--danger-color                  : #D32;
+
+	--border-color                  : #34414D;
+
+	--header-text-color             : #DDD;
+	--header-background-color       : #14212D;
+
+	--close-text-color              : var(--header-text-color);
+	--close-background-color        : transparent;
+	--close-background-hover-color  : #192837;
+
+	--body-text-color               : #CCC;
+	--body-background-color         : #192837;
+
+	--ok-text-color                 : #DDD;
+	--ok-text-hover-color           : var(--header-text-color);
+	--ok-background-color           : #0C448B;
+	--ok-background-hover-color     : #115FC2;
+
+	--cancel-text-color             : #115FC2;
+	--cancel-text-hover-color       : #007BFF;
+	--cancel-background-color       : transparent;
+	--cancel-background-hover-color : transparent;
+}
+
+.dialog.danger {
+	--border-color                  : var(--danger-color);
+
+	--header-text-color             : #EEE;
+	--header-background-color       : var(--danger-color);
+
+	--close-text-color              : var(--header-text-color);
+	--close-background-color        : transparent;
+	--close-background-hover-color  : #E43;
+
+	--body-text-color               : #CCC;
+	--body-background-color         : #192837;
+
+	--ok-text-color                 : var(--danger-color);
+	--ok-text-hover-color           : var(--header-text-color);
+	--ok-background-color           : transparent;
+	--ok-background-hover-color     : var(--danger-color);
+
+	--cancel-text-color             : #DDD;
+	--cancel-text-hover-color       : #DDD;
+	--cancel-background-color       : #0C448B;
+	--cancel-background-hover-color : #115FC2;
+}
+
+.dialog {
+	position: fixed;
+	z-index: 1001;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(20, 20, 20, 0.5);
+
+	.window {
+		position: relative;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		width: 400px;
+		border: 2px solid var(--border-color);
+		border-radius: 4px;
+		box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+		background-color: var(--body-background-color);
+		font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+
+		> * {
+			width: auto;
+		}
+
+		.header, .footer {
+			padding: 10px;
+		}
+
+		.header {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			color: var(--header-text-color);
+			background-color: var(--header-background-color);
+
+			.icon {
+				display: inline-block;
+				width: 50px;
+				font-size: 18px;
+				text-align: center;
+				margin-bottom: 2px;
+				margin-left: -10px;
+			}
+
+			.title-wrapper {
+				display: flex;
+				align-items: center;
+			}
+
+			.title {
+				font-size: 18px;
+				font-weight: bold;
+			}
+
+			.close-button {
+				width: 30px;
+				height: 30px;
+				padding: 0 0 2px;
+				border: none;
+				border-radius: 50%;
+				color: var(--close-text-color);
+				background: var(--close-background-color);
+				font-size: 16px;
+				font-weight: bold;
+				cursor: pointer;
+			}
+
+			.close-button:hover {
+				background-color: var(--close-background-hover-color);
+				box-shadow: none;
+			}
+		}
+
+		.body {
+			padding: 10px 50px;
+			color: var(--body-text-color);
+
+			p {
+				margin: 0;
+			}
+
+			.prompt {
+				font-size: 16px;
+			}
+
+			.selection {
+				margin-top: 10px;
+				font-size: 16px;
+				text-align: center;
+				font-style: italic;
+				
+				.quotation-mark {
+					opacity: 0.3;
+				}
+			}
+
+			input {
+				width: 100%;
+				border: none;
+				outline: none;
+				padding: 8px 0;
+
+				border-bottom: 1px solid var(--body-text-color);
+
+				font-family: "Inter", sans-serif;
+				font-size: 1rem;
+				text-align: center;
+				color: var(--body-text-color);
+
+				background: transparent;
+
+				transition: border-color 0.3s ease, box-shadow 0.3s ease;
+			}
+
+			input:focus {
+				border-bottom: 1px solid #007BFF;
+			}
+
+			input::placeholder {
+				color: var(--border-color);
+				opacity: 1;
+			}
+
+			input:focus::placeholder {
+				color: transparent;
+			}
+
+			.error-message {
+				text-align: center;
+				color: var(--danger-color);
+			}
+		}
+
+		.footer {
+			margin-top: 10px;
+			text-align: right;
+
+			.buttons {
+				display: inline-grid;
+				grid-template-columns: 1fr 1fr;
+			}
+
+			.ok-button, .cancel-button {
+				padding: 10px 20px;
+				margin-left: 10px;
+				font-size: 1.15em;
+				padding: 0.3em 0.5em;
+				border-radius: 4px;
+				cursor: pointer;
+			}
+
+			.ok-button {
+				color: var(--ok-text-color);
+				background-color: var(--ok-background-color);
+			}
+
+			.ok-button:hover {
+				color: var(--ok-text-hover-color);
+				background-color: var(--ok-background-hover-color);
+				box-shadow: none;
+			}
+
+			.cancel-button{
+				color: var(--cancel-text-color);
+				background: var(--cancel-background-color);
+			}
+
+			.cancel-button:hover {
+				color: var(--cancel-text-hover-color);
+				background-color: var(--cancel-background-hover-color);
+				box-shadow: none;
+			}
+		}
+	}
+}
+

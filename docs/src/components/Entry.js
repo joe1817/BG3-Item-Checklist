@@ -3,16 +3,30 @@ const Entry = {
 <div
 	ref="content"
 	:id="data.id"
-	:class="['entry', data.categories, data.rarity, {'top-tier': data.suggested, completed: $store.getters.checkboxState[data.id], 'hide-image': !$store.getters.showImages, 'indented': data.indented}]"
+	:class="[
+		'entry',
+		data.categories,
+		data.rarity,
+		{
+			'top-tier': data.suggested,
+			completed: $store.getters.checkboxState[data.id],
+			'hide-image': !$store.getters.showImages,
+			'indented': data.indented
+		}
+	]"
 	v-show="visible"
 	@click="handleClick($event)"
 >
 	<span v-if="checkbox" class="checkbox"><input type="checkbox" :checked="$store.getters.checkboxState[data.id]"></span>
 	<template v-if="data.spriteCoords">
-		<div
-			class="entry-img sprite"
-			:style="spriteStyle"
-		></div>
+		<div class="image">
+			<div class="sprite-background">
+				<div
+					class="entry-img sprite"
+					:style="spriteStyle"
+				></div>
+			</div>
+		</div>
 	</template>
 	<template v-else>
 		<img class="entry-img" :src="data.img" width=50 height=50>

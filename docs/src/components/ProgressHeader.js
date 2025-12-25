@@ -2,8 +2,8 @@ const ProgressHeader = {
 	template: `
 <span
 	:class="{
-		'progress-header': true,
-		active: $store.state.countTotal[id] || !trackable,
+		'progress-header' : true,
+		inactive          : trackable && !$store.state.countTotal[id],
 	}"
 >
 	<template v-if="$attrs.onClick">
@@ -18,11 +18,12 @@ const ProgressHeader = {
 
 	<span v-if="trackable"
 		:class="{
-			progress: true,
-			started: $store.state.countProgress[id],
-			completed: $store.state.countProgress[id] == $store.state.countTotal[id],
+			progress  : true,
+			started   : $store.state.countProgress[id],
+			completed : $store.state.countProgress[id] == $store.state.countTotal[id],
 		}"
-	>{{ $store.state.countProgress[id] || 0 }}/{{ $store.state.countTotal[id] || 0 }}
+	>
+		{{ $store.state.countProgress[id] || 0 }}/{{ $store.state.countTotal[id] || 0 }}
 	</span>
 </span>
 `,

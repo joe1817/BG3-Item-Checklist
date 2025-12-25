@@ -5,31 +5,48 @@ const Options = {
 	<fieldset id="filters" class="noselect">
 		<legend>Filters</legend>
 		<div class="content">
-			<Filter ref="filters" v-for="filter in filterData" :filter="filter" @expanded="expandHandler"></Filter>
+			<Filter
+				ref="filters"
+				v-for="filter in filterData"
+				:filter="filter"
+				@expanded="expandHandler"
+			></Filter>
 		</div>
 	</fieldset>
 
 	<fieldset id="more-options" class="noselect">
 		<legend>More Options</legend>
 		<div class="content">
-			<div class="toggle-button main-option"
-				:class="{enabled: $store.getters.showComplete, 'fully-enabled': $store.getters.showComplete}"
+			<button class="toggle-button main-option"
+				:class="{
+					'toggle-button': true,
+					off: !$store.getters.showComplete
+				}"
 				@click="$store.dispatch('toggleShowCompleteAndSave')"
 			>
-				<div class="header">
-					<span class="eye">👁️</span>
-					<span>Show Completed</span>
-				</div>
-			</div>
-			<div class="toggle-button main-option"
-				:class="{enabled: $store.getters.showImages, 'fully-enabled': $store.getters.showImages}"
+				<span
+					:class="{
+						eye: true,
+						off: !$store.getters.showComplete
+					}"
+				>👁️</span>
+				<span>Show Completed</span>
+			</button>
+			<button class="toggle-button main-option"
+				:class="{
+					'toggle-button': true,
+					off: !$store.getters.showImages
+				}"
 				@click="$store.dispatch('toggleShowImagesAndSave')"
 			>
-				<div class="header">
-					<span class="eye">👁️</span>
-					<span>Show Images</span>
-				</div>
-			</div>
+				<span
+					:class="{
+						eye: true,
+						off: !$store.getters.showImages
+					}"
+				>👁️</span>
+				<span>Show Images</span>
+			</button>
 		</div>
 	</fieldset>
 
@@ -44,7 +61,7 @@ const Options = {
 					@keyup ="keyupHandler($event)"
 					placeholder="..."
 				>
-				<div id="clear-button" class="text-button" @click="clearSearchHandler">Clear</div>
+				<button class="clear-button" @click="clearSearchHandler">Clear</button>
 			</div>
 		</div>
 	</fieldset>

@@ -14,7 +14,12 @@ const ConfirmDialogPlugin = {
 
 const ConfirmDialog = {
 	template: `
-<div ref="confirmDialog" v-show="show" id="confirm-dialog" :class="{danger: danger}">
+<div
+	ref="confirmDialog"
+	v-show="show"
+	id="confirm-dialog"
+	:class="{dialog: true, danger: danger}"
+>
 	<div class="window">
 		<div class="header">
 			<div class="title-wrapper">
@@ -25,7 +30,7 @@ const ConfirmDialog = {
 		</div>
 		<div class="body">
 			<p ref="prompt" class="prompt">{{ prompt }}</p>
-			<p ref="selection" class="selection">{{ selection }}</p>
+			<p ref="selection" class="selection"><span class="quotation-mark noselect">❝ </span>{{ selection }}<span class="quotation-mark noselect"> ❞</span></p>
 		</div>
 		<div class="footer">
 			<div class="buttons">
