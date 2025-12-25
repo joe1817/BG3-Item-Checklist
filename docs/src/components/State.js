@@ -1,27 +1,27 @@
 const State = {
 	state() {
 		// loads data from localStorage that has been stored by various names during development
-		function loadCompatibleData(activeProfile, key, _default=null) {
+		function loadCompatibleData(profile, key, _default=null) {
 			let data = null;
 			data = localStorage.getItem(key);
 			if (data !== null) {
 				localStorage.removeItem(key);
-				localStorage.setItem("bg3items." + (activeProfile ? activeProfile + "." : "") + key, data);
+				localStorage.setItem("bg3items." + (profile ? profile + "." : "") + key, data);
 				return data;
 			}
-			if (activeProfile === null) {
+			if (profile === null) {
 				data = localStorage.getItem("bg3items." + key);
 				if (data !== null) {
 					return data;
 				}
 			} else {
-				data = localStorage.getItem(activeProfile + "_" + key);
+				data = localStorage.getItem(profile + "_" + key);
 				if (data !== null) {
-					localStorage.removeItem(activeProfile + "_" + key);
-					localStorage.setItem("bg3items." + activeProfile + "." + key, data);
+					localStorage.removeItem(profile + "_" + key);
+					localStorage.setItem("bg3items." + profile + "." + key, data);
 					return data;
 				}
-				data = localStorage.getItem("bg3items." + activeProfile + "." + key);
+				data = localStorage.getItem("bg3items." + profile + "." + key);
 				if (data !== null) {
 					return data;
 				}

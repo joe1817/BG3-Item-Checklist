@@ -31,8 +31,8 @@ const App = {
 	},
 	mounted() {
 		// scroll to last viewed section
-		if (this.$store.getters.lastViewed) {
-			const lastViewed = this.$store.getters.lastViewed;
+		const lastViewed = this.$store.getters.lastViewed;
+		if (lastViewed) {
 			const yPos = window.scrollY;
 			setTimeout(() => {
 				if (window.scrollY == yPos) {
