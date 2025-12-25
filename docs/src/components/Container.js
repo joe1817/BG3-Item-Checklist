@@ -83,7 +83,8 @@ const Container = {
 			return this.data.parent && this.$store.state.matchesSearch[this.data.parent.id];
 		},
 		matchesSearch() {
-			return this.parentMatchesSearch || (this.searchable && this.data.title.toLowerCase().includes(this.$store.state.searchString));
+			this.$store.state.searchRegexp.lastIndex = 0;
+			return this.parentMatchesSearch || (this.searchable && this.$store.state.searchRegexp.test(this.data.title));
 		},
 		expanded() {
 			return this.$store.getters.expansionState[this.data.id];
@@ -95,9 +96,9 @@ const Container = {
 		},
 		clearHandler() {
 			this.$confirm({
-				prompt   : "Clear all checkboxes for this section?",
-				selection: this.data.title,
-				onOK     : () => {
+				prompt    : "Clear all checkboxes for this section?",
+				selection : this.data.title,
+				onOK      : () => {
 					updates = {};
 					const scan = (data) => {
 						for (const child of data.children) {

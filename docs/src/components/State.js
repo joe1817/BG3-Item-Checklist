@@ -93,6 +93,7 @@ const State = {
 
 			lastViewedWritePending : false, // scrolling too fast can cause too many writes, limit the rate
 			searchString           : "",
+			searchRegexp           : new RegExp(""),
 			matchesSearch          : {},
 			countProgress          : {},
 			countTotal             : {},
@@ -199,6 +200,9 @@ const State = {
 		},
 		updateSearchString(state, s) {
 			state.searchString = s;
+			
+			const regexp = s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // escape regex chars
+			state.searchRegexp = new RegExp(regexp, "gi");
 		}
 	},
 

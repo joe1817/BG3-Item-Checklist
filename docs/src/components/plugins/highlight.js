@@ -1,10 +1,12 @@
 const highlightPlugin = {
 	install: (app, options) => {
 		app.config.globalProperties.$highlight = (text) => {
+			options.state.searchRegexp.lastIndex = 0;
 			if (!options.state.searchString) {
 				return text;
-			} else if (text.toLowerCase().includes(options.state.searchString)) {
-				return highlightSubstring(text, options.state.searchString)
+			} else if (options.state.searchRegexp.test(text)) {
+				options.state.searchRegexp.lastIndex = 0;
+				return highlightSubstring(text, options.state.searchRegexp);
 			} else {
 				return text;
 			}
@@ -12,14 +14,13 @@ const highlightPlugin = {
 	}
 };
 
-function highlightSubstring(htmlString, searchString) {
-	const tempDiv = document.createElement('div');
+function highlightSubstring(htmlString, regex) {
+	const tempDiv = document.createElement("div");
 	tempDiv.innerHTML = htmlString;
 
 	function recursivelyHighlight(node) {
 		if (node.nodeType === Node.TEXT_NODE) {
 			const text = node.textContent;
-			const regex = new RegExp(escapeRegExp(searchString), 'gi');
 			let match;
 			let newNodes = [];
 			let lastIndex = 0;
@@ -32,8 +33,8 @@ function highlightSubstring(htmlString, searchString) {
 					newNodes.push(document.createTextNode(before));
 				}
 
-				const span = document.createElement('span');
-				span.classList.add('highlighted');
+				const span = document.createElement("span");
+				span.classList.add("highlighted");
 				span.textContent = highlighted;
 				newNodes.push(span);
 
@@ -50,7 +51,7 @@ function highlightSubstring(htmlString, searchString) {
 			}
 			return newNodes.length;
 
-		} else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
+		} else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== "SCRIPT" && node.tagName !== "STYLE") {
 			for (let i = 0; i < node.childNodes.length; ) {
 				i += recursivelyHighlight(node.childNodes[i]);
 			}
@@ -63,26 +64,5 @@ function highlightSubstring(htmlString, searchString) {
 }
 
 function escapeRegExp(string) {
-	return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+	return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
 }
-
-/*
-// Example usage:
-const htmlContent = `
-	<div>
-		<p>This paragraph contains the word search multiple times: search, SEARCH, and seArCh.</p>
-		<span>Another span with the term search here.</span>
-		<ul>
-			<li>Item with a search inside.</li>
-		</ul>
-		<script>const searchText = "search";</script>
-		<style>.highlighted { background-color: yellow; }</style>
-	</div>
-`;
-const searchTerm = "search";
-const highlightedHTML = highlightSubstring(htmlContent, searchTerm);
-console.log(highlightedHTML);
-
-// To apply this to an element in your actual DOM:
-// document.getElementById('yourElement').innerHTML = highlightedHTML;
-*/

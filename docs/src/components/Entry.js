@@ -103,7 +103,13 @@ const Entry = {
 			};
 		},
 		visible() {
-			if (this.searchable && !this.$store.state.matchesSearch[this.data.parent.id] && this.$store.state.searchString.length && !this.searchableArr.some(s => this.data[s].toLowerCase().includes(this.$store.state.searchString))) {
+			this.$store.state.searchRegexp.lastIndex = 0;
+			if (
+				this.searchable &&
+				!this.$store.state.matchesSearch[this.data.parent.id] &&
+				this.$store.state.searchString.length &&
+				!this.searchableArr.some(s => this.$store.state.searchRegexp.test(this.data[s]))
+			) {
 				return false;
 			}
 			if (this.$store.getters.checkboxState[this.data.id] && !this.$store.getters.showComplete) {
