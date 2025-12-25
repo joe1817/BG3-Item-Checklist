@@ -91,20 +91,7 @@ const Container = {
 	},
 	methods: {
 		collapseHandler() {
-			this.$refs.content.style.maxHeight = this.$refs.content.scrollHeight + "px";
-			this.$refs.content.style.transition = "max-height 0.2s ease-out";
-
-			// force a reflow
-			void this.$refs.content.offsetHeight;
-
 			this.$store.dispatch("toggleExpansionAndSave", this.data.id);
-
-			setTimeout(() => {
-				this.$refs.content.style.transition = null;
-				if (this.expanded) {
-					this.$refs.content.style.maxHeight = null;
-				}
-			}, 200);
 		},
 		clearHandler() {
 			this.$confirm({
@@ -133,9 +120,21 @@ const Container = {
 		},
 		expanded(newVal, oldVal) {
 			if (newVal) {
-				this.$refs.content.style.maxHeight = this.$refs.content.scrollHeight + "px";
+				requestAnimationFrame(() => {
+					this.$refs.content.style.maxHeight = this.$refs.content.scrollHeight + "px";
+				});
+				this.$refs.content.addEventListener("transitionend", () => {
+					this.$refs.content.style.maxHeight = null;
+				}, { once: true });
 			} else {
-				this.$refs.content.style.maxHeight = "0px";
+				this.$refs.content.style.maxHeight = this.$refs.content.scrollHeight + "px";
+				// need two requestAnimationFrame()'s to stop the browser from optimizing away the intermediate value above
+				// void this.$refs.content.offsetHeight; // also works by forcing a reflow & "flushing" CSS changes to the browser
+				requestAnimationFrame(() => {
+					requestAnimationFrame(() => {
+						this.$refs.content.style.maxHeight = "0px";
+					});
+				});
 			}
 		}
 	}
