@@ -376,17 +376,6 @@ button.tall {
 
 
 
-/*
-@media (max-width : 768px) {
-	.toggle-button {
-		font-size: 1.3em;
-		padding: 0.5em;
-	}
-	.eye {
-		font-size: 1.3em;
-	}
-}
-*/
 
 #site-header {
 	justify-content: space-between;
@@ -537,12 +526,6 @@ button.tall {
 			margin: 0 auto 8px;
 			max-width: 60%;
 		}
-
-		@media (max-width : 768px) {
-			.tip {
-				max-width: 100%;
-			}
-		}
 	}
 }
 
@@ -584,20 +567,6 @@ button.tall {
 
 .entry.indented {
 	margin-left: 100px;
-}
-
-@media (max-width : 768px) {
-	.entry {
-		margin-left: 0;
-
-		.title {
-			width: 100px;
-		}
-	}
-
-	.entry.indented {
-		margin-left: 50px;
-	}
 }
 
 .entry.top-tier {
@@ -652,5 +621,27 @@ button.tall {
 	}
 	.title a {
 		color: rgb(var(--rarity-story));
+	}
+}
+
+@media (max-width : 768px) {
+	#checklist {
+		.content {
+			.tip {
+				max-width: 100%;
+			}
+		}
+	}
+
+	.entry {
+		margin-left: 0;
+
+		.title {
+			width: 100px;
+		}
+	}
+
+	.entry.indented {
+		margin-left: 50px;
 	}
 }

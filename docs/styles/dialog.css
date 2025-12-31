@@ -229,3 +229,11 @@
 	}
 }
 
+@media (max-width : 768px) {
+	.dialog {
+		.window {
+			width: 80%;
+			max-width: 400px;
+		}
+	}
+}
