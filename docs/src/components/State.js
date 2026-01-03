@@ -1,100 +1,23 @@
 const State = {
 
+	plugins: [persistence],
+
 	state() {
-		// loads data from localStorage that has been stored by various names during development
-		function loadCompatibleData(profile, key, _default=null) {
-			let data = null;
-			data = localStorage.getItem(key);
-			if (data !== null) {
-				localStorage.removeItem(key);
-				localStorage.setItem("bg3items." + (profile ? profile + "." : "") + key, data);
-				return data;
-			}
-			if (profile === null) {
-				data = localStorage.getItem("bg3items." + key);
-				if (data !== null) {
-					return data;
-				}
-			} else {
-				data = localStorage.getItem(profile + "_" + key);
-				if (data !== null) {
-					localStorage.removeItem(profile + "_" + key);
-					localStorage.setItem("bg3items." + profile + "." + key, data);
-					return data;
-				}
-				data = localStorage.getItem("bg3items." + profile + "." + key);
-				if (data !== null) {
-					return data;
-				}
-			}
-			return _default;
-		}
-
-		const defaultShowImages = window.innerWidth > 768 ? "true" : "false";
-
-		const activeProfile = loadCompatibleData(null, "activeProfile", "(Default)");
-		const allProfiles   = loadCompatibleData(null, "allProfiles", "(Default)").split(",");
-
-		const allShowComplete = {};
-		const allShowImages   = {};
-		const allLastViewed   = {};
-
-		const allFilterState    = {};
-		const allCheckboxState  = {};
-		const allExpansionState = {};
-
-		for (const profile of allProfiles) {
-			allShowComplete[profile] = loadCompatibleData(profile, "showComplete", "true") == "true";
-			allShowImages[profile]   = loadCompatibleData(profile, "showImages", defaultShowImages) == "true";
-			allLastViewed[profile]   = loadCompatibleData(profile, "lastViewed");
-
-			disabled  = loadCompatibleData(profile, "disabled", "").split(",");
-			checked   = loadCompatibleData(profile, "checked", "").split(",");
-			collapsed = loadCompatibleData(profile, "collapsed", "").split(",");
-
-			allFilterState[profile]    = {};
-			allCheckboxState[profile]  = {};
-			allExpansionState[profile] = {};
-
-			const fillFilterState = (filters) => {
-				for (const filter of filters) {
-					allFilterState[profile][filter.id] = !disabled.includes(filter.id);
-					if (filter.children) {
-						fillFilterState(filter.children);
-					}
-				}
-			}
-			fillFilterState(filterData);
-
-			const fillEntryState = (entry) => {
-				if (entry.children === undefined) {
-					allCheckboxState[profile][entry.id] = checked.includes(entry.id);
-				} else {
-					allExpansionState[profile][entry.id] = !collapsed.includes(entry.id);
-					for (const subentry of entry.children) {
-						fillEntryState(subentry);
-					}
-				}
-			}
-			fillEntryState(entryData);
-		}
-
 		return {
-			// profiles
-			activeProfile : activeProfile,
-			allProfiles   : allProfiles,
+			activeProfile     : "(Default)",
+			allProfiles       : ["(Default)"],
 
-			allShowComplete : allShowComplete,
-			allShowImages   : allShowImages,
-			allLastViewed   : allLastViewed,
+			allShowComplete   : {},
+			allShowImages     : {},
+			allLastViewed     : {},
 
-			allFilterState    : allFilterState,
-			allCheckboxState  : allCheckboxState,
-			allExpansionState : allExpansionState,
+			allFilterState    : {},
+			allCheckboxState  : {},
+			allExpansionState : {},
 
-			lastViewedWritePending : false, // scrolling too fast can cause too many writes, limit the rate
 			searchString           : "",
 			searchRegexp           : new RegExp(""),
+
 			matchesSearch          : {},
 			visible                : {},
 			countProgress          : {},
@@ -304,46 +227,21 @@ const State = {
 	},
 
 	actions: {
-		saveProfile({ commit, state }, payload) {
+		setProfile({ commit, state }, payload) {
 			commit("SET_PROFILE", payload);
 			commit("UPDATE_VISIBLE");
-
-			localStorage.setItem("bg3items.activeProfile", state.activeProfile);
 		},
 
 		createProfile({ commit, state }, payload) {
 			const profileName = payload.trim();
-
 			if (profileName === "") {
 				return;
 			}
 			if (profileName !== "(Default)" && state.allProfiles.includes(profileName)) {
 				return;
 			}
-
 			commit("CREATE_PROFILE", profileName);
 			commit("UPDATE_VISIBLE");
-
-			let obj = state.allProfiles
-			let data = obj.join(",");
-			localStorage.setItem("bg3items.allProfiles", data);
-			localStorage.setItem("bg3items.activeProfile", profileName);
-
-			const storagePrefix = "bg3items." + profileName + ".";
-
-			localStorage.setItem(storagePrefix + "showComplete", state.allShowComplete[profileName]);
-			localStorage.setItem(storagePrefix + "showImages", state.allShowImages[profileName]);
-			localStorage.setItem(storagePrefix + "lastViewed", null);
-
-			obj = state.allFilterState[profileName];
-			data = Object.keys(obj).filter(key => obj[key] === false).join(",");
-			localStorage.setItem(storagePrefix + "disabled", data);
-			obj = state.allCheckboxState[profileName];
-			data = Object.keys(obj).filter(key => obj[key] === true).join(",");
-			localStorage.setItem(storagePrefix + "checked", data);
-			obj = state.allExpansionState[profileName];
-			data = Object.keys(obj).filter(key => obj[key] === false).join(",");
-			localStorage.setItem(storagePrefix + "collapsed", data);
 		},
 
 		deleteProfile({ commit, state }, payload) {
@@ -354,98 +252,43 @@ const State = {
 			if (!state.allProfiles.includes(payload)) {
 				return;
 			}
-
 			commit("DELETE_PROFILE", payload);
 			commit("UPDATE_VISIBLE");
-
-			let obj = state.allProfiles
-			let data = obj.join(",");
-			localStorage.setItem("bg3items.allProfiles", data);
-			localStorage.setItem("bg3items.activeProfile", state.activeProfile);
-
-			const storagePrefix = "bg3items." + payload + ".";
-
-			localStorage.removeItem(storagePrefix + "showComplete");
-			localStorage.removeItem(storagePrefix + "showImages");
-			localStorage.removeItem(storagePrefix + "lastViewed");
-
-			localStorage.removeItem(storagePrefix + "disabled");
-			localStorage.removeItem(storagePrefix + "checked");
-			localStorage.removeItem(storagePrefix + "collapsed");
 		},
 
 		toggleFilter({ commit, state }, payload) {
 			commit("TOGGLE_FILTER", payload);
 			commit("UPDATE_VISIBLE");
-
-			const storagePrefix = "bg3items." + state.activeProfile + ".";
-			const obj = state.allFilterState[state.activeProfile];
-			const data = Object.keys(obj).filter(key => obj[key] === false).join(",");
-			localStorage.setItem(storagePrefix + "disabled", data);
 		},
 
 		toggleExpansion({ commit, state }, payload) {
 			commit("TOGGLE_EXPANSION", payload);
-
-			const storagePrefix = "bg3items." + state.activeProfile + ".";
-			const obj = state.allExpansionState[state.activeProfile];
-			const data = Object.keys(obj).filter(key => obj[key] === false).join(",");
-			localStorage.setItem(storagePrefix + "collapsed", data);
 		},
 
 		toggleCheckbox({ commit, state }, payload) {
 			commit("TOGGLE_CHECKBOX", payload);
 			commit("UPDATE_VISIBLE");
-
-			const storagePrefix = "bg3items." + state.activeProfile + ".";
-			const obj = state.allCheckboxState[state.activeProfile];
-			const data = Object.keys(obj).filter(key => obj[key] === true).join(",");
-			localStorage.setItem(storagePrefix + "checked", data);
 		},
 
 		toggleShowComplete({ commit, state }) {
 			commit("TOGGLE_SHOW_COMPLETE");
 			commit("UPDATE_VISIBLE");
-
-			const storagePrefix = "bg3items." + state.activeProfile + ".";
-			const data = state.allShowComplete[state.activeProfile];
-			localStorage.setItem(storagePrefix + "showComplete", data);
 		},
 
 		toggleShowImages({ commit, state }) {
 			commit("TOGGLE_SHOW_IMAGES");
-
-			const storagePrefix = "bg3items." + state.activeProfile + ".";
-			const data = state.allShowImages[state.activeProfile];
-			localStorage.setItem(storagePrefix + "showImages", data);
 		},
 
 		setAllCheckboxes({ commit, state }, payload) {
 			commit("SET_ALL_CHECKBOXES", payload);
 			commit("UPDATE_VISIBLE");
-
-			const storagePrefix = "bg3items." + state.activeProfile + ".";
-			const obj = state.allCheckboxState[state.activeProfile];
-			const data = Object.keys(obj).filter(key => obj[key] === true).join(",");
-			localStorage.setItem(storagePrefix + "checked", data);
 		},
 
 		updateLastViewed({ commit, state }, payload) {
 			if (state.searchString || payload === state.allLastViewed[state.activeProfile]) {
 				return;
 			}
-
 			commit("UPDATE_LAST_VIEWED", payload);
-
-			const storagePrefix = "bg3items." + state.activeProfile + ".";
-			if (!state.lastViewedWritePending) {
-				state.lastViewedWritePending = true;
-				setTimeout(() => {
-					let data = state.allLastViewed[state.activeProfile];
-					localStorage.setItem(storagePrefix + "lastViewed", data);
-					state.lastViewedWritePending = false;
-				}, 2000);
-			}
 		},
 
 		updateSearchString({ commit, state }, payload) {

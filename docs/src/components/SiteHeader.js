@@ -44,7 +44,7 @@ const SiteHeader = {
 	methods: {
 		setProfile(event) {
 			const profile = event.target.value;
-			this.$store.dispatch("saveProfile", profile);
+			this.$store.dispatch("setProfile", profile);
 		},
 		createProfile() {
 			const placeholders = [
