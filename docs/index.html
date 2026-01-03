@@ -23,6 +23,31 @@
 <script src="https://unpkg.com/vuex@4.0.0/dist/vuex.global.js"></script>
 
 <script src="src/data.js"></script>
+<script>
+	const setParent = (data, parent) => {
+		if (parent) {
+			data.parent = parent;
+		}
+		if (data.children) {
+			data.children.forEach((child) => {
+				setParent(child, data);
+			});
+		}
+	}
+	setParent(entryData, null);
+
+	const setSearchableDesc = (data) => {
+		if (data.desc) {
+			data.searchableDesc = data.desc.replace(/<\/?[^>]+(>|$)/g, "");
+		}
+		if (data.children) {
+			data.children.forEach((child) => {
+				setSearchableDesc(child);
+			});
+		}
+	}
+	setSearchableDesc(entryData);
+</script>
 <script src="src/load-sprites.js"></script>
 
 <script src="src/components/plugins/highlight.js"></script>

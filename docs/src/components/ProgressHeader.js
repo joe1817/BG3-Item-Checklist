@@ -7,12 +7,12 @@ const ProgressHeader = {
 	}"
 >
 	<template v-if="$attrs.onClick">
-		<a v-if="searchable" class="title" v-bind="$attrs" v-html="$highlight(title)"></a>
+		<a v-if="searchable" class="title" v-bind="$attrs" v-html="$highlight(id, title)"></a>
 		<a v-else class="title" v-bind="$attrs">{{ title }}</a>
 	</template>
 
 	<template v-else>
-		<span v-if="searchable" class="title" v-bind="$attrs" v-html="$highlight(title)"></span>
+		<span v-if="searchable" class="title" v-bind="$attrs" v-html="$highlight(id, title)"></span>
 		<span v-else class="title" v-bind="$attrs">{{ title }}</span>
 	</template>
 

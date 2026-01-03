@@ -44,7 +44,7 @@ const SiteHeader = {
 	methods: {
 		setProfile(event) {
 			const profile = event.target.value;
-			this.$store.dispatch("setProfileAndSave", profile);
+			this.$store.dispatch("saveProfile", profile);
 		},
 		createProfile() {
 			const placeholders = [
@@ -65,7 +65,7 @@ const SiteHeader = {
 					}
 					return "";
 				},
-				onOK        : (profile) => this.$store.dispatch("createProfileAndSave", profile)
+				onOK        : (profile) => this.$store.dispatch("createProfile", profile)
 			});
 		},
 		deleteProfile() {
@@ -78,9 +78,9 @@ const SiteHeader = {
 				okText    : "Delete",
 				onOK      : () => {
 					if (profile == "(Default)") {
-						this.$store.dispatch("createProfileAndSave", profile);
+						this.$store.dispatch("createProfile", profile);
 					} else {
-						this.$store.dispatch("deleteProfileAndSave", profile);
+						this.$store.dispatch("deleteProfile", profile);
 					}
 				}
 			});

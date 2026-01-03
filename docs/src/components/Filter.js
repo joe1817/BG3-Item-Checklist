@@ -68,7 +68,7 @@ const Filter = {
 						updates[filter.parent.id] = false;
 					}
 				}
-				this.$store.dispatch("toggleFilterAndSave", updates);
+				this.$store.dispatch("toggleFilter", updates);
 			}
 		},
 		mouseenterHandler() {

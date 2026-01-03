@@ -6,7 +6,7 @@ const Container = {
 		(data.children[0].children !== undefined) ? 'meta-container':'container',
 		{expanded: expanded}
 	]"
-	v-show="!autoHide || !trackable || $store.state.countTotal[data.id]"
+	v-show="$store.state.visible[data.id]"
 >
 
 	<div class="header">
@@ -85,36 +85,22 @@ const Container = {
 			default: true
 		}
 	},
-	beforeMount() {
-		if (this.data.children) {
-			this.data.children.forEach(child => {
-				child.parent = this.data;
-			});
-		}
-		this.$store.state.countProgress[this.data.id] = 0;
-		this.$store.state.countTotal[this.data.id] = 0;
-		this.$store.state.matchesSearch[this.data.id] = true;
-	},
+
 	mounted() {
 		if (!this.$store.getters.expansionState[this.data.id]) {
 			this.$refs.content.style.maxHeight = "0px";
 		}
 	},
+
 	computed: {
-		parentMatchesSearch() {
-			return this.data.parent && this.$store.state.matchesSearch[this.data.parent.id];
-		},
-		matchesSearch() {
-			this.$store.state.searchRegexp.lastIndex = 0;
-			return this.parentMatchesSearch || (this.searchable && this.$store.state.searchRegexp.test(this.data.title));
-		},
 		expanded() {
 			return this.$store.getters.expansionState[this.data.id];
 		}
 	},
+
 	methods: {
 		collapseHandler() {
-			this.$store.dispatch("toggleExpansionAndSave", this.data.id);
+			this.$store.dispatch("toggleExpansion", this.data.id);
 		},
 		clearHandler() {
 			this.$confirm({
@@ -132,15 +118,13 @@ const Container = {
 						}
 					}
 					scan(this.data);
-					this.$store.dispatch("setAllCheckboxesAndSave", updates);
+					this.$store.dispatch("setAllCheckboxes", updates);
 				}
 			});
 		}
 	},
+
 	watch: {
-		matchesSearch(newVal, oldVal) {
-			this.$store.state.matchesSearch[this.data.id] = newVal;
-		},
 		expanded(newVal, oldVal) {
 			if (newVal) {
 				requestAnimationFrame(() => {

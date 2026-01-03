@@ -22,7 +22,7 @@ const Options = {
 					'toggle-button': true,
 					off: !$store.getters.showComplete
 				}"
-				@click="$store.dispatch('toggleShowCompleteAndSave')"
+				@click="$store.dispatch('toggleShowComplete')"
 			>
 				<span
 					:class="{
@@ -37,7 +37,7 @@ const Options = {
 					'toggle-button': true,
 					off: !$store.getters.showImages
 				}"
-				@click="$store.dispatch('toggleShowImagesAndSave')"
+				@click="$store.dispatch('toggleShowImages')"
 			>
 				<span
 					:class="{
@@ -85,13 +85,13 @@ const Options = {
 	methods: {
 		clearSearchHandler() {
 			this.$refs.searchBar.value="";
-			this.$store.commit("updateSearchString", "");
+			this.$store.dispatch("updateSearchString", "");
 		},
 		keyupHandler(event) {
 			if (event.key == "Escape") {
 				this.clearSearchHandler();
 			} else {
-				this.$store.commit("updateSearchString", event.target.value.toLowerCase());
+				this.$store.dispatch("updateSearchString", event.target.value.toLowerCase());
 			}
 		},
 		expandHandler(filter, expanded) {

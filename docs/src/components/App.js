@@ -30,6 +30,11 @@ const App = {
 			filterData : filterData
 		};
 	},
+
+	created() {
+		this.$store.commit("UPDATE_VISIBLE");
+	},
+
 	mounted() {
 		// scroll to last viewed section
 		if (!isLocal) {
@@ -54,7 +59,7 @@ const App = {
 						if (section.target.id !== "TOC") {
 							id = section.target.parentNode.id;
 						}
-						this.$store.dispatch("updateLastViewedAndSave", id)
+						this.$store.dispatch("updateLastViewed", id)
 					}
 				});
 			},
@@ -73,6 +78,7 @@ const App = {
 			value.innerText = this.get_final_price(value.innerText);
 		});
 	},
+
 	methods: {
 		get_difficulty_mod(difficulty) {
 			switch (difficulty) {
@@ -84,15 +90,15 @@ const App = {
 		},
 		//See https://bg3.wiki/wiki/Trading_and_item_pricing and https://bg3.wiki/wiki/Widget:PriceCalculator
 		get_final_price(value, persuasion_mod = 4, attitude = 0, difficulty = "balanced") {
-			let difficulty_mod = this.get_difficulty_mod(difficulty);
-			let price_mod = Math.max(1.0, 2.5 - 0.1*persuasion_mod - 0.005*attitude - difficulty_mod);
+			const difficulty_mod = this.get_difficulty_mod(difficulty);
+			const price_mod = Math.max(1.0, 2.5 - 0.1*persuasion_mod - 0.005*attitude - difficulty_mod);
 			value = value.split(" / ");
 			if (value.length == 1 || difficulty != "honour")
 				value = value[0];
 			else
 				value = value[1];
 			value = parseInt(value.replace(" gp", ""));
-			let price_buy = Math.round(value * price_mod);
+			const price_buy = Math.round(value * price_mod);
 			return price_buy + " gp";
 		}
 	}

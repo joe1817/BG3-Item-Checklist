@@ -1,10 +1,10 @@
 const highlightPlugin = {
 	install: (app, options) => {
-		app.config.globalProperties.$highlight = (text) => {
+		app.config.globalProperties.$highlight = (id, text) => {
 			options.state.searchRegexp.lastIndex = 0;
 			if (!options.state.searchString) {
 				return text;
-			} else if (options.state.searchRegexp.test(text)) {
+			} else if (options.state.matchesSearch[id] && options.state.searchRegexp.test(text)) {
 				options.state.searchRegexp.lastIndex = 0;
 				return highlightSubstring(text, options.state.searchRegexp);
 			} else {
