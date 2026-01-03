@@ -21,8 +21,7 @@
 	--button-background-color: #0C448B;
 	--button-faded-background-color: #0D3460;
 	--button-hover-background-color: #115FC2;
-
-	--eye-background-color: #0060DF;
+	--button-eye-background-color: #0060DF;
 
 	--rarity-uncommon  : 1 189 57; /* 01bd39 */
 	--rarity-rare      : 1 191 255; /* 01bfff */
@@ -226,7 +225,7 @@ button.tall {
 }
 
 .eye {
-	background-color: var(--eye-background-color);
+	background-color: var(--button-background-color);
 	font-size: 16px;
 	line-height: 21px;
 	border-radius: 50%;
@@ -243,8 +242,11 @@ button.tall {
 	box-shadow: 0 0 5px rgba(var(--highlighted-background-color) / 0.5);
 }
 
+.toggle-button .eye {
+	background-color: var(--button-eye-background-color);
+}
+
 .toggle-button .eye:hover {
-	background-color: var(--eye-background-color);
 	box-shadow: none;
 }
 
@@ -253,7 +255,7 @@ button.tall {
 }
 
 .eye.off:hover {
-	background-color: transparent;
+	box-shadow: none;
 }
 
 /*
