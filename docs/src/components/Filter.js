@@ -52,7 +52,7 @@ const Filter = {
 	},
 	methods: {
 		clickHandler(event, filter) {
-			if (this.touch && !event.target.classList.contains("eye") && (filter.children && filter.children.length)) {
+			if (this.touch && !event.target.classList.contains("eye") && filter.parent === undefined) {
 				this.expanded = !this.expanded;
 			} else {
 				const updates = {};
