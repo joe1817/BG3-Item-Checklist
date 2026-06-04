@@ -70,14 +70,15 @@ const SiteHeader = {
 		},
 		deleteProfile() {
 			const profile = this.$store.state.activeProfile;
+			const isDefault = profile == "(Default)";
 			this.$confirm({
 				danger    : true,
-				title     : "Confirm Delete",
-				prompt    : "Delete this profile?",
+				title     : isDefault ? "Confirm Reset" : "Confirm Delete",
+				prompt    : isDefault ? "Reset this profile?" : "Delete this profile?",
 				selection : profile,
-				okText    : "Delete",
+				okText    : isDefault ? "Reset" : "Delete",
 				onOK      : () => {
-					if (profile == "(Default)") {
+					if (isDefault) {
 						this.$store.dispatch("createProfile", profile);
 					} else {
 						this.$store.dispatch("deleteProfile", profile);
