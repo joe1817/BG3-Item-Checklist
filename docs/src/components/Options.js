@@ -67,6 +67,11 @@ const Options = {
 	</fieldset>
 </div>
 `,
+	data() {
+		return {
+			unfadeTimer: null
+		}
+	},
 	beforeMount() {
 		const scan = (filter) => {
 			filter.descendants = [filter.id];
@@ -97,6 +102,7 @@ const Options = {
 		expandHandler(filter, expanded) {
 			const fade = (el, id) => {
 				if (el.getAttribute("id") == id) {
+					unfade(el);
 					return true;
 				}
 				let found = null;
@@ -125,9 +131,16 @@ const Options = {
 			};
 
 			if (expanded) {
+				if (this.unfadeTimer) {
+					clearTimeout(this.unfadeTimer);
+					this.unfadeTimer = null;
+				}
 				fade(this.$refs.options, filter);
 			} else {
-				unfade(this.$refs.options);
+				this.unfadeTimer = setTimeout(() => {
+					unfade(this.$refs.options);
+					this.unfadeTimer = null;
+				}, 100);
 			}
 		},
 	},

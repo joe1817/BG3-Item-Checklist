@@ -47,7 +47,7 @@ const Filter = {
 	data() {
 		return {
 			expanded: false,
-			touch: "ontouchstart" in window || navigator.maxTouchPoints > 0
+			touch: window.matchMedia("(pointer: coarse)").matches
 		}
 	},
 	methods: {

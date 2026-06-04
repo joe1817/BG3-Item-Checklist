@@ -65,8 +65,10 @@ a {
 	cursor: pointer;
 }
 
-a:hover {
-	text-decoration: underline;
+@media (hover: hover) {
+	a:hover {
+		text-decoration: underline;
+	}
 }
 
 h1 {
@@ -192,9 +194,11 @@ button {
 	padding: 0 10px;
 }
 
-button:hover {
-	background-color: var(--button-hover-background-color);
-	box-shadow: 0 0 5px rgba(var(--highlighted-background-color) / 0.5);
+@media (hover: hover) {
+	button:hover {
+		background-color: var(--button-hover-background-color);
+		box-shadow: 0 0 5px rgba(var(--highlighted-background-color) / 0.5);
+	}
 }
 
 button.tall {
@@ -210,10 +214,12 @@ button.tall {
 	gap: 5px;
 }
 
-.toggle-button:hover {
-	background-color: var(--button-faded-background-color);
-	border: 1px solid var(--strong-border-color);
-	box-shadow: 0 0 5px rgba(var(--highlighted-background-color) / 0.5);
+@media (hover: hover) {
+	.toggle-button:hover {
+		background-color: var(--button-faded-background-color);
+		border: 1px solid var(--strong-border-color);
+		box-shadow: 0 0 5px rgba(var(--highlighted-background-color) / 0.5);
+	}
 }
 
 .toggle-button.off {
@@ -237,17 +243,21 @@ button.tall {
 
 }
 
-.eye:hover {
-	background-color: var(--button-hover-background-color);
-	box-shadow: 0 0 5px rgba(var(--highlighted-background-color) / 0.5);
+@media (hover: hover) {
+	.eye:hover {
+		background-color: var(--button-hover-background-color);
+		box-shadow: 0 0 5px rgba(var(--highlighted-background-color) / 0.5);
+	}
 }
 
 .toggle-button .eye {
 	background-color: var(--button-eye-background-color);
 }
 
-.toggle-button .eye:hover {
-	box-shadow: none;
+@media (hover: hover) {
+	.toggle-button .eye:hover {
+		box-shadow: none;
+	}
 }
 
 .eye.off {
@@ -293,10 +303,12 @@ button.tall {
 		transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 	}
 
-	select:hover {
-		outline: none;
-		border-color: var(--strong-border-color);
-		box-shadow: 0 0 5px rgba(var(--highlighted-background-color) / 0.5);
+	@media (hover: hover) {
+		select:hover {
+			outline: none;
+			border-color: var(--strong-border-color);
+			box-shadow: 0 0 5px rgba(var(--highlighted-background-color) / 0.5);
+		}
 	}
 
 	select:focus {
