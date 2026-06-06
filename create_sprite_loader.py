@@ -39,7 +39,7 @@ def create_sprite_sheet(img_dir, img_list):
 	sprite_sheet.save("sprites.png")
 	with open(img_list, "w", encoding="utf-8") as f:
 		f.write(these_images)
-	with open(os.path.join("src", "load-sprites.js"), "w", encoding="utf-8") as f:
+	with open(os.path.join("src", "scripts", "load-sprites.js"), "w", encoding="utf-8") as f:
 		f.write(f"const SPRITE_SIZE  = {SPRITE_SIZE};\n\n")
 		f.write("const SPRITE_COORDS = {\n")
 		for path in paths[:-1]:
