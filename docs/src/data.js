@@ -201,7 +201,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Nature's Snare.png",
 				link       : "https://bg3.wiki/wiki/Nature's_Snare",
-				desc       : "<span class='coordinates'>(X: -425 Y: -200)</span> Found in a chest in the Underground Passage, whose entrance is on a cliff behind Sazza's cage <span class='coordinates'>(X: 204 Y: 604)</span>. The key to the chest is located on a corpse on the lower part of the \"island\"."
+				desc       : "<span class='coordinates'>(X: -425 Y: -200)</span> Found in a chest in the Underground Passage, whose entrance <span class='coordinates'>(X: 204 Y: 604)</span> is on a cliff behind Sazza's cage. The key to the chest is located on a corpse on the lower part of the \"island\"."
 			},
 			{
 				title      : "Key of the Ancients",
@@ -227,7 +227,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/The Whispering Promise.png",
 				link       : "https://bg3.wiki/wiki/The_Whispering_Promise",
-				desc       : "<span class='coordinates'>(X: 260 Y: 510)</span> Bought from Volo (<span class='value'>40 gp / 85 gp</span>), who may not initially appear to be a trader, but there is a coin icon button in the bottom left that will allow you to start trading with him. Alternatively, bought from Grat the Trader in the Goblin Camp after Volo is captured."
+				desc       : "<span class='coordinates'>(X: 260 Y: 510)</span> Bought from Volo (<span class='value'>40 gp / 85 gp</span>), who may not initially appear to be a trader, but there is a coin icon button in the bottom left that will allow you to start trading with him. Alternatively, it can be bought from Grat the Trader in the Goblin Camp after Volo is captured."
 			},
 			{
 				title      : "Instrument Proficiency",
@@ -370,8 +370,8 @@ children : [
 				exploit    : false,
 				img        : "imgs/Sorrow.png",
 				link       : "https://bg3.wiki/wiki/Sorrow",
-				desc       : "Found in the Hidden Vault within the Druid Grove. You will need the Rune of the Wolf carried by Rath to access the vault. It is pickpocketed or looted from him, or rewarded for completing the quest \"<a href='https://bg3.wiki/wiki/Save_the_First_Druid'>Save the First Druid</a>\"."
-			},
+				desc       : "Found in the Hidden Vault. You will need the Rune of the Wolf carried by Rath to access the vault. It is pickpocketed or looted from him, or rewarded for completing the quest \"<a href='https://bg3.wiki/wiki/Save_the_First_Druid'>Save the First Druid</a>\"."
+			}, // TODO hidden vault coords
 			{
 				title      : "Robe of Summer",
 				id         : "Robe-of-Summer",
@@ -383,7 +383,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Robe of Summer.png",
 				link       : "https://bg3.wiki/wiki/Robe_of_Summer",
-				desc       : "Found in the Hidden Vault within the Druid Grove. You will need the Rune of the Wolf carried by Rath to access the vault. It is pickpocketed or looted from him, or rewarded for completing the quest \"<a href='https://bg3.wiki/wiki/Save_the_First_Druid'>Save the First Druid</a>\"."
+				desc       : "Found in the Hidden Vault. You will need the Rune of the Wolf carried by Rath to access the vault. It is pickpocketed or looted from him, or rewarded for completing the quest \"<a href='https://bg3.wiki/wiki/Save_the_First_Druid'>Save the First Druid</a>\"."
 			},
 			{
 				title      : "Idol of Silvanus",
@@ -409,8 +409,8 @@ children : [
 				exploit    : false,
 				img        : "imgs/Ring of Protection.png",
 				link       : "https://bg3.wiki/wiki/Ring_of_Protection",
-				desc       : "Rewarded by Mol for completing the quest \"<a href='https://bg3.wiki/wiki/Steal_the_Sacred_Idol'>Steal the Sacred Idol</a>\". You must be on good terms with the tiefling kids to receive this quest."
-			},
+				desc       : "Rewarded by Mol in the Tiefling Hideout for completing the quest \"<a href='https://bg3.wiki/wiki/Steal_the_Sacred_Idol'>Steal the Sacred Idol</a>\". You must be on good terms with the tiefling kids to receive this quest."
+			}, // TODO Tiefling Hideout coords
 			{
 				title      : "Wapira's Crown",
 				id         : "Wapiras-Crown",
@@ -422,8 +422,8 @@ children : [
 				exploit    : false,
 				img        : "imgs/Wapira's Crown.png",
 				link       : "https://bg3.wiki/wiki/Wapira's_Crown",
-				desc       : "Rewarded by Zevlor as thanks for eliminating the goblin threat, provided you accept the reward."
-			},
+				desc       : "Rewarded by Zevlor in the Secluded Vault for eliminating the goblin threat, provided you accept the reward."
+			}, // TODO Secluded Vault coords
 			{
 				title      : "Gift from the Absolute",
 				id         : "Mind-Flayer-Parasite-Specimen-2",
@@ -583,7 +583,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Corellon's Grace.png",
 				link       : "https://bg3.wiki/wiki/Corellon's_Grace",
-				desc       : "Bought here (<span class='value'>100 gp</span>), or looted from Ethel in the Riverside Teahouse <span class='coordinates'>(X: -58 Y: 263)</span>."
+				desc       : "<span class='value'>100 gp</span> (Can also be looted from Ethel in the Riverside Teahouse <span class='coordinates'>(X: -58 Y: 263)</span>.)"
 			}
 		]},
 		{
@@ -628,7 +628,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Scroll of True Resurrection.png",
 				link       : "https://bg3.wiki/wiki/Scroll_of_True_Resurrection",
-				desc       : "Obtained by following Gale's revival protocol after he dies. You can then keep the scroll for later by simply reviving Gale through Withers.<span class='tip'> (Note: You must obtain the scroll before employing Withers' services; it becomes unobtainable after Gale is revived the first time.)</span>"
+				desc       : "Obtained by following Gale's revival protocol after he dies. You can then keep the scroll for later by simply reviving Gale through Withers. (Note: You must obtain the scroll before employing Withers' services; it becomes unobtainable after Gale is revived the first time.)"
 			},
 			{
 				title      : "Gloves of Power",
@@ -751,8 +751,8 @@ children : [
 				exploit    : false,
 				img        : "imgs/Vision of the Absolute.png",
 				link       : "https://bg3.wiki/wiki/Vision_of_the_Absolute",
-				desc       : "Crafted from the Shaft of a Broken Spear and the Head of a Broken Spear (by right-clicking on one of the items in your inventory and pressing \"combine\", then dragging the other item into the open slot). Shaft of a Broken Spear is found on the body of Edowin <span class='coordinates'>(X: 136 Y: 446)</span> in the forest west of the Druid Grove, and Head of a Broken Spear is looted from the owlbear in the Owlbear Nest."
-			},
+				desc       : "Crafted from the Shaft of a Broken Spear and the Head of a Broken Spear<span class='tip'> (by right-clicking on one of the items in your inventory and pressing \"combine\", then dragging the other item into the open slot)</span>. Shaft of a Broken Spear is found on the body of Edowin in the forest west of the Druid Grove <span class='coordinates'>(X: 136 Y: 446)</span>, and Head of a Broken Spear is looted from the owlbear in the Owlbear Nest."
+			}, // TODO coords
 			{
 				title      : "Owlbear Egg",
 				id         : "Owlbear-Egg",
@@ -887,7 +887,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Sussur Dagger.png",
 				link       : "https://bg3.wiki/wiki/Finish_the_Masterwork_Weapon",
-				desc       : "Crafted in the forge <span class='coordinates'>(X: -477 Y: -378)</span> during \"<a href='https://bg3.wiki/wiki/Finish_the_Masterwork_Weapon'>Finish the Masterwork Weapon</a>\" using the Sussur Tree in the Underdark <span class='coordinates'>(X: -15 Y: -137)</span>.<span class='tip'> (Note: Only one Sussur weapon can be forged.)</span>"
+				desc       : "Crafted at the forge <span class='coordinates'>(X: -477 Y: -378)</span> during \"<a href='https://bg3.wiki/wiki/Finish_the_Masterwork_Weapon'>Finish the Masterwork Weapon</a>\" using the Sussur Tree in the Underdark <span class='coordinates'>(X: -15 Y: -137)</span>.<span class='tip'> (Note: Only one Sussur weapon can be forged.)</span>"
 			},
 			{
 				title      : "Sussur Sickle",
@@ -900,7 +900,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Sussur Sickle.png",
 				link       : "https://bg3.wiki/wiki/Finish_the_Masterwork_Weapon",
-				desc       : "Crafted in the forge <span class='coordinates'>(X: -477 Y: -378)</span> during \"<a href='https://bg3.wiki/wiki/Finish_the_Masterwork_Weapon'>Finish the Masterwork Weapon</a>\" using the Sussur Tree in the Underdark <span class='coordinates'>(X: -15 Y: -137)</span>.<span class='tip'> (Note: Only one Sussur weapon can be forged.)</span>"
+				desc       : "Crafted at the forge <span class='coordinates'>(X: -477 Y: -378)</span> during \"<a href='https://bg3.wiki/wiki/Finish_the_Masterwork_Weapon'>Finish the Masterwork Weapon</a>\" using the Sussur Tree in the Underdark <span class='coordinates'>(X: -15 Y: -137)</span>.<span class='tip'> (Note: Only one Sussur weapon can be forged.)</span>"
 			},
 			{
 				title      : "Sussur Greatsword",
@@ -913,7 +913,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Sussur Greatsword.png",
 				link       : "https://bg3.wiki/wiki/Finish_the_Masterwork_Weapon",
-				desc       : "Crafted in the forge <span class='coordinates'>(X: -477 Y: -378)</span> during \"<a href='https://bg3.wiki/wiki/Finish_the_Masterwork_Weapon'>Finish the Masterwork Weapon</a>\" using the Sussur Tree in the Underdark <span class='coordinates'>(X: -15 Y: -137)</span>.<span class='tip'> (Note: Only one Sussur weapon can be forged.)</span>"
+				desc       : "Crafted at the forge <span class='coordinates'>(X: -477 Y: -378)</span> during \"<a href='https://bg3.wiki/wiki/Finish_the_Masterwork_Weapon'>Finish the Masterwork Weapon</a>\" using the Sussur Tree in the Underdark <span class='coordinates'>(X: -15 Y: -137)</span>.<span class='tip'> (Note: Only one Sussur weapon can be forged.)</span>"
 			},
 			{
 				title      : "Shovel",
@@ -926,7 +926,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Shovel.png",
 				link       : "https://bg3.wiki/wiki/Scroll_of_Summon_Quasit",
-				desc       : "<span class='coordinates'>(X: -666 Y: -332)</span> Recruited after finding the Scroll of Summon Quasit in the Apothecary's Cellar <span class='coordinates'>(X: 34 Y: 379)</span>, located behind the moveable bookshelf, in the casket just to your right as you enter the cavernous room. A Wizard can scribe the spell to keep Shovel as a permanently available summon. Alternatively, a Warlock or Draconic Bloodline Sorcerer can learn the spell if they choose the line, \"Shovel is fine\" when talking to the quasit before going through the magic mirror. You've succeeded if Shovel says \"Oh, oh, a spell shite!\" after entering the mirror."
+				desc       : "<span class='coordinates'>(X: -666 Y: -332)</span> Recruited after using the Scroll of Summon Quasit in the Apothecary's Cellar <span class='coordinates'>(X: 34 Y: 379)</span>, found in a casket behind the moveable bookshelf. A Wizard can scribe the spell to keep Shovel as a permanently available summon. Alternatively, a Warlock or Draconic Bloodline Sorcerer can learn the spell if they choose the line, \"Shovel is fine\" when talking to the quasit before going through the magic mirror. You've succeeded if Shovel says \"Oh, oh, a spell shite!\" after entering the mirror."
 			},
 			{
 				title      : "Suspicious Poison",
@@ -964,8 +964,8 @@ children : [
 				crafting   : false,
 				exploit    : false,
 				img        : "imgs/Forbidden Knowledge.png",
-				link       : "https://bg3.wiki/wiki/Necromancy_of_Thay",
-				desc       : "<span class='coordinates'>(X: -649 Y: -362)</span> Obtained by reading the Necromancy of Thay, found in a gated section behind the magic mirror in the Apothecary's Cellar. To read the book, you'll need the Dark Amethyst, located near the Phase Spider Matriarch in the Whispering Deapths <span class='coordinates'>(X: -550 Y: -350)</span>."
+				link       : "https://bg3.wiki/wiki/Forbidden_Knowledge",
+				desc       : "<span class='coordinates'>(X: -649 Y: -362)</span> Obtained by reading the Necromancy of Thay, found in a gated section behind the magic mirror in the Apothecary's Cellar. To read the book, you'll need the Dark Amethyst, located near the Phase Spider Matriarch in the Whispering Deapths <span class='coordinates'>(X: -550 Y: -350)</span>. Passing the book's ability checks is not necessary."
 			}
 		]},
 		{
@@ -1068,7 +1068,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Gandrel's Aspiration.png",
 				link       : "https://bg3.wiki/wiki/Gandrel's_Aspiration",
-				desc       : "<span class='coordinates'>(X: -26 Y: 238)</span> Looted from Gandrel, the monster hunter who can be found just to the Southwest of the Riverside Teahouse waypoint."
+				desc       : "<span class='coordinates'>(X: -26 Y: 238)</span> Looted from Gandrel, the monster hunter who is found southwest of the Riverside Teahouse waypoint."
 			},
 			{
 				title      : "Paid the Price",
@@ -1359,7 +1359,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Brand of the Absolute.png",
 				link       : "https://bg3.wiki/wiki/Brand_of_the_Absolute",
-				desc       : "<span class='coordinates'>(X: 298 Y: -16)</span> Obtained by agreeing to be branded by Priestess Gut. Any or all characters can be branded."
+				desc       : "<span class='coordinates'>(X: 298 Y: -16)</span> Obtained by agreeing to be branded by Priestess Gut. Any and all characters can be branded."
 			},
 			{
 				title      : "Jagged Spear",
@@ -1967,7 +1967,7 @@ children : [
 				exploit    : true,
 				img        : "imgs/Silver Sword of the Astral Plane.png",
 				link       : "https://bg3.wiki/wiki/Silver_Sword_of_the_Astral_Plane",
-				desc       : "<span class='coordinates'>(X: -70 Y: 828)</span> Obtained by casting Command: Drop or Disarming Attack on Kith'rak Voss before he flies away, or rewarded for showing him the Orphic Hammer in Act 3."
+				desc       : "<span class='coordinates'>(X: -70 Y: 828)</span> Obtained by disarming Kith'rak Voss before he flies away, or rewarded for showing him the Orphic Hammer in Act 3. <a href='https://bg3.wiki/wiki/Guide:Early_Silver_Sword'>There are several ways to disarm him</a>, but the most consistent involves a level 5 Beastmaster with access to Honeyed Paws and a Divination Wizard."
 			},
 			{
 				title      : "Githyanki Greatsword (Psionic)",
@@ -2012,7 +2012,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Infernal Robe.png",
 				link       : "https://bg3.wiki/wiki/Infernal_Robe",
-				desc       : "Rewarded by Mizora at camp for killing Karlach at first meeting."
+				desc       : "Rewarded by Mizora at camp for killing Karlach on sight."
 			},
 			{
 				title      : "Sword of Justice",
@@ -2025,7 +2025,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Sword of Justice.png",
 				link       : "https://bg3.wiki/wiki/Sword_of_Justice",
-				desc       : "<span class='coordinates'>(X: 110 Y: 560)</span> Looted from Anders in the Risen Road Toll House, or rewarded for killing Karlach at first meeting."
+				desc       : "<span class='coordinates'>(X: 110 Y: 560)</span> Looted from Anders in the Risen Road Toll House, or rewarded by him for killing Karlach on sight."
 			},
 			{
 				title      : "Gloves of Heroism",
@@ -2161,7 +2161,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Phalar Aluve.png",
 				link       : "https://bg3.wiki/wiki/Phalar_Aluve",
-				desc       : "<span class='coordinates'>(X: 116 Y: -192)</span> Found embedded into a rock and freed by passing either a DC 15 Strength check or a DC 15 Religion check. Alternatively, blood will lossen it, and a Cleric of Eilistraee can release it without needing an ability check."
+				desc       : "<span class='coordinates'>(X: 116 Y: -192)</span> Found embedded into a rock and freed by passing either a DC 15 Strength check or a DC 15 Religion check. Alternatively, blood will loosen it, and a Cleric of Eilistraee can release it without needing an ability check."
 			},
 			{
 				title      : "Amulet of the Unworthy",
@@ -2200,7 +2200,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Mourning Frost.png",
 				link       : "https://bg3.wiki/wiki/Mourning_Frost",
-				desc       : "Crafted from components carried by three drow mages competing to discover the Adamantine Forge, found at various Underdark locations. The Icy Helve is with Dhourn west of the Selûnite Outpost <span class='coordinates'>(X: 121 Y: -245)</span>, the Icy Metal looted from the Pale Corpse in the Myconid Colony's secret area unlocked by completing the quest \"<a href='https://bg3.wiki/wiki/Defeat_the_Duergar_Intruders'>Defeat the Duergar Intruders</a>\" <span class='coordinates'>(X: 53 Y: -75)</span>, and the Icy Crystal looted from Filro the Forgotten near the Sussur Tree <span class='coordinates'>(X: -57 Y: -160)</span>."
+				desc       : "Crafted from components carried by three drow mages competing to discover the Adamantine Forge, found at various Underdark locations. The Icy Helve is with Dhourn west of the Selûnite Outpost <span class='coordinates'>(X: 121 Y: -245)</span>, the Icy Metal looted from the Pale Corpse in the Myconid Colony's secret area <span class='coordinates'>(X: 53 Y: -75)</span> unlocked by completing the quest \"<a href='https://bg3.wiki/wiki/Defeat_the_Duergar_Intruders'>Defeat the Duergar Intruders</a>\", and the Icy Crystal looted from Filro the Forgotten near the Sussur Tree <span class='coordinates'>(X: -57 Y: -160)</span>."
 			},
 			{
 				title      : "Sussur Tree Bark",
@@ -2226,7 +2226,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Dog Collar.png",
 				link       : "https://bg3.wiki/wiki/Dog_Collar",
-				desc       : "<span class='coordinates'>(X: -41 Y: -209)</span> Found in a grave on the cliff overlooking Arcane Tower to the south of the Sussur Tree waypoint. (On the 4th floor of the Arcane Tower, there's a button in the North-Eastern corner. When pressed, it seems inactive. However, if you wear the Dog Collar and interact with it, you'll discover it's actually a food dispenser for Lenore's pet, as it dispenses a piece of raw steak.)"
+				desc       : "<span class='coordinates'>(X: -41 Y: -209)</span> Found in a grave on the cliff overlooking Arcane Tower to the south of the Sussur Tree waypoint.<span class='tip'> (On the 4th floor of the Arcane Tower, there's a button in the northeastern corner. When pressed, it seems inactive. However, if you wear the Dog Collar and interact with it, you'll discover it's actually a food dispenser for Lenore's pet, as it dispenses a piece of raw steak.)</span>"
 			},
 			{
 				title      : "On Educating the Faithful",
@@ -2427,7 +2427,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Winter's Clutches.png",
 				link       : "https://bg3.wiki/wiki/Winter's_Clutches",
-				desc       : "Rewarded by Glut for completing the quest \"<a href='https://bg3.wiki/wiki/Avenge_Glut's_Circle'>Avenge Glut's Circle</a>\" by defeating Sovereign Spaw <span class='coordinates'>(X: 58 Y: -110)</span>, bought from Lady Esther at Rosymorn Monastery Trail (<span class='value'>90 gp / 170 gp</span>) <span class='coordinates'>(X: -43 Y: -129)</span>, and found on a counter at Sorcerous Sundries guarded by a lava elemental <span class='coordinates'>(X: -2 Y: -66)</span>."
+				desc       : "Rewarded by Glut for completing the quest \"<a href=\"https://bg3.wiki/wiki/Avenge_Glut's_Circle\">Avenge Glut's Circle</a>\" by defeating Sovereign Spaw <span class='coordinates'>(X: 58 Y: -110)</span>, bought from Lady Esther at Rosymorn Monastery Trail (<span class='value'>90 gp / 170 gp</span>) <span class='coordinates'>(X: -43 Y: -129)</span>, and found on a counter at Sorcerous Sundries guarded by a lava elemental <span class='coordinates'>(X: -2 Y: -66)</span>."
 			}
 		]},
 		{
@@ -2750,7 +2750,7 @@ children : [
 		{
 		title    : "The Festering Cove",
 		id       : "The-Festering-Cove",
-		tip      : "<span class='coordinates'>(X: 81 Y: -241)</span> The entrance to The Festering Cove can be found in the torchstalk field northeast of the Arcane Tower and southeast of the Decrepit Village. There is a Cragged Rock that can be reached by jumping over two mushrooms growing out of the cliff face. Climb down the Cragged Rock to reach The Festering Cove. (Note: Be careful of the exploding mushroom that can throw you to your death.)",
+		tip      : "The entrance to The Festering Cove is found in the torchstalk field northeast of the Arcane Tower and southeast of the Decrepit Village. There is a Cragged Rock <span class='coordinates'>(X: 81 Y: -241)</span> that can be reached by jumping over two mushrooms growing out of the cliff face. Climb down the Cragged Rock to reach The Festering Cove. Be careful of the exploding mushroom that can throw you to your death.",
 		children : [
 			{
 				title      : "Slippery Chain Shirt",
@@ -2777,7 +2777,7 @@ children : [
 				img        : "imgs/Sickle of BOOOAL.png",
 				link       : "https://bg3.wiki/wiki/Sickle_of_BOOOAL",
 				desc       : "<span class='coordinates'>(X: -417 Y: 284)</span> Pickpocketed or looted from Pooldripp the Zealous, or obtained by agreeing to be BOOOAL's Chosen after causing his power to momentarily falter. Alternatively, selecting different dialog options during the cutscene allows you to eliminate BOOOAL without provoking the kuo-toa into attacking. Once this is done, you can then buy the weapon from Pooldripp the Zealous (<span class='value'>190 gp</span>)."
-			},
+			}, // TODO dialog options
 			{
 				title      : "BOOOAL's Blessing",
 				id         : "BOOOALs-Blessing",
@@ -2931,7 +2931,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Intransigent Warhammer.png",
 				link       : "https://bg3.wiki/wiki/Intransigent_Warhammer",
-				desc       : "<span class='coordinates'>(X: -447 Y: -525)</span> Found in a chest on a duergar skiff thats pulls up next to you during your first voyage to Grymforge. You'll need to start a fight to obtain it.<span class='tip'> (Note: This event only happens once.)</span>"
+				desc       : "<span class='coordinates'>(X: -447 Y: -525)</span> Found in a chest on a duergar skiff thats pulls up next to you during your first voyage to Grymforge. You'll need to start a fight to obtain it. (Note: This event only happens once.)"
 			},
 			{
 				title      : "Bow of the Banshee",
@@ -2989,7 +2989,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Fetish of Callarduran Smoothhands.png",
 				link       : "https://bg3.wiki/wiki/Fetish_of_Callarduran_Smoothhands",
-				desc       : "<span class='coordinates'>(X: -610 Y: 408)</span> Stolen from one of the dead deep gnomes that a pair of duergar are throwing into the lake. If you talk to the duergar you can succeed a DC 10 Perception check, then a DC 20 Sleight of Hand or DC 10 Deception check to loot the corpse without a fight."
+				desc       : "<span class='coordinates'>(X: -610 Y: 408)</span> Stolen from one of the dead deep gnomes that a pair of duergar are throwing into the lake. If you talk to the duergar and succeed a DC 10 Perception check followed by a DC 20 Sleight of Hand or DC 10 Deception check, then you can loot the corpse without a fight."
 			},
 			{
 				title      : "Infernal Alloy",
@@ -3132,7 +3132,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Sharran Crossbow.png",
 				link       : "https://bg3.wiki/wiki/Sharran_Crossbow",
-				desc       : "<span class='coordinates'>(X: -666 Y: 398)</span> Found in a chest behind two archery targets. When picking it up from the chest, the player needs to pass a DC 10 Intelligence Saving Throw to recognize that it's actually a Sharran Crossbow."
+				desc       : "<span class='coordinates'>(X: -666 Y: 398)</span> Found in a chest behind two archery targets. When picking it up from the chest, the player needs to pass a DC 10 Intelligence saving throw to recognize that it's actually a Sharran Crossbow."
 			},
 			{
 				title      : "The Real Sparky Sparkswall",
@@ -3275,7 +3275,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Mind Flayer Parasite Specimen.png",
 				link       : "https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen",
-				desc       : "<span class='coordinates'>(X: -854 Y: 780)</span> Looted from Nere.<span class='tip'> (Note: It's recommended to convince Barcus to stay at your camp afterwards.)</span>"
+				desc       : "<span class='coordinates'>(X: -854 Y: 780)</span> Looted from Nere.<span class='tip'> (Note: It's recommended to convince Barcus to stay at your camp immediately afterwards.)</span>"
 			},
 			{
 				title      : "Disintegrating Night Walkers",
@@ -3398,7 +3398,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Mithral Ore.png",
 				link       : "https://bg3.wiki/wiki/Mithral_Ore",
-				desc       : "Mined from one of two Ore Veins. The first can be found southwest of the Anient Forge waypoint, across some lava, next to a cliff <span class='coordinates'>(X: -642 Y: 253)</span>. The second is located at the end of a side path that splits from the main staircase leading to the Adamantine Forge <span class='coordinates'>(X: -556 Y: 277)</span>."
+				desc       : "Mined from one of two Ore Veins. The first is found southwest of the Anient Forge waypoint, across some lava <span class='coordinates'>(X: -642 Y: 253)</span>. The second is located at the end of a side path that splits from the main staircase leading to the Adamantine Forge <span class='coordinates'>(X: -556 Y: 277)</span>."
 			},
 			{
 				title      : "Adamantine Scimitar",
@@ -3605,7 +3605,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Ceremonial Mace.png",
 				link       : "https://bg3.wiki/wiki/Ceremonial_Mace",
-				desc       : "<span class='coordinates'>(X: 45 Y: 37)</span> Looted from a random kobold in the Firewine storage room. Place the Ceremonial Mace onto the Southeast altar for Dawnmaster Stockhold."
+				desc       : "<span class='coordinates'>(X: 45 Y: 37)</span> Looted from a random kobold in the Firewine storage room. Place the Ceremonial Mace onto the southeast altar for Dawnmaster Stockhold."
 			},
 			{
 				title      : "Ceremonial Longsword",
@@ -3631,7 +3631,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Ceremonial Battleaxe.png",
 				link       : "https://bg3.wiki/wiki/Ceremonial_Battleaxe",
-				desc       : "<span class='coordinates'>(X: 105 Y: 44)</span> Found in one of the dormitories, guarded by a Guardian of Faith. Place the Ceremonial Battleaxe onto the Southwest altar for Dawnmaster Vaseid."
+				desc       : "<span class='coordinates'>(X: 105 Y: 44)</span> Found in one of the dormitories, guarded by a Guardian of Faith. Place the Ceremonial Battleaxe onto the southwest altar for Dawnmaster Vaseid."
 			},
 			{
 				title      : "Ceremonial Warhammer",
@@ -3644,7 +3644,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Ceremonial Warhammer.png",
 				link       : "https://bg3.wiki/wiki/Ceremonial_Warhammer",
-				desc       : "<span class='coordinates'>(X: 80 Y: 44)</span> Found in the Giant Eagle's nest. Place the Ceremonial Warhammer on the Northeast altar for Dawnmaster Seed. You can take all four weapons once you collect the Dawnmaster's Crest."
+				desc       : "<span class='coordinates'>(X: 80 Y: 44)</span> Found in the Giant Eagle's nest. Place the Ceremonial Warhammer on the northeast altar for Dawnmaster Seed. You can take all four weapons once you collect the Dawnmaster's Crest."
 			},
 			{
 				title      : "Holy Lance Helm",
@@ -3702,8 +3702,8 @@ children : [
 				exploit    : false,
 				img        : "imgs/Awakened.png",
 				link       : "https://bg3.wiki/wiki/Awakened",
-				desc       : "<span class='coordinates'>(X:1299, Y:-809)</span> Obtained by succeeding all three saving throws upon using the Zaith'isk. If Lae'zel uses the Zaith'isk, you need only to succeed a DC 30 Arcana check in the third stage. The player character will always receive the buff."
-			}, // TODO add DC, is condition?
+				desc       : "<span class='coordinates'>(X:1299, Y:-809)</span> Obtained by succeeding all three saving throws while using the Zaith'isk. Alternatively, if Lae'zel uses the Zaith'isk, you need only to succeed a DC 30 Arcana check in the third stage. Either way, the player character will receive the buff."
+			}, // TODO add DC
 			{
 				title      : "Aberration Hunters' Amulet",
 				id         : "Aberration-Hunters-Amulet",
@@ -3871,8 +3871,8 @@ children : [
 				exploit    : false,
 				img        : "imgs/The Blood of Lathander.png",
 				link       : "https://bg3.wiki/wiki/The_Blood_of_Lathander",
-				desc       : "Found past the secret entrance in the western alcove, revealed by rotating the two statues. The one to the south requires an Athletics check (or a grease bottle) to move and should be turned west, while the other should be turned east. Proceed through the opening, evading traps along the way, until you reach the Blood of Lathander. If the Dawnmaster's Crest has been obtained, simply place it in the altar's item slot to safely acquire the Blood of Lathander. Otherwise, taking the mace will trigger a countdown to the Monastery's destruction. The party has only four turns to either escape the Monastery or dismantle the four Lathander Solar Machines that activate the trap."
-			} // TODO add DC
+				desc       : "Found past the secret entrance in the western alcove, revealed by rotating the two statues. The one to the south requires an Athletics check (or a grease bottle) to move and should be turned west, while the other should be turned east. Proceed through the opening, evading traps along the way, until you reach the Blood of Lathander. If the Dawnmaster's Crest has been obtained, simply place it in the altar's item slot to safely acquire the Blood of Lathander. Otherwise, taking the mace will trigger a countdown to the Monastery's destruction. The party has only four turns to either escape the Monastery or dismantle the four Lathander Solar Machines that power the trap."
+			} // TODO add DC, coordinates of entrance
 		]},
 		{
 		title    : "A'jak'nir Jeera",
@@ -4394,7 +4394,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Penumbral Armour.png",
 				link       : "https://bg3.wiki/wiki/Penumbral_Armour",
-				desc       : "<span class='coordinates'>(X: 33 Y: 145)</span> Found in a chest in the abandoned house by the river just east."
+				desc       : "<span class='coordinates'>(X: 33 Y: 145)</span> Found in a chest in the abandoned house by the river, east of Last Light Inn."
 			},
 			{
 				title      : "Rippling Force Mail",
@@ -4892,7 +4892,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Consumed Shadow Weave.png",
 				link       : "https://bg3.wiki/wiki/Gale#Special_features",
-				desc       : "<span class='coordinates'>(X: -112 Y: -92)</span> Obtained as Gale (Origin) by <i>consuming</i> the Shadow Weave from the corpse of Gerringothe Thorm, Malus Thorm, or Thisobald Thorm. This can be done only once and awards you one extra Level 3 Spell Slot. If you cleanse the Shadow Weave instead, you gain Mystra's Blessing."
+				desc       : "<span class='coordinates'>(X: -112 Y: -92)</span> Obtained as Gale (Origin) by <i>consuming</i> the Shadow Weave from the corpse of Gerringothe Thorm, Malus Thorm, or Thisobald Thorm. This can only be done once and awards you one extra Level 3 Spell Slot. If you cleanse the Shadow Weave instead, you gain Mystra's Blessing."
 			},
 			{
 				title      : "Mystra's Blessing",
@@ -4905,7 +4905,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Mystra's Blessing.png",
 				link       : "https://bg3.wiki/wiki/Gale#Special_features",
-				desc       : "<span class='coordinates'>(X: -112 Y: -92)</span> Obtained as Gale (Origin) by either <i>cleansing</i> the Shadow Weave from the corpse of Gerringothe Thorm, Malus Thorm, or Thisobald Thorm. This can be done only once and awards you immunity from Acid, Cold, Fire, Force, and Thunder damage until your next Long Rest. If you consume the Shadow Weave instead, you gain Consumed Shadow Weave."
+				desc       : "<span class='coordinates'>(X: -112 Y: -92)</span> Obtained as Gale (Origin) by <i>cleansing</i> the Shadow Weave from the corpse of Gerringothe Thorm, Malus Thorm, or Thisobald Thorm. This can only be done once and awards you immunity from Acid, Cold, Fire, Force, and Thunder damage until your next Long Rest. If you consume the Shadow Weave instead, you gain Consumed Shadow Weave."
 			},
 			{
 				title      : "Ironvine Shield",
@@ -4976,8 +4976,8 @@ children : [
 				exploit    : false,
 				img        : "imgs/Helmet of Arcane Acuity.png",
 				link       : "https://bg3.wiki/wiki/Helmet_of_Arcane_Acuity",
-				desc       : "<span class='coordinates'>(X: 107 Y: -758)</span> Found in a chest in a secret area of the Reithwin Mason's Guild Basement. The basement is accessed through a trapdoor in the Mason's Guild, and the secret area can be opened by lockpicking or using the Tower-Shaped Key on the Keyholed Herald <span class='coordinates'>(X: 123 Y: -688)</span>."
-			}
+				desc       : "<span class='coordinates'>(X: 107 Y: -758)</span> Found in a chest in a secret area of the Reithwin Mason's Guild Basement. The basement is accessed through a trapdoor in the Mason's Guild, and the secret area is opened by lockpicking or using the Tower-Shaped Key on the Keyholed Herald <span class='coordinates'>(X: 123 Y: -688)</span>."
+			} // TODO coords of trapdoor
 		]},
 		{
 		title    : "Reithwin Graveyard",
@@ -5105,7 +5105,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Shadow Blade Ring.png",
 				link       : "https://bg3.wiki/wiki/Shadow_Blade_Ring",
-				desc       : "Rewarded for completing the quest \"<a href='https://bg3.wiki/wiki/Find_Arabella's_Parents'>Find Arabella's Parents</a>\"."
+				desc       : "Rewarded for speaking with Arabella <span class='coordinates'>(X: -153 Y: 15)</span> and completing the quest \"<a href=\"https://bg3.wiki/wiki/Find_Arabella's_Parents\">Find Arabella's Parents</a>\"."
 			},
 			{
 				title      : "Arabella's Shadow Entangle",
@@ -5118,7 +5118,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Arabella's Shadow Entangle.png",
 				link       : "https://bg3.wiki/wiki/Arabella's_Shadow_Entangle",
-				desc       : "Rewarded for completing the quest \"<a href='https://bg3.wiki/wiki/Find_Arabella's_Parents'>Find Arabella's Parents</a>\"."
+				desc       : "Rewarded for speaking with Arabella <span class='coordinates'>(X: -153 Y: 15)</span> and completing the quest \"<a href=\"https://bg3.wiki/wiki/Find_Arabella's_Parents\">Find Arabella's Parents</a>\"."
 			}
 		]},
 		{
@@ -5357,7 +5357,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Barbed Arrow.png",
 				link       : "https://bg3.wiki/wiki/Barbed_Arrow",
-				desc       : "Three are looted from Looted from \"Timothy\" the Gnoll, \"Tomelia\" the Gnoll, and The Warden."
+				desc       : "Three are looted from \"Timothy\" the Gnoll, \"Tomelia\" the Gnoll, and The Warden."
 			}, // TODO coords
 			{
 				title      : "Argument Solver",
@@ -5448,7 +5448,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Myrkulite Scourge.png",
 				link       : "https://bg3.wiki/wiki/Myrkulite_Scourge",
-				desc       : "Looted from the following people: Radija on the 1st floor <span class='coordinates'>(X: -162 Y: -203)</span>, Susdera on the rooftop <span class='coordinates'>(X: -146 Y: -213)</span>, and Kressa Bonedaughter in the Mind Flayer Colony Barracks <span class='coordinates'>(X: 727 Y: 41)</span> Three more can be looted from enemies in the prison area while assaulting Moonrise Towers."
+				desc       : "Looted from the following people: Radija on the 1st floor <span class='coordinates'>(X: -162 Y: -203)</span>, Susdera on the rooftop <span class='coordinates'>(X: -146 Y: -213)</span>, and Kressa Bonedaughter in the Mind Flayer Colony barracks <span class='coordinates'>(X: 727 Y: 41)</span> Two more can be looted from enemies in the prison area while assaulting Moonrise Towers."
 			},
 			{
 				title      : "Derivation Cloak",
@@ -5487,7 +5487,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Shadow Lantern.png",
 				link       : "https://bg3.wiki/wiki/Shadow_Lantern",
-				desc       : "<span class='coordinates'>(X: -151 Y: -163)</span> Crafted inside Balthazar's hidden room. The hidden room is unlocked by interacting with the top right Protruding Book and inserting one of the human hearts around the room into the small Ancient Altar. Inside, interact with the ritual circle as Gale and \"combine\" a Dead Pixie with a Broken Moonlantern to receive the Shadow Lantern. Alternatively, destroying the ritual circle will merely grant Gale Mystra's Benevolence (advantage to Concentration checks) until the next Long Rest."
+				desc       : "<span class='coordinates'>(X: -151 Y: -163)</span> Crafted at the workbench in Balthazar's hidden room. The hidden room is unlocked by interacting with the top right Protruding Book and inserting one of the human hearts around the room into the small Ancient Altar. Inside, interact with the ritual circle as Gale and \"combine\" a Dead Pixie with a Broken Moonlantern to receive the Shadow Lantern. Alternatively, destroying the ritual circle will merely grant Gale Mystra's Benevolence (advantage to Concentration checks) until the next Long Rest."
 			},
 			{
 				title      : "Cloak of Elemental Absorption",
@@ -5558,7 +5558,7 @@ children : [
 		{
 		title    : "Lann Tarv",
 		id       : "Lann-Tarv",
-		tip      : "<span class='coordinates'>(X: -164 Y: -167)</span> He is found near the stairs inside Moonrise Towers. (Note: You must ask for extra help from Z'rell to unlock his full stock.)",
+		tip      : "<span class='coordinates'>(X: -164 Y: -167)</span> He is found near the stairs inside Moonrise Towers. You must ask for extra help from Z'rell to unlock his full stock.",
 		children : [
 			{
 				title      : "Bigboy's Chew Toy",
@@ -6786,7 +6786,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Spellmight Gloves.png",
 				link       : "https://bg3.wiki/wiki/Spellmight_Gloves",
-				desc       : "<span class='coordinates'>(X: -82 Y: -33)</span> Rewarded by Lucretious at the end of the quest \"<a href='https://bg3.wiki/wiki/Find_Dribbles_the_Clown'>Find Dribbles the Clown</a>\". Alternatively, can be pickpocketed or looted from her."
+				desc       : "<span class='coordinates'>(X: -82 Y: -33)</span> Rewarded by Lucretious at the end of the quest \"<a href='https://bg3.wiki/wiki/Find_Dribbles_the_Clown'>Find Dribbles the Clown</a>\". Alternatively, it can be pickpocketed or looted from her."
 			},
 			{
 				title      : "Hollow's Staff",
@@ -6844,7 +6844,7 @@ children : [
 		{
 		title    : "Jungle",
 		id       : "Jungle",
-		tip      : "The player is teleported here if they win the jackpot in Akabi's spin the wheel game by pickpocketing his Djinni Ring before playing his game. (Note: You can visit this area only once.)",
+		tip      : "The player is teleported here if they win Akabi's spin the wheel game by pickpocketing his Djinni Ring beforehand. You can only visit this area once.",
 		children : [
 			{
 				title      : "Band of the Mystic Scoundrel",
@@ -6928,7 +6928,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Stillmaker.png",
 				link       : "https://bg3.wiki/wiki/Stillmaker",
-				desc       : "<span class='coordinates'>(X: 67 Y: -1018)</span> Found in a hole in the area underneath the temple. A successful DC 5 Perception check is needed to spot it. The hole is just at the top of the cragged rock and can be easy to miss. There is blood right next to the hole."
+				desc       : "<span class='coordinates'>(X: 67 Y: -1018)</span> Found in a hole in the area underneath the temple. A successful DC 5 Perception check is needed to spot it. The hole is at the top of the cragged rock and can be easy to miss. There is blood right next to the hole."
 			},
 			{
 				title      : "Ring of Blink",
@@ -7057,7 +7057,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Runepowder Bomb.png",
 				link       : "https://bg3.wiki/wiki/Runepowder_Bomb",
-				desc       : "Given by Wulbren when initiating the quest \"<a href='https://bg3.wiki/wiki/Avenge_the_Ironhands'>Avenge the Ironhands</a>\", or stolen from his desk <span class='coordinates'>(X: -259 Y: -1079)</span>."
+				desc       : "<span class='coordinates'>(X: -259 Y: -1079)</span> Given by Wulbren when initiating the quest \"<a href='https://bg3.wiki/wiki/Avenge_the_Ironhands'>Avenge the Ironhands</a>\", or stolen from his desk."
 			}
 		]},
 		{
@@ -7250,7 +7250,7 @@ children : [
 		{
 		title    : "Entharl Danthelon",
 		id       : "Entharl-Danthelon",
-		tip      : "<span class='coordinates'>(X: -6 Y: 133)</span> He can be found in Danthelon's Dancing Axe in Wyrm's Crossing.",
+		tip      : "<span class='coordinates'>(X: -6 Y: 133)</span> He is found in Danthelon's Dancing Axe in Wyrm's Crossing.",
 		children : [
 			{
 				title      : "Blightbringer",
@@ -7386,7 +7386,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Amulet of Windrider.png",
 				link       : "https://bg3.wiki/wiki/Amulet_of_Windrider",
-				desc       : "Rewarded for completing the quest \"<a href='https://bg3.wiki/wiki/Save_Vanra'>Save Vanra</a>\".<span class='tip'> (Note: It's recommended to complete the quest \"<a href='https://bg3.wiki/wiki/Help_the_Hag_Survivors'>Help the Hag Survivors</a>\" first.)</span>"
+				desc       : "<span class='coordinates'>(X: -65 Y: -89)</span> Rewarded for completing the quest \"<a href='https://bg3.wiki/wiki/Save_Vanra'>Save Vanra</a>\".<span class='tip'> (Note: It's recommended to complete the quest \"<a href='https://bg3.wiki/wiki/Help_the_Hag_Survivors'>Help the Hag Survivors</a>\" first.)</span>"
 			},
 			{
 				title      : "Duellist's Prerogative",
@@ -7399,7 +7399,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Duellist's Prerogative.png",
 				link       : "https://bg3.wiki/wiki/Duellist's_Prerogative",
-				desc       : "Rewarded for completing the quest \"<a href='https://bg3.wiki/wiki/Save_Vanra'>Save Vanra</a>\".<span class='tip'> (Note: It's recommended to complete the quest \"<a href='https://bg3.wiki/wiki/Help_the_Hag_Survivors'>Help the Hag Survivors</a>\" first.)</span>"
+				desc       : "<span class='coordinates'>(X: -65 Y: -89)</span> Rewarded for completing the quest \"<a href='https://bg3.wiki/wiki/Save_Vanra'>Save Vanra</a>\".<span class='tip'> (Note: It's recommended to complete the quest \"<a href='https://bg3.wiki/wiki/Help_the_Hag_Survivors'>Help the Hag Survivors</a>\" first.)</span>"
 			}
 		]},
 		{
@@ -8004,7 +8004,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Danse Macabre.png",
 				link       : "https://bg3.wiki/wiki/Danse_Macabre",
-				desc       : "Obtained by reading The Tharchiate Codex, then reading the last page of the Necromancy of Thay and passing a DC 20 Wisdom Saving Throw."
+				desc       : "Obtained by reading The Tharchiate Codex, then reading the last page of the Necromancy of Thay and passing a DC 20 Wisdom saving throw."
 			},
 			{
 				title      : "Pyroquickness Hat",
@@ -8112,9 +8112,9 @@ children : [
 			}
 		]},
 		{
-		title    : "Rolan / Lorroakan's Projection",
+		title    : "Lorroakan's Projection",
 		id       : "Rolan-/-Lorroakans-Projection",
-		tip      : "<span class='coordinates'>(X: -14 Y: -72)</span> He is found at Sorcerous Sundries' front desk.",
+		tip      : "<span class='coordinates'>(X: -14 Y: -72)</span> He is found at Sorcerous Sundries' front desk. There may be a different character here based on quest outcomes.",
 		children : [
 			{
 				title      : "Armour of Landfall",
@@ -8237,7 +8237,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Mind Flayer Parasite Specimen.png",
 				link       : "https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen",
-				desc       : "<span class='coordinates'>(X: -32 Y: -114)</span> Two are looted from Sally and Dravo Flymm in Flymm's Cobblers, just west of Felogyr's Fireworks."
+				desc       : "<span class='coordinates'>(X: -32 Y: -114)</span> Two are looted from Sally and Dravo Flymm in Flymm's Cobblers, west of Felogyr's Fireworks."
 			}
 		]},
 		{
@@ -8256,7 +8256,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Crypt Lord Ring.png",
 				link       : "https://bg3.wiki/wiki/Crypt_Lord_Ring",
-				desc       : "Rewarded for completing the quest \"<a href='https://bg3.wiki/wiki/Find_Mystic_Carrion's_Servant'>Find Mystic Carrion's Servant</a>\" and keeping Thrumbo alive."
+				desc       : "<span class='coordinates'>(X: 14 Y: -160)</span> Rewarded for completing the quest \"<a href=\"https://bg3.wiki/wiki/Find_Mystic_Carrion's_Servant\">Find Mystic Carrion's Servant</a>\" and siding with Thrumbo."
 			},
 			{
 				title      : "Torch of Revocation",
@@ -8269,8 +8269,8 @@ children : [
 				exploit    : false,
 				img        : "imgs/Torch of Revocation.png",
 				link       : "https://bg3.wiki/wiki/Torch_of_Revocation",
-				desc       : "Looted from Mystic Carrion, potentially rewarded for completing the quest \"<a href='https://bg3.wiki/wiki/Find_Mystic_Carrion's_Servant'>Find Mystic Carrion's Servant</a>\", or bought from him through dialogue (<span class='value'>145 gp</span>). Can also be stolen from the chest behind him."
-			},
+				desc       : "<span class='coordinates'>(X: 14 Y: -160)</span> Rewarded for completing the quest \"<a href=\"https://bg3.wiki/wiki/Find_Mystic_Carrion's_Servant\">Find Mystic Carrion's Servant</a>\" and siding with Mystic Carrion. Alternatively, it can be stolen from the chest behind him."
+			}, // TODO possible to buy or loot from him?
 			{
 				title      : "Staff of Cherished Necromancy",
 				id         : "Staff-of-Cherished-Necromancy",
@@ -8282,7 +8282,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Staff of Cherished Necromancy.png",
 				link       : "https://bg3.wiki/wiki/Staff_of_Cherished_Necromancy",
-				desc       : "Looted from Mystic Carrion."
+				desc       : "<span class='coordinates'>(X: 14 Y: -160)</span> Looted from Mystic Carrion."
 			}
 		]},
 		{
@@ -8514,7 +8514,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Elegant Studded Leather.png",
 				link       : "https://bg3.wiki/wiki/Elegant_Studded_Leather",
-				desc       : "<span class='coordinates'>(X: -686 Y: 874)</span> Found in High Security Vault n°9 (the big vault at the back of the room). A key for this vault can be obtained by completing the quest \"<a href='https://bg3.wiki/wiki/Return_Rakath's_Gold'>Return Rakath's Gold</a>\". The gold can be looted off Roah Moonglow."
+				desc       : "<span class='coordinates'>(X: -686 Y: 874)</span> Found in High Security Vault n°9 (the big vault at the back of the room). A key for this vault can be obtained by completing the quest \"<a href=\"https://bg3.wiki/wiki/Return_Rakath's_Gold\">Return Rakath's Gold</a>\"."
 			}
 		]},
 		{
@@ -8655,7 +8655,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Katana.png",
 				link       : "https://bg3.wiki/wiki/Katana",
-				desc       : "<span class='coordinates'>(X: -152 Y: -55)</span> Found on a table in Golbraith's Cellar, which can be accessed through a hatch in Golbraith's House."
+				desc       : "<span class='coordinates'>(X: -152 Y: -55)</span> Found on a table in Golbraith's Cellar, which is accessed through a hatch in Golbraith's House."
 			}
 		]},
 		{
@@ -8947,7 +8947,7 @@ children : [
 				desc       : "<span class='coordinates'>(X: -400 Y: -1651)</span> Looted from Viconia DeVir in the Cloister of Sombre Embrace beneath the House of Grief."
 			},
 			{
-				title      : "Mirror of Loss",
+				title      : "Mirror of Loss (Buffs)",
 				id         : "Mirror-of-Loss",
 				categories : ["stat-bonus"],
 				rarity     : null,
@@ -8957,8 +8957,8 @@ children : [
 				exploit    : false,
 				img        : "imgs/Mirror of Loss.png",
 				link       : "https://bg3.wiki/wiki/Mirror_of_Loss",
-				desc       : "<span class='coordinates'>(X: -645 Y: -735)</span> Obtained by offering a prayer to the Mirror of Loss (DC 25 Religion check), then sacrificing one of the following: Constitution, Wisdom, Charisma, or your knowledge of the Necromancy of Thay. You'll receive the option to choose a +2 bonus to any ability (up to 24)."
-			} // TODO better desc
+				desc       : "<span class='coordinates'>(X: -645 Y: -735)</span> There are two buffs that each player can acquire from the Mirror: +1 to Charisma and +2 to an ability of your choosing. Each charcter has six chances of obtaining the buffs by offering a memory to the Mirror (which will temporarily debuff an ability). However, the +2 buff has a chance of showing only after praying to Shar (DC 25 Religion check), and obtaining this buff will stop the +1 Charisma buff from showing. Therefore, the recommended strategy for obtaining both buffs is to offer at most three memories trying to get the Patriar's Memory (+1 Charisma), pray to Shar, and then offer your remaining memories."
+			}
 		]},
 		{
 		title    : "Grey Harbour Docks",
@@ -9099,7 +9099,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Hellfire Engine Crossbow.png",
 				link       : "https://bg3.wiki/wiki/Hellfire_Engine_Crossbow",
-				desc       : "Crafted by combining three components found on the main floor of the Steel Watch Foundry at the table <span class='coordinates'>(X: -325 Y: -134)</span> in the Security Office. The Watcher Crossbow Blueprint <span class='coordinates'>(X: -330 Y: -157)</span> can be located on a table within the Security Office. The Targeting Module <span class='coordinates'>(X: -307 Y: -157)</span> can be found on a table on the main floor right next to the plaque labeled \"Watcher Targeting Module\". The Steel Watcher Arm <span class='coordinates'>(X: -280 Y: -165)</span> is situated on a table on the main floor, adjacent to the plaque labeled \"Steel Watcher Arm Unit\"."
+				desc       : "<span class='coordinates'>(X: -325 Y: -134)</span> Crafted at the workbench in the Security Office by combining three components found on the main floor of the Steel Watch Foundry. The Watcher Crossbow Blueprint is found on a table in the Security Office <span class='coordinates'>(X: -330 Y: -157)</span>. The Targeting Module is found on a table on the main floor right next to the plaque labeled \"Watcher Targeting Module\" <span class='coordinates'>(X: -307 Y: -157)</span>. The Steel Watcher Arm is found on a table on the main floor, adjacent to the plaque labeled \"Steel Watcher Arm Unit\" <span class='coordinates'>(X: -280 Y: -165)</span>."
 			},
 			{
 				title      : "Mind Flayer Parasite Specimen",
@@ -9144,7 +9144,7 @@ children : [
 		{
 		title    : "Iron Throne",
 		id       : "Iron-Throne",
-		tip      : "Duke Ravengard will not be present here (and will become a permanent enemy) if you don't attend Gortash's coronation first.",
+		tip      : "Duke Ravengard will not be present here (and will become a permanent enemy) if you don't attend Gortash's coronation first. Saving him here will allow you to obtain his gear later on at camp.",
 		children : [
 			{
 				title      : "Infernal Iron",
@@ -9171,32 +9171,6 @@ children : [
 				img        : "imgs/Mind Flayer Parasite Specimen.png",
 				link       : "https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen",
 				desc       : "<span class='coordinates'>(X: -45 Y: 18)</span> Found on a table inside a flooded room in the Iron Throne if Omeluum was not killed and Lady Esther was not given a githyanki egg in Act 1."
-			},
-			{
-				title      : "Duke Ravengard's Longsword",
-				id         : "Duke-Ravengards-Longsword",
-				categories : ["longsword"],
-				rarity     : "rare",
-				suggested  : false,
-				choice     : false,
-				crafting   : false,
-				exploit    : false,
-				img        : "imgs/Duke Ravengard's Longsword.png",
-				link       : "https://bg3.wiki/wiki/Duke_Ravengard's_Longsword",
-				desc       : "Obtained from Duke Ulder Ravengard at camp by casting Command: Drop on him. The spell must be cast by a character who is not considered an ally: either by a companion that was not part of the original rescue party, or using a disguise to alter your appearance. Wyll will permanently leave the party and turn hostile if the Duke notices his sword being stolen. This can be prevented by immediately leaving the camp after picking up the sword."
-			},
-			{
-				title      : "Emblazoned Plate of the Marshal",
-				id         : "Emblazoned-Plate-of-the-Marshal",
-				categories : ["heavy-armour"],
-				rarity     : "very-rare",
-				suggested  : false,
-				choice     : false,
-				crafting   : false,
-				exploit    : false,
-				img        : "imgs/Emblazoned Plate of the Marshal.png",
-				link       : "https://bg3.wiki/wiki/Emblazoned_Plate_of_the_Marshal",
-				desc       : "Looted from Duke Ulder Ravengard."
 			}
 		]},
 		{
@@ -9230,6 +9204,32 @@ children : [
 				link       : "https://bg3.wiki/wiki/Flame_Enamelled_Armour",
 				desc       : "<span class='coordinates'>(X: -28 Y: 184)</span> Found in a chest in the corner of the armoury, southeast of the Wyrm's Rock waypoint."
 			},
+			{
+				title      : "Duke Ravengard's Longsword",
+				id         : "Duke-Ravengards-Longsword",
+				categories : ["longsword"],
+				rarity     : "rare",
+				suggested  : false,
+				choice     : false,
+				crafting   : false,
+				exploit    : false,
+				img        : "imgs/Duke Ravengard's Longsword.png",
+				link       : "https://bg3.wiki/wiki/Duke_Ravengard's_Longsword",
+				desc       : "Obtained by disarming Duke Ravengard, or looted from him. This can be done either here or later on at camp if you save Ravengard from the Iron Throne. At camp, the disarming action must be performed by a character who is not considered an ally: someone who was not part of the original rescue party or who is otherwise disguised. Wyll will permanently leave the party and turn hostile if the Duke notices his sword being stolen. This can be prevented by immediately leaving camp after taking it."
+			}, // TODO coords
+			{
+				title      : "Emblazoned Plate of the Marshal",
+				id         : "Emblazoned-Plate-of-the-Marshal",
+				categories : ["heavy-armour"],
+				rarity     : "very-rare",
+				suggested  : false,
+				choice     : false,
+				crafting   : false,
+				exploit    : false,
+				img        : "imgs/Emblazoned Plate of the Marshal.png",
+				link       : "https://bg3.wiki/wiki/Emblazoned_Plate_of_the_Marshal",
+				desc       : "Looted from Duke Ulder Ravengard."
+			}, // TODO coords
 			{
 				title      : "Reflectoguard",
 				id         : "Reflectoguard",
@@ -9396,7 +9396,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Blackguard's Gauntlets.png",
 				link       : "https://bg3.wiki/wiki/Blackguard's_Gauntlets",
-				desc       : "<span class='coordinates'>(X: -1292 Y: 501)</span> Looted from the undead guardian, That Which Watches."
+				desc       : "<span class='coordinates'>(X: -1292 Y: 501)</span> Looted from the undead guardian That Which Watches."
 			},
 			{
 				title      : "Blackguard's Greaves",
@@ -9409,7 +9409,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Blackguard's Greaves.png",
 				link       : "https://bg3.wiki/wiki/Blackguard's_Greaves",
-				desc       : "<span class='coordinates'>(X: -1292 Y: 505)</span> Looted from the undead guardian, That Which Lurks."
+				desc       : "<span class='coordinates'>(X: -1292 Y: 505)</span> Looted from the undead guardian That Which Lurks."
 			},
 			{
 				title      : "Blackguard's Plate",
@@ -9422,7 +9422,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Blackguard's Plate.png",
 				link       : "https://bg3.wiki/wiki/Blackguard's_Plate",
-				desc       : "<span class='coordinates'>(X: -1293 Y: 503)</span> Looted from the undead guardian, That Which Guards."
+				desc       : "<span class='coordinates'>(X: -1293 Y: 503)</span> Looted from the undead guardian That Which Guards."
 			},
 			{
 				title      : "Blackguard's Sword",
@@ -9435,7 +9435,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Blackguard's Sword.png",
 				link       : "https://bg3.wiki/wiki/Blackguard's_Sword",
-				desc       : "<span class='coordinates'>(X: -1293 Y: 503)</span> Looted from the undead guardian, That Which Guards."
+				desc       : "<span class='coordinates'>(X: -1293 Y: 503)</span> Looted from the undead guardian That Which Guards."
 			},
 			{
 				title      : "Shield of the Undevout",
@@ -9448,7 +9448,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Shield of the Undevout.png",
 				link       : "https://bg3.wiki/wiki/Shield_of_the_Undevout",
-				desc       : "<span class='coordinates'>(X: -1293 Y: 503)</span> Looted from the undead guardian, That Which Guards."
+				desc       : "<span class='coordinates'>(X: -1293 Y: 503)</span> Looted from the undead guardian That Which Guards."
 			},
 			{
 				title      : "Amulet of Bhaal",
@@ -9706,7 +9706,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Bonespike Gloves.png",
 				link       : "https://bg3.wiki/wiki/Bonespike_Gloves",
-				desc       : "<span class='coordinates'>(X: -136 Y: 980)</span> Looted from Strangler Luke in the Undercity Ruins during the quest \"<a href='https://bg3.wiki/wiki/Get_Orin's_Netherstone'>Get Orin's Netherstone</a>\" as part of the trial to enter the Temple of Bhaal. The enemy will despawn once the trial is complete so the item will need to be obtained before then."
+				desc       : "<span class='coordinates'>(X: -136 Y: 980)</span> Looted from Strangler Luke in the Undercity Ruins during the quest \"<a href=\"https://bg3.wiki/wiki/Get_Orin's_Netherstone\">Get Orin's Netherstone</a>\" as part of the trial to enter the Temple of Bhaal. The enemy will despawn once the trial is complete so the item will need to be obtained before then."
 			},
 			{
 				title      : "Bloodthirst",
@@ -9719,7 +9719,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Bloodthirst.png",
 				link       : "https://bg3.wiki/wiki/Bloodthirst",
-				desc       : "<span class='coordinates'>(X: 61 Y: 1004)</span> Looted from Orin during the quest \"<a href='https://bg3.wiki/wiki/Get_Orin's_Netherstone'>Get Orin's Netherstone</a>\"."
+				desc       : "<span class='coordinates'>(X: 61 Y: 1004)</span> Looted from Orin during the quest \"<a href=\"https://bg3.wiki/wiki/Get_Orin's_Netherstone\">Get Orin's Netherstone</a>\"."
 			},
 			{
 				title      : "Crimson Mischief",
@@ -9732,7 +9732,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Crimson Mischief.png",
 				link       : "https://bg3.wiki/wiki/Crimson_Mischief",
-				desc       : "<span class='coordinates'>(X: 61 Y: 1004)</span> Looted from Orin during the quest \"<a href='https://bg3.wiki/wiki/Get_Orin's_Netherstone'>Get Orin's Netherstone</a>\"."
+				desc       : "<span class='coordinates'>(X: 61 Y: 1004)</span> Looted from Orin during the quest \"<a href=\"https://bg3.wiki/wiki/Get_Orin's_Netherstone\">Get Orin's Netherstone</a>\"."
 			},
 			{
 				title      : "Mutilated Carapace",
@@ -9745,7 +9745,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Mutilated Carapace.png",
 				link       : "https://bg3.wiki/wiki/Mutilated_Carapace",
-				desc       : "<span class='coordinates'>(X: 61 Y: 1004)</span> Looted from Orin during the quest \"<a href='https://bg3.wiki/wiki/Get_Orin's_Netherstone'>Get Orin's Netherstone</a>\"."
+				desc       : "<span class='coordinates'>(X: 61 Y: 1004)</span> Looted from Orin during the quest \"<a href=\"https://bg3.wiki/wiki/Get_Orin's_Netherstone\">Get Orin's Netherstone</a>\"."
 			}
 		]},
 		{
