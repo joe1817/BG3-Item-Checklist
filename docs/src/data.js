@@ -1,73 +1,75 @@
-filterData = [
-	{ title: "Accessories", 			id: "accessory", children: [
-		{ title: "Amulets", 			id: "amulet", },
-		{ title: "Rings", 				id: "ring", },
+const filterData = [
+	{ title: "Accessories",             id: "accessory", children: [
+		{ title: "Amulets",             id: "amulet", },
+		{ title: "Rings",               id: "ring", },
 	]},
-	{ title: "Armour", 					id: "armour", children: [
-		{ title: "Boots", 				id: "boots", },
-		{ title: "Cloaks", 				id: "cloak", },
-		{ title: "Clothing", 			id: "clothing", },
-		{ title: "Gloves", 				id: "gloves", },
-		{ title: "Heavy Armour", 		id: "heavy-armour", },
-		{ title: "Helmets", 			id: "helmet", },
-		{ title: "Light Armour", 		id: "light-armour", },
-		{ title: "Medium Armour", 		id: "medium-armour", },
+	{ title: "Armour",                  id: "armour", children: [
+		{ title: "Boots",               id: "boots", },
+		{ title: "Cloaks",              id: "cloak", },
+		{ title: "Clothing",            id: "clothing", },
+		{ title: "Gloves",              id: "gloves", },
+		{ title: "Heavy Armour",        id: "heavy-armour", },
+		{ title: "Helmets",             id: "helmet", },
+		{ title: "Light Armour",        id: "light-armour", },
+		{ title: "Medium Armour",       id: "medium-armour", },
 	]},
-	{ title: "Bonuses", 				id: "bonus", 	children: [
-		{ title: "Actions", 			id: "action", 	children: [
-			{ title: "Non-spells", 		id: "non-spell", },
-			{ title: "Spells", 			id: "spell", },
-		]
-		},
-		{ title: "Conditions", 			id: "condition", },
-		{ title: "Enhancements", 		id: "enhancement", },
+	{ title: "Consumables",             id: "consumable", children: [
+		{ title: "Arrows",              id: "arrow", },
+		{ title: "Barrels",             id: "barrel", },
+		{ title: "Camp Supplies",       id: "camp-supplies", },
+		{ title: "Crafting",            id: "crafting", },
+		{ title: "Grenades",            id: "grenade", },
+		{ title: "Potions",             id: "potion", },
+		{ title: "Scrolls",             id: "scroll", },
 	]},
-	{ title: "Consumables", 			id: "consumable", children: [
-		{ title: "Arrows", 				id: "arrow", },
-		{ title: "Barrels", 			id: "barrel", },
-		{ title: "Camp Supplies", 		id: "camp-supplies", },
-		{ title: "Crafting", 			id: "crafting", },
-		{ title: "Grenades", 			id: "grenade", },
-		{ title: "Potions", 			id: "potion", },
-		{ title: "Scrolls", 			id: "scroll", },
-	]},
-	{ title: "Followers", 				id: "follower", },
-	{ title: "Misc", 					id: "misc", },
-	{ title: "Shields", 				id: "shield", },
-	{ title: "Weapons", 				id: "weapon", 	children: [
-		{ title: "Melee", 				id: "melee", 	children: [
-			{ title: "Battleaxes", 		id: "battleaxe", },
-			{ title: "Clubs", 			id: "club", },
-			{ title: "Daggers", 		id: "dagger", },
-			{ title: "Flails", 			id: "flail", },
-			{ title: "Glaives", 		id: "glaive", },
-			{ title: "Greataxes", 		id: "greataxe", },
-			{ title: "Greatclubs", 		id: "greatclub", },
-			{ title: "Greatswords", 	id: "greatsword", },
-			{ title: "Halberds", 		id: "halberd", },
-			{ title: "Handaxes", 		id: "handaxe", },
-			{ title: "Light Hammers",	id: "light-hammer", },
-			{ title: "Longswords", 		id: "longsword", },
-			{ title: "Maces", 			id: "mace", },
-			{ title: "Mauls", 			id: "maul", },
-			{ title: "Morningstars", 	id: "morningstar", },
-			{ title: "Pikes", 			id: "pike", },
-			{ title: "Quarterstaves", 	id: "quarterstaff", },
-			{ title: "Rapiers", 		id: "rapier", },
-			{ title: "Scimitars", 		id: "scimitar", },
-			{ title: "Shortswords", 	id: "shortsword", },
-			{ title: "Sickles", 		id: "sickle", },
-			{ title: "Spears", 			id: "spear", },
-			{ title: "Tridents", 		id: "trident", },
-			{ title: "War Picks", 		id: "war-pick", },
-			{ title: "Warhammers", 		id: "warhammer", },
+	{ title: "Followers",               id: "follower", },
+	{ title: "Misc",                    id: "misc", },
+	{ title: "Permanent Buffs",         id: "buff", children: [
+		{ title: "Actions",             id: "action", children: [
+			{ title: "Non-spells",      id: "non-spell", },
+			{ title: "Spells",          id: "spell", },
 		]},
-		{ title: "Ranged", 				id: "ranged", children: [
-			{ title: "Hand Crossbows", 	id: "hand-crossbow", },
+		{ title: "Passives",            id: "passive", children: [
+			{ title: "Conditions",      id: "condition", },
+			{ title: "Stat Bonuses",    id: "stat-bonus", },
+		]},
+		{ title: "MFP Specimens",       id: "specimen", },
+	]},
+	{ title: "Shields",                 id: "shield", },
+	{ title: "Weapons",                 id: "weapon", children: [
+		{ title: "Melee",               id: "melee", children: [
+			{ title: "Battleaxes",      id: "battleaxe", },
+			{ title: "Clubs",           id: "club", },
+			{ title: "Daggers",         id: "dagger", },
+			{ title: "Flails",          id: "flail", },
+			{ title: "Glaives",         id: "glaive", },
+			{ title: "Greataxes",       id: "greataxe", },
+			{ title: "Greatclubs",      id: "greatclub", },
+			{ title: "Greatswords",     id: "greatsword", },
+			{ title: "Halberds",        id: "halberd", },
+			{ title: "Handaxes",        id: "handaxe", },
+			{ title: "Light Hammers",   id: "light-hammer", },
+			{ title: "Longswords",      id: "longsword", },
+			{ title: "Maces",           id: "mace", },
+			{ title: "Mauls",           id: "maul", },
+			{ title: "Morningstars",    id: "morningstar", },
+			{ title: "Pikes",           id: "pike", },
+			{ title: "Quarterstaves",   id: "quarterstaff", },
+			{ title: "Rapiers",         id: "rapier", },
+			{ title: "Scimitars",       id: "scimitar", },
+			{ title: "Shortswords",     id: "shortsword", },
+			{ title: "Sickles",         id: "sickle", },
+			{ title: "Spears",          id: "spear", },
+			{ title: "Tridents",        id: "trident", },
+			{ title: "War Picks",       id: "war-pick", },
+			{ title: "Warhammers",      id: "warhammer", },
+		]},
+		{ title: "Ranged",              id: "ranged", children: [
+			{ title: "Hand Crossbows",  id: "hand-crossbow", },
 			{ title: "Heavy Crossbows", id: "heavy-crossbow", },
 			{ title: "Light Crossbows", id: "light-crossbow", },
-			{ title: "Longbows", 		id: "longbow", },
-			{ title: "Shortbows", 		id: "shortbow", },
+			{ title: "Longbows",        id: "longbow", },
+			{ title: "Shortbows",       id: "shortbow", },
 		]},
 	]},
 ]
@@ -230,7 +232,7 @@ children : [
 			{
 				title      : "Instrument Proficiency",
 				id         : "Instrument-Proficiency",
-				categories : ["enhancement"],
+				categories : ["condition"],
 				rarity     : null,
 				suggested  : false,
 				choice     : false,
@@ -282,7 +284,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-1",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -425,7 +427,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-2",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -670,7 +672,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-3",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -955,7 +957,7 @@ children : [
 			{
 				title      : "Forbidden Knowledge",
 				id         : "Forbidden-Knowledge",
-				categories : ["enhancement"],
+				categories : ["condition"],
 				rarity     : null,
 				suggested  : true,
 				choice     : false,
@@ -1084,7 +1086,7 @@ children : [
 			{
 				title      : "Auntie Ethel's Hair",
 				id         : "Auntie-Ethels-Hair",
-				categories : ["enhancement"],
+				categories : ["stat-bonus"],
 				rarity     : "common",
 				suggested  : false,
 				choice     : false,
@@ -1349,7 +1351,7 @@ children : [
 			{
 				title      : "Brand of the Absolute",
 				id         : "Brand-of-the-Absolute",
-				categories : ["enhancement"],
+				categories : ["condition"],
 				rarity     : null,
 				suggested  : false,
 				choice     : false,
@@ -1544,7 +1546,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-4",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -1570,7 +1572,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-5",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -1622,7 +1624,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-6",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -2041,7 +2043,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-7",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -3252,7 +3254,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-8",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -3265,7 +3267,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-9",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -3679,7 +3681,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-10",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -3692,7 +3694,7 @@ children : [
 			{
 				title      : "Awakened",
 				id         : "Awakened",
-				categories : ["enhancement"],
+				categories : ["condition"],
 				rarity     : null,
 				suggested  : true,
 				choice     : false,
@@ -4306,7 +4308,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-11",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -4332,7 +4334,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-12",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -4882,7 +4884,7 @@ children : [
 			{
 				title      : "Consumed Shadow Weave",
 				id         : "Consumed-Shadow-Weave",
-				categories : ["enhancement"],
+				categories : ["condition"],
 				rarity     : null,
 				suggested  : false,
 				choice     : true,
@@ -5295,7 +5297,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-13",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -5308,7 +5310,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-14",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -5321,7 +5323,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-15",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -5334,7 +5336,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-16",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -5386,7 +5388,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-17",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -5542,7 +5544,7 @@ children : [
 			{
 				title      : "Improved Bardic Inspiration",
 				id         : "Improved-Bardic-Inspiration",
-				categories : ["enhancement"],
+				categories : ["condition"],
 				rarity     : null,
 				suggested  : false,
 				choice     : false,
@@ -5924,7 +5926,7 @@ children : [
 			{
 				title      : "Potion of Everlasting Vigour",
 				id         : "Potion-of-Everlasting-Vigour",
-				categories : ["enhancement"],
+				categories : ["stat-bonus"],
 				rarity     : "common",
 				suggested  : true,
 				choice     : false,
@@ -6235,7 +6237,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-18",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -6280,7 +6282,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-19",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -6397,7 +6399,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-20",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -6474,7 +6476,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-21",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -6524,7 +6526,7 @@ children : [
 			{
 				title      : "Mind Flayer Brain",
 				id         : "Mind-Flayer-Parasite-Specimen-22",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -7137,7 +7139,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-23",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -7150,7 +7152,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-24",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -7942,7 +7944,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-25",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -7981,7 +7983,7 @@ children : [
 			{
 				title      : "The Tharchiate Codex: Blessing",
 				id         : "The-Tharchiate-Codex:-Blessing",
-				categories : ["enhancement"],
+				categories : ["condition"],
 				rarity     : null,
 				suggested  : false,
 				choice     : false,
@@ -8201,7 +8203,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-26",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -8227,7 +8229,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-27",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -8478,7 +8480,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-28",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -8523,7 +8525,7 @@ children : [
 			{
 				title      : "Unstable Blood",
 				id         : "Unstable-Blood",
-				categories : ["enhancement"],
+				categories : ["condition"],
 				rarity     : null,
 				suggested  : false,
 				choice     : false,
@@ -8536,7 +8538,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-29",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -8600,7 +8602,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-30",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -8664,7 +8666,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-31",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -8748,7 +8750,7 @@ children : [
 			{
 				title      : "Vampire Ascendant",
 				id         : "Vampire-Ascendant",
-				categories : ["enhancement"],
+				categories : ["condition"],
 				rarity     : null,
 				suggested  : false,
 				choice     : false,
@@ -8786,7 +8788,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-32",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -8857,7 +8859,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-33",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -8947,7 +8949,7 @@ children : [
 			{
 				title      : "Mirror of Loss",
 				id         : "Mirror-of-Loss",
-				categories : ["enhancement"],
+				categories : ["stat-bonus"],
 				rarity     : null,
 				suggested  : true,
 				choice     : false,
@@ -8966,7 +8968,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-34",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -8979,7 +8981,7 @@ children : [
 			{
 				title      : "Slayer Knowledge",
 				id         : "Slayer-Knowledge",
-				categories : ["enhancement"],
+				categories : ["condition"],
 				rarity     : null,
 				suggested  : false,
 				choice     : false,
@@ -8992,7 +8994,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-35",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -9102,7 +9104,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-36",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -9160,7 +9162,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-37",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
@@ -9309,7 +9311,7 @@ children : [
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-38",
-				categories : ["enhancement"],
+				categories : ["specimen"],
 				rarity     : "story",
 				suggested  : false,
 				choice     : false,
