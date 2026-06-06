@@ -532,7 +532,7 @@ button.tall {
 		overflow: hidden;
 		transition: max-height 0.3s ease-out;
 
-		.tip {
+		.bordered-tip {
 			border: 1px solid var(--border-color);
 			border-radius: 5px;
 			padding: 8px;
@@ -541,6 +541,18 @@ button.tall {
 			max-width: 60%;
 		}
 	}
+}
+
+.hide-tips .tip {
+	display: none;
+}
+
+.hide-coords .coordinates {
+	display: none;
+}
+
+.hide-coords .coord-wrapper {
+	display: none;
 }
 
 .entry {
@@ -641,7 +653,7 @@ button.tall {
 @media (max-width : 768px) {
 	#checklist {
 		.content {
-			.tip {
+			.bordered-tip {
 				max-width: 100%;
 			}
 		}

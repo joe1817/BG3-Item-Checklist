@@ -115,7 +115,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/The Watcher's Guide.png",
 				link       : "https://bg3.wiki/wiki/The_Watcher's_Guide",
-				desc       : "<span class='coordinates'>(X: -293 Y: -323)</span> Found in a trapped sarcophagus next to the beach-side entrance. (Note: Recommended to feed Gale.)"
+				desc       : "<span class='coordinates'>(X: -293 Y: -323)</span> Found in a trapped sarcophagus next to the beach-side entrance.<span class='tip'> (Note: Recommended to feed Gale.)</span>"
 			},
 			{
 				title      : "The Amulet of Lost Voices",
@@ -303,7 +303,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Komira's Locket.png",
 				link       : "https://bg3.wiki/wiki/Komira's_Locket",
-				desc       : "<span class='coordinates'>(X: 261 Y: 543)</span> Rewarded by Arabella's parents after protecting her from Kagha. (Note: Recommended to feed Gale.)"
+				desc       : "<span class='coordinates'>(X: 261 Y: 543)</span> Rewarded by Arabella's parents after protecting her from Kagha.<span class='tip'> (Note: Recommended to feed Gale.)</span>"
 			},
 			{
 				title      : "Faldorn's Canticle: The Shadow Druids' Doctrine",
@@ -394,7 +394,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Idol of Silvanus.png",
 				link       : "https://bg3.wiki/wiki/Idol_of_Silvanus",
-				desc       : "<span class='coordinates'>(X: 241 Y: 510)</span> Stolen from the center of the Druid Grove. (Note: It's recommended to do so after the ritual has ended.) You can pickpocket this off Mol after giving it to her."
+				desc       : "<span class='coordinates'>(X: 241 Y: 510)</span> Stolen from the center of the Druid Grove.<span class='tip'> (Note: It's recommended to do so after the ritual has ended.)</span> You can pickpocket this off Mol after giving it to her."
 			},
 			{
 				title      : "Ring of Protection",
@@ -433,7 +433,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Mind Flayer Parasite Specimen.png",
 				link       : "https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen",
-				desc       : "Rewarded by Minthara for raiding the Emerald Grove. (Note: Doing so will lock you out of multiple quests and rewards.)"
+				desc       : "Rewarded by Minthara for raiding the Emerald Grove.<span class='tip'> (Note: Doing so will lock you out of multiple quests and rewards.)</span>"
 			} // TODO The actual reward is https://bg3.wiki/wiki/Gift_from_the_Absolute
 		]},
 		{
@@ -452,7 +452,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Dragon's Grasp.png",
 				link       : "https://bg3.wiki/wiki/Dragon's_Grasp",
-				desc       : "<span class='value'>65 gp</span> (Note: Recommended to feed Gale.)"
+				desc       : "<span class='value'>65 gp</span><span class='tip'> (Note: Recommended to feed Gale.)</span>"
 			},
 			{
 				title      : "Gloves of Missile Snaring",
@@ -517,7 +517,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Spellthief.png",
 				link       : "https://bg3.wiki/wiki/Spellthief",
-				desc       : "<span class='value'>100 gp</span> (Note: Recommended to feed Gale.)"
+				desc       : "<span class='value'>100 gp</span><span class='tip'> (Note: Recommended to feed Gale.)</span>"
 			}
 		]},
 		{
@@ -600,7 +600,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/The Deathstalker Mantle.png",
 				link       : "https://bg3.wiki/wiki/The_Deathstalker_Mantle",
-				desc       : "Rewarded to The Dark Urge (Origin) by Sceleritas Fel for murdering either Alfira or Quil during a camp event. (Note: It's recommended to leave Alfira alive by non-lethally knocking her out before each Long Rest until the event occurs.)"
+				desc       : "Rewarded to The Dark Urge (Origin) by Sceleritas Fel for murdering either Alfira or Quil during a camp event.<span class='tip'> (Note: It's recommended to leave Alfira alive by non-lethally knocking her out before each Long Rest until the event occurs.)</span>"
 			},
 			{
 				title      : "Ring of Evasion",
@@ -626,7 +626,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Scroll of True Resurrection.png",
 				link       : "https://bg3.wiki/wiki/Scroll_of_True_Resurrection",
-				desc       : "Obtained by following Gale's revival protocol after he dies. You can then keep the scroll for later by simply reviving Gale through Withers. (Note: You must obtain the scroll before employing Withers' services; it becomes unobtainable after Gale is revived the first time.)"
+				desc       : "Obtained by following Gale's revival protocol after he dies. You can then keep the scroll for later by simply reviving Gale through Withers.<span class='tip'> (Note: You must obtain the scroll before employing Withers' services; it becomes unobtainable after Gale is revived the first time.)</span>"
 			},
 			{
 				title      : "Gloves of Power",
@@ -885,7 +885,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Sussur Dagger.png",
 				link       : "https://bg3.wiki/wiki/Finish_the_Masterwork_Weapon",
-				desc       : "Crafted in the forge <span class='coordinates'>(X: -477 Y: -378)</span> during \"<a href='https://bg3.wiki/wiki/Finish_the_Masterwork_Weapon'>Finish the Masterwork Weapon</a>\" using the Sussur Tree in the Underdark <span class='coordinates'>(X: -15 Y: -137)</span>. (Note: Only one Sussur weapon can be forged.)"
+				desc       : "Crafted in the forge <span class='coordinates'>(X: -477 Y: -378)</span> during \"<a href='https://bg3.wiki/wiki/Finish_the_Masterwork_Weapon'>Finish the Masterwork Weapon</a>\" using the Sussur Tree in the Underdark <span class='coordinates'>(X: -15 Y: -137)</span>.<span class='tip'> (Note: Only one Sussur weapon can be forged.)</span>"
 			},
 			{
 				title      : "Sussur Sickle",
@@ -898,7 +898,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Sussur Sickle.png",
 				link       : "https://bg3.wiki/wiki/Finish_the_Masterwork_Weapon",
-				desc       : "Crafted in the forge <span class='coordinates'>(X: -477 Y: -378)</span> during \"<a href='https://bg3.wiki/wiki/Finish_the_Masterwork_Weapon'>Finish the Masterwork Weapon</a>\" using the Sussur Tree in the Underdark <span class='coordinates'>(X: -15 Y: -137)</span>. (Note: Only one Sussur weapon can be forged.)"
+				desc       : "Crafted in the forge <span class='coordinates'>(X: -477 Y: -378)</span> during \"<a href='https://bg3.wiki/wiki/Finish_the_Masterwork_Weapon'>Finish the Masterwork Weapon</a>\" using the Sussur Tree in the Underdark <span class='coordinates'>(X: -15 Y: -137)</span>.<span class='tip'> (Note: Only one Sussur weapon can be forged.)</span>"
 			},
 			{
 				title      : "Sussur Greatsword",
@@ -911,7 +911,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Sussur Greatsword.png",
 				link       : "https://bg3.wiki/wiki/Finish_the_Masterwork_Weapon",
-				desc       : "Crafted in the forge <span class='coordinates'>(X: -477 Y: -378)</span> during \"<a href='https://bg3.wiki/wiki/Finish_the_Masterwork_Weapon'>Finish the Masterwork Weapon</a>\" using the Sussur Tree in the Underdark <span class='coordinates'>(X: -15 Y: -137)</span>. (Note: Only one Sussur weapon can be forged.)"
+				desc       : "Crafted in the forge <span class='coordinates'>(X: -477 Y: -378)</span> during \"<a href='https://bg3.wiki/wiki/Finish_the_Masterwork_Weapon'>Finish the Masterwork Weapon</a>\" using the Sussur Tree in the Underdark <span class='coordinates'>(X: -15 Y: -137)</span>.<span class='tip'> (Note: Only one Sussur weapon can be forged.)</span>"
 			},
 			{
 				title      : "Shovel",
@@ -937,7 +937,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Suspicious Poison.png",
 				link       : "https://bg3.wiki/wiki/Suspicious_Poison",
-				desc       : "Found in a chest in the Apothecary's Cellar. (Note: This can be used as a powerful grenade.)"
+				desc       : "Found in a chest in the Apothecary's Cellar."
 			}, // TODO coords
 			{
 				title      : "Bracers of Defence",
@@ -1079,7 +1079,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Paid the Price.png",
 				link       : "https://bg3.wiki/wiki/Paid_the_Price_(Condition)",
-				desc       : "<span class='coordinates'>(X: -58 Y: 263)</span> Obtained by accepting Ethel's offer to eliminate the parasite. (Note: This option is mutually exclusive with Volo's Ersatz Eye and Wyll's stone eye options; you can only undergo one questionable eye surgery per character.)"
+				desc       : "<span class='coordinates'>(X: -58 Y: 263)</span> Obtained by accepting Ethel's offer to eliminate the parasite.<span class='tip'> (Note: This option is mutually exclusive with Volo's Ersatz Eye and Wyll's stone eye options; you can only undergo one questionable eye surgery per character.)</span>"
 			},
 			{
 				title      : "Auntie Ethel's Hair",
@@ -1092,7 +1092,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Auntie Ethel's Hair.png",
 				link       : "https://bg3.wiki/wiki/Auntie_Ethel's_Hair",
-				desc       : "<span class='coordinates'>(X: -412 Y: 577)</span> Obtained by weakening Ethel to below 20% HP and allowing her to flee once she begs for her life on her turn. (Note: It's recommended to intiminate Ethel into leaving without taking Mayrina.)"
+				desc       : "<span class='coordinates'>(X: -412 Y: 577)</span> Obtained by weakening Ethel to below 20% HP and allowing her to flee once she begs for her life on her turn.<span class='tip'> (Note: It's recommended to intiminate Ethel into leaving without taking Mayrina.)</span>"
 			}, // TODO add DC
 			{
 				title      : "Tarnished Charm",
@@ -1202,7 +1202,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Volo's Ersatz Eye.png",
 				link       : "https://bg3.wiki/wiki/Volo's_Ersatz_Eye_(Condition)",
-				desc       : "<span class='coordinates'>(X: 333 Y: -8)</span> Obtained by agreeing to a surgical extraction of the tadpole after Volo suggests it at camp. (Note: He will cease being a camp trader if you choose to do this.)"
+				desc       : "<span class='coordinates'>(X: 333 Y: -8)</span> Obtained by agreeing to a surgical extraction of the tadpole after Volo suggests it at camp.<span class='tip'> (Note: He will cease being a camp trader if you choose to do this.)</span>"
 			},
 			{
 				title      : "Owlbear Cub",
@@ -1461,7 +1461,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Amulet of Selûne's Chosen.png",
 				link       : "https://bg3.wiki/wiki/Amulet_of_Sel%C3%BBne's_Chosen",
-				desc       : "<span class='coordinates'>(X: 296 Y: 71)</span> Stolen from Dror Ragzlin's treasure pile. (Note: Recommended to feed Gale.)"
+				desc       : "<span class='coordinates'>(X: 296 Y: 71)</span> Stolen from Dror Ragzlin's treasure pile.<span class='tip'> (Note: Recommended to feed Gale.)</span>"
 			},
 			{
 				title      : "Gloves of the Growling Underdog",
@@ -1778,7 +1778,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Hamarhraft.png",
 				link       : "https://bg3.wiki/wiki/Hamarhraft",
-				desc       : "<span class='coordinates'>(X: -84 Y: 630)</span> Found in a chest on the 2nd floor of the inn, in the room adjacent to the trapped man. (Note: It's recommended to come back for it after the fire has burned itself out.)"
+				desc       : "<span class='coordinates'>(X: -84 Y: 630)</span> Found in a chest on the 2nd floor of the inn, in the room adjacent to the trapped man.<span class='tip'> (Note: It's recommended to come back for it after the fire has burned itself out.)</span>"
 			},
 			{
 				title      : "The Spellsparkler",
@@ -1836,7 +1836,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Harold.png",
 				link       : "https://bg3.wiki/wiki/Harold",
-				desc       : "<span class='coordinates'>(X: 277 Y: -247)</span> Rewarded for bringing the <i>unopened</i> Caravan Strongbox to Zarys. (Note: It's recommended to pickpocket the Caravan Strongbox off her afterwards to obtain the Iron Flask.)"
+				desc       : "<span class='coordinates'>(X: 277 Y: -247)</span> Rewarded for bringing the <i>unopened</i> Caravan Strongbox to Zarys.<span class='tip'> (Note: It's recommended to pickpocket the Caravan Strongbox off her afterwards to obtain the Iron Flask.)</span>"
 			},
 			{
 				title      : "Infernal Iron",
@@ -2088,7 +2088,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Iron Flask.png",
 				link       : "https://bg3.wiki/wiki/Iron_Flask",
-				desc       : "<span class='coordinates'>(X: 39 Y: 628)</span> Stolen from the Caravan Strongbox near the two survivors. (Note: It's recommended to give the <i>unopened</i> Caravan Strongbox to Zarys in the Zhentarim Hideout for a quest reward, then pickpocket it off her.)"
+				desc       : "<span class='coordinates'>(X: 39 Y: 628)</span> Stolen from the Caravan Strongbox near the two survivors.<span class='tip'> (Note: It's recommended to give the <i>unopened</i> Caravan Strongbox to Zarys in the Zhentarim Hideout for a quest reward, then pickpocket it off her.)</span>"
 			}, // TODO can be found in Act 3 if not pickpocketed back
 			{
 				title      : "Reason's Grasp",
@@ -2101,7 +2101,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Reason's Grasp.png",
 				link       : "https://bg3.wiki/wiki/Reason's_Grasp",
-				desc       : "<span class='coordinates'>(X: 37 Y: 644)</span> Found in a chest on a ledge in the cave where gnolls are attacking the caravan survivors. (Note: Recommended to feed Gale.)"
+				desc       : "<span class='coordinates'>(X: 37 Y: 644)</span> Found in a chest on a ledge in the cave where gnolls are attacking the caravan survivors.<span class='tip'> (Note: Recommended to feed Gale.)</span>"
 			},
 			{
 				title      : "Smuggler's Ring",
@@ -2645,7 +2645,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Ring of Mind-Shielding.png",
 				link       : "https://bg3.wiki/wiki/Ring_of_Mind-Shielding",
-				desc       : "Obtained after completing the quest \"<a href='https://bg3.wiki/wiki/Help_Omeluum_Investigate_the_Parasite'>Help Omeluum Investigate the Parasite</a>\". You can buy it either with gold (<span class='value'>70 gp</span>), or by supplying information about the Nautiloid gathered from Eldritch Runes in the Prologue. (Note: Recommended to feed Gale.)"
+				desc       : "Obtained after completing the quest \"<a href='https://bg3.wiki/wiki/Help_Omeluum_Investigate_the_Parasite'>Help Omeluum Investigate the Parasite</a>\". You can buy it either with gold (<span class='value'>70 gp</span>), or by supplying information about the Nautiloid gathered from Eldritch Runes in the Prologue.<span class='tip'> (Note: Recommended to feed Gale.)</span>"
 			}
 		]},
 		{
@@ -2929,7 +2929,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Intransigent Warhammer.png",
 				link       : "https://bg3.wiki/wiki/Intransigent_Warhammer",
-				desc       : "<span class='coordinates'>(X: -447 Y: -525)</span> Found in a chest on a duergar skiff thats pulls up next to you during your first voyage to Grymforge. You'll need to start a fight to obtain it. (Note: This event only happens once.)"
+				desc       : "<span class='coordinates'>(X: -447 Y: -525)</span> Found in a chest on a duergar skiff thats pulls up next to you during your first voyage to Grymforge. You'll need to start a fight to obtain it.<span class='tip'> (Note: This event only happens once.)</span>"
 			},
 			{
 				title      : "Bow of the Banshee",
@@ -3273,7 +3273,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Mind Flayer Parasite Specimen.png",
 				link       : "https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen",
-				desc       : "<span class='coordinates'>(X: -854 Y: 780)</span> Looted from Nere. (Note: It's recommended to convince Barcus to stay at your camp afterwards.)"
+				desc       : "<span class='coordinates'>(X: -854 Y: 780)</span> Looted from Nere.<span class='tip'> (Note: It's recommended to convince Barcus to stay at your camp afterwards.)</span>"
 			},
 			{
 				title      : "Disintegrating Night Walkers",
@@ -4340,7 +4340,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Mind Flayer Parasite Specimen.png",
 				link       : "https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen",
-				desc       : "Rewarded by Z'rell for siding with Flaming Fist Marcus and capturing Isobel alive. (Note: Doing so will lock you out of multiple quests and rewards.)"
+				desc       : "Rewarded by Z'rell for siding with Flaming Fist Marcus and capturing Isobel alive.<span class='tip'> (Note: Doing so will lock you out of multiple quests and rewards.)</span>"
 			}, // TODO coords, The actual reward is https://bg3.wiki/wiki/Gift_from_the_Absolute
 			{
 				title      : "Jhannyl's Gloves",
@@ -5919,7 +5919,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Blood-Draw Elixir.png",
 				link       : "https://bg3.wiki/wiki/Araj_Oblodra#Blood-draw_elixirs",
-				desc       : "Rewarded to each character for allowing Araj Oblodra to draw their blood. (Note: Halfling and Human elixirs are particularly useful.)"
+				desc       : "Rewarded to each character for allowing Araj Oblodra to draw their blood.<span class='tip'> (Note: Halfling and Human elixirs are particularly useful.)</span>"
 			},
 			{
 				title      : "Potion of Everlasting Vigour",
@@ -6243,7 +6243,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Mind Flayer Parasite Specimen.png",
 				link       : "https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen",
-				desc       : "Rewarded by Ketheric for allowing Balthazar to transport the Nightsong to Moonrise Towers. (Note: Doing so will lose Shadowheart as a companion as well as lock you out of multiple quests and rewards.)"
+				desc       : "Rewarded by Ketheric for allowing Balthazar to transport the Nightsong to Moonrise Towers.<span class='tip'> (Note: Doing so will lose Shadowheart as a companion as well as lock you out of multiple quests and rewards.)</span>"
 			} // TODO The actual reward is https://bg3.wiki/wiki/Gift_from_the_Absolute
 		]},
 		{
@@ -6939,7 +6939,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Ring of Blink.png",
 				link       : "https://bg3.wiki/wiki/Ring_of_Blink",
-				desc       : "<span class='coordinates'>(X: -45 Y: -5)</span> Obtained by stealing from or persuading the tressym, Tara, on the roof. (Note: It's recommended to do this during the quest \"<a href='https://bg3.wiki/wiki/Find_the_Missing_Letters'>Find the Missing Letters</a>\" with Gale in your party.)"
+				desc       : "<span class='coordinates'>(X: -45 Y: -5)</span> Obtained by stealing from or persuading the tressym, Tara, on the roof.<span class='tip'> (Note: It's recommended to do this during the quest \"<a href='https://bg3.wiki/wiki/Find_the_Missing_Letters'>Find the Missing Letters</a>\" with Gale in your party.)</span>"
 			}
 		]},
 		{
@@ -7384,7 +7384,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Amulet of Windrider.png",
 				link       : "https://bg3.wiki/wiki/Amulet_of_Windrider",
-				desc       : "Rewarded for completing the quest \"<a href='https://bg3.wiki/wiki/Save_Vanra'>Save Vanra</a>\". (Note: It's recommended to complete the quest \"<a href='https://bg3.wiki/wiki/Help_the_Hag_Survivors'>Help the Hag Survivors</a>\" first.)"
+				desc       : "Rewarded for completing the quest \"<a href='https://bg3.wiki/wiki/Save_Vanra'>Save Vanra</a>\".<span class='tip'> (Note: It's recommended to complete the quest \"<a href='https://bg3.wiki/wiki/Help_the_Hag_Survivors'>Help the Hag Survivors</a>\" first.)</span>"
 			},
 			{
 				title      : "Duellist's Prerogative",
@@ -7397,7 +7397,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Duellist's Prerogative.png",
 				link       : "https://bg3.wiki/wiki/Duellist's_Prerogative",
-				desc       : "Rewarded for completing the quest \"<a href='https://bg3.wiki/wiki/Save_Vanra'>Save Vanra</a>\". (Note: It's recommended to complete the quest \"<a href='https://bg3.wiki/wiki/Help_the_Hag_Survivors'>Help the Hag Survivors</a>\" first.)"
+				desc       : "Rewarded for completing the quest \"<a href='https://bg3.wiki/wiki/Save_Vanra'>Save Vanra</a>\".<span class='tip'> (Note: It's recommended to complete the quest \"<a href='https://bg3.wiki/wiki/Help_the_Hag_Survivors'>Help the Hag Survivors</a>\" first.)</span>"
 			}
 		]},
 		{
@@ -7429,7 +7429,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Amulet of the Devout.png",
 				link       : "https://bg3.wiki/wiki/Amulet_of_the_Devout",
-				desc       : "<span class='coordinates'>(X: 105 Y: -26)</span> Stolen from the main Offering Chest in the basement. (Note: Doing so will inflict the character with Castigated By Divinity.)"
+				desc       : "<span class='coordinates'>(X: 105 Y: -26)</span> Stolen from the main Offering Chest in the basement.<span class='tip'> (Note: Doing so will inflict the character with Castigated By Divinity.)</span>"
 			},
 			{
 				title      : "Shield of Shielding",
@@ -7442,7 +7442,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Shield of Shielding.png",
 				link       : "https://bg3.wiki/wiki/Shield_of_Shielding",
-				desc       : "<span class='coordinates'>(X: 105 Y: -26)</span> Stolen from the main Offering Chest in the basement. (Note: Doing so will inflict the character with Castigated By Divinity.)"
+				desc       : "<span class='coordinates'>(X: 105 Y: -26)</span> Stolen from the main Offering Chest in the basement.<span class='tip'> (Note: Doing so will inflict the character with Castigated By Divinity.)</span>"
 			},
 			{
 				title      : "Hammer of the Just",
@@ -7455,7 +7455,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Hammer of the Just.png",
 				link       : "https://bg3.wiki/wiki/Hammer_of_the_Just",
-				desc       : "<span class='coordinates'>(X: 796 Y: 1159)</span> Stolen from the Offerings to Tyr Chest in the basement. (Note: Doing so will inflict the character with Castigated By Divinity.)"
+				desc       : "<span class='coordinates'>(X: 796 Y: 1159)</span> Stolen from the Offerings to Tyr Chest in the basement.<span class='tip'> (Note: Doing so will inflict the character with Castigated By Divinity.)</span>"
 			},
 			{
 				title      : "Deva Mace",
@@ -8531,7 +8531,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Unstable Blood.png",
 				link       : "https://bg3.wiki/wiki/Unstable_Blood",
-				desc       : "<span class='coordinates'>(X: -91 Y: -90)</span> Rewarded for giving your blood to Araj Oblodra in Moonrise Towers in Act 2, then helping her again at her house, east of The Blushing Mermaid in Act 3. (Note: Some may not find this to be a beneficial effect.)"
+				desc       : "<span class='coordinates'>(X: -91 Y: -90)</span> Rewarded for giving your blood to Araj Oblodra in Moonrise Towers in Act 2, then helping her again at her house, east of The Blushing Mermaid in Act 3.<span class='tip'> (Note: Some may not find this to be a beneficial effect.)</span>"
 			}, // TODO is condition?
 			{
 				title      : "Mind Flayer Parasite Specimen",

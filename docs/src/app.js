@@ -16,7 +16,13 @@ const App = {
 	:filterData="filterData"
 ></Options>
 
-<div id="checklist">
+<div
+	id="checklist"
+	:class="{
+		'hide-tips': !$store.getters.showTips,
+		'hide-coords': !$store.getters.showCoords,
+	}"
+>
 	<DefaultContainer
 		:data="entryData"
 		:collapsible=false

@@ -36,6 +36,8 @@ const persistence = (store) => {
 
 	const allShowComplete = {};
 	const allShowImages   = {};
+	const allShowTips     = {};
+	const allShowCoords   = {};
 	const allLastViewed   = {};
 
 	const allFilterState    = {};
@@ -45,6 +47,8 @@ const persistence = (store) => {
 	for (const profile of allProfiles) {
 		allShowComplete[profile] = loadCompatibleData(profile, "showComplete", "true") == "true";
 		allShowImages[profile]   = loadCompatibleData(profile, "showImages", defaultShowImages) == "true";
+		allShowTips[profile]     = loadCompatibleData(profile, "showTips", "true") == "true";
+		allShowCoords[profile]   = loadCompatibleData(profile, "showCoords", "true") == "true";
 		allLastViewed[profile]   = loadCompatibleData(profile, "lastViewed");
 
 		disabled  = loadCompatibleData(profile, "disabled", "").split(",");
@@ -85,6 +89,8 @@ const persistence = (store) => {
 
 		allShowComplete   : allShowComplete,
 		allShowImages     : allShowImages,
+		allShowTips       : allShowTips,
+		allShowCoords     : allShowCoords,
 		allLastViewed     : allLastViewed,
 
 		allFilterState    : allFilterState,
@@ -114,6 +120,8 @@ const persistence = (store) => {
 
 			localStorage.setItem(storagePrefix + "showComplete", state.allShowComplete[profileName]);
 			localStorage.setItem(storagePrefix + "showImages", state.allShowImages[profileName]);
+			localStorage.setItem(storagePrefix + "showTips", state.allShowTips[profileName]);
+			localStorage.setItem(storagePrefix + "showCoords", state.allShowCoords[profileName]);
 			localStorage.setItem(storagePrefix + "lastViewed", null);
 
 			obj = state.allFilterState[profileName];
@@ -136,6 +144,8 @@ const persistence = (store) => {
 
 			localStorage.removeItem(storagePrefix + "showComplete");
 			localStorage.removeItem(storagePrefix + "showImages");
+			localStorage.removeItem(storagePrefix + "showTips");
+			localStorage.removeItem(storagePrefix + "showCoords");
 			localStorage.removeItem(storagePrefix + "lastViewed");
 
 			localStorage.removeItem(storagePrefix + "disabled");
@@ -169,6 +179,16 @@ const persistence = (store) => {
 			const storagePrefix = "bg3items." + state.activeProfile + ".";
 			const data = state.allShowImages[state.activeProfile];
 			localStorage.setItem(storagePrefix + "showImages", data);
+
+		} else if (mutation.type == "TOGGLE_SHOW_TIPS") {
+			const storagePrefix = "bg3items." + state.activeProfile + ".";
+			const data = state.allShowTips[state.activeProfile];
+			localStorage.setItem(storagePrefix + "showTips", data);
+
+		} else if (mutation.type == "TOGGLE_SHOW_COORDS") {
+			const storagePrefix = "bg3items." + state.activeProfile + ".";
+			const data = state.allShowCoords[state.activeProfile];
+			localStorage.setItem(storagePrefix + "showCoords", data);
 
 		} else if (mutation.type == "UPDATE_LAST_VIEWED") {
 			const storagePrefix = "bg3items." + state.activeProfile + ".";

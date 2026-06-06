@@ -47,6 +47,37 @@ const Options = {
 				>👁️</span>
 				<span>Show Images</span>
 			</button>
+
+			<button class="toggle-button main-option"
+				:class="{
+					'toggle-button': true,
+					off: !$store.getters.showTips
+				}"
+				@click="$store.dispatch('toggleShowTips')"
+			>
+				<span
+					:class="{
+						eye: true,
+						off: !$store.getters.showTips
+					}"
+				>👁️</span>
+				<span>Show Tips</span>
+			</button>
+			<button class="toggle-button main-option"
+				:class="{
+					'toggle-button': true,
+					off: !$store.getters.showCoords
+				}"
+				@click="$store.dispatch('toggleShowCoords')"
+			>
+				<span
+					:class="{
+						eye: true,
+						off: !$store.getters.showCoords
+					}"
+				>👁️</span>
+				<span>Show Coordinates</span>
+			</button>
 		</div>
 	</fieldset>
 

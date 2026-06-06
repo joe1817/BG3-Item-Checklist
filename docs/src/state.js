@@ -9,6 +9,8 @@ const State = {
 
 			allShowComplete   : {},
 			allShowImages     : {},
+			allShowTips       : {},
+			allShowCoords     : {},
 			allLastViewed     : {},
 
 			allFilterState    : {},
@@ -32,6 +34,14 @@ const State = {
 
 		showImages(state) {
 			return state.allShowImages[state.activeProfile];
+		},
+
+		showTips(state) {
+			return state.allShowTips[state.activeProfile];
+		},
+
+		showCoords(state) {
+			return state.allShowCoords[state.activeProfile];
 		},
 
 		lastViewed(state) {
@@ -140,6 +150,8 @@ const State = {
 		CREATE_PROFILE(state, profile) {
 			state.allShowComplete[profile] = true;
 			state.allShowImages[profile]   = window.innerWidth > 768;
+			state.allShowTips[profile]     = true;
+			state.allShowCoords[profile]   = true;
 			state.allLastViewed[profile]   = null;
 
 			state.allFilterState[profile]    = {};
@@ -180,6 +192,8 @@ const State = {
 
 			delete state.allShowComplete[profile];
 			delete state.allShowImages[profile];
+			delete state.allShowTips[profile];
+			delete state.allShowCoords[profile];
 			delete state.allLastViewed[profile];
 
 			delete state.allFilterState[profile];
@@ -207,6 +221,14 @@ const State = {
 
 		TOGGLE_SHOW_IMAGES(state) {
 			state.allShowImages[state.activeProfile] = !state.allShowImages[state.activeProfile];
+		},
+
+		TOGGLE_SHOW_TIPS(state) {
+			state.allShowTips[state.activeProfile] = !state.allShowTips[state.activeProfile];
+		},
+
+		TOGGLE_SHOW_COORDS(state) {
+			state.allShowCoords[state.activeProfile] = !state.allShowCoords[state.activeProfile];
 		},
 
 		SET_ALL_CHECKBOXES(state, updates) {
@@ -277,6 +299,14 @@ const State = {
 
 		toggleShowImages({ commit, state }) {
 			commit("TOGGLE_SHOW_IMAGES");
+		},
+
+		toggleShowTips({ commit, state }) {
+			commit("TOGGLE_SHOW_TIPS");
+		},
+
+		toggleShowCoords({ commit, state }) {
+			commit("TOGGLE_SHOW_COORDS");
 		},
 
 		setAllCheckboxes({ commit, state }, payload) {

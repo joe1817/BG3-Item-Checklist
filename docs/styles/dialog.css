@@ -110,7 +110,7 @@
 			.close-button {
 				width: 30px;
 				height: 30px;
-				padding: 0 0 2px;
+				padding: 0 1px 0 0px;
 				border: none;
 				border-radius: 50%;
 				color: var(--close-text-color);

@@ -42,7 +42,15 @@ const Container = {
 
 	<div ref="content" class="content">
 
-		<div v-if="data.tip" class="tip" v-html="data.tip"></div>
+		<div
+			v-if="data.tip"
+			:class="{
+				tip:true,
+				'bordered-tip': true,
+				'coord-wrapper': data.tip.startsWith('<span') && data.tip.length <= 50
+			}"
+			v-html="data.tip"
+		></div>
 
 		<slot
 			name="nestedContainer"
