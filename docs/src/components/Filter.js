@@ -52,7 +52,12 @@ const Filter = {
 	},
 	methods: {
 		clickHandler(event, filter) {
-			if (this.touch && !event.target.classList.contains("eye") && filter.parent === undefined) {
+			if (
+				this.touch
+				&& !event.target.classList.contains("eye")
+				&& filter.children !== undefined
+				&& filter.parent === undefined // the UI only supports 1 level of expansion at the moment
+			) {
 				this.expanded = !this.expanded;
 			} else {
 				const updates = {};
