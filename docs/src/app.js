@@ -23,11 +23,20 @@ const App = {
 		'hide-coords': !$store.getters.showCoords,
 	}"
 >
-	<DefaultContainer
+	<Container
 		:data="entryData"
 		:collapsible=false
 		:clearable=false
-	></DefaultContainer>
+	>
+
+		<template #leaf="props">
+			<Entry
+				:data="props.data"
+			>
+			</Entry>
+		</template>
+
+	</Container>
 </div>
 `,
 	data() {

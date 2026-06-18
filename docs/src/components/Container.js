@@ -52,30 +52,27 @@ const Container = {
 			v-html="data.tip"
 		></div>
 
-		<slot
-			name="nestedContainer"
+		<Container
 			v-if="data.children[0].children !== undefined"
 			v-for="subdata in data.children"
 			:data="subdata"
 		>
-		</slot>
+			<template #leaf="props">
+				<slot name="leaf" :data="props.data" />
+			</template>
+		</Container>
 
 		<slot
 			name="leaf"
 			v-else
 			v-for="subdata in data.children"
 			:data="subdata"
-		>
-		</slot>
+		></slot>
 	</div>
 </div>
 `,
 	props: {
 		data: {},
-		autoHide: {
-			type: Boolean,
-			default: true
-		},
 		collapsible: {
 			type: Boolean,
 			default: true
@@ -143,7 +140,7 @@ const Container = {
 				}, { once: true });
 			} else {
 				this.$refs.content.style.maxHeight = this.$refs.content.scrollHeight + "px";
-				// need two requestAnimationFrame()'s to stop the browser from optimizing away the intermediate value above
+				// need two requestAnimationFrame()'s to stop the browser from optimizing away the starting value above
 				// void this.$refs.content.offsetHeight; // also works by forcing a reflow & "flushing" CSS changes to the browser
 				requestAnimationFrame(() => {
 					requestAnimationFrame(() => {

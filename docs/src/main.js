@@ -8,7 +8,6 @@ app.component("Options", Options);
 app.component("Entry", Entry);
 app.component("ProgressHeader", ProgressHeader);
 app.component("Container", Container);
-app.component("DefaultContainer", DefaultContainer);
 
 const { createStore } = Vuex;
 const store = createStore(State);
