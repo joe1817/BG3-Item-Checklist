@@ -90,11 +90,16 @@ const Filter = {
 		expanded(expand) {
 			const subcategoriesDiv = this.$refs.subfilters;
 			if (expand) {
+				this.closeDropDown = () => {
+					this.expanded = false;
+				}
+				window.addEventListener("scroll", this.closeDropDown, { passive: true });
 				subcategoriesDiv.style.maxHeight = subcategoriesDiv.scrollHeight + "px";
 				this.$emit("expanded", "filter-"+this.filter.id, true);
 			} else {
+				window.removeEventListener("scroll", this.closeDropDown);
 				subcategoriesDiv.style.maxHeight = "0px";
-				this.$emit("expanded", "filter-"+this.filter.id, false);
+				this.$emit("expanded", "filter-"+this.filter.id, false); // TODO emit 'collapsed' instead
 			}
 		}
 	}
