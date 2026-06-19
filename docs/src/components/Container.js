@@ -3,7 +3,7 @@ const Container = {
 <div
 	:id="data.id"
 	:class="[
-		(data.children[0].children !== undefined) ? 'meta-container':'container',
+		(data.children[0].children !== undefined) ? 'meta-container':'leaf-container',
 		{expanded: expanded}
 	]"
 	v-show="$store.state.visible[data.id]"
@@ -33,8 +33,11 @@ const Container = {
 		<div class="header-component">
 			<button
 				v-if="clearable"
-				v-show="$store.state.countProgress[data.id]"
-				class="clear-button noselect"
+				:class="{
+					'clear-button': true,
+					noselect: true,
+					hidden: !$store.state.countProgress[data.id],
+				}"
 				@click="clearHandler"
 			>Clear</button>
 		</div>

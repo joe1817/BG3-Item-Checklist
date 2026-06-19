@@ -1,6 +1,6 @@
 const ProgressHeader = {
 	template: `
-<span
+<div
 	:class="{
 		'progress-header' : true,
 		inactive          : trackable && !$store.state.countTotal[id],
@@ -25,7 +25,7 @@ const ProgressHeader = {
 	>
 		{{ $store.state.countProgress[id] || 0 }}/{{ $store.state.countTotal[id] || 0 }}
 	</span>
-</span>
+</div>
 `,
 	inheritAttrs: false,
 	props: {

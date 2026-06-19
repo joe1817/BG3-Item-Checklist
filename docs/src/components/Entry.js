@@ -10,7 +10,6 @@ const Entry = {
 		{
 			'top-tier': data.suggested,
 			completed: $store.getters.checkboxState[data.id],
-			'hide-image': !$store.getters.showImages,
 			'indented': data.indented
 		}
 	]"

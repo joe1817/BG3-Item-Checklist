@@ -23,14 +23,14 @@
 	--button-hover-background-color: #115FC2;
 	--button-eye-background-color: #0060DF;
 
-	--rarity-uncommon  : 1 189 57; /* 01bd39 */
-	--rarity-rare      : 1 191 255; /* 01bfff */
-	--rarity-very-rare : 209 1 123; /* d1017b */
-	--rarity-legendary : 183 134 29; /* b7861d */
-	--rarity-story     : 255 160 55; /* ffa037 */
+	--rarity-uncommon  : 1 189 57; /* 01BD39 */
+	--rarity-rare      : 1 191 255; /* 01BFFF */
+	--rarity-very-rare : 209 1 123; /* D1017B */
+	--rarity-legendary : 183 134 29; /* B7861D */
+	--rarity-story     : 255 160 55; /* FFA037 */
 
-	--progress-some-color: orange;
-	--progress-all-color: green;
+	--progress-some-color: #FFA037;
+	--progress-all-color: #01BD39;
 }
 
 .light-mode {
@@ -107,9 +107,8 @@ input[type="checkbox"] {
 }
 
 .progress {
-	padding: 0 2px;
-	margin: 1px;
-	margin-left: 8px;
+	height: min-content;
+	padding: 0 2px 2px;
 	border: 1px solid var(--border-color);
 	border-radius: 5px;
 	color: inherit;
@@ -137,6 +136,10 @@ input[type="checkbox"] {
 	                              supported by Chrome, Edge, Opera and Firefox */
 }
 
+.hidden {
+	visibility: hidden !important;
+}
+
 .header {
 	color: var(--strong-text-color);
 	background-color: var(--strong-background-color);
@@ -151,26 +154,7 @@ input[type="checkbox"] {
 	box-sizing: border-box;
 
 	.progress {
-		padding: 0 5px;
-	}
-}
-
-.meta-container > .header {
-	background-color: transparent;
-
-	.header-component {
-		min-width: 60px;
-	}
-
-	> .header-component:nth-of-type(1) {
-		text-align: right;
-	}
-}
-
-.container > .header {
-	.header-component:nth-of-type(3) {
-		flex-grow: 1;
-		text-align: right;
+		padding: 0 5px 1px;
 	}
 }
 
@@ -346,7 +330,7 @@ button.tall {
 		color: var(--strong-text-color);
 		background-color: var(--strong-background-color);
 		width: 300px;
-		box-sizing: border-box; /* Ensure padding doesn't affect width */
+		box-sizing: border-box;
 		transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 	}
 
@@ -390,6 +374,24 @@ button.tall {
 
 
 
+.meta-container > .header {
+	background-color: transparent;
+
+	.header-component {
+		min-width: 60px;
+	}
+
+	> .header-component:nth-of-type(1) {
+		text-align: right;
+	}
+}
+
+.leaf-container > .header {
+	.header-component:nth-of-type(3) {
+		flex-grow: 1;
+		text-align: right;
+	}
+}
 
 #site-header {
 	justify-content: space-between;
@@ -449,6 +451,10 @@ button.tall {
 
 	.progress-header.inactive {
 		opacity: 0.5;
+	}
+
+	.progress {
+		margin: 1px;
 	}
 }
 
@@ -511,6 +517,11 @@ button.tall {
 			display: flex;
 			flex-direction: row;
 			padding-left: 8px;
+
+			.progress {
+				margin-left: 8px;
+				align-self: center;
+			}
 		}
 
 		.title {
@@ -543,18 +554,6 @@ button.tall {
 	}
 }
 
-.hide-tips .tip {
-	display: none;
-}
-
-.hide-coords .coordinates {
-	display: none;
-}
-
-.hide-coords .coord-wrapper {
-	display: none;
-}
-
 .entry {
 	display: flex;
 	flex-direction: row;
@@ -578,7 +577,7 @@ button.tall {
 	}
 }
 
-.entry.hide-image {
+.hide-images .entry {
 	padding-top: 8px;
 	padding-bottom: 8px;
 
@@ -589,6 +588,18 @@ button.tall {
 	.entry-img {
 		display: none;
 	}
+}
+
+.hide-tips .tip {
+	display: none;
+}
+
+.hide-coords .coordinates {
+	display: none;
+}
+
+.hide-coords .coord-wrapper {
+	display: none;
 }
 
 .entry.indented {
@@ -652,6 +663,10 @@ button.tall {
 
 @media (max-width : 768px) {
 	#checklist {
+		.leaf-container .header .title {
+			font-size: 1.8em;
+		}
+
 		.content {
 			.bordered-tip {
 				max-width: 100%;
@@ -669,5 +684,23 @@ button.tall {
 
 	.entry.indented {
 		margin-left: 50px;
+	}
+}
+
+@media (max-width : 600px) {
+	#checklist .leaf-container .header .title {
+		font-size: 1.4em;
+	}
+}
+
+@media (max-width : 500px) {
+	#checklist .leaf-container .header .title {
+		font-size: 1.2em;
+	}
+}
+
+@media (max-width : 400px) {
+	#checklist .leaf-container .header .title {
+		font-size: 1em;
 	}
 }

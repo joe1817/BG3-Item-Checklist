@@ -21,6 +21,7 @@ const App = {
 	:class="{
 		'hide-tips': !$store.getters.showTips,
 		'hide-coords': !$store.getters.showCoords,
+		'hide-images': !$store.getters.showImages,
 	}"
 >
 	<Container
@@ -65,7 +66,7 @@ const App = {
 		}
 
 		// keep track of last viewed section
-		const containers = document.querySelectorAll("#checklist .container > .header");
+		const containers = document.querySelectorAll("#checklist .header");
 		const observer = new IntersectionObserver(
 			(sections) => {
 				sections.forEach((section) => {
