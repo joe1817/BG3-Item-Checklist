@@ -28,7 +28,8 @@ const persistence = (store) => {
 		return _default;
 	}
 
-	const defaultShowImages = window.innerWidth > 768 ? "true" : "false";
+	const isSmallScreen = window.matchMedia("(max-width: 768px)").matches;
+	const defaultShowImages = isSmallScreen ? "false" : "true";
 
 	const activeProfile = loadCompatibleData(null, "activeProfile", "(Default)");
 	const allProfiles   = loadCompatibleData(null, "allProfiles", "(Default)").split(",");
