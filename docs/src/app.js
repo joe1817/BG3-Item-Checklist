@@ -55,18 +55,18 @@ const App = {
 		// scroll to last viewed section
 		if (!isLocal) {
 			const lastViewed = this.$store.getters.lastViewed;
-			if (lastViewed) {
+			if (lastViewed && lastViewed != "TOC") {
 				const yPos = window.scrollY;
 				setTimeout(() => {
 					if (window.scrollY == yPos) {
-						document.getElementById(lastViewed).scrollIntoView({ behavior: "smooth" });
+						document.getElementById(lastViewed).scrollIntoView({ behavior: "instant" });
 					}
 				}, 1000);
 			}
 		}
 
 		// keep track of last viewed section
-		const containers = document.querySelectorAll("#checklist .header");
+		const headers = document.querySelectorAll("#checklist .header");
 		const observer = new IntersectionObserver(
 			(sections) => {
 				sections.forEach((section) => {
@@ -84,10 +84,18 @@ const App = {
 				rootMargin: "0px 0px -80%",
 			}
 		);
-		containers.forEach((section) => {
-			observer.observe(section);
-		});
-		observer.observe(document.getElementById("TOC"));
+
+		// watch for new sections coming into view
+		setTimeout(() => {
+			// wait for auto-scroll to end
+			window.addEventListener("scroll", () => {
+				// wait for user input
+				headers.forEach((header) => {
+					observer.observe(header);
+				});
+				observer.observe(document.getElementById("TOC"));
+			}, { once: true });
+		}, 2000);
 
 		// calculate buy prices from values
 		document.querySelectorAll(".value").forEach(value => {

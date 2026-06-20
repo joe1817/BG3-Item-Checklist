@@ -122,7 +122,7 @@ const persistence = (store) => {
 			localStorage.setItem(storagePrefix + "showImages", state.allShowImages[profileName]);
 			localStorage.setItem(storagePrefix + "showTips", state.allShowTips[profileName]);
 			localStorage.setItem(storagePrefix + "showCoords", state.allShowCoords[profileName]);
-			localStorage.setItem(storagePrefix + "lastViewed", null);
+			localStorage.setItem(storagePrefix + "lastViewed", "");
 
 			obj = state.allFilterState[profileName];
 			data = Object.keys(obj).filter(key => obj[key] === false).join(",");
