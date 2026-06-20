@@ -510,8 +510,6 @@ button.tall {
 		flex-direction: row;
 		align-items: center;
 		margin: 0.5em 0;
-		color: var(--strong-text-color);
-		opacity: 0.5;
 
 		.progress-header {
 			display: flex;
@@ -529,8 +527,8 @@ button.tall {
 		}
 	}
 
-	.expanded > .header {
-		opacity: 1;
+	.collapsed > .header {
+		opacity: 0.5;
 	}
 
 	.meta-container > .header {

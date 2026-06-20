@@ -4,7 +4,7 @@ const Container = {
 	:id="data.id"
 	:class="[
 		(data.children[0].children !== undefined) ? 'meta-container':'leaf-container',
-		{expanded: expanded}
+		{collapsed: collapsed}
 	]"
 	v-show="$store.state.visible[data.id]"
 >
@@ -16,7 +16,7 @@ const Container = {
 				:class="{
 					eye      : true,
 					noselect : true,
-					off      : !expanded
+					off      : collapsed
 				}"
 				@click="collapseHandler"
 			>👁️</span>
@@ -95,20 +95,20 @@ const Container = {
 	},
 
 	mounted() {
-		if (!this.$store.getters.expansionState[this.data.id]) {
+		if (this.$store.getters.collapsedState[this.data.id]) {
 			this.$refs.content.style.maxHeight = "0px";
 		}
 	},
 
 	computed: {
-		expanded() {
-			return this.$store.getters.expansionState[this.data.id];
+		collapsed() {
+			return this.$store.getters.collapsedState[this.data.id];
 		}
 	},
 
 	methods: {
 		collapseHandler() {
-			this.$store.dispatch("toggleExpansion", this.data.id);
+			this.$store.dispatch("toggleCollapse", this.data.id);
 		},
 		clearHandler() {
 			this.$confirm({
@@ -133,15 +133,8 @@ const Container = {
 	},
 
 	watch: {
-		expanded(newVal, oldVal) {
+		collapsed(newVal, oldVal) {
 			if (newVal) {
-				requestAnimationFrame(() => {
-					this.$refs.content.style.maxHeight = this.$refs.content.scrollHeight + "px";
-				});
-				this.$refs.content.addEventListener("transitionend", () => {
-					this.$refs.content.style.maxHeight = null;
-				}, { once: true });
-			} else {
 				this.$refs.content.style.maxHeight = this.$refs.content.scrollHeight + "px";
 				// need two requestAnimationFrame()'s to stop the browser from optimizing away the starting value above
 				// void this.$refs.content.offsetHeight; // also works by forcing a reflow & "flushing" CSS changes to the browser
@@ -150,6 +143,13 @@ const Container = {
 						this.$refs.content.style.maxHeight = "0px";
 					});
 				});
+			} else {
+				requestAnimationFrame(() => {
+					this.$refs.content.style.maxHeight = this.$refs.content.scrollHeight + "px";
+				});
+				this.$refs.content.addEventListener("transitionend", () => {
+					this.$refs.content.style.maxHeight = null;
+				}, { once: true });
 			}
 		}
 	}

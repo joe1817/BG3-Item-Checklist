@@ -42,7 +42,7 @@ const persistence = (store) => {
 
 	const allFilterState    = {};
 	const allCheckboxState  = {};
-	const allExpansionState = {};
+	const allCollapsedState = {};
 
 	for (const profile of allProfiles) {
 		allShowComplete[profile] = loadCompatibleData(profile, "showComplete", "true") == "true";
@@ -57,7 +57,7 @@ const persistence = (store) => {
 
 		allFilterState[profile]    = {};
 		allCheckboxState[profile]  = {};
-		allExpansionState[profile] = {};
+		allCollapsedState[profile] = {};
 
 		const fillFilterState = (filters) => {
 			for (const filter of filters) {
@@ -73,7 +73,7 @@ const persistence = (store) => {
 			if (entry.children === undefined) {
 				allCheckboxState[profile][entry.id] = checked.includes(entry.id);
 			} else {
-				allExpansionState[profile][entry.id] = !collapsed.includes(entry.id);
+				allCollapsedState[profile][entry.id] = collapsed.includes(entry.id);
 				for (const subentry of entry.children) {
 					fillEntryState(subentry);
 				}
@@ -95,7 +95,7 @@ const persistence = (store) => {
 
 		allFilterState    : allFilterState,
 		allCheckboxState  : allCheckboxState,
-		allExpansionState : allExpansionState
+		allCollapsedState : allCollapsedState
 	});
 
 
@@ -130,8 +130,8 @@ const persistence = (store) => {
 			obj = state.allCheckboxState[profileName];
 			data = Object.keys(obj).filter(key => obj[key] === true).join(",");
 			localStorage.setItem(storagePrefix + "checked", data);
-			obj = state.allExpansionState[profileName];
-			data = Object.keys(obj).filter(key => obj[key] === false).join(",");
+			obj = state.allCollapsedState[profileName];
+			data = Object.keys(obj).filter(key => obj[key] === true).join(",");
 			localStorage.setItem(storagePrefix + "collapsed", data);
 
 		} else if (mutation.type == "DELETE_PROFILE") {
@@ -158,10 +158,10 @@ const persistence = (store) => {
 			const data = Object.keys(obj).filter(key => obj[key] === false).join(",");
 			localStorage.setItem(storagePrefix + "disabled", data);
 
-		} else if (mutation.type == "TOGGLE_EXPANSION") {
+		} else if (mutation.type == "TOGGLE_COLLAPSE") {
 			const storagePrefix = "bg3items." + state.activeProfile + ".";
-			const obj = state.allExpansionState[state.activeProfile];
-			const data = Object.keys(obj).filter(key => obj[key] === false).join(",");
+			const obj = state.allCollapsedState[state.activeProfile];
+			const data = Object.keys(obj).filter(key => obj[key] === true).join(",");
 			localStorage.setItem(storagePrefix + "collapsed", data);
 
 		} else if (["TOGGLE_CHECKBOX", "SET_ALL_CHECKBOXES"].includes(mutation.type)) {

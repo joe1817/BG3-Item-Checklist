@@ -15,7 +15,7 @@ const State = {
 
 			allFilterState    : {},
 			allCheckboxState  : {},
-			allExpansionState : {},
+			allCollapsedState : {},
 
 			searchString           : "",
 			searchRegexp           : new RegExp(""),
@@ -56,8 +56,8 @@ const State = {
 			return state.allCheckboxState[state.activeProfile];
 		},
 
-		expansionState(state) {
-			return state.allExpansionState[state.activeProfile];
+		collapsedState(state) {
+			return state.allCollapsedState[state.activeProfile];
 		},
 	},
 
@@ -156,7 +156,7 @@ const State = {
 
 			state.allFilterState[profile]    = {};
 			state.allCheckboxState[profile]  = {};
-			state.allExpansionState[profile] = {};
+			state.allCollapsedState[profile] = {};
 
 			const fillFilterState = (filters) => {
 				for (const filter of filters) {
@@ -172,7 +172,7 @@ const State = {
 				if (entry.children === undefined) {
 					state.allCheckboxState[profile][entry.id] = false;
 				} else {
-					state.allExpansionState[profile][entry.id] = true;
+					state.allCollapsedState[profile][entry.id] = false;
 					for (const subentry of entry.children) {
 						fillEntryState(subentry);
 					}
@@ -198,7 +198,7 @@ const State = {
 
 			delete state.allFilterState[profile];
 			delete state.allCheckboxState[profile];
-			delete state.allExpansionState[profile];
+			delete state.allCollapsedState[profile];
  		},
 
 		TOGGLE_FILTER(state, updates) {
@@ -207,8 +207,8 @@ const State = {
 			});
 		},
 
-		TOGGLE_EXPANSION(state, id) {
-			state.allExpansionState[state.activeProfile][id] = !state.allExpansionState[state.activeProfile][id];
+		TOGGLE_COLLAPSE(state, id) {
+			state.allCollapsedState[state.activeProfile][id] = !state.allCollapsedState[state.activeProfile][id];
 		},
 
 		TOGGLE_CHECKBOX(state, id) {
@@ -283,8 +283,8 @@ const State = {
 			commit("UPDATE_VISIBLE");
 		},
 
-		toggleExpansion({ commit, state }, payload) {
-			commit("TOGGLE_EXPANSION", payload);
+		toggleCollapse({ commit, state }, payload) {
+			commit("TOGGLE_COLLAPSE", payload);
 		},
 
 		toggleCheckbox({ commit, state }, payload) {
