@@ -646,6 +646,7 @@ button {
 .hide-tips .tip { display: none !important; }
 .hide-coords .coordinates { display: none !important; }
 .hide-coords .coord-wrapper { display: none !important; }
+.hide-coords  .tip:has(.coord-wrapper:only-child) { display: none !important; }
 
 
 /* ==========================================================================

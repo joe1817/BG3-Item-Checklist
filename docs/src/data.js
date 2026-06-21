@@ -441,7 +441,7 @@ children : [
 		{
 		title    : "Arron",
 		id       : "Arron",
-		tip      : "<span class='coordinates'>(X: 205 Y: 516)</span>",
+		tip      : "",
 		children : [
 			{
 				title      : "Dragon's Grasp",
@@ -454,7 +454,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Dragon's Grasp.png",
 				link       : "https://bg3.wiki/wiki/Dragon's_Grasp",
-				desc       : "<span class='value'>65 gp</span><span class='tip'> (Note: Recommended to feed Gale.)</span>"
+				desc       : "<span class='coordinates'>(X: 205 Y: 516)</span> <span class='value'>65 gp</span><span class='tip'> (Note: Recommended to feed Gale.)</span>"
 			},
 			{
 				title      : "Gloves of Missile Snaring",
@@ -467,7 +467,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Gloves of Missile Snaring.png",
 				link       : "https://bg3.wiki/wiki/Gloves_of_Missile_Snaring",
-				desc       : "<span class='value'>160 gp / 210 gp</span>"
+				desc       : "<span class='coordinates'>(X: 205 Y: 516)</span> <span class='value'>160 gp / 210 gp</span>"
 			},
 			{
 				title      : "Hedge Wanderer Armour",
@@ -480,7 +480,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Hedge Wanderer Armour.png",
 				link       : "https://bg3.wiki/wiki/Hedge_Wanderer_Armour",
-				desc       : "<span class='value'>130 gp</span>"
+				desc       : "<span class='coordinates'>(X: 205 Y: 516)</span> <span class='value'>130 gp</span>"
 			},
 			{
 				title      : "Rain Dancer",
@@ -493,7 +493,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Rain Dancer.png",
 				link       : "https://bg3.wiki/wiki/Rain_Dancer",
-				desc       : "<span class='value'>100 gp / 155 gp</span>"
+				desc       : "<span class='coordinates'>(X: 205 Y: 516)</span> <span class='value'>100 gp / 155 gp</span>"
 			},
 			{
 				title      : "Ring of Flinging",
@@ -506,7 +506,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Ring of Flinging.png",
 				link       : "https://bg3.wiki/wiki/Ring_of_Flinging",
-				desc       : "<span class='value'>40 gp / 90 gp</span>"
+				desc       : "<span class='coordinates'>(X: 205 Y: 516)</span> <span class='value'>40 gp / 90 gp</span>"
 			},
 			{
 				title      : "Spellthief",
@@ -519,13 +519,13 @@ children : [
 				exploit    : false,
 				img        : "imgs/Spellthief.png",
 				link       : "https://bg3.wiki/wiki/Spellthief",
-				desc       : "<span class='value'>100 gp</span><span class='tip'> (Note: Recommended to feed Gale.)</span>"
+				desc       : "<span class='coordinates'>(X: 205 Y: 516)</span> <span class='value'>100 gp</span><span class='tip'> (Note: Recommended to feed Gale.)</span>"
 			}
 		]},
 		{
 		title    : "Dammon",
 		id       : "Dammon-1",
-		tip      : "<span class='coordinates'>(X: 177 Y: 562)</span>",
+		tip      : "",
 		children : [
 			{
 				title      : "Hunting Shortbow",
@@ -538,7 +538,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Hunting Shortbow.png",
 				link       : "https://bg3.wiki/wiki/Hunting_Shortbow",
-				desc       : "<span class='value'>65 gp</span>"
+				desc       : "<span class='coordinates'>(X: 177 Y: 562)</span> <span class='value'>65 gp</span>"
 			},
 			{
 				title      : "Safeguard Shield",
@@ -551,7 +551,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Safeguard Shield.png",
 				link       : "https://bg3.wiki/wiki/Safeguard_Shield",
-				desc       : "<span class='value'>55 gp</span>"
+				desc       : "<span class='coordinates'>(X: 177 Y: 562)</span> <span class='value'>55 gp</span>"
 			},
 			{
 				title      : "Orthon Explosive",
@@ -564,13 +564,13 @@ children : [
 				exploit    : false,
 				img        : "imgs/Orthon Explosive.png",
 				link       : "https://bg3.wiki/wiki/Orthon_Explosive",
-				desc       : "Obtained by giving Devilfoil Masks to Dammon."
+				desc       : "<span class='coordinates'>(X: 177 Y: 562)</span> Obtained by giving Devilfoil Masks to Dammon."
 			}
 		]},
 		{
 		title    : "Auntie Ethel",
 		id       : "Auntie-Ethel",
-		tip      : "<span class='coordinates'>(X: 192 Y: 546)</span> She will cease being a trader when encountered south of the Blighted Village.",
+		tip      : "She will cease being a trader when encountered south of the Blighted Village.",
 		children : [
 			{
 				title      : "Corellon's Grace",
@@ -583,7 +583,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Corellon's Grace.png",
 				link       : "https://bg3.wiki/wiki/Corellon's_Grace",
-				desc       : "<span class='value'>100 gp</span> (Can also be looted from Ethel in the Riverside Teahouse <span class='coordinates'>(X: -58 Y: 263)</span>.)"
+				desc       : "<span class='coordinates'>(X: 192 Y: 546)</span> <span class='value'>100 gp</span> (Can also be looted from Ethel in the Riverside Teahouse <span class='coordinates'>(X: -58 Y: 263)</span>.)"
 			}
 		]},
 		{
@@ -1275,7 +1275,7 @@ children : [
 		{
 		title    : "Grat the Trader",
 		id       : "Grat-the-Trader",
-		tip      : "<span class='coordinates'>(X: -99 Y: 425)</span> He will cease being a trader if the booze is poisoned.",
+		tip      : "He will cease being a trader if the booze is poisoned.",
 		children : [
 			{
 				title      : "Boots of Aid and Comfort",
@@ -1288,7 +1288,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Boots of Aid and Comfort.png",
 				link       : "https://bg3.wiki/wiki/Boots_of_Aid_and_Comfort",
-				desc       : "<span class='value'>70 gp</span>"
+				desc       : "<span class='coordinates'>(X: -99 Y: 425)</span> <span class='value'>70 gp</span>"
 			},
 			{
 				title      : "Doom Hammer",
@@ -1301,7 +1301,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Doom Hammer.png",
 				link       : "https://bg3.wiki/wiki/Doom_Hammer",
-				desc       : "<span class='value'>65 gp</span>"
+				desc       : "<span class='coordinates'>(X: -99 Y: 425)</span> <span class='value'>65 gp</span>"
 			},
 			{
 				title      : "Gloves of Archery",
@@ -1314,7 +1314,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Gloves of Archery.png",
 				link       : "https://bg3.wiki/wiki/Gloves_of_Archery",
-				desc       : "<span class='value'>60 gp / 170 gp</span>"
+				desc       : "<span class='coordinates'>(X: -99 Y: 425)</span> <span class='value'>60 gp / 170 gp</span>"
 			},
 			{
 				title      : "Returning Pike",
@@ -1327,7 +1327,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Returning Pike.png",
 				link       : "https://bg3.wiki/wiki/Returning_Pike",
-				desc       : "<span class='value'>65 gp / 250 gp</span>"
+				desc       : "<span class='coordinates'>(X: -99 Y: 425)</span> <span class='value'>65 gp / 250 gp</span>"
 			},
 			{
 				title      : "Swiresy Shoes",
@@ -1340,7 +1340,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Swiresy Shoes.png",
 				link       : "https://bg3.wiki/wiki/Swiresy_Shoes",
-				desc       : "<span class='value'>35 gp</span>"
+				desc       : "<span class='coordinates'>(X: -99 Y: 425)</span> <span class='value'>35 gp</span>"
 			}
 		]},
 		{
@@ -1638,7 +1638,7 @@ children : [
 		{
 		title    : "Roah Moonglow",
 		id       : "Roah-Moonglow",
-		tip      : "<span class='coordinates'>(X: 274 Y: -30)</span>",
+		tip      : "",
 		children : [
 			{
 				title      : "Blooded Greataxe",
@@ -1651,7 +1651,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Blooded Greataxe.png",
 				link       : "https://bg3.wiki/wiki/Blooded_Greataxe",
-				desc       : "<span class='value'>380 gp</span>"
+				desc       : "<span class='coordinates'>(X: 274 Y: -30)</span> <span class='value'>380 gp</span>"
 			},
 			{
 				title      : "Bow of Awareness",
@@ -1664,7 +1664,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Bow of Awareness.png",
 				link       : "https://bg3.wiki/wiki/Bow_of_Awareness",
-				desc       : "<span class='value'>65 gp / 130 gp</span>"
+				desc       : "<span class='coordinates'>(X: 274 Y: -30)</span> <span class='value'>65 gp / 130 gp</span>"
 			},
 			{
 				title      : "Gold Wyrmling Staff",
@@ -1677,7 +1677,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Gold Wyrmling Staff.png",
 				link       : "https://bg3.wiki/wiki/Gold_Wyrmling_Staff",
-				desc       : "<span class='value'>320 gp / 400 gp</span>"
+				desc       : "<span class='coordinates'>(X: 274 Y: -30)</span> <span class='value'>320 gp / 400 gp</span>"
 			},
 			{
 				title      : "Hunter's Dagger",
@@ -1690,7 +1690,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Hunter's Dagger.png",
 				link       : "https://bg3.wiki/wiki/Hunter's_Dagger",
-				desc       : "<span class='value'>65 gp</span>"
+				desc       : "<span class='coordinates'>(X: 274 Y: -30)</span> <span class='value'>65 gp</span>"
 			},
 			{
 				title      : "Monster Slayer Glaive",
@@ -1703,13 +1703,13 @@ children : [
 				exploit    : false,
 				img        : "imgs/Monster Slayer Glaive.png",
 				link       : "https://bg3.wiki/wiki/Monster_Slayer_Glaive",
-				desc       : "<span class='value'>380 gp</span>"
+				desc       : "<span class='coordinates'>(X: 274 Y: -30)</span> <span class='value'>380 gp</span>"
 			}
 		]},
 		{
 		title    : "Worg Pens",
 		id       : "Worg-Pens",
-		tip      : "<span class='coordinates'>(X: 342 Y: 31)</span>",
+		tip      : "<span class='coord-wrapper'>The entrance is located at <span class='coordinates'>X: 342 Y: 31</span>.</span>",
 		children : [
 			{
 				title      : "Worgfang",
@@ -1870,7 +1870,7 @@ children : [
 		{
 		title    : "Brem",
 		id       : "Brem",
-		tip      : "<span class='coordinates'>(X: 295 Y: -251)</span> Brem's secret stock is unlocked after completing the quest \"<a href='https://bg3.wiki/wiki/Find_the_Missing_Shipment'>Find the Missing Shipment</a>\".",
+		tip      : "Brem's secret stock is unlocked after completing the quest \"<a href='https://bg3.wiki/wiki/Find_the_Missing_Shipment'>Find the Missing Shipment</a>\".",
 		children : [
 			{
 				title      : "Giantbreaker",
@@ -1883,7 +1883,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Giantbreaker.png",
 				link       : "https://bg3.wiki/wiki/Giantbreaker",
-				desc       : "<span class='value'>380 gp</span>"
+				desc       : "<span class='coordinates'>(X: 295 Y: -251)</span> <span class='value'>380 gp</span>"
 			},
 			{
 				title      : "Gloves of Hail of Thorns",
@@ -1896,7 +1896,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Gloves of Hail of Thorns.png",
 				link       : "https://bg3.wiki/wiki/Gloves_of_Hail_of_Thorns",
-				desc       : "<span class='value'>90 gp</span>"
+				desc       : "<span class='coordinates'>(X: 295 Y: -251)</span> <span class='value'>90 gp</span>"
 			},
 			{
 				title      : "Gloves of Thievery",
@@ -1909,7 +1909,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Gloves of Thievery.png",
 				link       : "https://bg3.wiki/wiki/Gloves_of_Thievery",
-				desc       : "<span class='value'>60 gp</span>"
+				desc       : "<span class='coordinates'>(X: 295 Y: -251)</span> <span class='value'>60 gp</span>"
 			},
 			{
 				title      : "Rupturing Blade",
@@ -1922,7 +1922,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Rupturing Blade.png",
 				link       : "https://bg3.wiki/wiki/Rupturing_Blade",
-				desc       : "<span class='value'>130 gp</span>"
+				desc       : "<span class='coordinates'>(X: 295 Y: -251)</span> <span class='value'>130 gp</span>"
 			},
 			{
 				title      : "The Jolty Vest",
@@ -1935,7 +1935,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/The Jolty Vest.png",
 				link       : "https://bg3.wiki/wiki/The_Jolty_Vest",
-				desc       : "<span class='value'>510 gp</span>"
+				desc       : "<span class='coordinates'>(X: 295 Y: -251)</span> <span class='value'>510 gp</span>"
 			},
 			{
 				title      : "Titanstring Bow",
@@ -1948,7 +1948,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Titanstring Bow.png",
 				link       : "https://bg3.wiki/wiki/Titanstring_Bow",
-				desc       : "<span class='value'>310 gp / 400 gp</span> (Can also be bought from Lann Tarv on the Main Floor of Moonrise Towers in Act 2.)"
+				desc       : "<span class='coordinates'>(X: 295 Y: -251)</span> <span class='value'>310 gp / 400 gp</span> (Can also be bought from Lann Tarv on the Main Floor of Moonrise Towers in Act 2.)"
 			}
 		]},
 		{
@@ -2433,7 +2433,7 @@ children : [
 		{
 		title    : "Blurg",
 		id       : "Blurg",
-		tip      : "<span class='coordinates'>(X: 111 Y: -90)</span>",
+		tip      : "",
 		children : [
 			{
 				title      : "Boots of Genial Striding",
@@ -2446,7 +2446,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Boots of Genial Striding.png",
 				link       : "https://bg3.wiki/wiki/Boots_of_Genial_Striding",
-				desc       : "<span class='value'>190 gp</span>"
+				desc       : "<span class='coordinates'>(X: 111 Y: -90)</span> <span class='value'>190 gp</span>"
 			},
 			{
 				title      : "Cinder Shoes",
@@ -2459,7 +2459,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Cinder Shoes.png",
 				link       : "https://bg3.wiki/wiki/Cinder_Shoes",
-				desc       : "<span class='value'>70 gp</span>"
+				desc       : "<span class='coordinates'>(X: 111 Y: -90)</span> <span class='value'>70 gp</span>"
 			},
 			{
 				title      : "Circlet of Blasting",
@@ -2472,7 +2472,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Circlet of Blasting.png",
 				link       : "https://bg3.wiki/wiki/Circlet_of_Blasting",
-				desc       : "<span class='value'>300 gp</span>"
+				desc       : "<span class='coordinates'>(X: 111 Y: -90)</span> <span class='value'>300 gp</span>"
 			},
 			{
 				title      : "Melf's First Staff",
@@ -2485,7 +2485,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Melf's First Staff.png",
 				link       : "https://bg3.wiki/wiki/Melf's_First_Staff",
-				desc       : "<span class='value'>100 gp</span>"
+				desc       : "<span class='coordinates'>(X: 111 Y: -90)</span> <span class='value'>100 gp</span>"
 			},
 			{
 				title      : "Psychic Spark",
@@ -2498,7 +2498,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Psychic Spark.png",
 				link       : "https://bg3.wiki/wiki/Psychic_Spark",
-				desc       : "<span class='value'>65 gp</span>"
+				desc       : "<span class='coordinates'>(X: 111 Y: -90)</span> <span class='value'>65 gp</span>"
 			},
 			{
 				title      : "Sunwalker's Gift",
@@ -2511,7 +2511,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Sunwalker's Gift.png",
 				link       : "https://bg3.wiki/wiki/Sunwalker's_Gift",
-				desc       : "<span class='value'>40 gp</span>"
+				desc       : "<span class='coordinates'>(X: 111 Y: -90)</span> <span class='value'>40 gp</span>"
 			},
 			{
 				title      : "The Baneful",
@@ -2524,7 +2524,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/The Baneful.png",
 				link       : "https://bg3.wiki/wiki/The_Baneful",
-				desc       : "<span class='value'>190 gp / 250 gp</span>"
+				desc       : "<span class='coordinates'>(X: 111 Y: -90)</span> <span class='value'>190 gp / 250 gp</span>"
 			},
 			{
 				title      : "The Lifebringer",
@@ -2537,13 +2537,13 @@ children : [
 				exploit    : false,
 				img        : "imgs/The Lifebringer.png",
 				link       : "https://bg3.wiki/wiki/The_Lifebringer",
-				desc       : "<span class='value'>90 gp</span>"
+				desc       : "<span class='coordinates'>(X: 111 Y: -90)</span> <span class='value'>90 gp</span>"
 			}
 		]},
 		{
 		title    : "Omeluum",
 		id       : "Omeluum",
-		tip      : "<span class='coordinates'>(X: 112 Y: -88)</span> Blurg will summon him.",
+		tip      : "Blurg will summon him.",
 		children : [
 			{
 				title      : "Boots of Stormy Clamour",
@@ -2556,7 +2556,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Boots of Stormy Clamour.png",
 				link       : "https://bg3.wiki/wiki/Boots_of_Stormy_Clamour",
-				desc       : "<span class='value'>70 gp / 145 gp</span>"
+				desc       : "<span class='coordinates'>(X: 112 Y: -88)</span> <span class='value'>70 gp / 145 gp</span>"
 			},
 			{
 				title      : "Creation's Echo",
@@ -2569,7 +2569,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Creation's Echo.png",
 				link       : "https://bg3.wiki/wiki/Creation's_Echo",
-				desc       : "<span class='value'>310 gp</span>"
+				desc       : "<span class='coordinates'>(X: 112 Y: -88)</span> <span class='value'>310 gp</span>"
 			},
 			{
 				title      : "On Illithids, Volume XXVI",
@@ -2582,7 +2582,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/On Illithids, Volume XXVI.png",
 				link       : "https://bg3.wiki/wiki/On_Illithids,_Volume_XXVI",
-				desc       : "<span class='value'>14 gp</span>. Grants an inspiration point when read by Gale."
+				desc       : "<span class='coordinates'>(X: 112 Y: -88)</span> <span class='value'>14 gp</span>. Grants an inspiration point when read by Gale."
 			},
 			{
 				title      : "Pearl of Power Amulet",
@@ -2595,7 +2595,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Pearl of Power Amulet.png",
 				link       : "https://bg3.wiki/wiki/Pearl_of_Power_Amulet",
-				desc       : "<span class='value'>45 gp / 155 gp</span>"
+				desc       : "<span class='coordinates'>(X: 112 Y: -88)</span> <span class='value'>45 gp / 155 gp</span>"
 			},
 			{
 				title      : "Ring of Salving",
@@ -2608,7 +2608,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Ring of Salving.png",
 				link       : "https://bg3.wiki/wiki/Ring_of_Salving",
-				desc       : "<span class='value'>40 gp</span>"
+				desc       : "<span class='coordinates'>(X: 112 Y: -88)</span> <span class='value'>40 gp</span>"
 			},
 			{
 				title      : "The Shadespell Circlet",
@@ -2621,7 +2621,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/The Shadespell Circlet.png",
 				link       : "https://bg3.wiki/wiki/The_Shadespell_Circlet",
-				desc       : "<span class='value'>90 gp / 310 gp</span>"
+				desc       : "<span class='coordinates'>(X: 112 Y: -88)</span> <span class='value'>90 gp / 310 gp</span>"
 			},
 			{
 				title      : "Survival Instinct",
@@ -2634,7 +2634,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Survival Instinct.png",
 				link       : "https://bg3.wiki/wiki/Survival_Instinct",
-				desc       : "Obtained for completing the quest \"<a href='https://bg3.wiki/wiki/Help_Omeluum_Investigate_the_Parasite'>Help Omeluum Investigate the Parasite</a>\"."
+				desc       : "<span class='coordinates'>(X: 112 Y: -88)</span> Obtained for completing the quest \"<a href='https://bg3.wiki/wiki/Help_Omeluum_Investigate_the_Parasite'>Help Omeluum Investigate the Parasite</a>\"."
 			},
 			{
 				title      : "Ring of Mind-Shielding",
@@ -2647,13 +2647,13 @@ children : [
 				exploit    : false,
 				img        : "imgs/Ring of Mind-Shielding.png",
 				link       : "https://bg3.wiki/wiki/Ring_of_Mind-Shielding",
-				desc       : "Obtained after completing the quest \"<a href='https://bg3.wiki/wiki/Help_Omeluum_Investigate_the_Parasite'>Help Omeluum Investigate the Parasite</a>\". You can buy it either with gold (<span class='value'>70 gp</span>), or by supplying information about the Nautiloid gathered from Eldritch Runes in the Prologue.<span class='tip'> (Note: Recommended to feed Gale.)</span>"
+				desc       : "<span class='coordinates'>(X: 112 Y: -88)</span> Obtained after completing the quest \"<a href='https://bg3.wiki/wiki/Help_Omeluum_Investigate_the_Parasite'>Help Omeluum Investigate the Parasite</a>\". You can buy it either with gold (<span class='value'>70 gp</span>), or by supplying information about the Nautiloid gathered from Eldritch Runes in the Prologue.<span class='tip'> (Note: Recommended to feed Gale.)</span>"
 			}
 		]},
 		{
 		title    : "Derryth Bonecloak",
 		id       : "Derryth-Bonecloak",
-		tip      : "<span class='coordinates'>(X: 50 Y: -94)</span>",
+		tip      : "",
 		children : [
 			{
 				title      : "Amulet of Restoration",
@@ -2666,7 +2666,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Amulet of Restoration.png",
 				link       : "https://bg3.wiki/wiki/Amulet_of_Restoration",
-				desc       : "<span class='value'>160 gp / 210 gp</span>"
+				desc       : "<span class='coordinates'>(X: 50 Y: -94)</span> <span class='value'>160 gp / 210 gp</span>"
 			},
 			{
 				title      : "Caustic Band",
@@ -2679,7 +2679,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Caustic Band.png",
 				link       : "https://bg3.wiki/wiki/Caustic_Band",
-				desc       : "<span class='value'>40 gp / 590 gp</span>"
+				desc       : "<span class='coordinates'>(X: 50 Y: -94)</span> <span class='value'>40 gp / 590 gp</span>"
 			},
 			{
 				title      : "Corrosive Flail",
@@ -2692,7 +2692,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Corrosive Flail.png",
 				link       : "https://bg3.wiki/wiki/Corrosive_Flail",
-				desc       : "<span class='value'>310 gp</span>"
+				desc       : "<span class='coordinates'>(X: 50 Y: -94)</span> <span class='value'>310 gp</span>"
 			},
 			{
 				title      : "Gloves of Hail of Thorns",
@@ -2705,7 +2705,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Gloves of Hail of Thorns.png",
 				link       : "https://bg3.wiki/wiki/Gloves_of_Hail_of_Thorns",
-				desc       : "<span class='value'>90 gp</span>"
+				desc       : "<span class='coordinates'>(X: 50 Y: -94)</span> <span class='value'>90 gp</span>"
 			},
 			{
 				title      : "Herbalist's Gloves",
@@ -2718,7 +2718,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Herbalist's Gloves.png",
 				link       : "https://bg3.wiki/wiki/Herbalist's_Gloves",
-				desc       : "<span class='value'>90 gp</span>"
+				desc       : "<span class='coordinates'>(X: 50 Y: -94)</span> <span class='value'>90 gp</span>"
 			},
 			{
 				title      : "Ring of Jumping",
@@ -2731,7 +2731,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Ring of Jumping.png",
 				link       : "https://bg3.wiki/wiki/Ring_of_Jumping",
-				desc       : "<span class='value'>55 gp</span>"
+				desc       : "<span class='coordinates'>(X: 50 Y: -94)</span> <span class='value'>55 gp</span>"
 			},
 			{
 				title      : "Gloves of Uninhibited Kushigo",
@@ -2744,7 +2744,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Gloves of Uninhibited Kushigo.png",
 				link       : "https://bg3.wiki/wiki/Gloves_of_Uninhibited_Kushigo",
-				desc       : "Rewarded by Derryth Bonecloak after finding and saving Baelen Bonecloak during the quest \"<a href='https://bg3.wiki/wiki/Find_the_Mushroom_Picker'>Find the Mushroom Picker</a>\"."
+				desc       : "<span class='coordinates'>(X: 50 Y: -94)</span> Rewarded by Derryth Bonecloak after finding and saving Baelen Bonecloak during the quest \"<a href='https://bg3.wiki/wiki/Find_the_Mushroom_Picker'>Find the Mushroom Picker</a>\"."
 			}
 		]},
 		{
@@ -2918,7 +2918,7 @@ children : [
 		{
 		title    : "Zurkhwood Skiffs",
 		id       : "Zurkhwood-Skiffs",
-		tip      : "",
+		tip      : "This event only happens once.",
 		children : [
 			{
 				title      : "Intransigent Warhammer",
@@ -2931,7 +2931,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Intransigent Warhammer.png",
 				link       : "https://bg3.wiki/wiki/Intransigent_Warhammer",
-				desc       : "<span class='coordinates'>(X: -447 Y: -525)</span> Found in a chest on a duergar skiff thats pulls up next to you during your first voyage to Grymforge. You'll need to start a fight to obtain it. (Note: This event only happens once.)"
+				desc       : "<span class='coordinates'>(X: -447 Y: -525)</span> Found in a chest on a duergar skiff thats pulls up next to you during your first voyage to Grymforge. You'll need to start a fight to obtain it."
 			},
 			{
 				title      : "Bow of the Banshee",
@@ -3482,7 +3482,7 @@ children : [
 		{
 		title    : "Lady Esther",
 		id       : "Lady-Esther",
-		tip      : "<span class='coordinates'>(X: -43 Y: -129)</span> She is in the Mountain Pass area, down the stairs and to the right from the Trielta Crags waypoint.",
+		tip      : "She is in the Mountain Pass area, down the stairs and to the right from the Trielta Crags waypoint.",
 		children : [
 			{
 				title      : "Boots of Elemental Momentum",
@@ -3495,7 +3495,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Boots of Elemental Momentum.png",
 				link       : "https://bg3.wiki/wiki/Boots_of_Elemental_Momentum",
-				desc       : "<span class='value'>90 gp / 125 gp</span>"
+				desc       : "<span class='coordinates'>(X: -43 Y: -129)</span> <span class='value'>90 gp / 125 gp</span>"
 			},
 			{
 				title      : "Cacophony",
@@ -3508,7 +3508,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Cacophony.png",
 				link       : "https://bg3.wiki/wiki/Cacophony",
-				desc       : "<span class='value'>310 gp</span>"
+				desc       : "<span class='coordinates'>(X: -43 Y: -129)</span> <span class='value'>310 gp</span>"
 			},
 			{
 				title      : "Gloves of Baneful Striking",
@@ -3521,7 +3521,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Gloves of Baneful Striking.png",
 				link       : "https://bg3.wiki/wiki/Gloves_of_Baneful_Striking",
-				desc       : "<span class='value'>90 gp / 150 gp</span>"
+				desc       : "<span class='coordinates'>(X: -43 Y: -129)</span> <span class='value'>90 gp / 150 gp</span>"
 			},
 			{
 				title      : "Gloves of Cinder and Sizzle",
@@ -3534,7 +3534,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Gloves of Cinder and Sizzle.png",
 				link       : "https://bg3.wiki/wiki/Gloves_of_Cinder_and_Sizzle",
-				desc       : "<span class='value'>240 gp</span>"
+				desc       : "<span class='coordinates'>(X: -43 Y: -129)</span> <span class='value'>240 gp</span>"
 			},
 			{
 				title      : "Hoppy",
@@ -3547,7 +3547,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Hoppy.png",
 				link       : "https://bg3.wiki/wiki/Hoppy",
-				desc       : "<span class='value'>100 gp</span>"
+				desc       : "<span class='coordinates'>(X: -43 Y: -129)</span> <span class='value'>100 gp</span>"
 			},
 			{
 				title      : "Periapt of Wound Closure",
@@ -3560,7 +3560,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Periapt of Wound Closure.png",
 				link       : "https://bg3.wiki/wiki/Periapt_of_Wound_Closure",
-				desc       : "<span class='value'>125 gp / 410 gp</span>"
+				desc       : "<span class='coordinates'>(X: -43 Y: -129)</span> <span class='value'>125 gp / 410 gp</span>"
 			},
 			{
 				title      : "The Graceful Cloth",
@@ -3573,7 +3573,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/The Graceful Cloth.png",
 				link       : "https://bg3.wiki/wiki/The_Graceful_Cloth",
-				desc       : "<span class='value'>800 gp / 1050 gp</span>"
+				desc       : "<span class='coordinates'>(X: -43 Y: -129)</span> <span class='value'>800 gp / 1050 gp</span>"
 			},
 			{
 				title      : "Winter's Clutches",
@@ -3586,7 +3586,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Winter's Clutches.png",
 				link       : "https://bg3.wiki/wiki/Winter's_Clutches",
-				desc       : "<span class='value'>90 gp / 170 gp</span>"
+				desc       : "<span class='coordinates'>(X: -43 Y: -129)</span> <span class='value'>90 gp / 170 gp</span>"
 			}
 		]},
 		{
@@ -3877,7 +3877,7 @@ children : [
 		{
 		title    : "A'jak'nir Jeera",
 		id       : "Ajaknir-Jeera",
-		tip      : "<span class='coordinates'>(X: 1383 Y: -812)</span> She is found in the camp area.",
+		tip      : "She is found in the camp area.",
 		children : [
 			{
 				title      : "Daredevil Gloves",
@@ -3890,7 +3890,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Daredevil Gloves.png",
 				link       : "https://bg3.wiki/wiki/Daredevil_Gloves",
-				desc       : "<span class='value'>240 gp / 310 gp</span>"
+				desc       : "<span class='coordinates'>(X: 1383 Y: -812)</span> <span class='value'>240 gp / 310 gp</span>"
 			},
 			{
 				title      : "Defender Flail",
@@ -3903,7 +3903,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Defender Flail.png",
 				link       : "https://bg3.wiki/wiki/Defender_Flail",
-				desc       : "<span class='value'>310 gp</span>"
+				desc       : "<span class='coordinates'>(X: 1383 Y: -812)</span> <span class='value'>310 gp</span>"
 			},
 			{
 				title      : "Gloves of Dexterity",
@@ -3916,7 +3916,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Gloves of Dexterity.png",
 				link       : "https://bg3.wiki/wiki/Gloves_of_Dexterity",
-				desc       : "<span class='value'>300 gp / 860 gp</span>"
+				desc       : "<span class='coordinates'>(X: 1383 Y: -812)</span> <span class='value'>300 gp / 860 gp</span>"
 			},
 			{
 				title      : "Knife of the Undermountain King",
@@ -3929,7 +3929,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Knife of the Undermountain King.png",
 				link       : "https://bg3.wiki/wiki/Knife_of_the_Undermountain_King",
-				desc       : "<span class='value'>480 gp / 1200 gp</span>"
+				desc       : "<span class='coordinates'>(X: 1383 Y: -812)</span> <span class='value'>480 gp / 1200 gp</span>"
 			},
 			{
 				title      : "Larethian's Wrath",
@@ -3942,7 +3942,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Larethian's Wrath.png",
 				link       : "https://bg3.wiki/wiki/Larethian's_Wrath",
-				desc       : "<span class='value'>250 gp</span>"
+				desc       : "<span class='coordinates'>(X: 1383 Y: -812)</span> <span class='value'>250 gp</span>"
 			},
 			{
 				title      : "Unseen Menace",
@@ -3955,7 +3955,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Unseen Menace.png",
 				link       : "https://bg3.wiki/wiki/Unseen_Menace",
-				desc       : "<span class='value'>190 gp / 310 gp</span>"
+				desc       : "<span class='coordinates'>(X: 1383 Y: -812)</span> <span class='value'>190 gp / 310 gp</span>"
 			},
 			{
 				title      : "Vital Conduit Boots",
@@ -3968,7 +3968,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Vital Conduit Boots.png",
 				link       : "https://bg3.wiki/wiki/Vital_Conduit_Boots",
-				desc       : "<span class='value'>240 gp</span>"
+				desc       : "<span class='coordinates'>(X: 1383 Y: -812)</span> <span class='value'>240 gp</span>"
 			},
 			{
 				title      : "Witchbreaker",
@@ -3981,7 +3981,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Witchbreaker.png",
 				link       : "https://bg3.wiki/wiki/Witchbreaker",
-				desc       : "<span class='value'>100 gp</span>"
+				desc       : "<span class='coordinates'>(X: 1383 Y: -812)</span> <span class='value'>100 gp</span>"
 			},
 			{
 				title      : "Amulet of Branding",
@@ -3994,7 +3994,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Amulet of Branding.png",
 				link       : "https://bg3.wiki/wiki/Amulet_of_Branding",
-				desc       : "Looted from A'jak'nir Jeera."
+				desc       : "<span class='coordinates'>(X: 1383 Y: -812)</span> Looted from A'jak'nir Jeera."
 			}
 		]},
 		{
@@ -4439,7 +4439,7 @@ children : [
 		{
 		title    : "Quartermaster Talli",
 		id       : "Quartermaster-Talli",
-		tip      : "<span class='coordinates'>(X: -31 Y: 130)</span> She is found near the bridge.",
+		tip      : "She is found near the bridge.",
 		children : [
 			{
 				title      : "Amulet of the Harpers",
@@ -4452,7 +4452,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Amulet of the Harpers.png",
 				link       : "https://bg3.wiki/wiki/Amulet_of_the_Harpers",
-				desc       : "<span class='value'>125 gp</span>"
+				desc       : "<span class='coordinates'>(X: -31 Y: 130)</span> <span class='value'>125 gp</span>"
 			},
 			{
 				title      : "Barkskin Armour",
@@ -4465,7 +4465,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Barkskin Armour.png",
 				link       : "https://bg3.wiki/wiki/Barkskin_Armour",
-				desc       : "<span class='value'>420 gp</span>"
+				desc       : "<span class='coordinates'>(X: -31 Y: 130)</span> <span class='value'>420 gp</span>"
 			},
 			{
 				title      : "Cindersnap Gloves",
@@ -4478,7 +4478,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Cindersnap Gloves.png",
 				link       : "https://bg3.wiki/wiki/Cindersnap_Gloves",
-				desc       : "<span class='value'>240 gp</span>"
+				desc       : "<span class='coordinates'>(X: -31 Y: 130)</span> <span class='value'>240 gp</span>"
 			},
 			{
 				title      : "Cloak of Protection",
@@ -4491,7 +4491,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Cloak of Protection.png",
 				link       : "https://bg3.wiki/wiki/Cloak_of_Protection",
-				desc       : "<span class='value'>200 gp / 310 gp</span>"
+				desc       : "<span class='coordinates'>(X: -31 Y: 130)</span> <span class='value'>200 gp / 310 gp</span>"
 			},
 			{
 				title      : "Defender Greataxe",
@@ -4504,7 +4504,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Defender Greataxe.png",
 				link       : "https://bg3.wiki/wiki/Defender_Greataxe",
-				desc       : "<span class='value'>380 gp</span>"
+				desc       : "<span class='coordinates'>(X: -31 Y: 130)</span> <span class='value'>380 gp</span>"
 			},
 			{
 				title      : "Gloves of the Balanced Hands",
@@ -4517,7 +4517,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Gloves of the Balanced Hands.png",
 				link       : "https://bg3.wiki/wiki/Gloves_of_the_Balanced_Hands",
-				desc       : "<span class='value'>160 gp / 460 gp</span>"
+				desc       : "<span class='coordinates'>(X: -31 Y: 130)</span> <span class='value'>160 gp / 460 gp</span>"
 			},
 			{
 				title      : "Hat of Uninhibited Kushigo",
@@ -4530,7 +4530,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Hat of Uninhibited Kushigo.png",
 				link       : "https://bg3.wiki/wiki/Hat_of_Uninhibited_Kushigo",
-				desc       : "<span class='value'>240 gp / 400 gp</span>"
+				desc       : "<span class='coordinates'>(X: -31 Y: 130)</span> <span class='value'>240 gp / 400 gp</span>"
 			},
 			{
 				title      : "Incandescent Staff",
@@ -4543,7 +4543,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Incandescent Staff.png",
 				link       : "https://bg3.wiki/wiki/Incandescent_Staff",
-				desc       : "<span class='value'>770 gp / 1450 gp</span>"
+				desc       : "<span class='coordinates'>(X: -31 Y: 130)</span> <span class='value'>770 gp / 1450 gp</span>"
 			},
 			{
 				title      : "Obsidian Laced Robe",
@@ -4556,7 +4556,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Obsidian Laced Robe.png",
 				link       : "https://bg3.wiki/wiki/Obsidian_Laced_Robe",
-				desc       : "<span class='value'>800 gp</span>"
+				desc       : "<span class='coordinates'>(X: -31 Y: 130)</span> <span class='value'>800 gp</span>"
 			},
 			{
 				title      : "Shadeclinger Armour",
@@ -4569,7 +4569,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Shadeclinger Armour.png",
 				link       : "https://bg3.wiki/wiki/Shadeclinger_Armour",
-				desc       : "<span class='value'>130 gp</span>"
+				desc       : "<span class='coordinates'>(X: -31 Y: 130)</span> <span class='value'>130 gp</span>"
 			},
 			{
 				title      : "Shield of Devotion",
@@ -4582,7 +4582,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Shield of Devotion.png",
 				link       : "https://bg3.wiki/wiki/Shield_of_Devotion",
-				desc       : "<span class='value'>570 gp / 740 gp</span>"
+				desc       : "<span class='coordinates'>(X: -31 Y: 130)</span> <span class='value'>570 gp / 740 gp</span>"
 			},
 			{
 				title      : "The Mighty Cloth",
@@ -4595,7 +4595,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/The Mighty Cloth.png",
 				link       : "https://bg3.wiki/wiki/The_Mighty_Cloth",
-				desc       : "<span class='value'>800 gp / 1050 gp</span>"
+				desc       : "<span class='coordinates'>(X: -31 Y: 130)</span> <span class='value'>800 gp / 1050 gp</span>"
 			},
 			{
 				title      : "Yuan-Ti Scale Mail",
@@ -4608,13 +4608,13 @@ children : [
 				exploit    : false,
 				img        : "imgs/Yuan-Ti Scale Mail.png",
 				link       : "https://bg3.wiki/wiki/Yuan-Ti_Scale_Mail",
-				desc       : "<span class='value'>640 gp / 960 gp</span>"
+				desc       : "<span class='coordinates'>(X: -31 Y: 130)</span> <span class='value'>640 gp / 960 gp</span>"
 			}
 		]},
 		{
 		title    : "Dammon",
 		id       : "Dammon-2",
-		tip      : "<span class='coordinates'>(X: -34 Y: 166)</span> He is found in the barn.",
+		tip      : "He is found in the barn.",
 		children : [
 			{
 				title      : "Charge-Bound Warhammer",
@@ -4627,7 +4627,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Charge-Bound Warhammer.png",
 				link       : "https://bg3.wiki/wiki/Charge-Bound_Warhammer",
-				desc       : "<span class='value'>310 gp</span>"
+				desc       : "<span class='coordinates'>(X: -34 Y: 166)</span> <span class='value'>310 gp</span>"
 			},
 			{
 				title      : "Darkfire Shortbow",
@@ -4640,7 +4640,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Darkfire Shortbow.png",
 				link       : "https://bg3.wiki/wiki/Darkfire_Shortbow",
-				desc       : "<span class='value'>480 gp / 1550 gp</span>"
+				desc       : "<span class='coordinates'>(X: -34 Y: 166)</span> <span class='value'>480 gp / 1550 gp</span>"
 			},
 			{
 				title      : "Harmonium Halberd",
@@ -4653,7 +4653,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Harmonium Halberd.png",
 				link       : "https://bg3.wiki/wiki/Harmonium_Halberd",
-				desc       : "<span class='value'>380 gp</span>"
+				desc       : "<span class='coordinates'>(X: -34 Y: 166)</span> <span class='value'>380 gp</span>"
 			},
 			{
 				title      : "Sword of Clutching Umbra",
@@ -4666,7 +4666,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Sword of Clutching Umbra.png",
 				link       : "https://bg3.wiki/wiki/Sword_of_Clutching_Umbra",
-				desc       : "<span class='value'>190 gp</span>"
+				desc       : "<span class='coordinates'>(X: -34 Y: 166)</span> <span class='value'>190 gp</span>"
 			},
 			{
 				title      : "Sword of Life Stealing",
@@ -4679,7 +4679,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Sword of Life Stealing.png",
 				link       : "https://bg3.wiki/wiki/Sword_of_Life_Stealing",
-				desc       : "<span class='value'>480 gp / 1550 gp</span>"
+				desc       : "<span class='coordinates'>(X: -34 Y: 166)</span> <span class='value'>480 gp / 1550 gp</span>"
 			},
 			{
 				title      : "Swordmaster Gloves",
@@ -4692,7 +4692,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Swordmaster Gloves.png",
 				link       : "https://bg3.wiki/wiki/Swordmaster_Gloves",
-				desc       : "<span class='value'>160 gp / 460 gp</span>"
+				desc       : "<span class='coordinates'>(X: -34 Y: 166)</span> <span class='value'>160 gp / 460 gp</span>"
 			},
 			{
 				title      : "Thermodynamo Axe",
@@ -4705,7 +4705,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Thermodynamo Axe.png",
 				link       : "https://bg3.wiki/wiki/Thermodynamo_Axe",
-				desc       : "<span class='value'>310 gp / 460 gp</span>"
+				desc       : "<span class='coordinates'>(X: -34 Y: 166)</span> <span class='value'>310 gp / 460 gp</span>"
 			},
 			{
 				title      : "Thorn Blade",
@@ -4718,7 +4718,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Thorn Blade.png",
 				link       : "https://bg3.wiki/wiki/Thorn_Blade",
-				desc       : "<span class='value'>190 gp</span>"
+				desc       : "<span class='coordinates'>(X: -34 Y: 166)</span> <span class='value'>190 gp</span>"
 			},
 			{
 				title      : "Flawed Helldusk Armour",
@@ -4731,7 +4731,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Flawed Helldusk Armour.png",
 				link       : "https://bg3.wiki/wiki/Flawed_Helldusk_Armour",
-				desc       : "Obtained by giving Dammon a piece of Infernal Iron."
+				desc       : "<span class='coordinates'>(X: -34 Y: 166)</span> Obtained by giving Dammon a piece of Infernal Iron."
 			},
 			{
 				title      : "Flawed Helldusk Gloves",
@@ -4744,7 +4744,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Flawed Helldusk Gloves.png",
 				link       : "https://bg3.wiki/wiki/Flawed_Helldusk_Gloves",
-				desc       : "Obtained by giving Dammon a piece of Infernal Iron."
+				desc       : "<span class='coordinates'>(X: -34 Y: 166)</span> Obtained by giving Dammon a piece of Infernal Iron."
 			},
 			{
 				title      : "Flawed Helldusk Helmet",
@@ -4757,13 +4757,13 @@ children : [
 				exploit    : false,
 				img        : "imgs/Flawed Helldusk Helmet.png",
 				link       : "https://bg3.wiki/wiki/Flawed_Helldusk_Helmet",
-				desc       : "Obtained by giving Dammon a piece of Infernal Iron."
+				desc       : "<span class='coordinates'>(X: -34 Y: 166)</span> Obtained by giving Dammon a piece of Infernal Iron."
 			}
 		]},
 		{
 		title    : "Mattis",
 		id       : "Mattis-1",
-		tip      : "<span class='coordinates'>(X: -54 Y: 141)</span> He is found by the main entrance to Last Light Inn.",
+		tip      : "He is found by the main entrance to Last Light Inn. Most of his items are fake and do nothing.",
 		children : [
 			{
 				title      : "Cloak of Cunning Brume",
@@ -4776,7 +4776,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Cloak of Cunning Brume.png",
 				link       : "https://bg3.wiki/wiki/Cloak_of_Cunning_Brume",
-				desc       : "<span class='value'>70 gp</span>"
+				desc       : "<span class='coordinates'>(X: -54 Y: 141)</span> <span class='value'>70 gp</span>"
 			},
 			{
 				title      : "Evasive Shoes",
@@ -4789,13 +4789,13 @@ children : [
 				exploit    : false,
 				img        : "imgs/Evasive Shoes.png",
 				link       : "https://bg3.wiki/wiki/Evasive_Shoes",
-				desc       : "<span class='value'>95 gp / 1050 gp</span>"
+				desc       : "<span class='coordinates'>(X: -54 Y: 141)</span> <span class='value'>95 gp / 1050 gp</span>"
 			}
 		]},
 		{
 		title    : "Barcus Wroot",
 		id       : "Barcus-Wroot",
-		tip      : "<span class='coordinates'>(X: -56 Y: 133)</span> If Barcus was saved in Grymforge he can be found in his lab at Last Light Inn.",
+		tip      : "If Barcus was saved in Grymforge he can be found in his lab at Last Light Inn.",
 		children : [
 			{
 				title      : "Acrobat Shoes",
@@ -4808,7 +4808,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Acrobat Shoes.png",
 				link       : "https://bg3.wiki/wiki/Acrobat_Shoes",
-				desc       : "<span class='value'>35 gp</span>"
+				desc       : "<span class='coordinates'>(X: -56 Y: 133)</span> <span class='value'>35 gp</span>"
 			},
 			{
 				title      : "Gloves of the Automaton",
@@ -4821,7 +4821,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Gloves of the Automaton.png",
 				link       : "https://bg3.wiki/wiki/Gloves_of_the_Automaton",
-				desc       : "<span class='value'>290 gp / 400 gp</span>"
+				desc       : "<span class='coordinates'>(X: -56 Y: 133)</span> <span class='value'>290 gp / 400 gp</span>"
 			},
 			{
 				title      : "Ring of Geniality",
@@ -4834,7 +4834,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Ring of Geniality.png",
 				link       : "https://bg3.wiki/wiki/Ring_of_Geniality",
-				desc       : "<span class='value'>40 gp</span>"
+				desc       : "<span class='coordinates'>(X: -56 Y: 133)</span> <span class='value'>40 gp</span>"
 			},
 			{
 				title      : "Brilliant Retort",
@@ -4847,7 +4847,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Brilliant Retort.png",
 				link       : "https://bg3.wiki/wiki/Brilliant_Retort",
-				desc       : "Rewarded for completing the quest \"<a href='https://bg3.wiki/wiki/Rescue_Wulbren'>Rescue Wulbren</a>\"."
+				desc       : "<span class='coordinates'>(X: -56 Y: 133)</span> Rewarded for completing the quest \"<a href='https://bg3.wiki/wiki/Rescue_Wulbren'>Rescue Wulbren</a>\"."
 			} // TODO Found in the inventory of Hogi Nuners?
 		]},
 		{
@@ -5558,7 +5558,7 @@ children : [
 		{
 		title    : "Lann Tarv",
 		id       : "Lann-Tarv",
-		tip      : "<span class='coordinates'>(X: -164 Y: -167)</span> He is found near the stairs inside Moonrise Towers. You must ask for extra help from Z'rell to unlock his full stock.",
+		tip      : "He is found near the stairs inside Moonrise Towers. You must ask for extra help from Z'rell to unlock his full stock.",
 		children : [
 			{
 				title      : "Bigboy's Chew Toy",
@@ -5571,7 +5571,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Bigboy's Chew Toy.png",
 				link       : "https://bg3.wiki/wiki/Bigboy's_Chew_Toy",
-				desc       : "<span class='value'>310 gp</span>"
+				desc       : "<span class='coordinates'>(X: -164 Y: -167)</span> <span class='value'>310 gp</span>"
 			},
 			{
 				title      : "Dwarven Splintmail",
@@ -5584,7 +5584,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Dwarven Splintmail.png",
 				link       : "https://bg3.wiki/wiki/Dwarven_Splintmail",
-				desc       : "<span class='value'>1900 gp</span>"
+				desc       : "<span class='coordinates'>(X: -164 Y: -167)</span> <span class='value'>1900 gp</span>"
 			},
 			{
 				title      : "Enraging Heart Garb",
@@ -5597,7 +5597,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Enraging Heart Garb.png",
 				link       : "https://bg3.wiki/wiki/Enraging_Heart_Garb",
-				desc       : "<span class='value'>800 gp</span>"
+				desc       : "<span class='coordinates'>(X: -164 Y: -167)</span> <span class='value'>800 gp</span>"
 			},
 			{
 				title      : "Fistbreaker Helm",
@@ -5610,7 +5610,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Fistbreaker Helm.png",
 				link       : "https://bg3.wiki/wiki/Fistbreaker_Helm",
-				desc       : "<span class='value'>60 gp / 420 gp</span>"
+				desc       : "<span class='coordinates'>(X: -164 Y: -167)</span> <span class='value'>60 gp / 420 gp</span>"
 			},
 			{
 				title      : "Gauntlets of Surging Accuracy",
@@ -5623,7 +5623,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Gauntlets of Surging Accuracy.png",
 				link       : "https://bg3.wiki/wiki/Gauntlets_of_Surging_Accuracy",
-				desc       : "<span class='value'>300 gp / 380 gp</span>"
+				desc       : "<span class='coordinates'>(X: -164 Y: -167)</span> <span class='value'>300 gp / 380 gp</span>"
 			},
 			{
 				title      : "Gloves of The Duellist",
@@ -5636,7 +5636,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Gloves of The Duellist.png",
 				link       : "https://bg3.wiki/wiki/Gloves_of_The_Duellist",
-				desc       : "<span class='value'>160 gp / 380 gp</span>"
+				desc       : "<span class='coordinates'>(X: -164 Y: -167)</span> <span class='value'>160 gp / 380 gp</span>"
 			},
 			{
 				title      : "Halberd of Vigilance",
@@ -5649,7 +5649,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Halberd of Vigilance.png",
 				link       : "https://bg3.wiki/wiki/Halberd_of_Vigilance",
-				desc       : "<span class='value'>960 gp</span>"
+				desc       : "<span class='coordinates'>(X: -164 Y: -167)</span> <span class='value'>960 gp</span>"
 			},
 			{
 				title      : "Render of Mind and Body",
@@ -5662,7 +5662,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Render of Mind and Body.png",
 				link       : "https://bg3.wiki/wiki/Render_of_Mind_and_Body",
-				desc       : "<span class='value'>65 gp / 310 gp</span>"
+				desc       : "<span class='coordinates'>(X: -164 Y: -167)</span> <span class='value'>65 gp / 310 gp</span>"
 			},
 			{
 				title      : "Sentinel Shield",
@@ -5675,7 +5675,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Sentinel Shield.png",
 				link       : "https://bg3.wiki/wiki/Sentinel_Shield",
-				desc       : "<span class='value'>580 gp / 790 gp</span>"
+				desc       : "<span class='coordinates'>(X: -164 Y: -167)</span> <span class='value'>580 gp / 790 gp</span>"
 			},
 			{
 				title      : "Slicing Shortsword",
@@ -5688,13 +5688,13 @@ children : [
 				exploit    : false,
 				img        : "imgs/Slicing Shortsword.png",
 				link       : "https://bg3.wiki/wiki/Slicing_Shortsword",
-				desc       : "<span class='value'>190 gp</span>"
+				desc       : "<span class='coordinates'>(X: -164 Y: -167)</span> <span class='value'>190 gp</span>"
 			}
 		]},
 		{
 		title    : "Roah Moonglow",
 		id       : "Roah-Moonglow",
-		tip      : "<span class='coordinates'>(X: -174 Y: -176)</span> She is found in Moonrise Towers' entrance hall.",
+		tip      : "She is found in Moonrise Towers' entrance hall.",
 		children : [
 			{
 				title      : "Armour of Devotion",
@@ -5707,7 +5707,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Armour of Devotion.png",
 				link       : "https://bg3.wiki/wiki/Armour_of_Devotion",
-				desc       : "<span class='value'>3200 gp / 3800 gp</span>"
+				desc       : "<span class='coordinates'>(X: -174 Y: -176)</span> <span class='value'>3200 gp / 3800 gp</span>"
 			},
 			{
 				title      : "Gloves of Crushing",
@@ -5720,7 +5720,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Gloves of Crushing.png",
 				link       : "https://bg3.wiki/wiki/Gloves_of_Crushing",
-				desc       : "<span class='value'>160 gp / 380 gp</span>"
+				desc       : "<span class='coordinates'>(X: -174 Y: -176)</span> <span class='value'>160 gp / 380 gp</span>"
 			},
 			{
 				title      : "Drakethroat Glaive",
@@ -5733,7 +5733,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Drakethroat Glaive.png",
 				link       : "https://bg3.wiki/wiki/Drakethroat_Glaive",
-				desc       : "<span class='value'>960 gp</span>"
+				desc       : "<span class='coordinates'>(X: -174 Y: -176)</span> <span class='value'>960 gp</span>"
 			},
 			{
 				title      : "Marksmanship Hat",
@@ -5746,7 +5746,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Marksmanship Hat.png",
 				link       : "https://bg3.wiki/wiki/Marksmanship_Hat",
-				desc       : "<span class='value'>24 gp</span>"
+				desc       : "<span class='coordinates'>(X: -174 Y: -176)</span> <span class='value'>24 gp</span>"
 			},
 			{
 				title      : "Ne'er Misser",
@@ -5759,7 +5759,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Ne'er Misser.png",
 				link       : "https://bg3.wiki/wiki/Ne'er_Misser",
-				desc       : "<span class='value'>310 gp / 800 gp</span>"
+				desc       : "<span class='coordinates'>(X: -174 Y: -176)</span> <span class='value'>310 gp / 800 gp</span>"
 			},
 			{
 				title      : "Poisoner's Ring",
@@ -5772,7 +5772,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Poisoner's Ring.png",
 				link       : "https://bg3.wiki/wiki/Poisoner's_Ring",
-				desc       : "<span class='value'>40 gp</span>"
+				desc       : "<span class='coordinates'>(X: -174 Y: -176)</span> <span class='value'>40 gp</span>"
 			},
 			{
 				title      : "Ring of Spiteful Thunder",
@@ -5785,7 +5785,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Ring of Spiteful Thunder.png",
 				link       : "https://bg3.wiki/wiki/Ring_of_Spiteful_Thunder",
-				desc       : "<span class='value'>40 gp / 210 gp</span>"
+				desc       : "<span class='coordinates'>(X: -174 Y: -176)</span> <span class='value'>40 gp / 210 gp</span>"
 			},
 			{
 				title      : "Sharpened Snare Cuirass",
@@ -5798,13 +5798,13 @@ children : [
 				exploit    : false,
 				img        : "imgs/Sharpened Snare Cuirass.png",
 				link       : "https://bg3.wiki/wiki/Sharpened_Snare_Cuirass",
-				desc       : "<span class='value'>830 gp</span>"
+				desc       : "<span class='coordinates'>(X: -174 Y: -176)</span> <span class='value'>830 gp</span>"
 			}
 		]},
 		{
 		title    : "Araj Oblodra",
 		id       : "Araj-Oblodra",
-		tip      : "<span class='coordinates'>(X: -128 Y: -193)</span> She is found in a side room to the left as you enter Moonrise Towers.",
+		tip      : "She is found in a side room to the left as you enter Moonrise Towers.",
 		children : [
 			{
 				title      : "Boots of Arcane Bolstering",
@@ -5817,7 +5817,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Boots of Arcane Bolstering.png",
 				link       : "https://bg3.wiki/wiki/Boots_of_Arcane_Bolstering",
-				desc       : "<span class='value'>190 gp / 500 gp</span>"
+				desc       : "<span class='coordinates'>(X: -128 Y: -193)</span> <span class='value'>190 gp / 500 gp</span>"
 			},
 			{
 				title      : "Circlet of Hunting",
@@ -5830,7 +5830,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Circlet of Hunting.png",
 				link       : "https://bg3.wiki/wiki/Circlet_of_Hunting",
-				desc       : "<span class='value'>230 gp</span>"
+				desc       : "<span class='coordinates'>(X: -128 Y: -193)</span> <span class='value'>230 gp</span>"
 			},
 			{
 				title      : "Hat of Storm Scion's Power",
@@ -5843,7 +5843,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Hat of Storm Scion's Power.png",
 				link       : "https://bg3.wiki/wiki/Hat_of_Storm_Scion's_Power",
-				desc       : "<span class='value'>90 gp / 330 gp</span>"
+				desc       : "<span class='coordinates'>(X: -128 Y: -193)</span> <span class='value'>90 gp / 330 gp</span>"
 			},
 			{
 				title      : "Ring of Free Action",
@@ -5856,7 +5856,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Ring of Free Action.png",
 				link       : "https://bg3.wiki/wiki/Ring_of_Free_Action",
-				desc       : "<span class='value'>160 gp</span>"
+				desc       : "<span class='coordinates'>(X: -128 Y: -193)</span> <span class='value'>160 gp</span>"
 			},
 			{
 				title      : "Risky Ring",
@@ -5869,7 +5869,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Risky Ring.png",
 				link       : "https://bg3.wiki/wiki/Risky_Ring",
-				desc       : "<span class='value'>190 gp / 580 gp</span>"
+				desc       : "<span class='coordinates'>(X: -128 Y: -193)</span> <span class='value'>190 gp / 580 gp</span>"
 			},
 			{
 				title      : "Robe of Exquisite Focus",
@@ -5882,7 +5882,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Robe of Exquisite Focus.png",
 				link       : "https://bg3.wiki/wiki/Robe_of_Exquisite_Focus",
-				desc       : "<span class='value'>800 gp</span>"
+				desc       : "<span class='coordinates'>(X: -128 Y: -193)</span> <span class='value'>800 gp</span>"
 			},
 			{
 				title      : "The Graceful Cloth",
@@ -5895,7 +5895,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/The Graceful Cloth.png",
 				link       : "https://bg3.wiki/wiki/The_Graceful_Cloth",
-				desc       : "<span class='value'>800 gp / 1050 gp</span>"
+				desc       : "<span class='coordinates'>(X: -128 Y: -193)</span> <span class='value'>800 gp / 1050 gp</span>"
 			},
 			{
 				title      : "Thunderskin Cloak",
@@ -5908,7 +5908,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Thunderskin Cloak.png",
 				link       : "https://bg3.wiki/wiki/Thunderskin_Cloak",
-				desc       : "<span class='value'>75 gp / 290 gp</span>"
+				desc       : "<span class='coordinates'>(X: -128 Y: -193)</span> <span class='value'>75 gp / 290 gp</span>"
 			},
 			{
 				title      : "Blood-Draw Elixir",
@@ -5921,7 +5921,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Blood-Draw Elixir.png",
 				link       : "https://bg3.wiki/wiki/Araj_Oblodra#Blood-draw_elixirs",
-				desc       : "Rewarded to each character for allowing Araj Oblodra to draw their blood.<span class='tip'> (Note: Halfling and Human elixirs are particularly useful.)</span>"
+				desc       : "<span class='coordinates'>(X: -128 Y: -193)</span> Rewarded to each character for allowing Araj Oblodra to draw their blood.<span class='tip'> (Note: Halfling and Human elixirs are particularly useful.)</span>"
 			},
 			{
 				title      : "Potion of Everlasting Vigour",
@@ -5934,7 +5934,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Potion of Everlasting Vigour.png",
 				link       : "https://bg3.wiki/wiki/Potion_of_Everlasting_Vigour",
-				desc       : "Rewarded for convincing Astarion to bite Araj Oblodra."
+				desc       : "<span class='coordinates'>(X: -128 Y: -193)</span> Rewarded for convincing Astarion to bite Araj Oblodra."
 			}
 		]},
 		{
@@ -6553,7 +6553,7 @@ children : [
 		{
 		title    : "Ferg Drogher",
 		id       : "Ferg-Drogher",
-		tip      : "<span class='coordinates'>(X: 45 Y: -98)</span> He is the Sharran lookout watching for Shadowheart's return. He is willing to trade, but if Shadowheart is in your party, he will flat-out refuse and then leave, never to return.",
+		tip      : "He is the Sharran lookout watching for Shadowheart's return. He is willing to trade, but if Shadowheart is in your party, he will flat-out refuse and then leave, never to return.",
 		children : [
 			{
 				title      : "Cold Snap",
@@ -6566,7 +6566,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Cold Snap.png",
 				link       : "https://bg3.wiki/wiki/Cold_Snap",
-				desc       : "<span class='value'>190 gp</span>"
+				desc       : "<span class='coordinates'>(X: 45 Y: -98)</span> <span class='value'>190 gp</span>"
 			},
 			{
 				title      : "Dwarven Thrower",
@@ -6579,7 +6579,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Dwarven Thrower.png",
 				link       : "https://bg3.wiki/wiki/Dwarven_Thrower",
-				desc       : "<span class='value'>770 gp</span>"
+				desc       : "<span class='coordinates'>(X: 45 Y: -98)</span> <span class='value'>770 gp</span>"
 			},
 			{
 				title      : "Hellrider Longbow",
@@ -6592,7 +6592,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Hellrider Longbow.png",
 				link       : "https://bg3.wiki/wiki/Hellrider_Longbow",
-				desc       : "<span class='value'>770 gp / 1550 gp</span>"
+				desc       : "<span class='coordinates'>(X: 45 Y: -98)</span> <span class='value'>770 gp / 1550 gp</span>"
 			},
 			{
 				title      : "Nymph Cloak",
@@ -6605,7 +6605,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Nymph Cloak.png",
 				link       : "https://bg3.wiki/wiki/Nymph_Cloak",
-				desc       : "<span class='value'>360 gp</span>"
+				desc       : "<span class='coordinates'>(X: 45 Y: -98)</span> <span class='value'>360 gp</span>"
 			},
 			{
 				title      : "Robe of Supreme Defences",
@@ -6618,7 +6618,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Robe of Supreme Defences.png",
 				link       : "https://bg3.wiki/wiki/Robe_of_Supreme_Defences",
-				desc       : "<span class='value'>1600 gp</span>"
+				desc       : "<span class='coordinates'>(X: 45 Y: -98)</span> <span class='value'>1600 gp</span>"
 			},
 			{
 				title      : "Sethan",
@@ -6631,13 +6631,13 @@ children : [
 				exploit    : false,
 				img        : "imgs/Sethan.png",
 				link       : "https://bg3.wiki/wiki/Sethan",
-				desc       : "<span class='value'>960 gp</span>"
+				desc       : "<span class='coordinates'>(X: 45 Y: -98)</span> <span class='value'>960 gp</span>"
 			}
 		]},
 		{
 		title    : "Mattis",
 		id       : "Mattis-2",
-		tip      : "<span class='coordinates'>(X: 59 Y: -127)</span> He is found near the Requisitioned Barn in Rivington.",
+		tip      : "He is found near the Requisitioned Barn in Rivington.",
 		children : [
 			{
 				title      : "Corvid Token",
@@ -6650,7 +6650,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Corvid Token.png",
 				link       : "https://bg3.wiki/wiki/Corvid_Token",
-				desc       : "<span class='value'>230 gp / 360 gp</span>"
+				desc       : "<span class='coordinates'>(X: 59 Y: -127)</span> <span class='value'>230 gp / 360 gp</span>"
 			},
 			{
 				title      : "Scabby Pugilist Circlet",
@@ -6663,7 +6663,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Scabby Pugilist Circlet.png",
 				link       : "https://bg3.wiki/wiki/Scabby_Pugilist_Circlet",
-				desc       : "<span class='value'>120 gp / 500 gp</span>"
+				desc       : "<span class='coordinates'>(X: 59 Y: -127)</span> <span class='value'>120 gp / 500 gp</span>"
 			}
 		]},
 		{
@@ -6947,7 +6947,7 @@ children : [
 		{
 		title    : "Exxvikyap",
 		id       : "Exxvikyap",
-		tip      : "<span class='coordinates'>(X: 8 Y: -32)</span> She is found in the blacksmith shop.",
+		tip      : "She is found in the blacksmith shop.",
 		children : [
 			{
 				title      : "Ambusher",
@@ -6960,7 +6960,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Ambusher.png",
 				link       : "https://bg3.wiki/wiki/Ambusher",
-				desc       : "<span class='value'>190 gp / 920 gp</span>"
+				desc       : "<span class='coordinates'>(X: 8 Y: -32)</span> <span class='value'>190 gp / 920 gp</span>"
 			},
 			{
 				title      : "Bonespike Garb",
@@ -6973,7 +6973,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Bonespike Garb.png",
 				link       : "https://bg3.wiki/wiki/Bonespike_Garb",
-				desc       : "<span class='value'>1600 gp</span>"
+				desc       : "<span class='coordinates'>(X: 8 Y: -32)</span> <span class='value'>1600 gp</span>"
 			},
 			{
 				title      : "Elven Chain",
@@ -6986,7 +6986,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Elven Chain.png",
 				link       : "https://bg3.wiki/wiki/Elven_Chain",
-				desc       : "<span class='value'>510 gp</span>"
+				desc       : "<span class='coordinates'>(X: 8 Y: -32)</span> <span class='value'>510 gp</span>"
 			},
 			{
 				title      : "Stalker Gloves",
@@ -6999,7 +6999,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Stalker Gloves.png",
 				link       : "https://bg3.wiki/wiki/Stalker_Gloves",
-				desc       : "<span class='value'>400 gp / 580 gp</span>"
+				desc       : "<span class='coordinates'>(X: 8 Y: -32)</span> <span class='value'>400 gp / 580 gp</span>"
 			},
 			{
 				title      : "Swires' Sledboard",
@@ -7012,7 +7012,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Swires' Sledboard.png",
 				link       : "https://bg3.wiki/wiki/Swires'_Sledboard",
-				desc       : "<span class='value'>360 gp</span>"
+				desc       : "<span class='coordinates'>(X: 8 Y: -32)</span> <span class='value'>360 gp</span>"
 			},
 			{
 				title      : "The Dancing Breeze",
@@ -7025,7 +7025,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/The Dancing Breeze.png",
 				link       : "https://bg3.wiki/wiki/The_Dancing_Breeze",
-				desc       : "<span class='value'>960 gp</span>"
+				desc       : "<span class='coordinates'>(X: 8 Y: -32)</span> <span class='value'>960 gp</span>"
 			}
 		]},
 		{
@@ -7063,7 +7063,7 @@ children : [
 		{
 		title    : "Bumpnagel",
 		id       : "Bumpnagel",
-		tip      : "<span class='coordinates'>(X: 30 Y: 29)</span> He is found in Angleiron's Cellar.",
+		tip      : "He is found in Angleiron's Cellar.",
 		children : [
 			{
 				title      : "Martial Exertion Gloves",
@@ -7076,7 +7076,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Martial Exertion Gloves.png",
 				link       : "https://bg3.wiki/wiki/Martial_Exertion_Gloves",
-				desc       : "<span class='value'>160 gp / 580 gp</span>"
+				desc       : "<span class='coordinates'>(X: 30 Y: 29)</span> <span class='value'>160 gp / 580 gp</span>"
 			},
 			{
 				title      : "Nimblefinger Gloves",
@@ -7089,7 +7089,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Nimblefinger Gloves.png",
 				link       : "https://bg3.wiki/wiki/Nimblefinger_Gloves",
-				desc       : "<span class='value'>160 gp / 500 gp</span>"
+				desc       : "<span class='coordinates'>(X: 30 Y: 29)</span> <span class='value'>160 gp / 500 gp</span>"
 			},
 			{
 				title      : "Thunderpalm Strikers",
@@ -7102,7 +7102,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Thunderpalm Strikers.png",
 				link       : "https://bg3.wiki/wiki/Thunderpalm_Strikers",
-				desc       : "<span class='value'>450 gp</span>"
+				desc       : "<span class='coordinates'>(X: 30 Y: 29)</span> <span class='value'>450 gp</span>"
 			}
 		]},
 		{
@@ -7250,7 +7250,7 @@ children : [
 		{
 		title    : "Entharl Danthelon",
 		id       : "Entharl-Danthelon",
-		tip      : "<span class='coordinates'>(X: -6 Y: 133)</span> He is found in Danthelon's Dancing Axe in Wyrm's Crossing.",
+		tip      : "He is found in Danthelon's Dancing Axe in Wyrm's Crossing.",
 		children : [
 			{
 				title      : "Blightbringer",
@@ -7263,7 +7263,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Blightbringer.png",
 				link       : "https://bg3.wiki/wiki/Blightbringer",
-				desc       : "<span class='value'>480 gp / 960 gp</span>"
+				desc       : "<span class='coordinates'>(X: -6 Y: 133)</span> <span class='value'>480 gp / 960 gp</span>"
 			},
 			{
 				title      : "Cloak of Displacement",
@@ -7276,7 +7276,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Cloak of Displacement.png",
 				link       : "https://bg3.wiki/wiki/Cloak_of_Displacement",
-				desc       : "<span class='value'>190 gp / 300 gp</span>"
+				desc       : "<span class='coordinates'>(X: -6 Y: 133)</span> <span class='value'>190 gp / 300 gp</span>"
 			},
 			{
 				title      : "Garb of the Land and Sky",
@@ -7289,7 +7289,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Garb of the Land and Sky.png",
 				link       : "https://bg3.wiki/wiki/Garb_of_the_Land_and_Sky",
-				desc       : "<span class='value'>800 gp</span>"
+				desc       : "<span class='coordinates'>(X: -6 Y: 133)</span> <span class='value'>800 gp</span>"
 			},
 			{
 				title      : "Gauntlets of the Warmaster",
@@ -7302,7 +7302,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Gauntlets of the Warmaster.png",
 				link       : "https://bg3.wiki/wiki/Gauntlets_of_the_Warmaster",
-				desc       : "<span class='value'>1600 gp / 1900 gp</span>"
+				desc       : "<span class='coordinates'>(X: -6 Y: 133)</span> <span class='value'>1600 gp / 1900 gp</span>"
 			},
 			{
 				title      : "Harmonic Dueller",
@@ -7315,7 +7315,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Harmonic Dueller.png",
 				link       : "https://bg3.wiki/wiki/Harmonic_Dueller",
-				desc       : "<span class='value'>380 gp</span>"
+				desc       : "<span class='coordinates'>(X: -6 Y: 133)</span> <span class='value'>380 gp</span>"
 			},
 			{
 				title      : "Heavy Supply Pack",
@@ -7328,8 +7328,8 @@ children : [
 				exploit    : false,
 				img        : "imgs/Heavy Supply Pack.png",
 				link       : "https://bg3.wiki/wiki/Heavy_Supply_Pack",
-				desc       : "Stolen from a shelf."
-			},
+				desc       : "<span class='coordinates'>(X: -6 Y: 133)</span> Stolen from a shelf."
+			}, // TODO better coords
 			{
 				title      : "Horns of the Berserker",
 				id         : "Horns-of-the-Berserker",
@@ -7341,7 +7341,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Horns of the Berserker.png",
 				link       : "https://bg3.wiki/wiki/Horns_of_the_Berserker",
-				desc       : "<span class='value'>230 gp</span>"
+				desc       : "<span class='coordinates'>(X: -6 Y: 133)</span> <span class='value'>230 gp</span>"
 			},
 			{
 				title      : "Snow-Dusted Monastery Gloves",
@@ -7354,7 +7354,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Snow-Dusted Monastery Gloves.png",
 				link       : "https://bg3.wiki/wiki/Snow-Dusted_Monastery_Gloves",
-				desc       : "<span class='value'>450 gp</span>"
+				desc       : "<span class='coordinates'>(X: -6 Y: 133)</span> <span class='value'>450 gp</span>"
 			}
 		]},
 		{
@@ -7476,7 +7476,7 @@ children : [
 		{
 		title    : "Vicar Humbletoes",
 		id       : "Vicar-Humbletoes",
-		tip      : "<span class='coordinates'>(X: 109 Y: -16)</span> He is the guardian of the Stormshore Tabernacle.",
+		tip      : "He is the guardian of the Stormshore Tabernacle.",
 		children : [
 			{
 				title      : "Mantle of the Holy Warrior",
@@ -7489,7 +7489,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Mantle of the Holy Warrior.png",
 				link       : "https://bg3.wiki/wiki/Mantle_of_the_Holy_Warrior",
-				desc       : "<span class='value'>630 gp</span>"
+				desc       : "<span class='coordinates'>(X: 109 Y: -16)</span> <span class='value'>630 gp</span>"
 			},
 			{
 				title      : "The Reviving Hands",
@@ -7502,7 +7502,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/The Reviving Hands.png",
 				link       : "https://bg3.wiki/wiki/The_Reviving_Hands",
-				desc       : "<span class='value'>570 gp</span>"
+				desc       : "<span class='coordinates'>(X: 109 Y: -16)</span> <span class='value'>570 gp</span>"
 			},
 			{
 				title      : "The Sacred Star",
@@ -7515,7 +7515,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/The Sacred Star.png",
 				link       : "https://bg3.wiki/wiki/The_Sacred_Star",
-				desc       : "<span class='value'>770 gp</span>"
+				desc       : "<span class='coordinates'>(X: 109 Y: -16)</span> <span class='value'>770 gp</span>"
 			}
 		]},
 		{
@@ -7656,7 +7656,7 @@ children : [
 		{
 		title    : "Dammon",
 		id       : "Dammon-3",
-		tip      : "<span class='coordinates'>(X: -2 Y: -7)</span> He is the blacksmith at the Forge of the Nine.",
+		tip      : "He is the blacksmith at the Forge of the Nine.",
 		children : [
 			{
 				title      : "Armour of Persistence",
@@ -7669,7 +7669,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Armour of Persistence.png",
 				link       : "https://bg3.wiki/wiki/Armour_of_Persistence",
-				desc       : "<span class='value'>6400 gp</span>"
+				desc       : "<span class='coordinates'>(X: -2 Y: -7)</span> <span class='value'>6400 gp</span>"
 			},
 			{
 				title      : "Boots of Persistence",
@@ -7682,7 +7682,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Boots of Persistence.png",
 				link       : "https://bg3.wiki/wiki/Boots_of_Persistence",
-				desc       : "<span class='value'>1300 gp</span>"
+				desc       : "<span class='coordinates'>(X: -2 Y: -7)</span> <span class='value'>1300 gp</span>"
 			},
 			{
 				title      : "Legacy of the Masters",
@@ -7695,7 +7695,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Legacy of the Masters.png",
 				link       : "https://bg3.wiki/wiki/Legacy_of_the_Masters",
-				desc       : "<span class='value'>570 gp / 2100 gp</span>"
+				desc       : "<span class='coordinates'>(X: -2 Y: -7)</span> <span class='value'>570 gp / 2100 gp</span>"
 			}
 		]},
 		{
@@ -7720,7 +7720,7 @@ children : [
 		{
 		title    : "Helsik",
 		id       : "Helsik",
-		tip      : "<span class='coordinates'>(X: -39 Y: -13)</span> She is found in the Devil's Fee.",
+		tip      : "She is found in the Devil's Fee.",
 		children : [
 			{
 				title      : "Caitiff Staff",
@@ -7733,7 +7733,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Caitiff Staff.png",
 				link       : "https://bg3.wiki/wiki/Caitiff_Staff",
-				desc       : "<span class='value'>190 gp / 530 gp</span>"
+				desc       : "<span class='coordinates'>(X: -39 Y: -13)</span> <span class='value'>190 gp / 530 gp</span>"
 			},
 			{
 				title      : "Cloak of the Weave",
@@ -7746,7 +7746,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Cloak of the Weave.png",
 				link       : "https://bg3.wiki/wiki/Cloak_of_the_Weave",
-				desc       : "<span class='value'>300 gp / 940 gp</span>"
+				desc       : "<span class='coordinates'>(X: -39 Y: -13)</span> <span class='value'>300 gp / 940 gp</span>"
 			},
 			{
 				title      : "Gemini Gloves",
@@ -7759,7 +7759,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Gemini Gloves.png",
 				link       : "https://bg3.wiki/wiki/Gemini_Gloves",
-				desc       : "<span class='value'>460 gp / 860 gp</span>"
+				desc       : "<span class='coordinates'>(X: -39 Y: -13)</span> <span class='value'>460 gp / 860 gp</span>"
 			},
 			{
 				title      : "Gibus of the Worshipful Servant",
@@ -7772,7 +7772,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Gibus of the Worshipful Servant.png",
 				link       : "https://bg3.wiki/wiki/Gibus_of_the_Worshipful_Servant",
-				desc       : "Bought (<span class='value'>35 gp</span>), or stolen from the counter."
+				desc       : "<span class='coordinates'>(X: -39 Y: -13)</span> Bought (<span class='value'>35 gp</span>), or stolen from the counter."
 			},
 			{
 				title      : "Hellbeard Halberd",
@@ -7785,7 +7785,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Hellbeard Halberd.png",
 				link       : "https://bg3.wiki/wiki/Hellbeard_Halberd",
-				desc       : "<span class='value'>380 gp</span>"
+				desc       : "<span class='coordinates'>(X: -39 Y: -13)</span> <span class='value'>380 gp</span>"
 			},
 			{
 				title      : "Shapeshifter Hat",
@@ -7798,7 +7798,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Shapeshifter Hat.png",
 				link       : "https://bg3.wiki/wiki/Shapeshifter_Hat",
-				desc       : "<span class='value'>70 gp</span>"
+				desc       : "<span class='coordinates'>(X: -39 Y: -13)</span> <span class='value'>70 gp</span>"
 			},
 			{
 				title      : "Spellseeking Gloves",
@@ -7811,7 +7811,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Spellseeking Gloves.png",
 				link       : "https://bg3.wiki/wiki/Spellseeking_Gloves",
-				desc       : "<span class='value'>160 gp / 710 gp</span>"
+				desc       : "<span class='coordinates'>(X: -39 Y: -13)</span> <span class='value'>160 gp / 710 gp</span>"
 			}
 		]},
 		{
@@ -7856,7 +7856,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Tressym Collar.png",
 				link       : "https://bg3.wiki/wiki/Tressym_Collar",
-				desc       : "Looted from Tara."
+				desc       : "<span class='coordinates'>(X: -1 Y: -39)</span> Looted from Tara."
 			}
 		]},
 		{
@@ -8114,7 +8114,7 @@ children : [
 		{
 		title    : "Lorroakan's Projection",
 		id       : "Rolan-/-Lorroakans-Projection",
-		tip      : "<span class='coordinates'>(X: -14 Y: -72)</span> He is found at Sorcerous Sundries' front desk. There may be a different character here based on quest outcomes.",
+		tip      : "He is found at Sorcerous Sundries' front desk. There may be a different character here based on quest outcomes.",
 		children : [
 			{
 				title      : "Armour of Landfall",
@@ -8127,7 +8127,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Armour of Landfall.png",
 				link       : "https://bg3.wiki/wiki/Armour_of_Landfall",
-				desc       : "<span class='value'>1700 gp</span>"
+				desc       : "<span class='coordinates'>(X: -14 Y: -72)</span> <span class='value'>1700 gp</span>"
 			},
 			{
 				title      : "Birthright",
@@ -8140,7 +8140,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Birthright.png",
 				link       : "https://bg3.wiki/wiki/Birthright",
-				desc       : "<span class='value'>410 gp / 810 gp</span>"
+				desc       : "<span class='coordinates'>(X: -14 Y: -72)</span> <span class='value'>410 gp / 810 gp</span>"
 			},
 			{
 				title      : "Harper Sacredstriker",
@@ -8153,7 +8153,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Harper Sacredstriker.png",
 				link       : "https://bg3.wiki/wiki/Harper_Sacredstriker",
-				desc       : "<span class='value'>310 gp</span>"
+				desc       : "<span class='coordinates'>(X: -14 Y: -72)</span> <span class='value'>310 gp</span>"
 			},
 			{
 				title      : "Quickspell Gloves",
@@ -8166,7 +8166,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Quickspell Gloves.png",
 				link       : "https://bg3.wiki/wiki/Quickspell_Gloves",
-				desc       : "<span class='value'>300 gp / 1000 gp</span>"
+				desc       : "<span class='coordinates'>(X: -14 Y: -72)</span> <span class='value'>300 gp / 1000 gp</span>"
 			},
 			{
 				title      : "Ring of Regeneration",
@@ -8179,7 +8179,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Ring of Regeneration.png",
 				link       : "https://bg3.wiki/wiki/Ring_of_Regeneration",
-				desc       : "<span class='value'>360 gp / 580 gp</span>"
+				desc       : "<span class='coordinates'>(X: -14 Y: -72)</span> <span class='value'>360 gp / 580 gp</span>"
 			},
 			{
 				title      : "Vest of Soul Rejuvenation",
@@ -8192,7 +8192,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Vest of Soul Rejuvenation.png",
 				link       : "https://bg3.wiki/wiki/Vest_of_Soul_Rejuvenation",
-				desc       : "<span class='value'>4160 gp</span>"
+				desc       : "<span class='coordinates'>(X: -14 Y: -72)</span> <span class='value'>4160 gp</span>"
 			}
 		]},
 		{
@@ -8288,7 +8288,7 @@ children : [
 		{
 		title    : "Mystic Carrion",
 		id       : "Mystic-Carrion",
-		tip      : "<span class='coordinates'>(X: 14 Y: -160)</span> He is found in Philgrave's Mansion.",
+		tip      : "He is found in Philgrave's Mansion.",
 		children : [
 			{
 				title      : "Armour of the Sporekeeper",
@@ -8301,7 +8301,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Armour of the Sporekeeper.png",
 				link       : "https://bg3.wiki/wiki/Armour_of_the_Sporekeeper",
-				desc       : "<span class='value'>1050 gp / 1450 gp</span>"
+				desc       : "<span class='coordinates'>(X: 14 Y: -160)</span> <span class='value'>1050 gp / 1450 gp</span>"
 			},
 			{
 				title      : "Hood of the Weave",
@@ -8314,7 +8314,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Hood of the Weave.png",
 				link       : "https://bg3.wiki/wiki/Hood_of_the_Weave",
-				desc       : "<span class='value'>1450 gp / 1800 gp</span>"
+				desc       : "<span class='coordinates'>(X: 14 Y: -160)</span> <span class='value'>1450 gp / 1800 gp</span>"
 			},
 			{
 				title      : "Veil of the Morning",
@@ -8327,7 +8327,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Veil of the Morning.png",
 				link       : "https://bg3.wiki/wiki/Veil_of_the_Morning",
-				desc       : "<span class='value'>1600 gp</span>"
+				desc       : "<span class='coordinates'>(X: 14 Y: -160)</span> <span class='value'>1600 gp</span>"
 			}
 		]},
 		{
@@ -9493,7 +9493,7 @@ children : [
 		{
 		title    : "Echo of Abazigal",
 		id       : "Echo-of-Abazigal",
-		tip      : "<span class='coordinates'>(X: -1263 Y: 511)</span> He will appear in the main chamber after completing the quest \"<a href='https://bg3.wiki/wiki/Impress_the_Murder_Tribunal'>Impress the Murder Tribunal</a>\" and becoming an Unholy Assassin of Bhaal.",
+		tip      : "He will appear in the main chamber after completing the quest \"<a href='https://bg3.wiki/wiki/Impress_the_Murder_Tribunal'>Impress the Murder Tribunal</a>\" and becoming an Unholy Assassin of Bhaal.",
 		children : [
 			{
 				title      : "Assassin of Bhaal Cowl",
@@ -9506,7 +9506,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Assassin of Bhaal Cowl.png",
 				link       : "https://bg3.wiki/wiki/Assassin_of_Bhaal_Cowl",
-				desc       : "<span class='value'>450 gp / 590 gp</span>"
+				desc       : "<span class='coordinates'>(X: -1263 Y: 511)</span> <span class='value'>450 gp / 590 gp</span>"
 			},
 			{
 				title      : "Bhaalist Armour",
@@ -9519,7 +9519,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Bhaalist Armour.png",
 				link       : "https://bg3.wiki/wiki/Bhaalist_Armour",
-				desc       : "<span class='value'>2000 gp / 2700 gp</span>"
+				desc       : "<span class='coordinates'>(X: -1263 Y: 511)</span> <span class='value'>2000 gp / 2700 gp</span>"
 			},
 			{
 				title      : "Bhaalist Gloves",
@@ -9532,7 +9532,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Bhaalist Gloves.png",
 				link       : "https://bg3.wiki/wiki/Bhaalist_Gloves",
-				desc       : "<span class='value'>540 gp</span>"
+				desc       : "<span class='coordinates'>(X: -1263 Y: 511)</span> <span class='value'>540 gp</span>"
 			},
 			{
 				title      : "Craterflesh Gloves",
@@ -9545,7 +9545,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Craterflesh Gloves.png",
 				link       : "https://bg3.wiki/wiki/Craterflesh_Gloves",
-				desc       : "<span class='value'>290 gp</span>"
+				desc       : "<span class='coordinates'>(X: -1263 Y: 511)</span> <span class='value'>290 gp</span>"
 			},
 			{
 				title      : "Dread Iron Dagger",
@@ -9558,7 +9558,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Dread Iron Dagger.png",
 				link       : "https://bg3.wiki/wiki/Dread_Iron_Dagger",
-				desc       : "<span class='value'>190 gp</span>"
+				desc       : "<span class='coordinates'>(X: -1263 Y: 511)</span> <span class='value'>190 gp</span>"
 			},
 			{
 				title      : "Fleshrender",
@@ -9571,7 +9571,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Fleshrender.png",
 				link       : "https://bg3.wiki/wiki/Fleshrender",
-				desc       : "<span class='value'>190 gp</span>"
+				desc       : "<span class='coordinates'>(X: -1263 Y: 511)</span> <span class='value'>190 gp</span>"
 			},
 			{
 				title      : "Vicious Battleaxe",
@@ -9584,7 +9584,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Vicious Battleaxe.png",
 				link       : "https://bg3.wiki/wiki/Vicious_Battleaxe",
-				desc       : "<span class='value'>310 gp</span>"
+				desc       : "<span class='coordinates'>(X: -1263 Y: 511)</span> <span class='value'>310 gp</span>"
 			},
 			{
 				title      : "Vicious Shortbow",
@@ -9597,7 +9597,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Vicious Shortbow.png",
 				link       : "https://bg3.wiki/wiki/Vicious_Shortbow",
-				desc       : "<span class='value'>190 gp</span>"
+				desc       : "<span class='coordinates'>(X: -1263 Y: 511)</span> <span class='value'>190 gp</span>"
 			}
 		]},
 		{
@@ -9661,7 +9661,7 @@ children : [
 		{
 		title    : "Voiceless Penitent Bareki",
 		id       : "Voiceless-Penitent-Bareki",
-		tip      : "<span class='coordinates'>(X: -157 Y: 939)</span> He is found next to the Undercity Ruins waypoint.",
+		tip      : "He is found next to the Undercity Ruins waypoint.",
 		children : [
 			{
 				title      : "Armour of Moonbasking",
@@ -9674,7 +9674,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Armour of Moonbasking.png",
 				link       : "https://bg3.wiki/wiki/Armour_of_Moonbasking",
-				desc       : "<span class='value'>1400 gp</span>"
+				desc       : "<span class='coordinates'>(X: -157 Y: 939)</span> <span class='value'>1400 gp</span>"
 			},
 			{
 				title      : "Bonespike Helmet",
@@ -9687,7 +9687,7 @@ children : [
 				exploit    : false,
 				img        : "imgs/Bonespike Helmet.png",
 				link       : "https://bg3.wiki/wiki/Bonespike_Helmet",
-				desc       : "<span class='value'>450 gp</span>"
+				desc       : "<span class='coordinates'>(X: -157 Y: 939)</span> <span class='value'>450 gp</span>"
 			}
 		]},
 		{
