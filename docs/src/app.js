@@ -42,7 +42,7 @@ const App = {
 `,
 	data() {
 		return {
-			entryData  : entryData,
+			entryData  : this.processEntryData(entryData), // calculate buy prices from values
 			filterData : filterData
 		};
 	},
@@ -96,14 +96,37 @@ const App = {
 				observer.observe(document.getElementById("TOC"));
 			}, { once: true });
 		}, 2000);
-
-		// calculate buy prices from values
-		document.querySelectorAll(".value").forEach(value => {
-			value.innerText = this.get_final_price(value.innerText);
-		});
 	},
 
 	methods: {
+		processEntryData(data) {
+			if (!data) return data;
+
+			if (Array.isArray(data)) {
+				for (const item of data) {
+					this.processEntryData(item);
+				}
+				return data;
+			}
+
+			if (typeof data === "object" && data.desc) {
+				data.desc = this.transformHtmlString(data.desc);
+			}
+
+			if (data.children) {
+				this.processEntryData(data.children);
+			}
+
+			return data;
+		},
+		transformHtmlString(htmlString) {
+			// Regex to capture: <span class="value">123</span>
+			const spanRegex = /(<span\s+class=["']value["']>)([^<]+)(<\/span>)/g;
+			return htmlString.replace(spanRegex, (match, openTag, text, closeTag) => {
+				const val = this.get_final_price(text);
+				return `${openTag}${val}${closeTag}`;
+			});
+		},
 		get_difficulty_mod(difficulty) {
 			switch (difficulty) {
 				case "explorer": return 0.5;
