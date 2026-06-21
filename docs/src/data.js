@@ -425,7 +425,7 @@ children : [
 				desc       : "Rewarded by Zevlor as thanks for eliminating the goblin threat, provided you accept the reward."
 			},
 			{
-				title      : "Mind Flayer Parasite Specimen",
+				title      : "Gift from the Absolute",
 				id         : "Mind-Flayer-Parasite-Specimen-2",
 				categories : ["specimen"],
 				rarity     : "story",
@@ -433,10 +433,10 @@ children : [
 				choice     : false,
 				crafting   : false,
 				exploit    : false,
-				img        : "imgs/Mind Flayer Parasite Specimen.png",
-				link       : "https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen",
+				img        : "imgs/Gift from the Absolute.png",
+				link       : "https://bg3.wiki/wiki/Gift_from_the_Absolute",
 				desc       : "Rewarded by Minthara for raiding the Emerald Grove.<span class='tip'> (Note: Doing so will lock you out of multiple quests and rewards.)</span>"
-			} // TODO The actual reward is https://bg3.wiki/wiki/Gift_from_the_Absolute
+			} // TODO coords
 		]},
 		{
 		title    : "Arron",
@@ -3252,7 +3252,7 @@ children : [
 				desc       : "<span class='coordinates'>(X: -628 Y: 320)</span> Looted from Sergeant Thrinn."
 			},
 			{
-				title      : "Mind Flayer Parasite Specimen",
+				title      : "Gift from the Absolute",
 				id         : "Mind-Flayer-Parasite-Specimen-8",
 				categories : ["specimen"],
 				rarity     : "story",
@@ -3260,10 +3260,10 @@ children : [
 				choice     : false,
 				crafting   : false,
 				exploit    : false,
-				img        : "imgs/Mind Flayer Parasite Specimen.png",
-				link       : "https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen",
-				desc       : "<span class='coordinates'>(X: -854 Y: 780)</span> Rewarded by Nere for completing the quest \"<a href='https://bg3.wiki/wiki/Free_True_Soul_Nere'>Free True Soul Nere</a>\" by siding with him in the fight. You can still loot him afterwards."
-			}, // TODO The actual reward is https://bg3.wiki/wiki/Gift_from_the_Absolute
+				img        : "imgs/Gift from the Absolute.png",
+				link       : "https://bg3.wiki/wiki/Gift_from_the_Absolute",
+				desc       : "<span class='coordinates'>(X: -854 Y: 780)</span> Rewarded by Nere for completing the quest \"<a href='https://bg3.wiki/wiki/Free_True_Soul_Nere'>Free True Soul Nere</a>\" by siding with him in the fight.<span class='tip'> (Note: You can still loot him afterwards.)</span>"
+			},
 			{
 				title      : "Mind Flayer Parasite Specimen",
 				id         : "Mind-Flayer-Parasite-Specimen-9",
@@ -4332,7 +4332,7 @@ children : [
 				desc       : "<span class='coordinates'>(X: -63 Y: 163)</span> Looted from Flaming Fist Marcus."
 			},
 			{
-				title      : "Mind Flayer Parasite Specimen",
+				title      : "Gift from the Absolute",
 				id         : "Mind-Flayer-Parasite-Specimen-12",
 				categories : ["specimen"],
 				rarity     : "story",
@@ -4340,10 +4340,10 @@ children : [
 				choice     : false,
 				crafting   : false,
 				exploit    : false,
-				img        : "imgs/Mind Flayer Parasite Specimen.png",
-				link       : "https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen",
+				img        : "imgs/Gift from the Absolute.png",
+				link       : "https://bg3.wiki/wiki/Gift_from_the_Absolute",
 				desc       : "Rewarded by Z'rell for siding with Flaming Fist Marcus and capturing Isobel alive.<span class='tip'> (Note: Doing so will lock you out of multiple quests and rewards.)</span>"
-			}, // TODO coords, The actual reward is https://bg3.wiki/wiki/Gift_from_the_Absolute
+			}, // TODO coords
 			{
 				title      : "Jhannyl's Gloves",
 				id         : "Jhannyls-Gloves",
@@ -6235,7 +6235,7 @@ children : [
 				desc       : "Rewarded for convincing Shadowheart to <i>kill</i> the Nightsong."
 			},
 			{
-				title      : "Mind Flayer Parasite Specimen",
+				title      : "Gift from the Absolute",
 				id         : "Mind-Flayer-Parasite-Specimen-18",
 				categories : ["specimen"],
 				rarity     : "story",
@@ -6243,10 +6243,10 @@ children : [
 				choice     : false,
 				crafting   : false,
 				exploit    : false,
-				img        : "imgs/Mind Flayer Parasite Specimen.png",
-				link       : "https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen",
+				img        : "imgs/Gift from the Absolute.png",
+				link       : "https://bg3.wiki/wiki/Gift_from_the_Absolute",
 				desc       : "Rewarded by Ketheric for allowing Balthazar to transport the Nightsong to Moonrise Towers.<span class='tip'> (Note: Doing so will lose Shadowheart as a companion as well as lock you out of multiple quests and rewards.)</span>"
-			} // TODO The actual reward is https://bg3.wiki/wiki/Gift_from_the_Absolute
+			} // TODO coords
 		]},
 		{
 		title    : "Mind Flayer Colony",
